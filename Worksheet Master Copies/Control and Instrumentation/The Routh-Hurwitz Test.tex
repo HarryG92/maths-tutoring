@@ -1,0 +1,155 @@
+
+\documentclass{article}
+
+\usepackage[left=1.8cm,right=1.8cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{The Routh-Hurwitz Test}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To be able to use Routh tables to test for stability, and to}}
+
+\textbf{\underline{determine the range of values of a parameter that leads to stable behaviour.}}
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{Recap: Stability and Poles of the Transfer Function:}\bigskip
+
+
+
+\begin{enumerate}
+	\item Suppose that the transfer function of an LTI system is
+		\[\frac{1}{s-(\alpha+\beta j)},\]
+		where $\alpha$ and $\beta$ are real constants.
+		\begin{enumerate}
+			\item Show that the impulse response is
+				\[H(t)e^{\alpha t}e^{\beta j t}.\]
+			\item If $\alpha>0$, describe the system's behaviour.
+			\item If $\alpha= 0$, describe the system's behaviour.
+			\item If $\alpha<0$, describe the system's behaviour.
+		\end{enumerate}
+	\item Suppose that the transfer function of an LTI system is the rational function
+		\[\frac{f(s)}{g(s)},\]
+		where $f$ and $g$ are polynomials. Suppose also that $g(\alpha+\beta j)=0\neq f(\alpha+\beta j)$ (so $\alpha+\beta j$ is a pole of the transfer function).
+		\begin{enumerate}
+			\item By considering a partial fraction decomposition of the transfer function, describe the system's behaviour if $\alpha>0$.
+			\item If every pole of the transfer function has real part less than or equal to 0, what can we say about the system's behaviour?
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+\clearpage
+
+
+\textbf{Theory: Stability and Root-Finding:}\bigskip
+
+
+
+Recall that a system is BIBO (bounded input, bounded output) stable if whenever we give it a bounded input, the output is also bounded. Of course, a real-world system can never give an unbounded output, because of conservation of energy, but if the idealised model of a system gives an unbounded output for a given input, then the real-world system will ``try'' to do so, and is likely to break or run into some serious difficulty.
+
+Even a stable system can break trying to give an unreasonably large output, but this will typically be in response to a large input; if we think of a mass on a spring, which is a stable system, we can produce arbitrarily large outputs by giving the mass a large enough push (and a large enough output will break the spring), but for any fixed size of push, the output will be bounded. So for stable systems, the idea is that as long as we keep our inputs small enough, the outputs should be manageable; an unstable system, on the other hand, could produce a dangerously large output even for a very small input.\bigskip
+
+
+Since BIBO stability depends on the real parts of poles of the transfer function, it is important to be able to find poles of complex functions. Since transfer functions are often rational functions $f(s)/g(s)$, finding poles of the transfer function means finding roots of the denominator $g(s)$. So the problem we need to solve is: given a polynomial $g(s)$, to determine whether or not $g(s)$ has any roots with positive real part.
+
+With techniques such as the Newton-Raphson process, computers can easily calculate the roots of polynomials to arbitrary precision, so we can just compute all the roots and check their real parts. However, this is often more work than is needed; we don't need to know what the roots are, just whether or not they're in the right hand half-plane. There is a test called the \textbf{Routh-Hurwitz Criterion} for determining this.\bigskip
+
+
+The theory behind the Routh-Hurwitz criterion is complicated, and probably not worth going into in detail. A toy example will help illustrate the idea though: suppose $g(s)$ is a quadratic with two real roots, $\alpha$ and $\beta$. Then, by the Polynomial Factor Theorem, $g(s)=(s-\alpha)(s-\beta)$. Multiplying this out,
+\[g(s)= s^2-(\alpha+\beta)s +  \alpha\beta.\]
+If $\alpha,\beta \leq 0$, so $\alpha+\beta\leq 0$ and $\alpha\beta\geq 0$. So both coefficients are non-negative. Put another way, if $g(s)=s^2+as+b$, then $a=-(\alpha+\beta)$ and $b=\alpha\beta$, and if either $a$ or $b$ is negative, at least one of the roots must be positive, and so a transfer function with denominator $g$ will be unstable!
+
+
+
+\clearpage
+
+
+
+\textbf{Routh Tables:}\bigskip
+
+
+We saw above that if a quadratic has non-positive real roots, then it has non-negative coefficients; so if the denominator of a transfer function is a quadratic with a negative coefficient, then the system is unstable. In fact, this works for higher-degree polynomials too, not just quadratics. However, if all the coefficients of the polynomial are non-negative, it does not follow that all the roots are non-positive! Actually, for quadratics, this result is true---a quadratic has roots with non-positive real part if and only if all its coefficients are non-negative---but for higher-degree polynomials it fails. For instance, $s^3+s^2+s+2$ has two roots with positive real parts.
+
+The Routh-Hurwitz Criterion generalises this by considering more complicated combinations of the coefficients. The procedure for the test is as follows:
+
+\begin{enumerate}
+	\item Write the coefficients of the polynomial in two rows, alternating between top row and bottom. Add a zero at the end if needed to make the rows the same lengths.
+	\item Create a new row underneath as follows: If the preceding two rows are $a_1,a_2,\hdots,a_n$ and $b_1,b_2,\hdots,b_n$, then the $i^\mathrm{th}$ entry of the new row is
+		\[-\frac{\left|\begin{array}{cc}a_1 & a_{i+1}\\ b_1& b_{i+1}\end{array}\right|}{b_1}.\]
+		Treat absent entries (of the right-hand edge of the table) as 0.
+	\item Repeat step 2 until every entry is 0.
+	\item Count how many times the sign changes in the first column. This is the number of roots the polynomial has with positive real part.
+\end{enumerate}
+
+Note:
+	\[\left|\begin{array}{cc}a&b\\c&d\end{array}\right|=ad-bc.\]
+
+
+\bigskip
+
+
+Verify by drawing a Routh table that $s^3+s^2+s+2$ has two roots with positive real part.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

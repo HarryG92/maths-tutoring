@@ -1,0 +1,317 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Solving ODEs: Integrable Equations and Integrating Factors}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To be able to solve integrable first-order ODEs, including}}
+
+\textbf{\underline{the use of integrating factors.}}
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{Recap: Separation of Variables:}\bigskip
+
+Solve the ODE
+\[\deriv{y}{x}=\left(1-y^2\right)xe^x\]
+by separation of variables. Hint: use a trigonometric substitution for the $y$-integral and integration by parts for the $x$-integral.
+
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Warm-up:}\bigskip
+
+
+\begin{enumerate}
+	\item Solve the ODE
+		\[\deriv{z}{x}=2xe^{x^2}.\]
+	\item Suppose $y$ is some function of $x$. Differentiate $x^2y$ with respect to $x$ by the product rule.
+	\item Hence solve the ODE
+		\[x^2\deriv{y}{x}+2xy=2xe^{x^2}.\]
+		Hint: Let $z=x^2y$ and compare with the previous two questions.
+	\item Hence solve the ODE
+		\[\deriv{y}{x}+2\frac{y}{x}=2\frac{e^{x^2}}{x}.\]
+		Hint: can you multiply through by something to make it look like a previous equation?
+\end{enumerate}
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Integrable Equations:}
+
+\bigskip
+
+We say that a first-order ODE is \textbf{integrable} if it is possible to solve it simply by integrating. The simplest example of integrable equations are those of the form
+\[\deriv{y}{x}=f(x)\]
+for some known funciton $f$. These can be directly solved by
+\[y=\int f(x)\diff x + c.\]
+Of course, this relies on us being able to find an antiderivative of $f$, but at least in principle this lets us solve any ODE of the above form. Also, even if we cannot explicitly find an antiderivative of $f$ to write down this solution, numerical methods for approximating integrals mean we can estimate the solution to high precision.
+
+Other, less obvious integrable equations arise from the product rule. If we differentiate an expression of the form $g(x)y$, where $y$ is some function of $x$, we get
+\[g(x)\deriv{y}{x}+g'(x)y,\]
+by the product rule. Therefore, given an equation of the form
+\[g(x)\deriv{y}{x}+g'(x)y=f(x),\]
+we can rewrite as
+\[\deriv{}{x}\left(g(x)y\right)=f(x)\]
+and integrate to find $g(x)y$, then divide by $g(x)$ to obtain
+\[y=\frac{1}{g(x)}\int f(x)\diff x + \frac{c}{g(x)}.\]
+
+\bigskip
+
+
+Solve
+\[x^3\deriv{y}{x}+3x^2y=e^x.\]
+
+\vfill
+
+Solve
+\[\tan(x)\deriv{y}{x}+\sec^2(x)y=\cos(x).\]
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Integrating Factors:}
+
+\bigskip
+
+So if we have an integrable ODE (and manage to spot that it is integrable!), we can solve directly by integrating. Integrable equations coming from the product rule always have the form
+\[g(x)\deriv{y}{x}+g'(x)y=f(x)\]
+for some functions $f$ and $g$. What if we have an equation of a similar form, but not quite integrable? Sometimes, we can multiply through by a function of $x$ to turn the ODE into an integrable one:\medskip
+
+By multiplying through by $e^{\sin(x)}$, solve
+\[\deriv{y}{x}+\cos(x)y=\cos(x).\]
+
+\bigskip
+
+If there is some function $i(x)$ we can multiply through by to make an ODE integrable, we call that function an \textbf{integrating factor} for that ODE. So in the above example, $e^{\sin(x)}$ is an integrating factor.
+
+Given an ODE of the form
+\[\deriv{y}{x}+p(x)y=q(x),\]
+for some functions $p$ and $q$, there is a general method for finding an integrating factor. Suppose that $z$ is an integrating factor, so
+\[z\deriv{y}{x}+zp(x)=zq(x)\]
+is an integrable equation. This means that the left-hand side should come from the product rule, so we have
+\[\deriv{zy}{x}=z\deriv{y}{x}+\deriv{z}{x}y=z\deriv{y}{x}+zp(x)y.\]
+Therefore we must have
+\[\deriv{z}{x}=zp(x).\]
+This is a separable ODE, and we saw how to solve those last time. Solve this ODE to find an expression for the integrating factor $z$:
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Worked Examples:}
+
+\vspace{5mm}
+
+
+Find an integrating factor for the ODE
+\[\deriv{y}{x}+\frac{3y}{x}=\frac{e^{x^2}}{x^2}\]
+and hence solve the ODE.
+
+
+\vfill
+
+
+Find an integrating factor for the ODE
+\[\deriv{x}{t}+2\pi \cos(2\pi t)x=te^{-\sin(2\pi t)}\]
+and hence solve the ODE.
+
+\vfill
+
+
+
+\clearpage
+
+
+
+
+\textbf{Practice:}\bigskip
+
+
+Solve the following ODEs using integrating factors:
+
+\begin{enumerate}
+	\item \[\deriv{y}{x}-3\frac{y}{x+1}=(x+1)^4.\]
+	\item \[\deriv{z}{t}+\tan(t)z=\cos(t)\sin(2t),\]
+		subject to $z=0$ at $t=0$.
+	\item \[s\deriv{r}{s}+\frac{r}{s}=e^{1/s},\]
+		subject to $r=\sqrt{3}$ at $s=1$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Application: Inductors:}\bigskip
+
+
+The voltage $V_\mathrm{L}$ generated by current flowing through an inductor of inductance $L$ is given by
+\[V_\mathrm{L}=-L\deriv{I}{t}.\]
+That is, the voltage produced is proportional to the rate of change of current and acts opposite to the rate of change of current (so opposes further increases in the current).
+
+Consider a resistor $R$ in series with an inductor $L$, supplied with a sinusoidal voltage $V_\mathrm{in}=A\sin(\omega t)$.
+
+\begin{enumerate}
+	\item Using Ohm's Law, show that the current through the circuit is given by
+		\[I=\frac{V_\mathrm{in}-V_\mathrm{L}}{R}.\]
+	\item Substitute the sinusoidal supply voltage and the inductance equation to show that
+		\[\deriv{I}{t}-\frac{R}{L}I = \frac{A}{L}\sin(\omega t).\]
+	\item Find an integrating factor $z$ for this equation and hence show that
+		\[\deriv{e^{-Rt/L}I}{t}=e^{-Rt/L}\frac{A}{L}\sin(\omega t).\]
+	\item In order to integrate the right-hand side of the ODE, we will turn this from a real-numbers problem into a complex numbers problem. Use Euler's Equation to show that
+		\[e^{-Rt/L}\frac{A}{L}\sin(\omega t) = \frac{A}{L}\mathrm{im}\left(e^{(-R/L+j\omega)t}\right),\]
+		where $\mathrm{im}$ denotes the imaginary part.
+	\item Now find
+		\[\int \frac{A}{L}e^{(-R/L+j\omega)t}\diff t\]
+		and show that it is equal to
+		\[-\frac{A(R+jL\omega)}{R^2+L^2\omega^2}e^{-Rt/L}\left(\cos(\omega t) + j\sin(\omega t)\right)+c.\]
+	\item Expand the brackets, take imaginary parts, and hence show that the solution to our original ODE is
+		\[I=\frac{A}{R^2+L^2\omega^2}\left(R\sin(\omega t)+L\omega\cos(\omega t)\right) + ce^{-Rt/L}.\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item A first-order ODE is called \textbf{integrable} if it can be written in the form
+		\[\deriv{f(t)x}{t} = g(t)\]
+		for some functions $f$ and $g$. This can then be solved by integrating with respect to $t$ and then dividing by $f(t)$:
+		\[x=\frac{1}{f(t)}\int g(t)\diff t.\]
+	\item Given an ODE of the form
+		\[\deriv{x}{t}+p(t)x=q(t),\]
+		we can multiply through by an \textbf{integrating factor} of
+		\[e^{\int\! p(t)\!\diff t}\]
+		to make the equation integrable. The left-hand side becomes
+		\[e^{\int\! p(t)\!\diff t}\deriv{x}{t}+e^{\int\! p(t)\!\diff t}p(t)x = \deriv{}{t}\left(e^{\int\! p(t)\!\diff t}x\right),\]
+		so the whole ODE becomes
+		\[\deriv{}{t}\left(e^{\int\! p(t)\!\diff t}x\right) = e^{\int\! p(t)\!\diff t} q(t),\]
+		with solution
+		\[x=e^{-\int\! p(t)\!\diff t}\left[\int e^{\int\! p(t)\!\diff t}q(t)\diff t+c\right].\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

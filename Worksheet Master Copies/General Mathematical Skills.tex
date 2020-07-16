@@ -1,0 +1,195 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+
+
+
+
+\begin{document}
+
+\title{General Mathematical Skills}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To practise manipulating various expressions, reading}}
+
+\textbf{\underline{formulae, and self-explanation.}}
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+Factorise the following:
+
+\begin{enumerate}
+	\item $x^2+4x+4$
+	\item $2a^4+8a^2+8$
+	\item $3z^8y^3+12z^4y^3+12y^3$
+	\item $a^2+4ab + 4b^2$
+	\item $a^2-ab-6b^2$
+	\item $\frac{1}{a^2}-\frac{1}{a}-6$
+	\item $\frac{4}{a^2}-\frac{20}{a}-150$
+	\item $e^{2x}-e^x - 6$
+	\item $e^x - 1 - 6e^{-x}$
+	\item $\tan(x) - 1 - 6\cot(x)$.
+\end{enumerate}
+\bigskip
+
+
+Combine the following into a single fraction, with numerator and denominator factorised:
+
+\begin{enumerate}
+	\item $\frac{1}{n^2}-\frac{2}{n}+1$
+	\item $\frac{n(n+1)}{2}+n+1$
+	\item $\frac{n}{6}(n+1)(2n+1)+(n+1)^2$
+	\item $\frac{1}{x}+\frac{1}{x^2}$
+	\item $\frac{4x}{(x+3)^2}+\frac{9}{x+3}-2$
+	\item $\frac{x^{1/2}+1}{x}-\frac{4x+7x^{3/2}}{4x^2}$.
+\end{enumerate}
+
+\clearpage
+
+
+Split the following into sums of fractions, each with a different denominator, where the degree of the numerator is always strictly less than the degree of the denominator, and further such splitting is not possible:
+
+\begin{enumerate}
+	\item $\frac{x+1}{x}$
+	\item $\frac{x^2-x+1}{x}$
+	\item $\frac{(x-1)^2+1}{x-1}$
+	\item $\frac{x^2-2x+2}{x-1}$
+	\item $\frac{x + (x-1)}{x(x-1)}$
+	\item $\frac{2x-1}{x(x-1)}$
+	\item $\frac{(x^2-2x+1)x + (x-1)}{x(x-1)}$
+	\item $\frac{x^3-2x^2+2x-1}{x(x-1)}$.
+	\item $\frac{y}{y+3}$
+	\item $\frac{y}{(y+3)^2}$
+	\item $\frac{y^2+y+1}{(y+3)^2}$
+	\item $\frac{y^3-y^2+y-1}{(y+3)^2}$.
+\end{enumerate}
+
+Splitting a fraction in this way is called a \textbf{partial fractions decomposition}.
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+\textbf{Reading Mathematical Expressions:}\bigskip
+
+Questions to consider when confronted with a mathematical expression:
+
+\begin{enumerate}
+	\item Does this look similar to an expression I've seen before? Maybe if I change a variable name?
+	\item Can I break the expression up into independent parts and study those separately?
+	\item Where might this expression have come from? Can I think of some process that would lead to an expression like this?
+	\item For any constants in the expression, where might they come from? Why are they there?
+	\item If there is a sum, what does each term represent? If a product, what does each factor represent?
+\end{enumerate}
+\medskip
+
+\textbf{Example:}\bigskip
+
+Confronted with the expression:
+\[\sum_{i=1}^m ih^2 e^{i^2h^2} \sin(2\pi ih),\]
+my first thought is to break it up into parts. The $\Sigma$ at the start just means we're adding a lot of terms together, so let's look at an individual term first, before thinking about adding. Each term has three parts, $ih^2$, $e^{i^2h^2}$, and $\sin(2\pi ih)$; looking at these, $i$ and $h$ seem to always go together: we can rewrite the second two as $e^{(ih)^2}$ and $\sin(2\pi (ih))$. So let's try rewriting the $ih^2$ as $h(ih)$; then we can treat $ih$ as a single variable. If
+\[f(x)=xe^{(x)^2}\sin(2\pi x),\]
+we can write the original expression as
+\[\sum_{i=1}^m hf(ih).\]
+
+So now let's think about $ih$; $i$ is the variable of summation, so we're starting with $i=1$, and then increasing $i$ one at a time, until it reaches $m$. So $f(ih)$ takes the values $f(h),f(2h),f(3h),\hdots,f(mh)$, all of which are then multiplied by $h$ and added together. So we have a function, we're evaluating it at $m$ equally spaced points, multiplying by the width between those points, and adding up. This makes me think of integration! If we split the axis under $f(x)$ into $m$ subintervals of width $h$, starting at $x=0$, then the $i^\mathrm{th}$ rectangle will have area $hf(ih)$, which is precisely the term appearing in the sum. So the original expression is an estimate of the value of 
+\[\int_0^{mh} xe^{x^2}\sin(2\pi x)\diff x.\]
+
+\bigskip
+
+Try to analyse the following expressions:
+
+\begin{enumerate}
+	\item \[\sum_{n=0}^\infty \frac{2^n(y^2z+z+1)^n}{3^n n!}\]
+	\item \[\frac{\cos^2(t)-\cos(t)-\sin^2(t)}{t}\]
+	\item \[\sum_{n=0}^\infty \frac{z^{4n+3}}{(4n+3)!} - \sum_{n=0}^\infty \frac{z^{4n+1}}{(4n+1)!}.\]
+\end{enumerate}
+
+
+\clearpage
+
+
+
+\textbf{Self-Explanation for Improved Comprehension:}\bigskip
+
+
+Self-explanation is a technique for active reading and understanding of technical material. Research shows that it is effective in improving mathematics students understanding of proofs. Of course, you need to understand calculation techniques more than proofs themselves, and I am not directly aware of research on this, but I strongly suspect that self-explanation can help with the sort of mathematical understanding needed for engineers. Of course, you need to be able to understand the mathematical ideas behind a concept, and also actually carry out the calculations yourself; self-explanation should be helpful for understanding the concepts (and understanding an example calculation you are reading), but will not directly help you to do calculations yourself---for that, you need practice.
+
+
+So what is self-explanation? It's a technique where you try to connect each idea of a text with other ideas you are familiar with, and explain to yourself where the idea comes from. It is \textit{not} the same as simply paraphrasing the text or reassuring yourself that you do understand it. For instance, suppose you are given the statement of the Mean Value Theorem:\medskip
+
+``Let $f(x)$ be a differentiable function between $x=a$ and $x=b$. Then there is some $c$ with $a\leq c\leq b$ such that
+\[f'(c)=\frac{f(b)-f(a)}{b-a}.''\]
+
+Helpful self-explanation statements for understanding this would be things like:
+\begin{enumerate}
+	\item The expression
+		\[\frac{f(b)-f(a)}{b-a}\]
+		is the change in the value of $f$ between $a$ and $b$, divided by the change in $x$ from $a$ to $b$. So it is the average rate-of-change of $f$ between $a$ and $b$.
+	\item The expression $f'(c)$ means the derivative of $f$ at $c$; this means the instantaneous rate-of-change at the point $x=c$.
+	\item So the theorem is telling us the instantaneous rate-of-change must at some point $c$ be equal to the average rate-of-change.
+	\item Why do we have $a\leq c\leq b$? Well, we want to say that the average rate-of-change between $a$ and $b$ is the instantaneous rate-of-change at $c$, and if $c$ is not between $a$ and $b$, there's no reason $f'(c)$ should have anything to do with how $f$ changes between $a$ and $b$.
+	\item Why must $f$ be differentiable? Well, we need to take the derivative of $f$ to get $f'(c)$, so the statement wouldn't even make sense without $f$ being differentiable.
+	\item Can we think of a real-world example? Rate-of-change is like speed, so let's imagine $f$ is position of a car, so $f'$ is the car's speed. Then $f'(c)$ is the speed at time $c$, and
+		\[\frac{f(b)-f(a)}{b-a}\]
+		is the change in position divided by the change in time, so it's the average speed from between $t=a$ and $t=b$; so in this real-world case, the theorem is saying that if a car drives on a journey, at some point its speed at an instant must be equal to its average speed over the whole journey. This makes intuitive sense---its average speed can't be higher than its speed at all points, and can't be lower than its speed at all points, so the speed should be sometimes higher than the average and sometimes lower, and then at some point it must be exactly equal.
+\end{enumerate}\bigskip
+
+
+On the other hand, simply paraphrasing the statement, for instance to\smallskip
+
+``If $f$ is differentiable, then
+\[\frac{f(b)-f(a)}{b-a}\]
+is equal to $f'(c)$ for some $c$ in between $a$ and $b$''\smallskip
+
+will not be so useful for understanding the statement. Nor will a reassuring bit of self-feedback like ``I understand what the fraction in the expression means''---explain to yourself what it means, don't just assert that you can!\bigskip
+
+
+Often, it's helpful to adopt a sceptical mindset with yourself; when trying to understand a bit of maths, I sometimes like to imagine a conversation with someone who doesn't believe the maths is correct. By thinking what objections they might raise to it, and how I would convince them the result really is correct, I can gain a better understanding of the ideas underlying the result.\bigskip
+
+A short booklet about self-explanation, with examples, is provided. It is written for pure mathematics students, and focuses on proof, but is still likely to be useful to engineering maths.
+
+
+
+
+
+\end{document}

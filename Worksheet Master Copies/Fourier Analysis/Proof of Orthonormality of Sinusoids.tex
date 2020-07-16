@@ -1,0 +1,167 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+\begin{document}
+
+\title{Orthonormality of Sinusoids}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+
+\large
+
+
+
+Let $[a,a+L]$ be an interval in the real line and consider $L_2([a,a+L])$, the space of square-integrable, real-valued functions on $[a,a+L]$, with inner product defined by
+\[\braket{f}{g}=\frac{2}{L}\int_a^{a+L}\!\!\!f(x)g(x)\diff x.\]
+We prove that the functions
+\[\frac{1}{\sqrt{2}},\cos\left(\frac{2\pi nx}{L}\right),\sin\left(\frac{2\pi nx}{L}\right)\]
+for integer $n\geq 1$ are orthonormal.\bigskip
+
+\noindent\textbf{Step 1:} We show that $\frac{1}{\sqrt{2}}$ is orthogonal to each of the sines and cosines:\medskip
+
+\begin{align*}
+	\braket{\frac{1}{\sqrt{2}}}{\sin\left(\frac{2\pi nx}{L}\right)}&=\frac{2}{L}\int_a^{a+L}\!\! \frac{\sin\left(\frac{2\pi nx}{L}\right)}{\sqrt{2}}\diff x\\
+	&= \frac{\sqrt{2}}{L}\left[ \frac{-L\cos\left(\frac{2\pi nx}{L}\right)}{2\pi n}\right]_a^{a+L}\\
+	&= \frac{-\sqrt{2}\cos\left(2\pi n+\frac{2\pi na}{L}\right)}{2\pi n}-\frac{-\sqrt{2}\cos\left(\frac{2\pi na}{L}\right)}{2\pi n}\\
+	&=\frac{-\sqrt{2}\cos\left(\frac{2\pi na}{L}\right)}{2\pi n}-\frac{-\sqrt{2}\cos\left(\frac{2\pi na}{L}\right)}{2\pi n}\\
+	&=0.\\
+	\braket{\frac{1}{\sqrt{2}}}{\cos\left(\frac{2\pi nx}{L}\right)}&=\frac{2}{L}\int_a^{a+L}\!\! \frac{\cos\left(\frac{2\pi nx}{L}\right)}{\sqrt{2}}\diff x\\
+	&= \frac{\sqrt{2}}{L}\left[ \frac{L\sin\left(\frac{2\pi nx}{L}\right)}{2\pi n}\right]_a^{a+L}\\
+	&= \frac{\sqrt{2}\sin\left(2\pi n+\frac{2\pi na}{L}\right)}{2\pi n}-\frac{\sqrt{2}\sin\left(\frac{2\pi na}{L}\right)}{2\pi n}\\
+	&=\frac{\sqrt{2}\sin\left(\frac{2\pi na}{L}\right)}{2\pi n}-\frac{\sqrt{2}\sin\left(\frac{2\pi na}{L}\right)}{2\pi n}\\
+	&=0.
+\end{align*}
+
+\bigskip
+
+
+
+
+\noindent\textbf{Step 2:} We show that $\frac{1}{\sqrt{2}}$ is a unit vector:\medskip
+
+\begin{align*}
+	\norm{\frac{1}{\sqrt{2}}}&=\sqrt{\braket{\frac{1}{\sqrt{2}}}{\frac{1}{\sqrt{2}}}}\\
+	&=\sqrt{\frac{2}{L}\int_a^{a+L}\!\!\frac{\diff x}{2}}\\
+	&= \sqrt{ \frac{1}{L}\left[x\right]_a^{a+L} }\\
+	&=\sqrt{\frac{1}{L}[(a+L)-a]}\\
+	&=\sqrt{\frac{L}{L}}\\
+	&=1.
+\end{align*}
+
+\bigskip
+
+
+
+
+
+\noindent\textbf{Step 3:} We show that the sines are orthogonal to the cosines, using the product-to-sum formula
+\[\sin(\alpha)\cos(\beta)=\frac{1}{2}\left[\sin(\alpha+\beta)-\sin(\beta-\alpha)\right]:\]
+
+\begin{align*}
+	\braket{\sin\left(\frac{2\pi nx}{L}\right)}{\cos\left(\frac{2\pi mx}{L}\right)} &= \frac{2}{L}\int_a^{a+L}\!\!\sin\left(\frac{2\pi nx}{L}\right)\cos\left(\frac{2\pi mx}{L}\right)\diff x\\
+	&=\frac{1}{L}\int_a^{a+L}\!\!\left[\sin\left(\frac{2\pi (n+m)x}{L}\right)-\sin\left(\frac{2\pi (m-n)x}{L}\right)\right]\diff x.
+\end{align*}
+
+Now we split into two cases:
+
+\textbf{Case 1:} $n\neq m$:
+
+\begin{align*}
+	\braket{\sin\left(\frac{2\pi nx}{L}\right)}{\cos\left(\frac{2\pi mx}{L}\right)} &= \frac{1}{L}\int_a^{a+L}\!\!\left[\sin\left(\frac{2\pi (n+m)x}{L}\right)-\sin\left(\frac{2\pi (m-n)x}{L}\right)\right]\diff x\\
+	&=\frac{1}{L}\left[\frac{-L\cos\left(\frac{2\pi (n+m)x}{L}\right)}{2\pi (n+m)} - \frac{-L\cos\left(\frac{2\pi (m-n)x}{L}\right)}{2\pi (m-n)}\right]_{a}^{a+L}\\
+	&=\left(\frac{-\cos\left[2\pi (n+m)\left(1 +\frac{a}{L}\right)\right]}{2\pi (n+m)}-\frac{-\cos\left[2\pi (m-n)\left(1 +\frac{a}{L}\right)\right]}{2\pi (m-n)}\right)\\
+	&{\color{white} =\quad} -\left(\frac{-\cos\left(\frac{2\pi (n+m)a}{L}\right)}{2\pi (n+m)}-\frac{-\cos\left(\frac{2\pi (m-n)a}{L}\right)}{2\pi (m-n)}\right)\\
+	&=\left(\frac{-\cos\left(\frac{2\pi (n+m)a}{L}\right)}{2\pi (n+m)}-\frac{-\cos\left(\frac{2\pi (m-n)a}{L}\right)}{2\pi (m-n)}\right)\\
+	&{\color{white} =\quad}-\left(\frac{-\cos\left(\frac{2\pi (n+m)a}{L}\right)}{2\pi (n+m)}-\frac{-\cos\left(\frac{2\pi (m-n)a}{L}\right)}{2\pi (m-n)}\right)\\
+	&=0.
+\end{align*}
+
+\textbf{Case 2:} $n=m$:
+\begin{align*}
+	\braket{\sin\left(\frac{2\pi nx}{L}\right)}{\cos\left(\frac{2\pi mx}{L}\right)} &= \frac{1}{L}\int_a^{a+L}\!\!\left[\sin\left(\frac{2\pi (n+m)x}{L}\right)-\sin\left(\frac{2\pi (m-n)x}{L}\right)\right]\diff x\\
+	&=\frac{1}{L}\int_a^{a+L}\!\!\left[\sin\left(\frac{4\pi nx}{L}\right)\right]\diff x\\
+	&= \frac{1}{L}\left[\frac{-L\cos\left(\frac{4\pi nx}{L}\right)}{4\pi n}\right]_a^{a+L}\\
+	&=\frac{-\cos\left(4\pi n + \frac{4\pi na}{L}\right)}{4\pi n} - \frac{-\cos\left(\frac{4\pi na}{L}\right)}{4\pi n}\\
+	&=\frac{-\cos\left(\frac{4\pi na}{L}\right)}{4\pi n}-\frac{-\cos\left(\frac{4\pi na}{L}\right)}{4\pi n}\\
+	&=0.
+\end{align*}
+
+\bigskip
+
+
+
+
+
+\noindent\textbf{Step 4:} We show that $\sin\left(\frac{2\pi nx}{L}\right)$ is a unit vector, using the cosine double-angle formula:
+\[\cos(2\alpha)=1-2\sin^2(\alpha):\]
+
+\begin{align*}
+	\norm{\sin\left(\frac{2\pi nx}{L}\right)}&=\sqrt{\braket{\sin\left(\frac{2\pi nx}{L}\right)}{\sin\left(\frac{2\pi nx}{L}\right)}}\\
+	&=\sqrt{\frac{2}{L}\int_a^{a+L}\!\! \sin^2\left(\frac{2\pi nx}{L}\right) }\\
+	&=\sqrt{\frac{1}{L}\int_a^{a+L}\!\! \left[1-\cos\left(\frac{4\pi nx}{L}\right)\right]\diff x}\\
+	&=\sqrt{\frac{1}{L}\left[x-\frac{L\sin\left(\frac{4\pi nx}{L}\right)}{4\pi n}\right]_a^{a+L}}\\
+	&=\sqrt{\left[\frac{x}{L}\right]_a^{a+L}-\left[\frac{\sin\left(\frac{4\pi nx}{L}\right)}{4\pi n}\right]_a^{a+L}}\\
+	&=\sqrt{\left(\frac{a+L}{L}-\frac{a}{L}\right) -0}\\
+	&=1.
+\end{align*}
+
+Details of why the sine terms cancel have been omitted, as they are similar to previous calculations.\bigskip
+
+
+
+
+
+\noindent\textbf{Step 5:} We show that $\cos\left(\frac{2\pi nx}{L}\right)$ is a unit vector, using the cosine double-angle formula:
+\[\cos(2\alpha)=2\cos^2(\alpha)-1.\]
+
+This is very similar to step 4, so details are omitted.\bigskip
+
+
+
+
+
+Notes:
+
+\begin{enumerate}
+	\item The reason $\frac{1}{\sqrt{2}}$ is the constant function but $\frac{a_0}{2}$ appears in the Fourier series is that $a_0\neq \braket{f}{\frac{1}{2}}$; rather, $\frac{a_0}{\sqrt{2}}=\braket{f}{\frac{1}{\sqrt{2}}}$; in order to keep a single definition of $a_n$, and not give a special definition in the case $n=0$, we  use $\frac{a_0}{2}$ in the Fourier series, but really this is $\frac{a_0}{\sqrt{2}}$ (the coefficient) times $\frac{1}{\sqrt{2}}$ (the constant function).
+	\item If we work with the space of \textit{complex-valued} square-integrable functions, we usually modify the inner product to
+		\[\braket{f}{g}=\frac{1}{L}\int_a^{a+L}\!\!f(x)\overline{g(x)}\diff x;\]
+		since the sine and cosine functions are real-valued, the complex conjugation has no effect on them, but the switch from $\frac{2}{L}$ to $\frac{1}{L}$ in front means that the above functions are no longer orthonormal. They are still orthogonal, but now all have norm $\frac{1}{\sqrt{2}}$; so the functions $1,\sqrt{2}\cos\left(\frac{2\pi nx}{L}\right),\sqrt{2}\sin\left(\frac{2\pi nx}{L}\right)$ are orthonormal with respect to this inner product. This means we get an extra $\sqrt{2}$ appearing in the coefficients $a_n$ and $b_n$, and an extra $\sqrt{2}$ in the functions themselves, so when they're multiplied we gain a factor of $2$. This factor of 2 is accounted for by the fact that when using the complex form we normally use exponentials instead of sines and cosines, and so the 2 cancels with the 2's in the expressions
+		\[\cos(x)=\frac{e^x+e^{-x}}{2},\quad \sin(x)=\frac{e^x-e^{-x}}{2i},\]
+		meaning we don't get any extra 2's appearing in exponential form. None of this really matters, and we can put whatever constant we like in front of the inner product without really changing anything, it's just a matter of making the choice which gives the tidiest formulae; when working with sines and cosines, $\frac{2}{L}$ in the inner product gives the tidiest formulae, with exponentials, it's $\frac{1}{L}$.
+	\item The key step in evaluating most of the integrals is that if you integrate a sine or cosine over one complete period, you get zero, because the positive and negative areas cancel out.
+\end{enumerate}
+
+
+
+
+\end{document}

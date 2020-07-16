@@ -1,0 +1,248 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+
+
+
+
+\begin{document}
+
+\title{The Mean Value Theorem}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand the Mean Value Theorem and its}}
+
+\textbf{\underline{consequences for monotonicity and extreme value problems.}}
+
+
+
+
+\vspace{5mm}
+
+
+\textbf{Recap: The Chain and Product Rules:}
+
+\vspace{5mm}
+
+Recall the chain rule:
+\[(fg)'(t)=f'(g(t))g'(t)\]
+and the product rule:
+\[\deriv{f(t)g(t)}{t}=f(t)g'(t)+g(t)f'(t).\]
+\begin{enumerate}
+	\item Differentiate $t\sin(t)$ with respect to $t$.
+	\item Differentiate $\sin(t^2)$ with respect to $t$.
+	\item Differentiate $(x^2+4x+2)^{-5}$ with respect to $x$.
+	\item Differentiate $\sin(x)\cos^2(x)$ with respect to $x$.
+	\item Differentiate $z^{-4/3}e^{\sin(z)}$ with respect to $z$.
+	\item Differentiate $f(z)=\frac{z^2-2z+1}{\cos(z)}$ by the following steps:
+		\begin{enumerate}
+			\item Differentiate $\frac{1}{\cos(z)}=[\cos(z)]^{-1}$ by the chain rule.
+			\item Differentiate $z^2-2z+1$.
+			\item Hence differentiate $f(z)=(z^2-2z+1)[\cos(z)]^{-1}$ by the product rule.
+		\end{enumerate}
+\end{enumerate}
+
+\bigskip
+
+
+Recall that we showed that if $f$ is strictly increasing, then $f'(t)>0$ for all $t$, and if $f$ is strictly decreasing, then $f'(t)<0$. In this sheet, we will prove the converse, using a powerful tool called the Mean Value Theorem.
+
+
+
+\clearpage
+
+
+{\bf Theory: The Mean Value Theorem:}
+
+\vspace{5mm}
+
+The derivative of a function $f(t)$ is a function $f'(t)$ which at each point $t$ returns the rate of change of $f(t)$ at time $t$. We can also find the average rate of change between two points; if $a$ and $b$ are times, with $a<b$, then
+\[\frac{f(b)-f(a)}{b-a}\]
+is the average rate of change from $t=a$ to $t=b$. Intuitively, the instantaneous rate of change must at some point between $a$ and $b$ be equal to the average rate of change. Thinking in terms of speed, for instance (so if $f(t)$ represents distance travelled by time $t$, and then $f'(t)$ represents velocity), a moving particle cannot have speed always less than its average speed, nor always more. It might be sometimes less, and sometimes more, but there must be at least one time between $a$ and $b$ at which the speed is exactly equal to the average speed between $a$ and $b$. This is what the Mean Value Theorem says:\bigskip
+
+\noindent\fbox{\parbox{\textwidth}{
+	If $f(t)$ is a continuously differentiable function, and $a<b$, then there exists some $c$ with $a<c<b$ such that
+	\[f'(c)=\frac{f(b)-f(a)}{b-a}.\]
+}}\bigskip
+
+
+
+Note: saying that $f$ is \textbf{continuously differentiable} means that $f$ is differentiable and its derivative $f'$ is continuous. So for a function such as the modulus function $f(t)=|t|$, the Mean Value Theorem does not apply.\bigskip
+
+
+
+We shall prove the Mean Value Theorem. Our strategy is as follows: we define a new function $F(t)$, related to $f(t)$, but with $F(a)=F(b)=0$; then we prove that there exists some $c$ between $a$ and $b$ such that $F'(c)=0$; finally, we use the relationship between $F$ and $f$ to prove that $f'(c)=\frac{f(b)-f(a)}{b-a}$.
+
+Define
+\[F(t)=f(t)-f(a)-\frac{f(b)-f(a)}{b-a}(t-a).\]
+
+Note that
+\[F(a)=f(a)-f(a)-\frac{f(b)-f(a)}{b-a}(0)=0\]
+and
+\[F(b)=f(b)-f(a)-\frac{f(b)-f(a)}{b-a}(b-a)=0.\]
+
+\bigskip
+
+
+\textbf{The Mean Value Theorem (cont.):}
+
+\vspace{5mm}
+
+Now we prove that $F'(c)=0$ for some $c$ in between $a$ and $b$. We know that $F(a)=F(b)=0$, so between $a$ and $b$, $F$ starts at 0, and returns to 0 by $b$. So $F$ could be completely flat between $a$ and $b$ (in which case $F'(t)=0$ for all $t$ between $a$ and $b$), or $F$ is sometimes strictly increasing and sometimes strictly decreasing. But whenever $F$ is strictly increasing, $F'(t)\geq 0$, and whenever $F$ is strictly decreasing, $F'(t)\leq 0$, so $F'(t)$ is positive at some points in between $a$ and $b$, and negative at other points. Since $F'$ is continuous, this means it must be 0 at some point $c$ between $a$ and $b$, as claimed.\bigskip
+
+
+So we have shown there is a point $c$ such that $F'(c)=0$. Now we relate this back to $f$. Differentiating $F$, we have
+\[F'(t)=f'(t)-\frac{f(b)-f(a)}{b-a},\]
+so
+\[0=F'(c)=f'(c)-\frac{f(b)-f(a)}{b-a}.\]
+Rearranging this gives
+\[f'(c)=\frac{f(b)-f(a)}{b-a},\]
+which is the result we wanted to prove.
+
+
+\vfill
+
+
+\textbf{Consequence:}\bigskip
+
+
+\noindent\fbox{\parbox{\textwidth}{
+	Let $f(t)$ be a continuously differentiable function. If $f'(t)>0$ for all $t$, then $f$ is strictly increasing. Similarly, if $f'(t)<0$ for all $t$, then $f$ is strictly decreasing.
+}}\bigskip
+
+We will prove the first statement. The second is similar. So suppose $f'(t)>0$ for all $t$. Then for any $a<b$, we can apply the Mean Value Theorem to get
+\[f'(c)=\frac{f(b)-f(a)}{b-a},\]
+for some $a<c<b$. Since $b>a$, $b-a>0$, and $f'(c)>0$; so we must have $f(b)-f(a)>0$, so $f(b)>f(a)$. So $f$ is strictly increasing.
+
+
+
+\clearpage
+
+
+
+\textbf{Theory: Extreme Value Problems:}
+
+\vspace{5mm}
+
+
+
+
+Recall from a previous sheet that at a local extremum (maximum or minimum), the derivative of a function must be zero. For instance, if a ball is thrown in the air, it slows down and then stops---just for an instant---before beginning to fall back down to earth. So the maximum height occurs at a point where the speed (the derivative) is 0. 
+
+If $f(t)$ is a differentiable function, a point $a$ is called a \textbf{stationary point} if $f'(a)=0$.\bigskip
+
+\noindent\fbox{\parbox{\textwidth}{
+	Let $f(t)$ be a differentiable function. Any local extremum of $f$ must be a stationary point. That is, if $f(a)$ is a local maximum or local minimum, then $f'(a)=0$.
+}}\bigskip
+
+
+This gives an extremely useful method for finding local extrema of a function $f$, called \textbf{Fermat's method}. Differentiate, and solve the equation $f'(t)=0$. This gives all the stationary points of $f$, and then we can check each stationary point to see if it is a maximum or a minimum by looking at whether $f'(t)$ is positive or negative to either side of the stationary point, since we now know that this tells us whether the function is increasing or decreasing. A stationary point which is not a local extremum is called \textbf{point of inflexion}.\bigskip
+
+
+\textbf{Examples:}\medskip
+
+Find all local extrema of $f(x)=x^3+3x^2-1$. Identify whether they are maxima or minima. Hence find the maximum and minimum values of $f(x)$ for $-3\leq x\leq 3$.
+
+\vfill
+
+Find all local extrema of $f(t)=e^t\sin(t)$ where $t\in [0,2\pi]$.
+
+
+\vfill
+
+
+
+\clearpage
+
+
+
+\textbf{Practice:}
+
+
+\begin{enumerate}
+	\item Find the minimum value of $x^2-4x+2$, and where it occurs.
+	\item Find all stationary points of $\sin(t)$ for $0\leq t<2\pi$; classify them as maxima, minima, or points of inflexion.
+	\item Find all stationary points of $x^2\cos(x)$ for $-\pi\leq x <\pi$.
+	\item Find the maximum and minimum values of $\sin(x^{3/2})$ for $0\leq x<2\pi$.
+	\item Find and classify the stationary points of $x^3$.
+	\item Find the maximum value of $\log_e(x)$ for $1\leq x\leq 3$.
+\end{enumerate}
+
+
+
+
+\clearpage
+
+
+
+
+\textbf{Application: Optimising Surface Area for Constrained Volume:}
+
+\vspace{5mm}
+
+A food company is designing cylindrical cans for their food. Let $r$ denote the radius of the cylinder, and $h$ the height. The cans need to have a volume of $50\mathrm{cm}^3$. The greater the surface area of the can, the more metal needed to make it, and so the greater the cost. Therefore it is important to find the cylinder which has the minimum surface area, given that its volume is $50\mathrm{cm}^3$.
+\begin{enumerate}
+	\item In terms of $r$ and $h$, write down formulae for the surface area $A$ and volume $V$ of a cylinder.
+	\item Using the constraint that $V=50$, eliminate $h$ from the expression for $A$, to leave $A$ expressed solely as a function of $r$.
+	\item Differentiate $A$ with respect to $r$.
+	\item Use Fermat's method to find the minimum surface area possible with the required volume, and find the radius and height which give this optimum area.
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The Mean Value Theorem: if $f$ is continuously differentiable and $a<b$, then there exists some $c$ strictly between $a$ and $b$ such that
+		\[f'(c)=\frac{f(b)-f(a)}{b-a}/\]
+	\item If $f$ is continuously differentiable, then if $f'(t)$ is strictly positive (negative), $f$ is strictly increasing (decreasing). If $f$ is increasing (decreasing), then $f'(t)$ is non-negative (non-positive).
+	\item A \textbf{stationary point} of a function is a point where the derivative is 0.
+	\item Any \textbf{local maximum or minimum} is a stationary point. Any stationary point which is not a local extremum is called a \textbf{point of inflexion}.
+	\item \textbf{Fermat's Method} for finding local extrema of a function $f(x)$ is to solve the equation $f'(x)=0$ to find all stationary points, then examine these to see if they are maxima, minima, or points of inflexion.
+	\item When finding the maximum or minimum values of a function $f(x)$ \textit{within some bounded range} (so for $a<x<b$), as well as checking stationary points, we have to check the endpoints, $f(a)$ and $f(b)$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

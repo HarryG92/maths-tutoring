@@ -1,0 +1,37 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{array}
+
+\setlength{\tabcolsep}{1.8cm}
+\renewcommand{\arraystretch}{2.5}
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+\makeatother
+
+\begin{document}
+
+\title{Recap of Factorising and Expanding Brackets}
+\date{}
+
+\maketitle
+
+\Large
+
+Expand $(x-2)(x+1)^2$.
+
+\vfill
+
+
+Factorise $x^2+2x-99$. Hence solve $x^2+2x-99=0$.
+
+\vfill
+
+
+\end{document}

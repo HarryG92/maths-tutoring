@@ -1,0 +1,68 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\begin{document}
+
+\title{Hypothesis Testing}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\begin{enumerate}
+	\item In what situations is a binomial distribution a suitable model?
+	\item In what situations is a normal distribution a suitable model?
+	\item What is the standard normal distribution?
+	\item Let $X\sim B(10,0.7)$.
+		\begin{enumerate}
+			\item Find the probability that $X=3$.
+			\item Find the probability that $X\geq 8$.
+			\item Find the probability that $X=2$, given that $X<5$.
+		\end{enumerate}
+	\item Let $Y\sim N(-7,3)$.
+		\begin{enumerate}
+			\item Find the probability that $-8\leq Y \leq -6$.
+			\item Find the probability that $Y\geq 0$, given that $Y<1$.
+		\end{enumerate}
+	\item In hypothesis testing, what do the terms ``null hypothesis,'' ``critical region,'' and ``significance level'' mean?
+\end{enumerate}
+
+
+
+\clearpage
+
+
+\begin{enumerate}
+	\item Suppose I toss a coin 20 times, and 16 of the tosses come up heads. I suspect the coin is biased towards heads. State a suitable null hypothesis and alternative hypothesis, and test at the 5\% significance level. What is the probability of incorrectly rejecting the null hypothesis?
+	\item A company manufactures electronic circuits for various applications. It is estimated that $0.2\%$ of the circuits are defective. The company buys new manufacturing equipment, hoping to reduce the rate of defective circuits. Of the first 100,000 circuits produced on the new machines, 184 are found to be defective. Conduct a hypothesis test at the 5\% significance level to determine if the new machines do reduce the defect rate. State your hypotheses clearly.
+	\item An orchard produces pears, which are classified as either ``superior'' or ``normal'' in quality. Superior quality pears can be sold at a higher price. Over the last few years, the proportion of superior pears has held steady at 3 in every 10. The farmer starts using a different fertiliser, which she hopes will increase the proportion of superior pears (but it may in fact decrease it!). Suppose the farmer collects 100 pears and classifies them. Find the critical region for a two-tailed hypothesis test with a significance level of 12\%. State the actual probability of incorrectly rejecting the null hypothesis using this critical region.
+	\item The number of olives harvested from a single vine in a season is modelled as a normal distribution, with mean 100 and standard deviation 12. In a particularly hot summer, it is believed that the mean increases, but the standard deviation remains the same. After one hot summer, twenty vines are harvested, yielding a total of 2183 olives. Conduct a single-tailed hypothesis test at the 5\% significance level, and hence say whether or not you think the average number of olives per vine changes after a hot summer.
+\end{enumerate}
+
+
+
+
+
+
+
+\end{document}

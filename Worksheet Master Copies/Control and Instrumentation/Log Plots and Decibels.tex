@@ -1,0 +1,234 @@
+
+\documentclass{article}
+
+\usepackage[left=1.8cm,right=1.8cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{Logarithmic Plots and Decibels}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To use logarithms to plot graphs over large ranges of}}
+
+\textbf{\underline{scales, and decibels to measure gain.}}
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{Recap: Logarithms:}\bigskip
+
+Recall that the \textbf{exponential function with base $b$} is the function $b^x$; if the base is not specified, the default is $e$, so we typically refer to $e^x$ as ``the'' exponential function, but exponential functions with other bases are possible. The \textbf{logarithm function with base $b$} is the inverse of $b^x$; it is the function $\log_b(x)$ defined by the properties
+\[\log_b(b^x)=x=b^{\log_b(x)}.\]
+Common bases for logarithms are 2, 10, and $e$; the logarithm with base $e$ is called the \textbf{natural logarithm} and often denoted simply $\ln$ instead of $\log_e$ (but either notation is acceptable).
+
+Exponential functions convert addition into multiplication:
+\[b^{x+y}=b^xb^y,\]
+and logarithms, as the inverses of exponentials, do the opposite, and turn multiplication into addition:
+\[\log_b(xy)=\log_b(x)+\log_b(y).\]
+
+
+\begin{enumerate}
+	\item $\log_2(2)=$
+	\item $\log_2(8)=$
+	\item $\log_2\left(\frac{1}{4}\right)=$
+	\item $\log_{10}(1000)=$
+	\item $\log_{10}(0.000001)=$
+	\item $\log_e(e^3)=$
+	\item For any positive integer $n$, let $d(n)$ be the number of digits of $n$ (written in decimal form). Show that
+		\[d(n)-1\leq\log_{10}(n)< d(n).\]
+		Hint: log functions are increasing, so if $x<y$, $\log(x)<\log(y)$.
+		
+		Note: this can be useful for ``back-of-the-envelope'' calculations.
+\end{enumerate}
+
+
+
+
+
+
+
+\clearpage
+
+
+\textbf{Theory: Logarithmic Scales:}\bigskip
+
+
+
+When considering amplification, we often want to consider a wide range of possible amplifications. For instance, (young, healthy) human ears can detect sounds at frequencies ranging from 20Hz to 20kHz; so a sound engineer will need to consider the frequency response of their circuits over this whole range. Suppose we have 20cm of space to draw a graph in (just under the width of a piece of A4 paper) and want to include the range from 20Hz (essentially 0) to 20kHz; then we should allow 1cm for each kHz.
+
+However, human hearing does not have the same sensitivity throughout that frequency range; it is most sensitive in the 1--4kHz range; this is only 3cm on our graph, so the part of the graph we're most interested in is quite small. We want a way of drawing our graph that shows more detail at low frequencies while still fitting in the high frequencies. Logarithms allow us to do this: instead of evenly spacing different frequencies along our horizontal axis, let's evenly space the loagrithms of different frequencies!
+
+To go from 20Hz to 20kHz, you multiply by 1000; $\log_{10}(1000)=3$, so $\log_{10}(20kHz)=3+\log_{10}(20Hz)$; so instead of dividing our 20cm of paper into 20 bands, each for a 1kHz range, let's divide it into 3 bands, one for each power-of-10 range. The first band will cover frequencies from 20Hz to 200Hz, the second from 200Hz to 2kHz, and the third from 2kHz to 20kHz---each band fits in 10 times as wide a frequency range as the one before it! In this way, our graph will have extremely high detail at low frequencies, and still fit in much higher frequencies on the paper.
+
+Similarly, if the amplification (plotted on the vertical axis) varies over several orders of magintude, using a logarithmic scale on the vertical axis will allow us to fit in the whole range while still maintaining good resolution at small values. It is conceivable that in some circumstances we might be more interested in the detail at \textit{high} values, but there are a lot more high values available, so inevitably if we want to fit a broad range of values into a small space, we must compress the high values more!
+
+The beauty of a log scale is that \textit{relative} changes take the same amount of space anywhere on the scale; the distance from 1 to $1.5$ on a log scale is the same as the distance from 10 to 15, and from 100 to 150, and from 6 to 9, and so on---any $50\%$ increase takes the same amount of space \textit{wherever it occurs}. Compare this with a traditional, linear scale, where the increase from 1 to 1.5 takes a tenth as much space as the increase from 10 to 15.
+
+
+
+\clearpage
+
+
+
+\textbf{Examples:}\bigskip
+
+We show a low-pass filter's frequency response (amplitude only) on linear-linear, log-linear, and log-log plots. The function plotted is
+\[G=\frac{3000}{\sqrt{f^2+3000^2}}.\]
+
+
+\begin{center}
+\begin{tikzpicture}
+	\draw[<->] (10,0) -- (0,0) -- (0,5.5);
+	\node[right] at (0,5.5) {$G$};
+	\node[right] at (10,0) {$f$/kHz};
+	\node[left] at (0,5) {1};
+	\node[left] at (0,0) {0};
+	
+	\foreach \i in {0,4,...,20}{
+		\node[below] at ({\i/2},0) {\i};
+	}
+	
+	\draw[thick,blue,samples=100,domain=0:10] plot (\x, {15/(sqrt(4*\x*\x+9)});
+\end{tikzpicture}
+\end{center}
+
+
+\begin{center}
+\begin{tikzpicture}
+	\draw[<->] (10,0) -- (0,0) -- (0,5.5);
+	\node[right] at (0,5.5) {$G$};
+	\node[right] at (10,0) {$f$/Hz};
+	\node[left] at (0,5) {1};
+	\node[left] at (0,0) {0};
+	
+	\node[below] at (0,0) {20};
+	\node[below] at (3.33,0) {200};
+	\node[below] at (6.67,0) {2k};
+	\node[below] at (10,0) {20k};
+	
+	\draw[thick,blue,samples=100,domain=0:10] plot (\x, { 5*15/sqrt( 10^((3*\x/5)-2) + 15*15 ) });
+\end{tikzpicture}
+\end{center}
+
+
+
+\begin{center}
+\begin{tikzpicture}
+	\draw[<->] (10,0) -- (0,0) -- (0,5.5);
+	\node[right] at (0,5.5) {$G$};
+	\node[right] at (10,0) {$f$/Hz};
+	\node[left] at (0,5) {1};
+	\node[left] at (0,0) {0.1};
+	\node[left] at (0,3) {0.4};
+	\node[left] at (0,4.23) {0.7};
+	
+	\node[below] at (0,0) {20};
+	\node[below] at (3.33,0) {200};
+	\node[below] at (6.67,0) {2k};
+	\node[below] at (10,0) {20k};
+	
+	\draw[thick,blue,samples=100,domain=0:10] plot (\x, { 5+ (5*ln(15/sqrt( 10^((3*\x/5)-2) + 15*15 ))/ln(10)) });
+\end{tikzpicture}
+\end{center}
+
+
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Decibels:}\bigskip
+
+
+The decibel is a standard unit of measurement for ratios of quantities that span several orders of magnitude, where a logarithmic scale is more convenient. They originate in the mesurement of signal attenuation down telephone lines, and so are named for the telephony pioneer Alexander Graham Bell (actually, the bel is named for him, and the decibel is one tenth of a bel, but it happens that the decibel has become the standard unit).
+
+If an amplifier has gain $G$ (so its output is $G$ times as big as its input), then we say the gain in decibels is $20\log_{10}(G)$. So a gain of 0dB means the output signal is the same amplitude as the input; a gain of 20dB means the output is 10 times as big as the input, 40dB gives 100 times, and so on. Negative decibel measurements mean suppression of the signal: 0.05dB means the output is one tenth the size of the input (note that $0.05=\frac{1}{20}$), and so on.
+
+The factor of 20 may seem a little mysterious. It should be thought of as two factors, one of 2 and one of 10. The 10 is easiest explained---it is the conversion from bels to decibels. So the formula for gain in bels is $2\log(G)$; by the laws of logarithms, this is the same as $\log(G^2)$, so why have we squared the gain? The reason is because the power delivered by a signal is the mean-squared of the signal, but the amplitude is proportional to the \textbf{root}-mean-squared. So the idea is that if the signal is boosted by 1B, the \textit{power} it delivers should be multiplied by 10, but that means the \textit{amplitude-squared} needs to be multiplied by 10, so the amplitude only needs to be multiplied by $\sqrt{10}=10^{1/2}$.
+
+So a gain of $k\mathrm{dB}$ causes the power to be multiplied by $10^{\frac{k}{10}}$ (first convert $k\mathrm{dB}$ into $\frac{k}{10}\mathrm{B}$, then that tells you how many powers of 10 to boost by), but to get the power to be multiplied by $10^{\frac{k}{10}}$, the amplitude must be multiplied by $10^{\frac{k}{20}}$.\bigskip
+
+So to convert amplification factor $F$ into decibel gain $G$, use
+\[G=20\log(F),\]
+and to convert decibel gain into amplification, use
+\[F=10^{G/20}.\]
+
+\clearpage
+
+
+
+\textbf{Practice:}\bigskip
+
+\begin{enumerate}
+	\item If an amplifier has gain 30dB, how much does it multiply its input signal by?
+	\item If an amplifier multiplies its input signal by $\frac{1}{50}$, what is its gain in decibels?
+	\item A low-pass RC filter has output given by
+		\[V_\mathrm{out}=\frac{1}{\sqrt{4\pi^2R^2C^2 f^2 +1}}V_\mathrm{in},\]
+		where $V_\mathrm{in}$ is the input voltage and $f$ is the frequency.
+		\begin{enumerate}
+			\item Show that the gain in decibels, as a function of frequency, is
+				\[G=-10\log_{10}\left(4\pi^2R^2C^2f^2+1\right).\]
+			\item Show that at low frequencies, when $f$ is much smaller than $\frac{1}{2\pi RC}$, the gain is approximately constant:
+				\[G\approx 0\mathrm{dB}.\]
+				What does this correspond to in terms of the circuit?
+			\item Show that a high frequencies, when $f$ is much larger than $\frac{1}{2\pi RC}$, the gain is approximately linear as a function of $\log_{10}(f)$:
+				\[G\approx -20\log_{10}(f) - 20\log_{10}(2\pi RC).\]
+				What does this correspond to in terms of the circuit?
+			\item Compare this question with the graphs of a low pass filter plotted on a previous page (for those graphs, $2\pi RC=3000$).
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

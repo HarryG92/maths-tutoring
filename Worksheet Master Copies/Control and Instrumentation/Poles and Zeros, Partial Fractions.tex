@@ -1,0 +1,185 @@
+
+\documentclass{article}
+
+\usepackage[left=1.8cm,right=1.8cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\sinc}{\mathrm{sinc}}
+
+
+
+
+\begin{document}
+
+\title{Poles and Zeros; Partial Fractions}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To relate poles and zeros of rational functions to behaviour}}
+
+\textbf{\underline{of linear, time-invariant systems and to partial fraction decompositions.}}
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{Recap: Partial Fractions:}\bigskip
+
+Write the following rational functions in partial fractions:
+
+\begin{enumerate}
+	\item $\frac{1}{(s+1)(s+2)}$
+	\item $\frac{s}{(s+1)(s+2)}$
+	\item $\frac{s^2}{(s+1)(s+2)}$
+	\item $\frac{1}{(s+1)^2}$
+	\item $\frac{s}{(s+1)^2}$
+	\item $\frac{s^2}{(s+1)^2}$
+\end{enumerate}
+
+
+
+
+
+
+
+\clearpage
+
+
+\textbf{Theory: Poles and Zeros:}\bigskip
+
+
+
+Let $f:\mathbb{C}\to\mathbb{C}$ be a function (taking complex inputs and giving complex outputs). A \textbf{zero} of $f$ is a complex number $\alpha$ such that $f(\alpha)=0$. A \textbf{singularity} of $f$ is a point where $f$ is undefined. There are three types of singularity: removable singularities, poles, and essential singularities.
+
+A \textbf{removable singularity} is a point $\alpha$ where $f(\alpha)$ is not directly defined, but there is a value we can assign to $f(\alpha)$ that makes $f$ well-defined and smooth. For example, the ``sinc'' function
+	\[\sinc(z)=\frac{\sin(z)}{z}\]
+is undefined at $z=0$, because we cannot divide by zero. However,
+	\[\lim_{z\to 0} \frac{\sin(z)}{z}=1,\]
+and if we define $\sinc(0)=1$, then the function is smooth. So 0 is a removable singularity of $\sinc(z)$.
+
+A \textbf{pole} of $f$ is a point $\alpha$ such that $f(\alpha)$ is undefined and there is some positive integer $n$ such that $(z-\alpha)^nf(z)$ has a removable singularity at $\alpha$. The smallest such $n$ is called the \textbf{order} of the pole. So $f$ itself is badly behaved at $\alpha$, but the problem can be fixed by multiplying by a polynomial; so a pole is a ``polynomially bad singularity.'' For example, the function
+	\[f(z)=\frac{\sin(z)}{z^3}\]
+has a pole of order 2 at $z=0$: $f(0)$ is undefined, because of division by 0, and there is no value we can assign to $f(0)$ to make the function smooth, so this is not a removable singularity. However, $z^2f(z)=\sinc(z)$, which has a removable singularity at $z=0$; so $0$ is a pole of order 2 for $f$. The idea is that if $f$ has a pole of order $n$ at $\alpha$, then near $z=\alpha$, $f(z)$ behaves similarly to $\frac{1}{(z-\alpha)^n}$.
+
+An \textbf{essential singularity} is a point $\alpha$ such that $f(\alpha)$ is undefined and the singularity of $(z-\alpha)^nf(z)$ at $\alpha$ is not removable for any $n$. So the idea is that $f(z)$ blows up so badly near $\alpha$ that we can't fix it by multiplying by a polynomial, no matter how high a degree we pick; so an essential singularity is like ``a pole of order $\infty$.'' For example, the function
+	\[f(z)=\frac{1}{e^z-1}\]
+has a singularity at $z=0$, because $e^0=1$, so $f(0)$ contains a division by 0. Moreover, $z^nf(z)=\frac{z^n}{e^z-1}$ still blows up no matter how big $n$ is, as can be seen by Taylor expanding the denominator.
+
+
+
+
+\clearpage
+
+
+
+\textbf{Practice:}\bigskip
+
+
+For each of the following functions, identify any singularities it has and whether they are removable, essential, or poles. For poles, identify the order. Hint: Taylor expansions can be useful here!
+
+\begin{enumerate}
+	\item $\frac{e^z-1}{z}$
+	\item $\frac{z^2}{z(z+2)}$
+	\item $\frac{1}{z^2(z-1)(z-12j)^8}$
+	\item $\frac{\cos(z)-1}{z^2}$
+\end{enumerate}
+
+
+\clearpage
+
+
+
+\textbf{Theory: Poles and Partial Fractions:}\bigskip
+
+
+Given a rational function $r(z)=\frac{f(z)}{g(z)}$, where $f$ and $g$ are polynomials with no common factors, the poles of $r$ are precisely the zeros of $g$, and their order is their multiplicity as zeros. For instance,
+\[\frac{(z-1)(z+4)^2}{z^7(z-4)(z+j)^3}\]
+has poles at $0$ and $-j$, of orders $7$ and $3$ respectively. Why does it not have a pole at 4?\medskip
+
+
+A partial fractions decomposition of a rational function expresses it as a sum of simpler rational functions, but it is still the same function, just expressed in a different form. So it must have all the same poles, with the same orders. So if a rational function $r(z)$ has a pole of order $n$ at $\alpha$, then the partial fractions decomposition of $r$ must contain a term with a denominator of $(z-\alpha)^n$. It can also contain terms with denominator $(z-\alpha)^m$ for any $m<n$, since these do not affect the number or order of poles---they are subsumed by the $(z-\alpha)^n$ denominator.
+
+For instance,
+\[\frac{1}{(z-3)^3(z+2)^2}=\frac{A}{(z-3)^3}+\frac{B}{(z-3)^2}+\frac{C}{z-3}+\frac{D}{(z+2)^2}+\frac{E}{z+2}\]
+is a partial fractions decomposition. We could try taking just the $\frac{A}{(z-3)^3}$ and $\frac{D}{(z+2)^2}$ terms, as these are enough to give us the poles, but then we would need $A$ and $D$ to be polynomials, not just constants; that is the reason for the terms with lower degree denominators.\bigskip
+
+
+\textbf{Application to LTI Systems:}\bigskip
+
+
+Let $T(s)$ be the transfer function of a linear, time-invariant system. Suppose $R(s)$ is the Laplace transform of an input $r(t)$ to this system. Then the output is $r(t)\ast I(t)$, where $I(t)$ is the impulse response; this has Laplace transform $R(s)T(s)$. If $T$ has a pole at $s=\alpha$, then that means that the system has undefined gain at the corresponding frequency, so if the input is not zero (to at least the order of the pole) at $s=\alpha$, then the system will (try to) provide infinite gain at that frequency.
+
+If this occurs when $\mathrm{re}(\alpha)<0$, this isn't a problem; it occurs for an exponentially decaying sinusoid, so even with the system trying to amplify the signal by an infinite amount, the signal will still decay to 0. However, if a pole has positive real part, then it provides unlimited gain to an exponentially growing sinusoid, so the signal blows up. This is why poles of the transfer function with positive real part represent instabilities.
+
+
+\clearpage
+
+
+
+\textbf{Conjugate Root Pairs:}\bigskip
+
+
+Recall that the complex conjugate of a complex number in cartesian form, $z=a+bj$, is given by negating the imaginary part: $\bar{z}=a-bj$. Graphically, this is reflection in the real axis, so corresponds to negating the argument; so in polar form, $z=re^{j\theta}$, we have $\bar{z}=re^{-j\theta}$.
+
+We will show a deep and important fact about complex conjugation and polynomials: complex roots of real polynomials occur in complex conjugate pairs.
+
+First we need some basic properties of conjugation. Let $z$ and $w$ be two complex numbers.
+
+\begin{enumerate}
+	\item Show that $\overline{z+w}=\bar{z}+\bar{w}$ (complex conjugation preserves addition). Hint: use cartesian form.
+	\item Show that $\overline{zw}=\bar{z}\bar{w}$ (complex conjugation preserves multiplication). Hint: use polar form.
+	\item Hence show that $\overline{az^n+bz^m}=a\bar{z}^n + b\bar{z}^m$ for any real numbers $a$ and $b$ and positive integers $m$ and $n$.
+	\item Hence conclude that if $p$ is a polynomial with real coefficients, then $p(\bar{z})=\overline{p(z)}$.
+\end{enumerate}
+
+
+So if $p$ is a polynomial with real coefficients, then we can conjugate a number before applying the polynomial (\textit{i.e.}, take $p(\bar{z})$) or first apply the polynomial then conjugate (\textit{i.e.}, take $\overline{p(z)}$), and we'll get the same result. Note that this is not true for polynomials with complex coefficients! Take $p(z)=z-j$; then $p(0)=-j$, so $p(\bar{0})=-j$, but $\overline{p(0)}=+j$. We need the coefficients to be real for this result to work.
+
+Now suppose $\alpha$ is a root of a polynomial $p$ with real coefficients, so $p(\alpha)=0$. Then
+\begin{align*}
+	p(\bar{\alpha})&=\overline{p(\alpha)}\\
+	&=\overline{0}\\
+	&=0,
+\end{align*}
+so $\bar{\alpha}$ is also a root of $p$. So whenever we have a polynomial $p$ with real coefficients and a complex root $\alpha$, the conjugate $\bar{\alpha}$ is also a root.\bigskip
+
+In particular, given a rational function with real coefficients, poles are roots of the denominator, so occur in complex conjugate pairs. However, for a rational function with complex coefficients, this can fail!
+
+
+
+
+
+
+
+
+\end{document}

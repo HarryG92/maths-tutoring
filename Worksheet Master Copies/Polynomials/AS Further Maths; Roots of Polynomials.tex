@@ -1,0 +1,193 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath,amssymb}
+\usepackage{array}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\title{Roots of Polynomials}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+
+{\bf Warm-up: The Polynomial Factor Theorem}\bigskip
+
+
+\begin{enumerate}
+	\item Let $f(x)=x^3-6x^2+11x-6$. Divide $f(x)$ by $(x-2)$.
+	\item Hence show that $f(2)=0$.
+	\item Let $g(x)=x^3-6x^2+11x + \alpha$ for some constant $\alpha$. Divide $g(x)$ by $(x-3)$ with remainder.
+	\item Given that $g(3)=0$, what must the remainder be? Hence find the value of $\alpha$.
+\end{enumerate}
+
+\clearpage
+
+
+\textbf{Theory: The Polynomial Factor Theorem:}\bigskip
+
+
+
+Suppose $f(x)$ is a polynomial and can be factored as $f(x)=(x-a)g(x)$ for some constant $a$ and polynomial $g(x)$. Show that $f(a)=0$ - we say $a$ is a \underline{root} of $f$.
+
+\vfill
+
+Now we go the other way around. Suppose that $f(x)$ is a polynomial and $f(a)=0$. Prove that $f(x)=(x-a)g(x)$ for some polynomial $g(x)$.
+
+\vfill
+
+
+\textsc{\underline{Theorem:}}\medskip
+
+Let $f(x)$ be a polynomial. Then $f(\alpha)=0$ if and only if $f(x)=(x-\alpha)g(x)$ for some polynomial $g$.
+\clearpage
+
+
+\textbf{Worked Examples:}\bigskip
+
+Let $f(x)=x^2+x-6$, and let $\alpha$ and $\beta$ be the roots. Show that $\alpha+\beta=-1$ and $\alpha\beta=-6$. By solving these equations simultaneously, find $\alpha$ and $\beta$.
+
+\vfill
+
+\vfill
+
+Now let $f(x)=ax^2+bx+c$, and let $\alpha$ and $\beta$ be the roots. Show that
+\[\alpha+\beta = \frac{b}{a}\quad\mbox{ and }\quad \alpha\beta = \frac{c}{a}.\]
+
+\vfill
+
+Hence show that the distance between $\alpha$ and $\beta$ is given by
+\[|\alpha-\beta|=\frac{\sqrt{b^2-4ac}}{a}.\]
+
+\vfill
+
+Geometrically, $\alpha$ and $\beta$ can be found by starting halfway between them and then moving up or down by half the distance between them:
+\[\alpha,\beta = \frac{\alpha+\beta}{2} \pm \frac{1}{2}|\alpha-\beta|.\]
+Hence show that
+\[\alpha,\beta = \frac{-b\pm\sqrt{b^2-4ac}}{2a}.\]
+
+
+
+
+
+\clearpage
+
+
+{\bf Exercises:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item Let $f(x)=x^3+px^2+qx-15$, where $p$ and $q$ are real constants. The roots of $f$ are
+		\[\alpha, \frac{5}{\alpha},\mbox{ and } \left(\alpha+\frac{5}{\alpha}-1\right)\]
+		for some complex constant $\alpha$.
+		\begin{enumerate}
+			\item Solve the equation $f(x)=0$.
+			%-15 = 5\alpha + \frac{25}{\alpha}-5.  -10\alpha = 5\alpha^2+25.  \alpha^2-2\alpha +5 = 0. \alpha = 1\pm \sqrt{1-5}=1\pm 2i.  \frac{5}{\alpha}=1\mp 2i. \alpha+\frac{5}{\alpha}-1 = 1.
+			\item Hence find the value of $p$.
+		\end{enumerate}
+	\item Let $g(t)=t^4+at^3-t^2+bt+c$. The roots of $g$ are
+		\[\alpha, -\alpha, \frac{1}{\alpha}, \frac{-1}{\alpha} \]
+		for some complex number $\alpha$.
+		% \alpha = \frac{\sqrt{3}}{2}+\frac{i}{2}, \frac{1}{\alpha}=\bar{\alpha}; t^2-\sqrt{3}t + 1; -\alpha, \frac{-1}{\alpha}; t^2+\sqrt{3}t+1. t^4 - 3t^2 + 1
+		\begin{enumerate}
+			\item Show that $a=b=0$.
+			\item Show that $c=1$.
+			\item Hence show that $\alpha^2$ and $\frac{1}{\alpha^2}$ are the roots of the polynomial
+				\[s^2-s+1.\]
+				Why can we conclude from this that $\alpha^*=\frac{1}{\alpha}$?
+			\item Hence find
+				\[\alpha^2+\frac{1}{\alpha^2}.\]
+			\item Hence show that
+				\[\left(\alpha+\frac{1}{\alpha}\right)^2=3\]
+				and
+				\[\left(\alpha- \frac{1}{\alpha}\right)^2=-1.\]
+			\item Hence show that all of the roots of $g$ have real part $\frac{\pm\sqrt{3}}{2}$ and imaginary part $\frac{\pm 1}{2}$.
+			\item Hence write down the four roots of $g$.
+		\end{enumerate}
+	\item Let $h(y)=y^3-11y^2+ry-169$, where $r$ is a real constant. The roots of $h$ are
+		\[\alpha, \frac{169}{\alpha},\beta,\]
+		where $\alpha$ and $\beta$ are constants.
+		\begin{enumerate}
+			\item Show that $\beta=1$.
+			\item Hence find a quadratic equation whose roots are $\alpha$ and $\frac{169}{\alpha}$.
+			\item Hence solve $h(y)=0$ and find the value of $r$.
+		\end{enumerate}
+	\item Consider a quadratic $ax^2+bx+c$, where $c\neq 0$. Show that the roots are given by
+		\[x=\frac{2c}{-b\pm\sqrt{b^2-4ac}}.\]
+		Hint: First consider the special case $x^2+x+1$; evaluate the above expression, and express in standard form of complex numbers. Can you generalise the manipulations you did to the solutions of any quadratic?
+		
+		Can you suggest a reason why this alternative to the usual quadratic formula might be useful?
+\end{enumerate}
+
+
+
+\clearpage
+
+
+\textbf{A Trigonometric Method for Solving Cubics}
+
+Let $f(x)=x^3+ax^2+bx+c$ be a general cubic equation. We will derive a formula for the roots which uses trig functions.
+
+Note: really, a general cubic should be $dx^3+ax^2+bx+c$, for some $d\neq 0$; but when solving, we can divide through by $d$. So we lose nothing by starting with the assumption that $d=1$; we just have to remember if ever using this method to solve a cubic that we first have to divide by the leading coefficient.
+
+\begin{enumerate}
+	\item Before we even look at the cubic, we do some trigonometry.
+		\begin{enumerate}
+			\item Writing $3\theta=2\theta+\theta$, apply the compound angle formula for cosine to $\cos(3\theta)$.
+			\item Apply the double angle formula for cosine to the expression you got in the previous part, to express $\cos(3\theta)$ in terms of $\cos(\theta)$ and $\sin(\theta)$.
+			\item Use the Pythagorean identity ($\sin^2(\theta)+\cos^2(\theta)=1$) to eliminate $\sin(\theta)$ from your formula above and get a formula for $\cos(3\theta)$ in terms of $\cos(\theta)$
+		\end{enumerate}
+	\item Now we tackle our cubic. The first step is to ``complete the cube''---like completing the square, only in degree 3.
+		\begin{enumerate}
+			\item Expand $\left(x+\frac{a}{3}\right)^3$.
+			\item Hence write $f(x)$ in the form $\left(x+\frac{a}{3}\right)^3+\beta x + \gamma$ for some $\beta$ and $\gamma$.
+			\item Hence write $f(x)$ in the form $\left(x+\frac{a}{3}\right)^3+\delta\left(x+\frac{a}{3}\right)+\epsilon$ for some $\delta$ and $\epsilon$.
+			\item Let $y=\left(x+\frac{a}{3}\right)$ to express $f(x)$ as $y^3+\delta y+\epsilon$.
+			\item If $f(x)=x^3-5x^2-57x+189$, what will $\delta$ and $\epsilon$ be?
+		\end{enumerate}
+	\item Now we have removed the squared term from $f(x)$ by rewriting in terms of $y$, our next step is to modify the coefficients to make them look like the coefficients in our triple angle formula for cosine from the start of the question. To do this, we let
+	\[z=yj\sqrt{\frac{3}{4\delta}}.\]
+		\begin{enumerate}
+			\item Show that $y^3=4z^3j\sqrt{\frac{4\delta^3}{27}}$.
+			\item Show that $\delta y=-3zj\sqrt{\frac{4\delta^3}{27}}$.
+			\item Hence write $f(x)$ in the form $\left(4z^3-3z+\eta\right)j\sqrt{\frac{4\delta^3}{27}}$ for some $\eta$.
+			\item If $f(x)=x^3-5x^2-57x+189$, as before, what will $\eta$ be?
+		\end{enumerate}
+	\item Now we make yet another substitution; this time, we substitute $z=\cos(\theta)$.
+		\begin{enumerate}
+			\item Show that $f(x)=0$ if and only if $4\cos^3(\theta)-3\cos(\theta)=-\eta$, with $\eta$ as above.
+			\item Hence, using the formula derived in part 1, show that $f(x)=0$ if and only if $\cos(3\theta)=-\eta$.
+			\item Hence solve $x^3-5x^2-57x+189=0$.
+		\end{enumerate}
+\end{enumerate}
+\clearpage
+
+
+\textbf{Complex Conjugation---Looking Deeper}
+
+ Let $p(x)$ be a polynomial with real coefficients; \textit{i.e.}, an expression of the form
+ \[p(x)=a_0+a_1x+a_2x^2+\hdots+a_{n-1}x^{n-1}+a_nx^n,\]
+ where all the $a_i$ are real numbers.
+
+\begin{enumerate}
+	\item Show that for any complex numbers $z$ and $w$, $\overline{z+w}=\bar{z}+\bar{w}$.
+	\item Show that for any complex numbers $z$ and $w$, $\overline{zw}=\bar{z}\bar{w}$.
+	\item Show that, if $z$ is any complex number, $p(\bar{z})=\overline{p(z)}$.
+	\item Hence show that if $z$ is a complex root of $p$ (\textit{i.e.}, if $p(z)=0$), then $\bar{z}$ is also a root.
+	\item Show that $2-j$ is a root of the polynomial $x^2-4x+5$. Hence write down the other root.
+	\item Let $p(x)=x^2+jx+2$. Show that $j$ is a root of $p$, but that $-j$ is not a root. Why does this not contradict the result we proved above?
+\end{enumerate}
+
+
+
+
+\end{document}

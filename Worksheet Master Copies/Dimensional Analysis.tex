@@ -1,0 +1,180 @@
+
+\documentclass{article}
+
+\usepackage[left=1.8cm,right=1.8cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+
+
+
+
+\begin{document}
+
+\title{Dimensional Analysis}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To be able to determine the units of quantities and}}
+
+\textbf{\underline{deduce unknowns by dimensional analysis.}}
+
+
+
+\vspace{5mm}
+
+\textbf{Warm-Up: Units of Measurement and Physical Equations:}\bigskip
+
+
+\begin{enumerate}
+	\item I go for a bike ride; my average speed $s$ is given by the equation
+		\[s=\frac{d}{t},\]
+		where $d$ is the distance I have travelled and $t$ is the time it took me to travel that distance.
+		\begin{enumerate}
+			\item If I travel 100m in 10s, what is my average speed? Convert to km per hour.
+			\item If I travel 36km in 1 hour, what is my average speed? Convert to metres per second.
+			\item If I give you the distance I travel in miles and the time it took in minutes, what will be the units of speed found when using the equation above?
+		\end{enumerate}
+	\item If an object is dropped from the top of the Eiffel tower, 300m above ground level, its height in metres $h$ above ground level after time $t$ is given by the equation
+		\[h=300-gt^2,\]
+		where $g$ is a constant expressing the strength of Earth's gravitational field.
+		\begin{enumerate}
+			\item If $t$ is measured in seconds, what should the units of $g$ be?
+			\item When expressed in those units, the value of $g$ is $9.8$. Find how many seconds it takes the object to hit the ground.
+		\end{enumerate}
+\end{enumerate}
+
+
+\clearpage
+
+
+
+\textbf{Theory: Dimensional Analysis:}\bigskip
+
+
+In any equation modelling the real world, the units of measurement have to match up. An equation expresses the fact that two seemingly different expressions are actually the same; they must be the same not just in numerical values, but also in units of measurement---and indeed if you change the units of one, you will need to change the units of the other in order to maintain equality.
+
+For instance, average speed is distance travelled over time taken; if distance is measured in metres and time in seconds, then speed has to be measured in metres-per-second to make the equation true. Both $10\mathrm{ms}^{-1}$ and $36\mathrm{kmph}$ express the same speed, but in different units, and hence with different numerical values. So the units of measurement are just as important as the numbers in any physical equation.
+
+There are two aspects to a unit of measurement: the type of quantity being measured, and the particular measurement being used. For instance, metres and miles both measure the same type of quantity (distance), but they measure it in different ways. So in a physical equation, for the units to match up, both sides must express the same type of quantity, and measure it in the same way. Dimensional analysis is primarily concerned with the type of quantity being measured, not the specific method of assigning it a numerical value; so dimensional analysis treats metres and miles as essentially equivalent, because both are units of distance---it ignores the fact that they assign different numerical values to the same distance.
+
+We use square brackets to denote the type of units of a quantity, and have certain standard letters, such as $L$ for length, $T$ for time, and $M$ for mass, to denote the types of quantity. So if $d$ is a distance, then $[d]=L$ is a way of saying that whatever units $d$ is measured in must be units of length; they could be metres, miles, or various other units, but they must be units of length.
+
+The type of units of a quantity is sometimes called the \textbf{dimensionality} of the quantity (hence ``dimensional analysis''); this name comes from the fact that comparing the dimensionality of a distance $d$, an area $A$, and a volume $V$ tells you about the dimension: $[d]=L$, $[A]=L^2$, $[V]=L^3$. So the dimensionality of a quantity is the \textit{type} of units used to measure it, without regards to the \textit{specific} units used.
+
+In any valid physical equation, both sides must have the same dimensionality. For instance, in the equation ``speed equals distance over time,'' we have
+\begin{align*}
+	s&=\frac{d}{t}\\
+	LT^{-1}&=\frac{L}{T}.
+\end{align*}
+
+\clearpage
+
+
+
+
+\textbf{Practice:}\bigskip
+
+Use the following symbols for dimensionality:
+\begin{align*}
+	L&=\mathrm{length}\\
+	T&=\mathrm{time}\\
+	M&=\mathrm{mass}\\
+	Q&=\mathrm{charge}
+\end{align*}
+
+Give the dimensionalities of the following quantities in terms of the above symbols:
+
+\begin{enumerate}
+	\item Electrical current $I$
+	\item Velocity $v$
+	\item Acceleration $a$
+	\item Density $\rho$
+	\item Force $F$, given that $F=ma$ (force is mass times acceleration)
+	\item Linear momentum $p$, given that $p=mv$ (momentum is mass times velocity)
+	\item Kinetic energy $E_k$, given that $E_k=\frac{1}{2}mv^2$ (kinetic energy is one half times mass times the square of velocity)
+	\item Gravitational potential energy $E_g$, given that $E_g=mgh$ (gravitational potential energy is mass times $g$ times height, where $g$ is the acceleration due to gravity from the warm-up); compare with the dimensionality of kinetic energy
+	\item Voltage (potential difference) $V$, given that this is the amount of energy per unit charge
+	\item Capacitance $C$, given that $C=QV$ (capacitance is amount of charge on the capacitor times the potential difference across it).
+\end{enumerate}
+
+\clearpage
+
+
+
+
+\textbf{Theory and Application:}\bigskip
+
+
+The key underlying principle of dimensional analysis is the principle of \textbf{dimensional homogeneity}. This states that two physical quantities can only be compared in size, added or subtracted if they have the same dimensionality. That is, if $x$ and $y$ are two physical quantities, then $x<y$, $x=y$, $x+y$ and $x-y$ only make sense as expressions if $[x]=[y]$.
+
+For instance, the ``equations of uniform motion'' (suvat equations) are
+\begin{align*}
+	v=u+at\qquad&\qquad  v^2=u^2+2as\\
+	s=ut+\frac{1}{2}at^2 \qquad&\qquad s=\frac{1}{2}(u+v)t,
+\end{align*}
+where $s$ is displacement (distance from starting position), $u$ is initial velocity, $v$ is final velocity, $a$ is (constant) acceleration, and $t$ is time. Find the dimensionality of each term in these equations and check that the principle of homogeneity is satisfied.\bigskip
+
+
+Dimensional analysis can be useful as a check to make sure an equation seems reasonable (it is often used when you half remember an equation to make sure you've written it down correctly!). For instance, if I wrote the third suvat equation down wrong as
+\[s=u+\frac{1}{2}at^2,\]
+a quick check of dimensionality would tell me there's a problem with the $u$ term. However, dimensional analysis can't catch every mistake: if I wrote
+\[s=ut+at^2,\]
+the dimensionality checks out, but the equation is still wrong! Nonetheless, dimensional analysis can provide a useful ``sanity check'' on an equation.
+
+Dimensionality also gives useful insight into the meaning of physical constants or quantities. For instance, specific heat capacity $c$ is typically measured in units of joules per kilogram-kelvin; in other words, it is energy per mass-temperature. This suggests an equation of the form $E=mc\theta$, which suggests that the energy required to raise the temperature of an object by an amount $\theta$ should be given by multiplying $\theta$ by the mass of the object and its specific heat capacity; so the specific heat capacity measures how much energy it takes to heat a given mass of a material by a given amount. Note that the equation above might not be exactly correct (in this case it is), because there could be missing constants, but it at least gives us an idea of what specific heat capacity \textit{means}.
+
+
+\clearpage
+
+
+
+\textbf{Practice:}\bigskip
+
+
+\begin{enumerate}
+	\item Einstein's famous equation $E=mc^2$ expresses the energy contained in a mass $m$ at rest, where $c$ is the speed of light. Find the dimensionality of energy, $[E]$.
+	\item Given that potential difference $V$ is energy per unit charge, and using Ohm's Law $V=IR$, find the dimensionality of resistance $[R]$.
+	\item Electrical resistance $R$ is a property of a component, whereas electrical resistivity $\rho$ is a property of a \textbf{material}. If a wire is made of a material with resistivity $\rho$ and has length $l$ and cross-sectional area $A$, then at temperature $\theta$ the resistance of the wire is given by
+		\[R=\frac{\rho\theta l}{A}.\]
+		Determine the dimensionality of resistivity, $[\rho]$.
+	\item Pressure is defined to be the force divided by the area on which the force acts. Find the dimensionality of pressure. You might find Newton's equation $F=ma$ useful.
+	\item The \textbf{ideal gas law} relates the pressure $P$, volume $V$ and temperature $T$ of a gas to the number of particles $n$ of the gas:
+		\[PV=nk_BT,\]
+		where $k_B$ is a universal physical constant called Boltzmann's constant. Find the dimensionality of $k_B$.
+	\item When a planet orbits a star, the orbital period $T$ (time taken for one complete orbit) is related to the radius of orbit $r$ by the equation
+		\[T=\frac{2\pi}{\sqrt{GM}}r^\alpha,\]
+		where $G$ is the universal gravitational constant and $M$ is the mass of the star (note that this equation does not include the mass of the planet---the time taken to orbit is totally independent of how heavy the planet is!). The constant $G$ occurs in Newton's Law of gravitation:
+		\[F=\frac{GMm}{r^2},\]
+		where $F$ is the gravitational force between the star (of mass $M$) and the planet (of mass $m$).
+		Use Newton's Law of Gravitation to find the dimensionality of $G$, and hence find the value of $\alpha$ in the equation for orbital period.
+\end{enumerate}
+
+
+
+
+\end{document}

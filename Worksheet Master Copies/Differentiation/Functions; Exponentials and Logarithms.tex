@@ -1,0 +1,284 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\id}{\mathrm{id}}
+
+
+
+
+\begin{document}
+
+\title{Functions; Exponentials and Logarithms}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand operations on functions, and the}}
+
+\textbf{\underline{exponential and logarithm functions.}}
+
+
+
+
+
+\vspace{5mm}
+
+
+\textbf{Warm-up:}
+
+\vspace{5mm}
+
+Let $f(x)=x^2$, $g(x)=\sin(x)$, and $h(x)=4x-7$.
+
+\begin{enumerate}
+	\item $f(g(x))=$
+	\item $g(f(x))=$
+	\item $f(h(x))=$
+	\item $h(f(x))=$
+	\item $g(h(x))=$
+	\item $h(g(x))=$
+	\item $f(x)+g(x)=$
+	\item $h(f(x)+g(x))=$
+	\item $f(x)g(x)=$
+	\item $h(f(x)g(x))=$
+	\item $h(f(g(x))=$
+\end{enumerate}
+
+
+\clearpage
+
+
+
+
+\textbf{Theory: Functions and Composition:}
+
+\vspace{5mm}
+
+
+A \textbf{set} is a collection of mathematical objects (such as numbers, points in the plane, functions, ...). Some important sets are $\mathbb{Z}$, the set of integers (from the German \textit{Zahlen}, meaning ``numbers''); $\mathbb{R}$, the set of real numbers; and $\mathbb{C}$, the set of complex numbers. Intervals of the real line are denoted with brackets to include the endpoints and parentheses to exclude them; so $[0,1]$ is the set of real numbers greater than or equal to 0 and less than or equal to 1, whereas $(0,1)$ is the set of real numbers strictly greater than 0 and strictly less than 1. We can combine these: $[0,1)$ is the set of real numbers greater than or equal to 0 and strictly less than 1, for instance.
+
+If $A$ is a set, we write $x\in A$ to say ``$x$ is in the set $A$'' or ``$x$ is an element of $A$.'' So, for instance, $z\in\mathbb{C}$ means ``$z$ is in the set of complex numbers'' or simply ``$z$ is a complex number.''
+
+Given two sets $A$ and $B$, a \textbf{function} from $A$ to $B$ is a rule that takes any element of $A$ and gives a \textit{unique} element of $B$; we write $f:A\to B$ for ``$f$ is a function from $A$ to $B$.'' Very often, functions can be written with an algebraic expression; for instance, we write the function $f:\mathbb{R}\to \mathbb{R}$ given by the rule ``multiply the number by 7 and subtract 4'' as $f(x)=7x-4$.
+
+Given $f:A\to B$ and $g:B\to C$, we can form a new function, the \textbf{composition} of $g$ with $f$, written $g\circ f:A\to C$, defined by $g(f(x))$. So we take $x$ in $A$, apply $f$ to it to get $f(x)$ in $B$, then apply $g$ to that to get $g(f(x))$ in $C$.
+
+For functions going between sets of numbers, we can also add, subtract, multiply, and divide functions. So given $f:\mathbb{R}\to\mathbb{R}$ and $g:\mathbb{R}\to\mathbb{R}$, we have $f(x)+g(x)$, $f(x)-g(x)$, $f(x)g(x)$, and $\frac{f(x)}{g(x)}$, all functions from $\mathbb{R}$ to $\mathbb{R}$. For instance, if $f(x)=x^2$ and $g(x)=\sin(x)$, then $f(x)+g(x)=x^2+\sin(x)$, $f(x)-g(x)=x^2-\sin(x)$, $f(x)g(x)=x^2\sin(x)$, $\frac{f(x)}{g(x)}=\frac{x^2}{\sin(x)}=x^2\mathrm{cosec}(x)$, $f(g(x))=\sin^2(x)$, and $g(f(x))=\sin(x^2)$. Notice how all of these are different functions.
+
+Note also that because $f$ and $g$ are both functions $\mathbb{R}\to\mathbb{R}$, we can form both $f\circ g$ and $g\circ f$; this is not always possible. For instance, the square root funtion is a function $\mathbb{R}_{\geq 0}\to\mathbb{R}_{\geq0}$, meaning it takes non-negative real inputs and gives non-negative real outputs. The sine function, on the other hand, is a function $\mathbb{R}\to[-1,1]$. Since $\mathbb{R}_{\geq 0}$ is contained in $\mathbb{R}$, $\sin(\sqrt{x})$ makes sense; but $[-1,1]$ contains values not included in $\mathbb{R}_{\geq 0}$, so $\sqrt{\sin(x)}$ is not a well-defined function (unless we restrict the possible values $x$ can take to make sure that $\sin(x)$ will be non-negative).
+
+\clearpage
+
+
+
+
+
+
+
+
+\textbf{Theory: Functions and Inverses:}
+
+\vspace{5mm}
+
+
+For any set $A$ there is a special function called the \textbf{identity function} $\id_A:A\to A$, defined by $\id_A(x)=x$. So the identity function does nothing. Given functions $f:A\to B$ and $g:B\to A$, we can form both $f\circ g:B\to B$ and $g\circ f:A\to A$. If $f\circ g=\id_B$, we say that $f$ is \textbf{left-inverse} to $g$ and $g$ is \textbf{right-inverse} to $f$. If $g\circ f=\id_A$, then $f$ is right-inverse to $g$ and $g$ is left-inverse to $f$. If both of these hold, so $f\circ g=\id_B$ and $g\circ f=\id_A$, then we say that $f$ and $g$ are \textbf{inverses} of each other.
+
+
+So $f$ is left-inverse to $g$ if $f(g(x))=x$, and $f$ is right-inverse to $g$ if $g(f(x))=x$. If $f$ is left- and right-inverse to $g$, so if $f(g(x))=x$ and $g(f(x))=x$, then $f$ and $g$ are inverses. For example, for any $x\in\mathbb{R}_{\geq 0}$, $\left(\sqrt{x}\right)^2=x$, so if we square root, then square, we get back to what we started with, so squaring is left-inverse to square rooting. On the other hand, for $x\in\mathbb{R}$, $\sqrt{x^2}$ is not always equal to $x$; \textit{e.g}, $\sqrt{(-2)^2}=\sqrt{4}=2$. So the squaring function is left-inverse to the square root function, but not right-inverse.
+
+
+Note: if you look back at our work on trigonometry and inverse trig functions, you'll find we saw that $\sin(\sin^{-1}(x))=x$, but $\sin^{-1}(\sin(x))$ need not be $x$; now that we have the terminology of inverse functions, we can say that arcsine is right-inverse to sine, but not left-inverse. The problem, both here and with squaring, is that multiple inputs can give the same output; \textit{e.g.}, $(-2)^2=2^2$ and $\sin(0)=\sin(\pi)$. So the attempted inverse function can't tell which value to pick out, so the best it can do is to pick out one of the possible values. This is what occurs when a function has only a one-sided inverse.
+
+If a function $f$ has an inverse (a full inverse, not a one-sided one), we write it as $f^{-1}$ (read ``$f$-inverse''). Usually, we do not use this notation with one-sided inverses, but the trig functions are an exception: we write $\sin^{-1}$ for the arcsine function, even though it is only a right-inverse, not a full inverse.\bigskip
+
+
+
+
+
+Let $f:\mathbb{R}\to\mathbb{R}$ be given by $f(x)=4x-1$. Find $f^{-1}$.
+
+\vfill
+
+
+
+\clearpage
+
+
+
+\textbf{Theory/Practice: Exponential and Logarithmic Functions:}
+
+\vspace{5mm}
+
+
+
+Let $b\in\mathbb{R}_{>0}$ (so $b$ is a positive real number). The function $\mathbb{R}\to\mathbb{R}_{>0}$ given by $b^x$ is called the \textbf{exponential function with base $b$}. Note that the exponential function with base 1 is the constant function 1; so it is only for $b\neq 1$ that exponential functions are interesting.
+
+We will show that if $b>1$, then $b^x$ is strictly increasing, whereas if $b\in (0,1)$, then $b^x$ is strictly decreasing.
+\begin{enumerate}
+	\item Suppose $x_1<x_2$. Then we can write $x_2=x_1+a$ for some $a>0$. Use this to factorise $b^{x_2}-b^{x_1}$.
+	\item Suppose $b>1$; what can we conclude about $b^{x_2}-b^{x_1}$? Why does this show that $b^x$ is strictly increasing?
+	\item Now suppose instead that $b<1$; what can we conclude about $b^{x_2}-b^{x_1}$? Why does this show that $b^x$ is decreasing?
+	\item Using this, prove for any $b\neq 1$ that if $b^x=b^y$, then $x=y$.
+\end{enumerate}
+
+So for any $b\neq 1$, the exponential function with base $b$ is \textbf{one-to-one}---it never takes two different inputs to the same output. This means that it will have an inverse; so there is a function $\log_b:\mathbb{R}_{>0}\to\mathbb{R}$, called the \textbf{logarithm to base $b$}, which is inverse to the exponential with base $b$. So
+\[\log_b(b^x)=x\qquad\mbox{ and }\qquad b^{\log_b(x)}=x.\]
+
+\noindent Fix $b\neq1$. We will explore some properties of the logarithm to base $b$.
+
+\begin{enumerate}
+\setcounter{enumi}{4}
+	\item Consider the expressions $\log_b(xy)$ and $\log_b(x)+\log_b(y)$. Take the exponential with base $b$ of both of these expressions, and hence conclude that
+		\[\log_b(xy)=\log_b(x)+\log_b(y).\]
+	\item Consider the expressions $\log_b(x^y)$ and $y\log_b(x)$. Take the exponential with base $b$ of both these expressions, and hence conclude that
+		\[\log_b(x^y)=y\log_b(x).\]
+	\item Let $a$ and $b$ be two numbers different from 1. Let $y=a^x$.
+		\begin{enumerate}
+			\item Take $\log_b(y)$ and simplify using question 6.
+			\item Substitute $x=\log_a(a^x)$ into the equation you just found.
+			\item Conclude the \textbf{change-of-base formula}:
+				\[\log_a(y)=\frac{\log_b(y)}{\log_b(a)}.\]
+		\end{enumerate}
+\end{enumerate}
+
+\clearpage
+
+
+\begin{center}
+		\begin{tikzpicture}
+			\draw[->] (-7,0) -- (7,0);
+			\node[right] at (7,0) {$x$};
+			\draw[->] (0,0) -- (0,10);
+			\node[above] at (0,10) {$y$};
+			
+			\draw[domain=-7:7,blue,thick,samples=100] plot (\x, {0.4^(\x/3)});
+			\draw[domain=-7:7,red] plot (\x, {0.5^(\x/3)});
+			\draw[domain=-7:7,cyan] plot (\x, {2.7183^(\x/3)});
+			\draw[domain=-7:7,violet] plot (\x, {2^(\x/3)});
+
+
+			\matrix [draw,right] at (current bounding box.north west) {
+				\node [blue,left] {$y=0.4^x$};
+				\node [red,right] {$y=0.5^x$}; \\
+				\node[violet,left] {$y=2^x$};
+				\node[cyan,right] {$y=2.71828^x$};\\
+				};
+		\end{tikzpicture}
+
+		\begin{tikzpicture}
+			\draw[->] (0,0) -- (12,0);
+			\node[right] at (12,0) {$x$};
+			\draw[->] (0,-6) -- (0,4);
+			\node[above] at (0,4) {$y$};
+			
+			\draw[domain=0.05:12,blue,thick,samples=100] plot (\x, {ln(\x)/ln(2)});
+			\draw[domain=0.05:12,red,samples=100] plot (\x, {ln(\x)});
+			\draw[domain=0.05:12,cyan, samples=200] plot (\x, {ln(\x)/ln(10)});
+
+
+			\matrix [draw,above] at (current bounding box.south) {
+				\node [blue,left] {$y=\log_2(x)$};
+				\node [red] {$y=\log_{2.71828}(x)$};
+				\node[cyan,right] {$y=\log_{10}(x)$};\\
+				};
+		\end{tikzpicture}
+		\end{center}
+\clearpage
+
+
+
+
+\textbf{Practice:}
+
+\vspace{5mm}
+
+Recall the laws of logarithms:
+\[\log_b(xy)=\log_b(x)+\log_b(y)\]
+and
+\[\log_b(x^y)=y\log_b(x).\]
+Recall also the change-of-base formula:
+\[\log_a(x)=\frac{\log_b(x)}{\log_b(a)}.\]
+
+
+
+\begin{enumerate}
+	\item Let $f(x)=2^x$, $g(x)=x^2$, and $h(x)=2-5x$.
+		\begin{enumerate}
+			\item Write down $f\circ g$, $g\circ f$, $f\circ h$, and $g\circ h\circ f$.
+			\item Write down $f^{-1}$ and $h^{-1}$.
+			\item Solve $f(x)=32$.
+			\item Solve $g(h(x))=4$.
+			\item Solve $f(g(x))=f(h(x))$.
+		\end{enumerate}
+	\item Solve $12\times3^{x+4}=100$.
+	\item Solve $\frac{9}{5^{x^2}}=8$.
+	\item Let $\phi$ and $\psi$ be invertible functions. Prove that $(\phi\circ \psi)^{-1}=\psi^{-1}\circ\phi^{-1}$.
+\end{enumerate}
+
+
+\clearpage
+
+
+
+
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item A \textbf{set} is a collection of mathematical objects; if $A$ is a set, we write $a\in A$ for ``$a$ is an element of $A$.''
+	\item Some important sets are $\mathbb{Z}$ (the set of integers), $\mathbb{R}$ (the set of real numbers), $\mathbb{C}$ (the set of complex numbers), $(a,b)$ (the set of all real numbers strictly between $a$ and $b$) and $[a,b]$ (the set of all real numbers between $a$ and $b$ inclusive).
+	\item A \textbf{function} $f:A\to B$ takes an input from the set $A$ and outputs a unique element of the set $B$.
+	\item The \textbf{composition} of two functions $f:A\to B$ and $g:B\to C$ is the function $g\circ f$ given by $g(f(x))$.
+	\item The \textbf{inverse} of a function $f:A\to B$ (if it exists), is the function $f^{-1}:B\to A$ such that $f(f^{-1}(x))=x$ and $f^{-1}(f(x))=x$.
+	\item Even if a function does not have an inverse, it could have a left-inverse or right-inverse; \textit{e.g.}, arcsine is right-inverse to sine.
+	\item For $b>0$, the \textbf{exponential function with base $b$} is the function $b^x$ (from $\mathbb{R}$ to $\mathbb{R}_{>0}$).
+	\item For $b>1$, $b^x$ is strictly increasing, and for $0<b<1$, $b^x$ is strictly decreasing.
+	\item For $b\neq 1$, the exponential with base $b$ has an inverse, the \textbf{logarithm with base $b$}, denoted $\log_b(x)$.
+	\item The \textbf{laws of logarithms}:
+		\[\log_b(xy)=\log_b(x)+\log_b(y)\]
+		and
+		\[\log_b(x^y)=y\log_b(x).\]
+	\item The \textbf{change-of-base formula}:
+		\[\log_a(x)=\frac{\log_b(x)}{\log_b(a)}.\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

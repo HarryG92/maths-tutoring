@@ -1,0 +1,253 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+
+
+
+
+\begin{document}
+
+\title{Exponential Form of Fourier Series}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To be able to express a periodic function as a series of}}
+
+\textbf{\underline{exponential functions.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{Recap/Warm-up: Fourier Series:}\bigskip
+
+
+
+Recall that the Fourier series of a function $f(t)$ on the interval $[a,a+L]$ is
+\[f_\mathrm{Fourier}(t)=\frac{a_0}{2}+\sum_{n=1}^\infty \left[a_n\cos\left(\frac{2\pi nt}{L}\right) + b_n\sin\left(\frac{2\pi nt}{L}\right)\right],\]
+where
+\begin{align*}
+	a_n&=\frac{2}{L}\int_a^{a+L} f(t)\cos\left(\frac{2\pi nt}{L}\right)\diff t\\
+	b_n&=\frac{2}{L}\int_a^{a+L} f(t)\sin\left(\frac{2\pi nt}{L}\right)\diff t.
+\end{align*}
+Outside the interval $[a,a+L]$, $f_\mathrm{Fourier}$ approximates the periodic extension of $f$.\bigskip
+
+
+\begin{enumerate}
+	\item Let $f(t)$ be the periodic extension of the function $\cos(t)$ on the interval $[0,\pi]$. Show that the Fourier series of $f$ is
+		\[f_\mathrm{Fourier}(t) = \sum_{n=1}^\infty \frac{8n}{(4n^2-1)\pi}\sin(2nt).\]
+	\item Use Euler's Equation to show that
+		\[\sin(2nt) = \frac{e^{2njt} - e^{-2njt}}{2j}.\]
+	\item Hence show that the Fourier series can be rewritten as
+		\[f_\mathrm{Fourier}(t) = \sum_{n=-\infty}^\infty \frac{4n}{(4n^2-1)\pi j} e^{2njt}.\]
+\end{enumerate}
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Exponential Fourier Series:}
+
+\bigskip
+
+
+We have seen how rearranging Euler's equation gives us the identities
+\[\cos(t)=\frac{e^{jt}+e^{-jt}}{2},\qquad \sin(t)=\frac{e^{jt}-e^{-jt}}{2j}.\]
+
+Using these, we can rewrite a Fourier series as a sum of exponentials; however, to do this, we must allow negative values of $n$, so our sum goes from $-\infty$ to $\infty$. Given a Fourier series
+\[F(t)=\frac{a_0}{2}+\sum_{n=1}^\infty \left[a_n\cos\left(\frac{2\pi nt}{L}\right) + b_n\sin\left(\frac{2\pi nt}{L}\right)\right],\]
+we substitute our above identities, and set $b_0=0$:
+\begin{align*}
+	F(t) &= \frac{a_0}{2} - \frac{b_0j}{2} + \sum_{n=1}^\infty \left[a_n\frac{e^{2\pi njt/L}+e^{-2\pi njt/L}}{2} + b_n\frac{e^{2\pi njt/L}-e^{-2\pi njt/L}}{2j}\right]\\
+	&= \frac{a_0}{2} -\frac{b_0j}{2}+ \sum_{n=1}^\infty \left[\frac{a_n}{2}\left(e^{2\pi njt/L}+e^{-2\pi njt/L}\right) - \frac{b_nj}{2}\left(e^{2\pi njt/L}-e^{-2\pi njt/L}\right)\right]\\
+	&= \frac{a_0-b_0j}{2} + \sum_{n=1}^\infty \frac{a_n-b_nj}{2}e^{2\pi njt/L} + \sum_{n=1}^\infty \frac{a_n+b_nj}{2}e^{-2\pi njt/L}
+\end{align*}
+
+Since we have negative powers of $e$ occuring, it makes sense to allow $n$ to take negative values; how do our Fourier coefficients behave with negative values of $n$? We see that, simply substituting $-n$ into the definition:
+\begin{align*}
+	a_{-n} &= \frac{2}{L}\int_a^{a+L} f(t)\cos\left(\frac{-2\pi nt}{L}\right)\diff t\\
+	&=\frac{2}{L}\int_a^{a+L} f(t)\cos\left(\frac{2\pi nt}{L}\right)\diff t\\
+	&=a_n,
+\end{align*}
+since cosine is an even function. For the sine coefficients, on the other hand:
+\begin{align*}
+	b_{-n} &= \frac{2}{L}\int_a^{a+L} f(t)\sin\left(\frac{-2\pi nt}{L}\right)\diff t\\
+	&= -\frac{2}{L}\int_a^{a+L} f(t)\sin\left(\frac{2\pi nt}{L}\right)\diff t\\
+	&=-b_n,
+\end{align*}
+since sine is an odd function. So we can extend our definition of the Fourier coefficients to negative values of $n$, with the simple relations $a_{-n}=a_n$, and $b_{-n}=-b_n$.
+
+Therefore, in the second infinite series of our rearranged Fourier series above, we can write
+\begin{align*}
+	\sum_{n=1}^\infty \frac{a_n+b_nj}{2}e^{-2\pi njt/L}&=\sum_{n=1}^\infty \frac{a_{-n}-b_{-n}j}{2}e^{-2\pi njt/L}\\
+	&= \sum_{n=-\infty}^1 \frac{a_n-b_nj}{2}e^{2\pi njt/L}.
+\end{align*}
+This makes the summands equal to those of the first infinite series, but the limits now go from $-\infty$ to $1$, instead of $1$ to $\infty$. The constant term also has the same form, so we can treat it as
+\[\frac{a_n-b_nj}{2}e^{2\pi njt/L}\]
+when $n=0$. Therefore every term we are adding has the same form, so we can combine them all into a single infinite sum:
+\[F(t)=\sum_{n=-\infty}^\infty \frac{a_n-b_nj}{2}e^{2\pi njt/L}.\]\medskip
+
+
+Now consider the coefficients in the above series. From the definitions, we have
+\begin{align*}
+	\frac{a_n-b_nj}{2} &= \frac{1}{2}\left[\frac{2}{L}\int_a^{a+L}\!\!f(t)\cos\left(\frac{2\pi nt}{L}\right)\diff t -\frac{2j}{L}\int_a^{a+L}\!\! f(t)\sin\left(\frac{2\pi nt}{L}\right)\diff t\right]\\
+	&=\frac{1}{L}\int_a^{a+L}\!\!f(t)\left[\cos\left(\frac{2\pi nt}{L}\right) - j \sin\left(\frac{2\pi nt}{L}\right)\right]\diff t\\
+	&=\frac{1}{L}\int_a^{a+L}\!\! f(t)e^{-2\pi njt/L}\diff t.
+\end{align*}
+
+So we define
+\[c_n=\frac{1}{L}\int_a^{a+L}\!\!f(t)e^{-2\pi njt/L}\diff t,\]
+and write the \textbf{exponential Fourier series} of $f$ over $[a,a+L]$ as
+\[f_\mathrm{exp}(t)=\sum_{n=-\infty}^\infty c_n e^{2\pi njt/L}.\]
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: The Coefficient Function:}\bigskip
+
+
+Consier the exponential Fourier coefficients, $c_n$. We can view this as a function which takes an integer $n$ as input and returns a complex number $c_n$ as output. Since this depends on the original function $f$, let us denote this coefficient function $\hat{f}$: $\hat{f}(n)=c_n$.
+
+This process of ``putting a hat'' on a function $f$ is therefore a type of \textbf{operator}. We have seen operators before, such as differentiation; just as a function takes a number and gives you a number, an operator takes a function and gives you a new function. In this case, we start with a function $f$ and obtain a function $\hat{f}$. There is a crucial difference between this ``hat operator'' and the differentiation operator, however. Differentiation takes a function that has real inputs and real outputs, and it gives a function out that has real inputs and real outputs. The hat operator, on the other hand, takes a function with real inputs and outputs, and gives out a function with integer inputs and complex outputs!
+
+The original function $f$ often has time as an input, in applications. The integer inputs to $\hat{f}$ are the harmonics over $L$, so represent frequencies. We say that $f$ is a function on the \textbf{time domain}, whereas $\hat{f}$ is a function on the \textbf{frequency domain}. In general, any real number is possible as the frequency of a sinusoid (or a complex exponential!), but $\hat{f}$ takes only integer multiples of the fundamental frequency on $L$. We say $\hat{f}$ is a function on the \textbf{discrete frequency domain}.
+
+We shall see a generalisation of Fourier series later, the Fourier transform, which allows any real frequency as input, so is a function on the entire frequency domain, not just the integer multiples of a fixed fundamental frequency. The Fourier transform is a complex-valued function on the \textit{continuous} frequency domain.
+
+It is worth looking more closely at the definition of our hat operator. It takes a function $f(t)$ and returns the function $\hat{f}(n)$, where
+\[\hat{f}(n)=\frac{1}{L}\int_a^{a+L}\!\! f(t)e^{-2\pi njt/L}\diff t.\]
+
+So we introduce a new variable $n$, then integrate with respect to the old variable to leave an expression using only the new variable. We multiply $f(t)$ by a function $e^{-2\pi njt/L}$ which involves \textit{both $t$ and $n$}, then integrate in the time domain to leave a function in the frequency domain. So the function $e^{-2\pi njt/L}$ acts as a bridge between the time and frequency domains.
+
+To recover the original function, via its exponential Fourier series, we multiply by a similar ``bridge'' function, $e^{2\pi njt/L}$, and sum over all value of $n$---we sum over the frequency domain. This leaves us with $f_\mathrm{exp}(t)$, a function in the time domain, which (for sufficiently nice $f$), will be equal to the original function $f$.
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+\[f_\mathrm{exp}(t)=\sum_{n=-\infty}^\infty c_ne^{2\pi njt/L},\]
+where
+\[c_n = \frac{1}{L}\int_a^{a+L}\!\! f(t)e^{-2\pi njt/L}\diff t.\]
+
+\begin{enumerate}
+	\item Let $f(t)$ be the square wave function obtained by periodic extension of the Heaviside function on $[-1,1]$. Find the exponential Fourier series of $f$.
+	\item Let $T(t)$ be the triangle wave function obtained by periodic extension of $|t|$ on $[-1,1]$. Find the exponential Fourier series of $T$.
+	\item Let $S(t)$ be the sawtooth function obtained by periodic extension of $t$ on $[-1,1]$. Find the exponential Fourier series of $S$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The \textbf{exponential Fourier series} of a function $f(x)$ on the interval $[a,a+L]$ is the complex exponential series
+		\[f_\mathrm{exp}(t)=\sum_{n=-\infty}^\infty c_ne^{2\pi njt/L},\]
+		where
+		\[c_n = \frac{1}{L}\int_a^{a+L}\!\! f(t)e^{-2\pi njt/L}\diff t.\]
+	\item If we substitute for the complex exponentials with Euler's equation, and split the coefficients $c_n$ into real and imaginary parts $c_n=a_n-b_nj$, we recover the trigonometric Fourier series.
+	\item There is an \textbf{operator} taking the real-valued \textbf{time-domain} function $f$ to the complex-valued \textbf{discrete frequency-domain} function $\hat{f}$, defined by
+		\[\hat{f}(n)=c_n=\frac{1}{L}\int_a^{a+L}\!\!f(t)e^{-2\pi njt/L}\diff t.\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

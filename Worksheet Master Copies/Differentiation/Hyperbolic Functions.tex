@@ -1,0 +1,297 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d}#3^{#1}}}
+\newcommand{\sech}{\mathrm{sech}}
+\newcommand{\cosech}{\mathrm{cosech}}
+\newcommand{\arsinh}{\mathrm{arsinh}}
+\newcommand{\arcosh}{\mathrm{arcosh}}
+\newcommand{\artanh}{\mathrm{artanh}}
+\newcommand{\cosec}{\mathrm{cosec}}
+
+
+
+
+\begin{document}
+
+\title{Hyperbolic Functions}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To be familiar with the hyperbolic functions and}}
+
+\textbf{\underline{Osborn's Rule.}}
+
+
+
+
+\vspace{5mm}
+
+
+\textbf{Recap/Warm-Up: Euler's Equation:}
+
+
+\vspace{5mm}
+
+Recall Euler's Equation:
+\[e^{jx}=\cos(x)+j\sin(x).\]
+
+\begin{enumerate}
+	\item Substitute Euler's Equation into
+		\[\frac{e^{jx}+e^{-jx}}{2}\]
+		and simplify.
+	\item Substitute Euler's Equation into
+		\[\frac{e^{jx}-e^{-jx}}{2j}\]
+		and simplify.
+	\item Show that
+		\[\tan(x)=\frac{e^{2jx}-1}{j(e^{2jx}+1)}.\]
+\end{enumerate}
+
+
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Theory: Hyperbolic Functions:}
+
+\vspace{5mm}
+
+We saw above that
+\[\sin(x)=\frac{e^{jx}-e^{-jx}}{2j},\qquad \cos(x)=\frac{e^{jx}+e^{-jx}}{2}.\]
+
+By simply dropping every occurence of $j$ from the above, we can define two new functions, called the \textbf{hyperbolic sine} and \textbf{hyperbolic cosine} functions:
+\[\sinh(x)=\frac{e^x-e^{-x}}{2},\qquad \cosh(x)=\frac{e^x+e^{-x}}{2}.\]
+
+Of course, we immediately have the relations $\cos(x)=\cosh(jx)$, $\sin(x)=\frac{\sinh(jx)}{j}$, $\cosh(x)=\cos(-jx)$, and $\sinh(x)=j\sin(-jx)$; so essentially the hyperbolic functions of real arguments are trig functions of imaginary arguments and \textit{vice versa}.\bigskip
+
+
+Having defined the hyperbolic sine and cosine, we can now define hyperbolic versions of all our other trig functions:
+\begin{align*}
+	\tanh(x)&=\frac{\sinh(x)}{\cosh(x)}\\
+	\sech(x)&=\frac{1}{\cosh(x)}\\
+	\cosech(x)&=\frac{1}{\sinh(x)}\\
+	\coth(x)&=\frac{1}{\tanh(x)}=\frac{\cosh(x)}{\sinh(x)}
+\end{align*}
+and inverse hyperbolic functions: $\arsinh$, $\arcosh$, and $\artanh$. Both $\sinh$ and $\tanh$ are genuinely invertible (unlike $\sin$ and $\tan$), but $\cosh$ is only right-invertible (like $\cos$), so although $\cosh(\arcosh(x))=x$, it is not generally true that $\arcosh(\cosh(x))=x$. However, unlike with trig functions, where there are infinitely many solutions (though only two between $0$ and $2\pi$), there are only two solutions to $\cosh(x)=a$---one positive, one negative, since $\cosh$ is an even function--- for $a$ in the range of $\cosh$. The inverse hyperbolic cosine ($\arcosh$) is defined to give the positive solution. So
+\[\arcosh(\cosh(x))=|x|.\]
+
+
+The graphs of $\sinh$, $\cosh$, and $\tanh$ are shown overleaf.
+
+
+\begin{center}
+\begin{tikzpicture}
+	\draw[->] (-6,0) -- (6,0);
+	\node[right] at (6,0) {$x$};
+	\draw[->] (0,-10) -- (0,10);
+	\node[above] at (0,10) {$y$};
+	
+	\draw[thick, red, domain=-3:3, samples=100] plot (\x,{sinh(\x)});
+	\draw[thick, blue, domain=-3:3, samples=100] plot (\x,{cosh(\x)});
+	\draw[thick, cyan, domain=-6:6, samples=100] plot (\x,{tanh(\x)});
+	
+	\matrix[below,draw] at (current bounding box.south){
+		\node[red] {$y=\sinh(x)$};\\
+		\node[blue] {$y=\cosh(x)$};\\
+		\node[cyan] {$y=\tanh(x)$};\\
+	};
+	
+	\foreach \i in {-10,...,10}{
+		\node[left] at (0,\i) {$\i$};
+	}
+	
+	\foreach \i in {-6,...,6}{
+		\node[below] at (\i,0) {$\i$};
+	}
+\end{tikzpicture}
+\end{center}
+
+
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{Theory: Osborn's Rule:}
+
+\vspace{5mm}
+
+
+Recall that
+\[\cosh(x)=\cos(-jx),\qquad \sinh(x)=j\sin(-jx).\]
+
+\bigskip
+
+
+Consider the identity
+\[\sin(\alpha+\beta)=\cos(\alpha)\sin(\beta)+\sin(\alpha)\cos(\beta).\]
+
+Replacing $\alpha$ and $\beta$ by $-j\alpha$ and $-j\beta$, and multiplying everything by $j$, we get
+\begin{align*}
+	j\sin(-j(\alpha+\beta))&=\cos(-j\alpha)j\sin(-j\beta)+j\sin(-j\alpha)\cos(-j\beta)\\
+	\sinh(\alpha+\beta)&=\cosh(\alpha)\sinh(\beta)+\sinh(\alpha)\cosh(\beta)
+\end{align*}
+
+\bigskip
+
+Similarly, starting with
+\[\cos(\alpha+\beta)=\cos(\alpha)\cos(\beta)-\sin(\alpha)\sin(\beta)\]
+and replacing $\alpha$ and $\beta$ by $-j\alpha$ and $-j\beta$:
+\begin{align*}
+	\cos(-j(\alpha+\beta))&=\cos(-j\alpha)\cos(-j\beta)-\sin(-j\alpha)\sin(-j\beta)\\
+	&=\cos(-j\alpha)\cos(-j\beta)+j^2\sin(-j\alpha)\sin(-j\beta)\\
+	\cosh(\alpha+\beta)&=\cosh(\alpha)\cosh(\beta)+\sinh(\alpha)\sinh(\beta)
+\end{align*}
+
+\bigskip
+
+
+We can employ this trick on any trig identity; simply multiply each variable by $-j$, and either multiply the whole equation by $j$ if there is a sine term everywhere, or treat $\sin^2(x)$ terms as $-j^2\sin^2(x)$, to get $-(j\sin(x))(j\sin(x))$. Then we can replace each trig function by its hyperbolic equivalent and have a hyperbolic identity. This is called Osborn's rule:
+
+
+\noindent\fbox{\parbox{\textwidth}{
+	\textbf{Osborn's Rule:}
+	Take a trigonometric identity, replace each trig function by its hyperbolic version, and change the sign on any product of two sines, and you have a valid hyperbolic identity.
+}}\bigskip
+
+
+
+\textbf{Caution:} There can be ``hidden'' $\sin^2$ terms, \textit{e.g.}, in $\tan^2$. So, for instance, applying Osborn's Rule to
+\[1+\tan^2(x)=\sec^2(x)\]
+yields
+\[1-\tanh^2(x)=\sech^2(x),\]
+because the $\sin^2$ term ``inside'' the $\tan^2$ term causes a sign change. If in doubt, first write all your functions in terms of sine and cosine.
+
+
+
+
+\clearpage
+
+\textbf{Practice:}
+
+
+\begin{enumerate}
+	\item Apply Osborn's rule to the following trig identities:
+		\begin{enumerate}
+			\item \[\cos^2(x)+\sin^2(x)=1\]
+			\item \[1+\cot^2(x)=\cosec^2(x)\]
+			\item \[\cos(\alpha)\cos(\beta)=\frac{1}{2}\left(\cos(\alpha+\beta)+\cos(\alpha-\beta)\right)\]
+			\item \[\sin(\alpha)\sin(\beta)=\frac{1}{2}\left(\cos(\alpha-\beta)-\cos(\alpha+\beta)\right)\]
+		\end{enumerate}
+	\item Prove:
+		\[\tanh(x)=\frac{e^{2x}-1}{e^{2x}+1}.\]
+	\item Let $y=\sinh(x)$, so
+		\[y=\frac{e^x-e^{-x}}{2}.\]
+		\begin{enumerate}
+			\item Let $z=e^x$ and multiply through by $z$ to obtain a quadratic equation in $z$.
+			\item Solve this quadratic to express $z$ in terms of $y$.
+			\item Hence express $x$ in terms of $y$. Explain why you only get one solution, despite the two solutions to the quadratic.
+			\item Conclude that
+				\[\arsinh(y)=\log_e\left(y+ \sqrt{y^2+1}\right).\]
+		\end{enumerate}
+	\item By following the steps of the previous question, and recalling that $\arcosh(y)$ gives the \textit{positive} value $x$ such that $\cosh(x)=y$, prove that
+		\[\arcosh(y)=\log_e\left(y+\sqrt{y^2-1}\right).\]
+	\item
+		\begin{enumerate}
+			\item By differentiating their defining equations, find
+				\[\deriv{\sinh(x)}{x}\qquad\mbox{ and }\qquad \deriv{\cosh(x)}{x}.\]
+			\item Hence differentiate $\tanh(x)$, $\sech(x)$, and $\cosech(x)$ (using the chain and product rules).
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Application: Catenaries:}\bigskip
+
+
+
+If a thin, flexible cable (or chain) of uniform density is suspended from two endpoints and allowed to hang freely under gravity, the shape it forms is called a \textbf{catenary}, from the Latin \textit{catena}, meaning \textit{chain}. When turned upside down, the catenary is also the optimum shape for an arch (in a doorway, bridge, etc.) for distributing the stress evenly. Intuitively, this makes sense, because a uniform cable's weight is evenly distributed and pulls the cable into a catenary shape, so simply turning upside down the catenary must be the shape evenly distributing weight on it.
+
+The equation for a catenary is
+\[y=a\cosh\left(\frac{x}{a}\right),\]
+where $x=0$ is beneath the lowest point of the catenary and $a$ is a factor describing how deep or shallow the catenary is. Deriving this equation is fairly tricky, and requires techniques from the integration section we have coming up, to do with solving differential equations. We might look at the derivation of this equation then, but for now we will simply take it as given.\bigskip
+
+
+ A cable is suspended between two pylons, each of which is 12m tall.
+ 
+\begin{enumerate}
+	\item If the cable must be at least 8m off the ground at all points, find the minimum value we can have for $a$ in the catenary equation
+		\[y=a\cosh\left(\frac{x}{a}\right).\]
+		Hint: find the minimum height of a general catenary in terms of $a$ by Fermat's Method, then set this equal to 8.
+	\item Using the value of $a$ you found above, find how far apart the pylons must be placed (hint: at the $x$-position of either pylon, the height of the cable must be 12).
+\end{enumerate}
+
+\clearpage
+
+
+
+
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item \[\sin(x)=\frac{e^{jx}-e^{-jx}}{2j},\qquad \cos(x)=\frac{e^{jx}+e^{-jx}}{2}.\]
+	\item \[\sinh(x)=\frac{e^x-e^{-x}}{2},\qquad \cosh(x)=\frac{e^x+e^{-x}}{2}.\]
+	\item Osborn's Rule: Take a trig identity (not involving calculus), replace every trig function by its hyperbolic version, and multiply any term containing a product of two sines by $-1$, then you have a valid hyperbolic identity.
+	\item The inverse hyperbolic sine and cosine functions are
+		\[\arsinh(x)=\log_e\left(x+\sqrt{x^2+1}\right),\qquad\arcosh(x)=\log_e\left(x+\sqrt{x^2-1}\right).\]
+	\item \[\deriv{\sinh(x)}{x}=\cosh(x),\qquad \deriv{\cosh(x)}{x}=\sinh(x).\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

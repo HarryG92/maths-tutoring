@@ -1,0 +1,146 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+%%%\setlength{\tabcolsep}{1.8cm}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\begin{document}
+
+\title{Exponentials and Logarithms}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+
+\textbf{Theory:}\bigskip
+
+\begin{itemize}
+	\item In an expression $b^a$, $b$ is called the \textbf{base} and $a$ the \textbf{exponent} or \textbf{power}.
+	\item The exponential function of base $b$ is the function $b^x$.
+	\item The logarithm function to base $b$ is the function $\log_b(x)$.
+	\item The most common bases used are 10 and $e$; the logarithm to base $e$ is called the \textbf{natural logarithm} and denoted $\ln(x)$.
+	\item The logarithm and exponential functions are inverses, so:
+		\[b^{\log_b(x)}=x=\log_b(b^x).\]
+	\item Laws of exponents:
+		\[b^{n+m}=b^nb^m,\qquad b^{-n}=\frac{1}{b^n},\qquad (b^n)^m=b^{nm}.\]
+	\item Laws of logarithms:
+		\[\log_b(nm)=\log_b(n)+\log_b(m),\qquad \log_b(n^m)=m\log_b(n).\]
+	\item The change-of-base rule for logarithms:
+		\[\log_a(x)=\frac{\log_b(x)}{\log_b(a)}.\]
+	\item The graphs of the log and exponential functions for a selection of bases are shown below.
+		\begin{center}
+		\begin{tikzpicture}
+			\draw[->] (-7,0) -- (7,0);
+			\node[right] at (7,0) {$x$};
+			\draw[->] (0,0) -- (0,10);
+			\node[above] at (0,10) {$y$};
+			
+			\draw[domain=-7:7,blue,thick,samples=100] plot (\x, {0.4^(\x/3)});
+			\draw[domain=-7:7,red] plot (\x, {0.5^(\x/3)});
+			\draw[domain=-7:7,cyan] plot (\x, {2.7183^(\x/3)});
+			\draw[domain=-7:7,violet] plot (\x, {2^(\x/3)});
+
+
+			\matrix [draw,right] at (current bounding box.north west) {
+				\node [blue,left] {$y=0.4^x$};
+				\node [red,right] {$y=0.5^x$}; \\
+				\node[violet,left] {$y=2^x$};
+				\node[cyan,right] {$y=e^x$};\\
+				};
+		\end{tikzpicture}
+
+		\begin{tikzpicture}
+			\draw[->] (0,0) -- (12,0);
+			\node[right] at (12,0) {$x$};
+			\draw[->] (0,-6) -- (0,4);
+			\node[above] at (0,4) {$y$};
+			
+			\draw[domain=0.05:12,blue,thick,samples=100] plot (\x, {ln(\x)/ln(2)});
+			\draw[domain=0.05:12,red,samples=100] plot (\x, {ln(\x)});
+			\draw[domain=0.05:12,cyan, samples=200] plot (\x, {ln(\x)/ln(10)});
+
+
+			\matrix [draw,above] at (current bounding box.south) {
+				\node [blue,left] {$y=\log_2(x)$};
+				\node [red] {$y=\ln(x)$};
+				\node[cyan,right] {$y=\log_{10}(x)$};\\
+				};
+		\end{tikzpicture}
+		\end{center}
+\end{itemize}
+
+
+
+
+
+
+
+\clearpage
+
+\textbf{Practice:}\bigskip
+
+\begin{enumerate}
+	\item Sketch the graph of $y=e^x$.
+	\item Sketch the graph of $y=\left(\frac{1}{2}\right)^x$.
+	\item Sketch the graph of $y=\log(x)$.
+	\item Solve $e^x=2$.
+	\item Solve $\log_{10}(x)=4$.
+	\item Solve $\log_{3}(3x)=4$.
+	\item Solve $10^{3+x}=19000$.
+	\item Solve $e^{3x+2}=5$.
+	\item Solve $\ln(5x-1)=2$.
+	\item Solve $10^{3x}10^{x-1}=100$.
+	\item Solve $\ln(5x)-\ln(2)=4$.
+	\item Solve $2\ln(x)+\ln(5)=2$.
+	\item We will derive the change-of-base rule. Let $y=a^x$ for some $a>0$, $a\neq 1$.
+		\begin{enumerate}
+			\item Write down $\log_a(y)$.
+			\item Let $b$ be any positive number different from 1. Write down $\log_b(y)$.
+			\item Substituting your answer from part (a) into part (b), write an equation linking $\log_b(x)$ and $\log_a(x)$.
+		\end{enumerate}
+	\item Using the change-of-base rule, solve $4^x=3$.
+	\item Solve $2^{3x-1}=7$.
+	\item Suppose $x=ae^{kt}$ for some parameters $a$ and $k$. Suppose also that the initial value of $x$ is 7, and $x(1)=7e^2$. Find $a$ and $k$.
+	\item Suppose $x=ab^{t}$ for some parameters $a$ and $b$. Given that $x(1)=3$ and $x(3)=10$, plot the graph of $\ln(x)$ against $t$. Use your graph to find the values of $a$ and $b$.
+	\item Suppose $y=ax^n$. Given that $y(1)=5$ and $y(5)=100$, plot the graph of $\log(y)$ against $\log(x)$, and hence find the values of $a$ and $n$.
+	\item Suppose there is an island with a plentiful supply of vegetation and no predators. Ten rabbits are introduced to this island. The rabbit population $P$ at time $t$ years is modelled by $P=P_0e^{\lambda t}$.
+		\begin{enumerate}
+			\item What is the value of $P_0$?
+			\item Suppose that after 1 year the rabbit population is $100$. What is the value of $\lambda$?
+			\item Find the rabbit population after 2 years.
+			\item What does the rabbit population do as $t$ gets very large? Does this seem realistic? What assumptions might need to be revised in light of this?
+		\end{enumerate}
+	\item After a patient takes some medication, the concentration $x$ of that medication in their bloodstream gradually decreases according to $x=ae^{\lambda t}$, where $t$ is the time in hours.
+		\begin{enumerate}
+			\item Would you expect $\lambda$ to be positive or negative?
+			\item What does the parameter $a$ represent?
+			\item Find an expression for the time $t$ at which the concentration is half of its initial value. This time is called the \textbf{half-life} of the medication.
+			\item What proportion of the initial concentration remains after 5 half-lives?
+			\item After how many half-lives is the concentration down to 10\% of its initial value?
+			\item Suppose that the half-life of a particular medicine is 6 hours. What is the value of $\lambda$?
+			\item Suppose that the initial concentration of medicine in the bloodstream is $10\mathrm{mg\,mol}^{-1}$ (milligrams per mole), and use the value of $\lambda$ from the previous part. After how long will the concentration of medicine be $1\mathrm{mg\,mol}^{-1}$?
+		\end{enumerate}
+\end{enumerate}
+
+
+
+\end{document}

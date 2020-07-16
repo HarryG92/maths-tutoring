@@ -1,0 +1,173 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+
+
+
+
+\begin{document}
+
+\title{Even and Odd Functions}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand the decomposition of a function into even}}
+
+\textbf{\underline{and odd parts.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+\textbf{Theory: Even and Odd Functions:}\bigskip
+
+
+Recall that a function $f(x)$ is \textbf{even} if $f(-x)=f(x)$ for any $x$, and is \textbf{odd} if $f(x)=-f(-x)$ for any $x$. The standard examples are that $x^n$ is odd for $n$ odd and even for $n$ even (hence the use of the same adjectives!), and the normal and hyperbolic sine and tangent functions are odd, while the normal and hyperbolic cosine functions are even.
+
+Graphically, $f$ is even if and only if the graph of $y=f(x)$ is symmetrical under reflection in the $y$-axis; this is because reflection in the $y$-axis corresponds to switching $x$ and $-x$, but $f(x)=f(-x)$ for an even function, so the function is unchanged by the reflection.
+
+For odd functions, on the other hand, if you reflect the part of the graph for positive $x$ in the $y$-axis and also the $x$-axis, you get the part of the graph for negative $x$. These two reflections have the same effect as a rotation by $180^\circ$ about the origin, so a function is odd if and only if it has rotational symmetry of $180^\circ$ about the origin.
+
+Most functions are neither even nor odd. For instance, if $f(x)=x^2+x$, then $f(-1)=0$, whereas $f(1)=2$, so $f$ is neither even nor odd. However, we see that $f(x)$ can be written as an even function, $x^2$, plus an odd function, $x$. In fact, this is always true! For any function $f$, define the \textbf{even part} and \textbf{odd part} of $f$ by:
+\begin{align*}
+	f_\mathrm{even}(x)&=\frac{f(x)+f(-x)}{2}\\
+	f_\mathrm{odd}(x)&=\frac{f(x)-f(-x)}{2}.
+\end{align*}
+
+Compare with the definitions of $\cosh(x)$ and $\sinh(x)$; these are precisely the even and odd parts respectively of the exponential function.
+
+
+
+\clearpage
+
+
+
+
+
+
+	
+	
+	
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+
+
+\begin{enumerate}
+	\item Show that for any function $f$:
+		\begin{enumerate}
+			\item $f_\mathrm{even}$ is indeed even.
+			\item $f_\mathrm{odd}$ is indeed odd.
+			\item $f(x)=f_\mathrm{even}(x)+f_\mathrm{odd}(x)$.
+		\end{enumerate}
+	\item Let $f(x)=7x^4-9x^3+3x^2+12x+8$. Find the even and odd parts of $f$.
+	\item Find the even and odd parts of $\cos\left(2\pi t + \frac{\pi}{3}\right)$.
+	\item Let $f$ be an integrable function, and $a$ a positive constant. Show that:
+		\begin{enumerate}
+			\item If $f$ is even,
+				\[\int_{-a}^a f(x)\diff x=2\int_0^a f(x)\diff x.\]
+			\item If $f$ is odd,
+				\[\int_{-a}^a f(x)\diff x=0.\]
+			\item Hence, whatever $f$ is,
+				\[\int_{-a}^a f(x)\diff x = 2\int_0^a f_\mathrm{even}(x)\diff x.\]
+		\end{enumerate}
+	\item Let $E_1$ \& $E_2$ be even functions and $O_1$ \& $O_2$ odd functions, with $E_2(x)$ and $O_2(x)$ not constantly zero. Show that:
+		\begin{enumerate}
+			\item $O_1(x)=0$.
+			\item $E_1(x)E_2(x)$ and $O_1(x)O_2(x)$ are even.
+			\item $E_1(x)O_1(x)$ is odd.
+			\item $E_1(x)+E_2(x)$ is even.
+			\item $O_1(x)+O_2(x)$ is odd.
+			\item $E_2(x)+O_2(x)$ is neither even nor odd.
+		\end{enumerate}
+	\item Let $f(x)$ be a function which is both even and odd. Show that $f(x)=0$ for all $x$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item An \textbf{even function} $f$ is one such that $f(x)=f(-x)$.
+	\item An \textbf{odd function} $f$ is one such that $f(x)=-f(-x)$.
+	\item Any function $f$ can be decomposed into an \textbf{even part} and an \textbf{odd part}: $f(x)=f_\mathrm{even}(x)+f_\mathrm{odd}(x)$, where
+		\begin{align*}
+			f_\mathrm{even}(x)&=\frac{f(x)+f(-x)}{2}\\
+			f_\mathrm{odd}(x)&=\frac{f(x)-f(-x)}{2}.
+		\end{align*}
+	\item Functions are usually neither even nor odd. The only function which is both even and odd is the zero function.
+	\item For any integrable even function $E(x)$ and integrable odd function $O(x)$, and any positive constant $a$:
+		\begin{align*}
+			\int_{-a}^a E(x)\diff x &= 2\int_0^a E(x)\diff x\\
+			\int_{-a}^a O(x)\diff x &= 0.
+		\end{align*}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

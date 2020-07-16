@@ -1,0 +1,254 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+%%%\usepackage{array}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+%%%\setlength{\tabcolsep}{1.8cm}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\cis}{\,\mathrm{cis}}
+
+\begin{document}
+
+\title{De Moivre's Theorem}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To know and be able to apply de Moivre's Theorem}}
+
+\textbf{\underline{to find powers and roots of complex numbers.}}
+
+\vspace{5mm}
+
+
+{\bf Recap of previous material:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Write $2-3j$ in polar form.
+\item Write $7\cis\left(\frac{\pi}{2}\right)$ in cartesian form.
+\item State the rule for multiplying complex numbers in polar form.
+\item Multiply $4\cis\left(\frac{5\pi}{12}\right)$ by $19\cis\left(\frac{-2\pi}{7}\right)$.
+\end{enumerate}
+
+
+\clearpage
+
+{\bf Warm-up---Laws of Powers:}
+
+\vspace{5mm}
+
+We revise how powers interact with each other.
+
+\begin{enumerate}
+\item
+	\begin{enumerate}
+	\item Simplify $3^{15}+3^{15}$.
+	\item Simplify $2^{19}+2^{20}$.
+	\end{enumerate}
+\item
+	\begin{enumerate}
+	\item $x^3\div x=$
+	\item $x^2\div x=$
+	\item $x^1\div x=$
+	\item $x^0\div x=$
+	\item $x^{-1}\div x=$
+	\item $x^{-2}\div x=$
+	\end{enumerate}
+\item
+	\begin{enumerate}
+	\item $y^2\times y^3=$
+	\item $y^{-4}\times y^9=$
+	\item $y^{11}\div y^{14}=$
+	\item $5^{19}\div 5^{17}=$
+	\item $2^{-2}\times 2^5=$
+	\end{enumerate}
+\item
+	\begin{enumerate}
+	\item $(z^2)^2=$
+	\item $(z^2)^3=$
+	\item $(z^3)^2=$
+	\item $\left(z^{-2}\right)^5=$
+	\item $\left(z^7\right)^{-2}=$
+	\item $(2^3)^2=$
+	\end{enumerate}
+\item
+	\begin{enumerate}
+	\item $(a^{1/2})^2=$
+	\item $a^{1/2}=$
+	\item $(a^{1/3})^3=$
+	\item $a^{1/3}=$
+	\item $4^{1/2}=$
+	\item $27^{1/3}=$
+	\item What, if anything, is the difference between $(a^2)^{1/3}$ and $(a^{1/3})^2$? And $a^{2/3}$?
+	\item $16^{-3/4}=$
+	\end{enumerate}
+\end{enumerate}
+
+\clearpage
+
+
+
+\textbf{Theory---De Moivre's Theorem:}
+
+\vspace{5mm}
+
+We have seen that to multiply complex numbers in polar form, we \textbf{Multiply the Moduli and Add the Arguments}. De Moivre's Theorem is a straightforward consequence of that rule which is very useful for taking powers of complex numbers, including fractional powers (roots).\medskip
+
+Given that $z=r\cis(\theta)$, find $z^n$ in polar form.
+
+\vfill
+
+
+Now find all values of $z^{1/n}$ in polar form.
+
+\vfill
+
+Hence find all values of $z^{a/b}$ in polar form.
+
+\vfill
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+\textbf{Practice:}
+
+\vspace{5mm}
+
+
+\begin{enumerate}
+\item Let $z=1-\sqrt{3}j$. Convert $z$ into polar form and hence find $z^4$ by de Moivre's Theorem.
+\item Let $z=\frac{-\sqrt{3}}{2}+\frac{1}{2}j$. Convert $z$ into polar form and hence find $z^{60}$.
+\item Write 4 in polar form. Hence use de Moivre's Theorem to find all values of $4^{1/2}$. Compare with what you know about taking square roots.
+\item Find all values of $j^{1/2}$.
+\item
+	\begin{enumerate}
+	\item Solve $z^3=1$.
+	\item Plot the solutions to $z^3=1$ on an Argand diagram.
+	\item Add together the three solutions of $z^3=1$.
+	\item Solve $z^4=1$.
+	\item Plot the solutions to $z^4=1$ on an Argand diagram.
+	\item Add together the four solutions of $z^4=1$.
+	\item Solve $z^5=1$.
+	\item Plot the solutions to $z^5=1$ on an Argand diagram.
+	\item Add together the five solutions of $z^5=1$.
+	\item Without solving $z^8=1$, predict the shape they form on an Argand diagram and the sum of the eight solutions.
+	\end{enumerate}
+\item \textbf{Caution! This is a tricky question, and one meant to warn you against mistakes many people make.} Find the mistake in the following ``proof'' that $1=-1$:
+	\begin{align*}
+	1&=\sqrt{1}\\
+	&=\sqrt{(-1)^2}\\
+	&=\left(\sqrt{-1}\right)^2\\
+	&=j^2\\
+	&=-1
+	\end{align*}
+\end{enumerate}
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Application---Complex Impedance:}
+
+\vspace{5mm}
+
+In DC circuits, the ratio of voltage across a component to current through it is the \textbf{resistance} of that component:
+\[R=\frac{V}{I}.\]
+
+In an AC circuit, capacitors and inductors alternately store energy (in electric and magnetic fields, respectively) and release it back into the ciruit as current. The ratio of voltage to current on a capacitor or inductor is called the \textbf{reactance}:
+\[X=\frac{V}{I}.\]
+
+Since both resistance and reactance are ratios of voltage to current, and are measured in ohms, it makes sense to combine them into a single quantity. However, they have different effects on a circuit, so shouldn't simply be added directly. We define the \textbf{impedance} to be the complex number
+\[R+Xj;\]
+that is, resistance plus $j$ times reactance.
+
+Resistance simply relates the relative sizes of voltage and current. Reactance however is more subtle. The resistance to current brought about by the accumulating charge on the plates of a capacitor, or by the back emf from Faraday's Law in an inductor causes the current to vary out of sync with the voltage. This means that reactance, as well as affecting the relative amplitudes of voltage and current, also produces a phase shift between them, where the current changes either before or after a voltage change, instead of at the same time.\medskip
+
+
+
+In AC circuits, the voltage and current are typically sinusoids; so we have
+\[V=A\cos(\omega t + \phi),\qquad I=B\cos(\omega t+\psi),\]
+for some amplitudes $A$ and $B$ and phases $\phi$ and $\psi$, and an angular frequency $\omega$. Consider the fictitious ``complex voltage'' $V_c$ and ``complex current'' $I_c$ defined by
+\[V_c=A\cis(\omega t+\phi),\qquad I_c=B\cis(\omega t+\psi).\]
+\begin{enumerate}
+\item Show that $V=\frac{1}{2}(V_c+\bar{V}_c)$.
+\item Show that $I=\frac{1}{2}(I_c+\bar{I_c})$.
+\item Show that $\frac{V_c}{I_c}=\frac{A}{B}\cis(\phi-\psi)$. Call this quantity $Z$.
+\item Identify the modulus of $Z$ and compare with the amplitudes of the (real!) voltage and current.
+\item Identify the argument of $Z$ and compare with the phases of the (real!) voltage and current.
+\end{enumerate}
+
+So the modulus of $Z$ is the ratio of the amplitude of voltage to the amplitude of current; the argument, meanwhile, tells us how to move from the phase of current to the phase of voltage. That is, $I$ has phase $\psi$, $V$ has phase $\phi$, and
+\[\psi+\arg(Z)=\psi+(\phi-\psi)=\phi.\]
+So the argument of $Z$ tells us the phase difference between the voltage sinusoid and the current sinusoid. In fact, it turns out that $Z$ is precisely the polar form of the impedance defined above. If there is no reactance, the impedance is real, so $\arg(Z)=0$ (noting that impedance cannot have negative real part, because negative resistances are unphysical) and so there is no phase difference between voltage and current. Reactance gives a non-zero imaginary part, and so a non-zero argument, corresponding to a phase shift between voltage and current.\smallskip
+
+\begin{enumerate}
+\setcounter{enumi}{5}
+\item If a circuit has resistance $400\Omega$ and reactance $300\Omega$, what is its impedance?
+\item If the above circuit is driven by mains voltage, $V=230\sqrt{2}\cos(100\pi t)$, what is the current through the circuit?
+\end{enumerate}
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Key Points to Remember}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item \textbf{De Moivre's Theorem:}
+	\[\left(r\cis(\theta)\right)^{a/b} = r^{a/b}\cis\left(\frac{a\theta}{b}\right).\]
+	In words: to raise a complex number in polar form to a power, raise the modulus to that power, and multiply the argument by that power.
+\item \textbf{When taking a non-integer power, remember to consider other possible arguments made by adding multiples of $2\pi$.}
+\item In particular, to find $n^{\mathrm{th}}$ roots of a complex number $z$, put it in polar form: $z=r\cis(\theta)$, then the roots are $r^{1/n}\cis\left(\frac{\theta+2\pi k}{n}\right)$ for $k=0, 1, \hdots, n-1$.
+\item For any $n$, the $n^{\mathrm{th}}$ roots of unity (1) are equally spaced around the unit circle, forming a regular $n$-gon, and they add up to 0.
+\end{enumerate}
+
+
+
+
+
+\end{document}

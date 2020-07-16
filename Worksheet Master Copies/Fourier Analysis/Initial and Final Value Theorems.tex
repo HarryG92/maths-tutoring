@@ -1,0 +1,247 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{Initial and Final Value Theorems}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To compute the initial and final values of a function from}}
+
+\textbf{\underline{its Laplace transform.}}
+
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+\textbf{Recap: Laplace Transforms and Differentiation:}\bigskip
+
+Let $f(t)$ be a time-domain function, and $F(s)$ its Laplace transform: $\mathcal{L}(f)=F$.
+
+\begin{enumerate}
+	\item Write down the integral for the Laplace transform of the derivative $f'(t)$.
+	\item Integrate by parts to show that
+		\[\mathcal{L}(f')=\left[f(t)e^{-st}\right]_0^\infty + s\int_0^\infty f(t)e^{-st}\diff t.\]
+	\item Hence conclude that
+		\[\mathcal{L}(f')=sF(s)-f(0^+),\]
+		at least when $\mathrm{re}(s)$ is sufficiently large.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Theory: The Initial and Final Value Theorems:}\bigskip
+
+By the ``initial value'' of $f(t)$, we mean $f(0^+)$; that is,
+\[\lim_{t\to 0^+} f(t),\]
+the limit of $f(t)$ as $t$ tends to 0 from above. By the ``final value'' of $f(t)$, we mean
+\[\lim_{t\to \infty} f(t),\]
+the limit of $f(t)$ as $t$ grows without bound; this is sometimes denoted $f(\infty)$, though of course we cannot literally plug $\infty$ in as a value of $t$.
+
+We shall see how the initial and final values of $f$ can be computed directly from the Laplace transform $F$, by proving the formulae:
+\begin{align*}
+	f(0^+) &= \lim_{s\to \infty}sF(s)\\
+	f(\infty)&=\lim_{s\to 0^+} sF(s).
+\end{align*}
+
+In words, the initial value of $f(t)$ is the final value of $sF(s)$, and the final value of $f(t)$ is the initial value of $sF(s)$!\bigskip
+
+For both these results, our starting point is the formula
+\[\int_0^\infty \deriv{f}{t}e^{-st}\diff t = sF(s)-f(0^+),\]
+expressing the Laplace transform of $f'$ in terms of $F$. Since the variable of integration is $t$, a limit in the variable $s$ can be taken inside the integral:
+\begin{align*}
+	\lim_{s\to ?} \left[sF(s)-f(0^+)\right]&=\lim_{s\to ?}\int_0^\infty \deriv{f}{t}e^{-st}\diff t\\
+	&=\int_0^\infty \deriv{f}{t}\lim_{s\to ?}e^{-st}\diff t.
+\end{align*}
+
+When the limit is taken as $s$ tends to 0 from above, this gives
+\begin{align*}
+	\lim_{s\to 0^+} sF(s) - f(0^+)&=\int_0^\infty \deriv{f}{t}\diff t\\
+	&= \left[f(t)\right]_0^\infty\\
+	&=\lim_{t\to\infty} f(t) - f(0^+)\\
+	\lim_{s\to 0^+}sF(s)&=\lim_{t\to \infty}f(t).
+\end{align*}
+
+\clearpage
+
+
+\textbf{Theory: The Initial and Final Value Theorems (cont.):}\bigskip
+
+
+When instead the limit is taken as $s\to \infty$ (more precisely, as $\mathrm{re}(s)\to \infty$):
+\begin{align*}
+	\lim_{s\to \infty} sF(s)-f(0^+)&=\int_0^\infty \deriv{f}{t}\times 0\diff t\\
+	&=0\\
+	\lim_{s\to \infty}sF(s)&=f(0^+).
+\end{align*}\bigskip
+
+\textbf{Warning:} We have made a tacit assumption in the proof of the final value theorem: we allowed $s$ to tend to 0 from above (strictly speaking, $s$ tends to $0$ with the real part of $s$ coming from above); this is fine if $F(s)$ is well-defined for all $s$ with positive real part, but if $F$ has a pole with positive real part, then the result can fail! We will see an example of this. \textbf{So the final value theorem can only be applied when $F(s)$ has no poles with positive real part!} In other words, only for stable systems---this makes sense, as unstable systems can have outputs growing to infinity (and potentially oscillating as they do so!), so we would not expect a well-defined final value from an unstable system.\bigskip
+
+
+\textbf{Examples:}\bigskip
+
+Find the initial and final values of a signal whose Laplace transform is
+\[\frac{1}{s(s+2)}.\]
+
+\vfill
+
+Find the initial and final values of a signal whose Laplace transform is
+\[\frac{1}{s(s-2)}.\]
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+
+\begin{enumerate}
+	\item If $f(t)$ has Laplace transform
+		\[\frac{2s-3}{(s+7)(s^2+2s+2)},\]
+		find the initial and final values of $f$.
+	\item If $x(t)$ has Laplace transform
+		\[\frac{s^3}{(s+1)(s^2-2s+2)},\]
+		find the initial and final (careful!) values of $x$.
+	\item Find the initial and final values of $x'(t)$ (\textit{sic}), given that 
+		\[X(s)=\frac{1}{s(s+3)}.\]
+\end{enumerate}
+
+
+\clearpage
+
+
+
+
+
+
+
+\textbf{Application: Steady-State Errors:}\bigskip
+
+
+
+Given an LTI system with input $r(t)$ and output $c(t)$, the \textbf{error} $e(t)$ is defined to be the difference: $e(t)=r(t)-c(t)$. In the Laplace domain, by linearity of the transform, we have $E(s)=R(s)-C(s)$, with the obvious notational convention. If $T(s)$ is the transfer function for the system then $C(s)=R(s)T(s)$, so
+\[E(s)=R(s)-R(s)T(s)=R(s)(1-T(s)).\]
+
+Of particular interest is the so-called \textbf{steady-state error}, $e(\infty)$. This is the limit of the error as time tends to infinity, so tells us about the eventual discrepancy between input and output for the system. If the system is stable (the transfer function has no poles with positive real part) and the input is bounded ($R(s)$ has no poles with positive real part), then we can apply the final value theorem:
+\[e(\infty)=\lim_{s\to 0^+}sE(s)=\lim_{s\to 0^+} sR(s)(1-T(s)).\]
+
+\bigskip
+
+
+Find the steady-state error of an undamped mass-spring system with a unit step input and a unit ramp input.
+
+\vfill
+
+
+
+Find the steady-state error of the (Type 1) system with transfer function
+\[\frac{1}{s(s+2)(s+3)}\]
+with each of a unit step input $H(t)$, a unit ramp input $H(t)t$, and a parabolic input $\frac{1}{2}H(t)t^2$.
+
+
+\clearpage
+
+
+
+\textbf{Practice:}\bigskip
+
+Find the steady-state errors for each of the following transfer functions, in each case for a unit step, unit ramp, and parabolic input.
+
+\begin{enumerate}
+	\item $\frac{s-1}{(s+2)(s+3)}$
+	\item $\frac{s-1}{s^3(s+2)(s+3)}$
+	\item $\frac{s-1}{s^2(s+2)(s+3)}$
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

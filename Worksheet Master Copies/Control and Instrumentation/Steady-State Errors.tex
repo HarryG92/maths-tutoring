@@ -1,0 +1,159 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{Steady-State Errors}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To use the final value theorem to compute steady-state}}
+
+\textbf{\underline{errors, and relate this to the type of a system.}}
+
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+\textbf{Recap: The Final Value Theorem:}\bigskip
+
+Let $F(s)$ be the Laplace transform of $f(t)$. Recall that:
+\[\mathcal{L}\left(\deriv{f}{t}\right)=sF(s)-f(0^+).\]
+
+
+\begin{enumerate}
+	\item Show that
+		\[\lim_{s\to 0} sF(s) = \lim_{s\to 0} \int_0^\infty \deriv{f}{t}e^{-st}\diff t + f(0^+).\]
+	\item Since the limit variable is $s$ and the variable of integration is $t$, and these variables are independent of each other, we can take the limit inside the integral:
+		\[\lim_{s\to 0} \int_0^\infty \deriv{f}{t}e^{-st}\diff t = \int_0^\infty \lim_{s\to 0} \deriv{f}{t}e^{-st}\diff t.\]
+		Use this to show that
+		\[\lim_{s\to 0} sF(s) = \int_0^\infty \deriv{f}{t}\diff t + f(0^+).\]
+	\item Hence conclude that
+		\[\lim_{s\to 0} sF(s) = \lim_{t\to \infty}f(t).\]
+\end{enumerate}
+
+
+
+
+This is the \textbf{final value theorem}: to find the ``final value'' of a function $f$ (its limit as $t$ tends to infinity), we can find the initial value (the limit as $s$ tends to 0) of $sF(s)$.
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{Theory: Steady-State Errors:}\bigskip
+
+Given an input $r(t)$ to a system, it produces an output $c(t)$. The \textbf{error} is defined by
+\[e(t)=r(t)-c(t),\]
+the difference between output and input. For a control system which aims to drive a control output $c$ to equal some reference input $r$, the aim is to set the error to 0. Note that the error depends on the particular system, the particular input, and time. If there is a sudden change in the input, the error will typically grow, but the system should then work to adapt to this and reduce the error again. For this reason we often focus not on the error function directly, but on its limit as $t$ tends to infinity; this is called the \textbf{steady-state error} and often denoted $e(\infty)$.
+
+
+By the final value theorem, we can evaluate the steady-state error in the Laplace domain:
+\[e(\infty) = \lim_{s\to 0} E(s),\]
+where $E(s)$ is the Laplace transform of $e(t)$. If the Laplace transforms of the input and output are known, then $E(s)=R(s)-C(s)$, by linearity of the Laplace transform. In particular, if $T(s)$ is the overall, closed-loop transfer function of the system, then $E(s)=R(s)(1-T(s))$.\bigskip
+
+
+Often, in practice, it is easier to examine a closed-loop system in terms of the open-loop transfer function. So suppose we have a unity gain feedback loop on a system whose open-loop transfer function is $G(s)$. Show that the Laplace-domain error is given by
+\[E(s)=\frac{R(s)}{1+G(s)}.\]
+
+\vfill
+
+
+Hence show that the steady-state error is given by
+\[e(\infty) = \lim_{s\to 0} \frac{sR(s)}{1+G(s)}.\]
+
+
+\clearpage
+
+
+
+\textbf{Practice:}\bigskip
+
+Recall:
+\[e(\infty) = \lim_{s\to 0} \frac{sR(s)}{1+G(s)}.\]
+
+\begin{enumerate}
+	\item Show that if the input is a unit step, $r(t)=H(t)$, then the steady-state error is given by
+		\[e(\infty) = \frac{1}{1+\lim\limits_{s\to 0}G(s)}.\]
+	\item Show that if the input is a unit ramp, $r(t)=tH(t)$, then the steady-state error is given by
+		\[e(\infty) = \frac{1}{\lim\limits_{s\to 0} sG(s)}.\]
+	\item Show that if the input is parabolic, $r(t)=\frac{1}{2}t^2H(t)$, then the steady-state error is given by
+		\[e(\infty) = \frac{1}{\lim\limits_{s\to 0} s^2G(s)}.\]
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+\textbf{Theory: System Type:}\bigskip
+
+We have seen that for a unit step input, $r(t)=H(t)$, the steady-state error is given by
+\[e(\infty)=\frac{1}{1+\lim\limits_{s\to 0} G(s)}.\]
+If $G(s)$ has a factor of $\frac{1}{s}$ (\textit{i.e.}, if there is at least one integrator in the forward path), then the limit of $G(s)$ as $s\to 0$ is infinite, and so $e(\infty)$ is 0. This proves the statement we argued for intuitively last time that adding integral control removes steady-state error (though there is could be overshoot and oscillation down to the desired level). On the other hand, if there is no integrator in the forward path, the steady-state error will be non-zero.\medskip
+
+For a unit ramp input, the steady-state error is
+\[e(\infty) = \frac{1}{\lim\limits_{s\to 0}sG(s)}.\]
+If $G(s)$ has no factor of $\frac{1}{s}$, the denominator will tend to 0 and so we get an infinite steady-state error. This makes sense: a ramp input corresponds to a linearly changing reference (so the control system is trying to catch up to a moving target); a purely proportional system, for instance, will always lag behind the retreating reference level. However, if the control system has an integrator, the control signal will grow more the longer the error endures for, and the control signal will ``speed up'' to catch the reference signal.
+
+To see this mathematically, if $G(s)$ has a single factor of $\frac{1}{s}$, then $sG(s)$ tends to a finite, non-zero limit as $s\to 0$, so the steady-state error is finite. If $G(s)$ has a factor of $\frac{1}{s^2}$, (at least two integrators), then $sG(s)$ will tend to infinity as $s\to 0$, and so the steady-state error will be 0---integrating the error twice in a row, the control signal will grow faster than the reference, and so will not ony fail to fall behind, but will even catch up to it.\medskip
+
+
+Similarly, for a parabolic input, the steady-state error is
+\[e(\infty)=\frac{1}{\lim\limits_{s\to 0}s^2G(s)},\]
+which will be infinite if $G(s)$ contains no more than 1 factor of $\frac{1}{s}$, finite and non-zero if $G(s)$ has a factor of $\frac{1}{s^2}$, and 0 if $G(s)$ has 3 or more such factors.\bigskip
+
+
+The \textbf{type} of a system is the number of integrators in its forward path---\textit{i.e.}, the number of factors of $\frac{1}{s}$ in its open-loop transfer function. This corresponds to how high a degree of input it can successfully track with finite steady-state error.
+
+
+
+
+\end{document}

@@ -1,0 +1,229 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+
+
+
+
+\begin{document}
+
+\title{Differentiation, Monotonicity, and Extrema}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand how the derivative of a function relates}}
+
+\textbf{\underline{to whether it is increasing or decreasing, and that the derivative}}
+
+\textbf{\underline{vanishes at extrema.}}
+
+
+
+
+\vspace{5mm}
+
+
+\textbf{Recap: Instantaneous rate of change:}
+
+\vspace{5mm}
+
+Let $f(t)=3t^2-2t+1$.
+\begin{enumerate}
+	\item Find the change in $f(t)$ between $t=1$ and $t=3$.
+	\item Hence find the average rate of change of $f$ between $t=1$ and $t=3$.
+	\item Find the change in $f(t)$ between $t$ and $t+h$.
+	\item Hence find the average rate of change of $f$ between $t$ and $t+h$.
+	\item What happens to this average rate of change as $h$ is made arbitrarily small?
+\end{enumerate}
+
+
+
+\clearpage
+
+
+{\bf Theory: Limits and Derivatives:}
+
+\vspace{5mm}
+
+The average rate of change of a function $f(t)$ between times $t$ and $t+h$ is
+\[\frac{f(t+h)-f(t)}{h}.\]
+As $h$ gets smaller and smaller, this gives a measure of the ``instantaneous'' rate of change of $f$ at time $t$. We describe this precisely with the mathematical notion of a limit. If there is a function $g(x)$ and numbers $a$ and $L$ such that $g(x)$ gets arbitrarily close to $L$ as $x$ gets close to $a$, then we say that $g(x)$ tends to $L$ as $x$ tends to $a$, or that $L$ is the limit of $g(x)$ as $x$ tends to $a$. We write this
+\[g(x)\to L\mbox{ as }x\to a\qquad\mbox{ or }\qquad \lim_{x\to a}g(x)=L.\]
+
+This is the intuitive idea, and in most cases, the intuition is good enough. However, there is a precise definition of a limit: suppose we pick a ``target zone'' around $L$, from $L-\epsilon$ to$L+\epsilon$, where $\epsilon$ is a small positive quantity. Then can we choose a ``launch zone'' around $a$, from $a-\delta$ to $a+\delta$ (where $\delta$ is another small positive quantity, usually depending on $\epsilon$), such that if we start with $x$ inside the launch zone, $g(x)$ will be inside the target zone? If the target zone is large, we probably can; the smaller we make $\epsilon$, the harder it is to find values of $x$ such that $g(x)$ is inside the target zone, so the harder it is to find a launch zone around $a$. If no matter how small we make the target zone, we can always find a launch zone around $a$, then $g(x)$ tends to $L$ as $x$ tends to $a$.
+
+Written out concisely, this says that $g(x)\to L$ as $x\to a$ if:
+
+\noindent\fbox{\parbox{\textwidth}{
+	For all $\epsilon>0$ there exists $\delta>0$ such that if $a-\delta<x<a+\delta$ and $x\neq a$, then $L-\epsilon<f(x)<L+\epsilon$.
+}}\bigskip
+
+In other words: for any target zone around $L$, no matter how small, we can choose a launch zone around $a$ such that starting with $x$ in the launch zone makes $g(x)$ land in the target zone.
+
+It takes a lot of practice to work with this ``$\epsilon$-$\delta$'' definition, and it usually isn't necessary in practical contexts such as engineering. We will mostly work with an intuitive notion of limits, but it is important to be aware of the $\epsilon$-$\delta$ definition.
+
+\clearpage
+
+
+
+\textbf{Theory: Continuous and Differentiable Functions:}
+
+\vspace{5mm}
+
+
+Given the notion of a limit, we can define what it means for a function to be \textbf{continuous}. Intuitively, a function is continuous if it has no sudden jumps; this means that its value \textit{at} a point $x=a$ should be equal to the limit of its value as $x$ \textit{tends to} $a$:
+
+A function $f(x)$ is continuous if and only if for every point $a$
+\[\lim_{x\to a}f(x)=f(a).\]
+
+\vfill
+
+
+The notion of a limit also allows us to define the instantaneous rate of change of a function $f(t)$ at time $t$ to be the function
+\[f'(t)=\lim_{h\to 0}\frac{f(t+h)-f(t)}{h}.\]
+This is a function of $t$ telling us at each time $t$ how quickly $f(t)$ is changing. We call it the \textbf{derivative} of $f$ with respect to $t$, and it is often denoted $\deriv{f}{t}$. The process of finding the derivative of a function is called \textbf{differentiation}.
+
+There is a subtle concept behind this: a function is (roughly) something which takes a number as input and gives a number as output, whereas differentiation is an \textbf{operator}---something which takes a function as input and gives another function as output! People sometimes write $\deriv{}{t}$ for the ``differential operator''---meaning the process of differentiation. So $\deriv{}{t}$ can be thought of as a machine that takes a function $f(t)$ and produces a new function $\deriv{f}{t}$, also written $f'(t)$. Both $f$ and $f'$ are functions, so each can take a number $a$ and give a new number, $f(a)$ or $f'(a)$, respectively.
+
+The derivative of a function might not exist; if it does, we say the function is \textit{differentiable}. This is a notion of smoothness, so that a function has a meaningful rate of change at each point; if a function has a sharp corner, then it will not be differentiable.\bigskip
+
+Notation: we will use the above two notations for differentation interchangeably---$\deriv{f}{t}$ and $f'(t)$. Note that $t$ is simply a placeholder; any other letter could be used, but $t$ is generally used to indicate that the variable is time. If a different letter is used for the variable input to the function, say $f(x)$, then we write $\deriv{f}{x}$, or $f'(x)$. There is a third notation for differentiation in use, but which is only used when the input variable to the function is time: if $x(t)$ is a function of time, we write $\dot{x}$ for $x'(t)=\deriv{x}{t}$. This is often used in mechanics, where $x$ is position, $\dot{x}=v$ is velocity, and $\ddot{x}=\dot{v}=a$ is acceleration.
+
+\clearpage
+
+
+
+\textbf{Theory: Monotone Functions:}
+
+\vspace{5mm}
+
+
+A function $f(t)$ is said to be \textbf{increasing} if whenever $t_1<t_2$, $f(t_1)\leq f(t_2)$, and \textbf{strictly increasing} if whenever $t_1<t_2$, $f(t_1)<f(t_2)$. So increasing functions get bigger as their argument gets bigger. A function is \textbf{decreasing} if it gets smaller instead: whenever $t_1<t_2$, $f(t_1)\geq f(t_2)$, and \textbf{strictly decreasing} if whenever $t_1<t_2$, $f(t_1)>f(t_2)$. We say the function is \textbf{(strictly) monotone} if it is either (strictly) increasing or (strictly) decreasing.
+
+One of the uses of differentiation (the process of taking derivatives) is that it relates to monotonicity. Intuitively, this is clear; if vehicles distance from a starting point is increasing, its velocity must be positive; if its distance from the starting point is decreasing, its velocity must be negative (\text{i.e.}, it is moving backwards). We will prove this:\bigskip
+
+Let $f(t)$ be an increasing function. Then $f'(t)\geq0$.
+
+
+
+\vfill
+
+Now let $f(t)$ be a decreasing function. Then $f'(t)\leq 0$.
+
+\vfill
+
+
+A converse of these statements is also true: if $f'(t)>0$, then $f(t)$ is strictly increasing, and if $f'(t)<0$, then $f(t)$ is strictly decreasing. This is harder to prove, and will have to wait until we have seen the Mean Value Theorem.
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Theory: Extreme Values:}
+
+\vspace{5mm}
+
+
+
+A function $f(x)$ is said to have a \textbf{local minimum} at $x=a$ if $f(a)$ is the smallest value $f(x)$ takes for $x$ near $a$ (though it may take smaller values further away). Similarly, $f(x)$ has a \textbf{local maximum} at $x=a$ if $f(a)$ is the largest value taken by $f$ near $a$. If a point is either a local maximum or a local minimum, it is called a \textbf{local extremum}.\bigskip
+
+
+Imagine throwing a ball up in the air. Think about its height as a function of time, and its vertical velocity, the derivative of its height. Initially, the height is an increasing function, and the velocity is positive (it is moving upwards). Later, the ball is falling; its height is decreasing, and the velocity is negative (it is moving downwards). In between the two, it reaches its maximum height, and there is an instant when the velocity is 0. So the maximum value of the height occurs at the instant the velocity (the derivative of the height) is exactly 0. This is a general phenomenon:\bigskip
+
+Let $f(t)$ be a differentiable function and suppose $f$ has a local extremum at $x=a$. Then $f'(a)=0$. We will prove the case where $x=a$ is a local maximum; it is similar when $x=a$ is a local minimum.
+
+\vfill
+
+This leads to \textbf{Fermat's Method} for finding extrema of a function $f(t)$. First differentiate, then solve the equation $f'(t)=0$ to find the values of $t$ at which the derivative is zero, then check each of these to see if it is a maximum or a minimum. However, there can be points where $f'(a)=0$ but $a$ is not a local extremum; such points are called \textbf{points of inflexion}.
+
+\clearpage
+
+
+
+
+\textbf{Practice:}
+
+\vspace{5mm}
+
+
+\begin{enumerate}
+	\item A ball is thrown vertically. Its height $y$ at time $t$ is given by $y(t)=10t-\frac{g}{2}t^2$, where $g\approx 9.8\mathrm{ms}^{-2}$ is the gravitational field strength at the Earth's surface.
+		\begin{enumerate}
+			\item Find the derivative $y'(t)$ (by taking the change in $y$ over a small time $h$, dividing by $h$ for the average rate of change, and taking the limit as $h\to 0$).
+			\item By solving $y'(t)=0$, find the time at which the ball reaches its maximum height.
+			\item Hence find the maximum height reached by the ball.
+		\end{enumerate}
+	\item Suppose the voltage on a capacitor varies according to $V=t^2-6t+15$, for $t>0$. Use Fermat's method to find the minimum voltage on the capacitor and the time at which it occurs.
+	\item \textbf{Cautionary example:} Let $f(x)=x^3$.
+		\begin{enumerate}
+			\item Find the derivative $f'(x)$.
+			\item Solve $f'(x)=0$.
+			\item Show that the solution you found above is a point of inflexion, not a local extremum.
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+\clearpage
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The limit of a function $f(x)$ as $x$ tends to $a$ is the number $L$ such that for any target zone around $L$ (no matter how small), we can take a launch zone around $a$ such that if $x$ is within this launch zone (but not equal to $a$), then $f(x)$ is within the target zone around $L$. We write $f(x)\to L$ as $x\to a$ or
+		\[\lim_{x\to a}f(x)=L.\]
+	\item A function $f(x)$ is \textbf{continuous} if for each point $x$,
+		\[f(x)=\lim_{x\to a}f(a).\]
+	\item The derivative of a function $f(t)$ (with respect to $t$) is the function $f'(t)$, or $\deriv{f}{t}$, defined by
+		\[\deriv{f}{t}=\lim_{h\to 0}\frac{f(t+h)-f(t)}{h}.\]
+	\item The process of taking the derivative of a function is called \textbf{differentiation}. It is an \textbf{operator} (it takes a function and returns a function, much like a function takes a number and returns a number).
+	\item A function is \textbf{increasing} when its derivative is positive and \textbf{decreasing} when its derivative is negative.
+	\item At a local \textbf{extremum} (\textbf{maximum} or \textbf{minimum}), the derivative is 0.
+	\item \textbf{Warning:} it can occur that the derivative is 0, but the function does not have a local extremum. Such a point is called a \textbf{point of inflexion}.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

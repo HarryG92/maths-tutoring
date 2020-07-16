@@ -1,0 +1,232 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Integrals to Infinity and Discontinuous Integrands}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To be able to integrate ``to infinity,'' and over}}
+
+\textbf{\underline{discontinuities in the integrand.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+\textbf{Warm-up: A Paradoxical Integral:}\bigskip
+
+
+\begin{enumerate}
+	\item Evaluate
+		\[\int_{-1}^1 x^{-2} \diff x.\]
+	\item Is this integrand $(x^{-2})$ positive or negative? Should the area it encloses be positive or negative? How does this match up with your answer to part 1?
+	\item Sketch the graph of $x^{-2}$ and see if you can explain the problem.
+	\item Let $\epsilon$ be some small, positive real number. Evaluate
+		\[\int_{-1}^{-\epsilon}x^{-2}\diff x + \int_\epsilon^1 x^{-2}\diff x.\]
+		Illustrate on your sketch the area you are finding. Now take the limit as $\epsilon$ tends to 0 and hence determine the area under the graph of $x^{-2}$ between $-1$ and $1$.
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{Theory: Integrating over Discontinuities:}\bigskip
+
+
+We have seen how to use the Fundamental Theorem of Calculus to integrate a function $f(x)$ from $a$ to $b$: find an antiderivative $F$ of $f$, and evaluate $F(b)-F(a)$. There is, however, an important caveat:\bigskip
+
+\noindent\fbox{\parbox{\textwidth}{
+	The Fundamental Theorem of Calculus only applies when the integrand is continuous!
+}}\bigskip
+
+We saw in the warm-up that with the function $x^{-2}$---which is discontinuous at 0---simply taking an antiderivative such as $-x^{-1}$ and plugging in the limits of integration gives a nonsense answer. How can we get around this problem and apply the Fundamental Theorem with a discontinuous integrand? If the integrand is very badly discontinuous, we can't, but if there is just a finite number of discontinuities, all is not lost.
+
+The idea, as we saw in the warm-up, is to stop the integral just short of the discontinuity and take it up again just after, missing out a small interval around the discontinuity. This can of course be done multiple times for multiple discontinuities, as long as there are only finitely many. So if $f(x)$ has a discontinuity at $c$, and we want to integrate $f(x)$ from $a$ to $b$, where $a\leq c\leq b$, we instead compute
+\[\int_a^{c-\epsilon} f(x)\diff x + \int_{c+\epsilon}^b f(x)\diff x,\]
+where $\epsilon$ is some small positive number. This gives us
+\[F(b)-F(c+\epsilon)+F(c-\epsilon)-F(a),\]
+where $F$ is an antiderivative of $f$. We can then take the limit as $\epsilon$ tends to 0; we sometimes write $F(c^+)$ and $F(c^-)$ for the limits of $F(c+\epsilon)$ and $F(c-\epsilon)$ respectively. So we find that
+\[\int_a^b f(x)\diff x = F(b)-F(c^+)+F(c^-)-F(a).\]
+If $d$ is another discontinuity between $a$ and $b$, we add $F(d^-)-F(d^+)$, and so on for other discontinuities.
+
+
+When a function is defined ``piecewise''---by different expressions over different points---we do the same thing, but with a different antiderivative over each interval of definition. For instance, the Heaviside function $H(x)$ is 1 if $x>0$, $0.5$ if $x=0$, and $0$ if $x<0$. Let us evaluate \[\int_{-1}^1 (x-1)(2H(x)-1)\diff x.\]
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+
+\begin{enumerate}
+	\item Let $0<\alpha<1$. Find
+		\[\int_0^1 \frac{1}{t^{\alpha}}\diff t.\]
+	\item Show that
+		\[\int_0^1 \frac{1}{t}\diff t\]
+		does not exist.
+	\item Evaluate
+		\[\int_{-2}^{4} \frac{x}{\sqrt[3]{1-x^2}}\diff x.\]
+	\item Let $H(x)$ be the Heaviside function. Evaluate
+		\[\int_{-1}^1 \sin(x)H(x)+\cos(x)H(-x)\diff x.\]
+\end{enumerate}
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+\textbf{Theory: Integrating to Infinity:}
+
+\bigskip
+
+
+Integration from $a$ to $b$ gives the area under a curve between $a$ and $b$, which often has an important real-world meaning. If the variable of integration is time, then the integral gives the total change in the value of the integrand between time $a$ and time $b$. Sometimes, we are interested in the total change in the value of the integrand after an (unspecified) very large amount of time---the eventual behaviour of the function. For instance, integrating power with respect to time gives energy transferred, so we might want to examine the total energy transferred by some system after a very large amount of time. For this, we have the notion of an integral \textit{to infinity}. We define:
+\[\int_a^\infty f(t)\diff t = \lim_{b\to \infty} \int_a^b f(t)\diff t.\]
+
+Similarly, we can consider an integral from $-\infty$, to take account of everything a function has ever done in the past:
+\[\int_{-\infty}^b f(t)\diff t=\lim_{a\to-\infty}\int_a^b f(t)\diff t,\]
+and even the integral over all time, forwards and backwards:
+\[\int_{-\infty}^\infty f(t)\diff t = \lim_{a\to \infty}\int _{-a}^a f(t)\diff t.\]
+
+\bigskip
+
+Evaluate
+\[\int_0^\infty e^{-t}\diff t.\]
+
+\vfill
+
+Evaluate
+\[\int_{-\infty}^{-1}\frac{1}{x^3}\diff x.\]
+ 
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+
+
+
+
+\begin{enumerate}
+	\item Let $\alpha>1$. Evaluate
+		\[\int_1^\infty \frac{1}{x^\alpha}\diff x.\]
+	\item Let $f$ be a real constant and $H$ the Heaviside function. Show that
+		\[\int_{-\infty}^\infty H(x)e^{-x}e^{-2\pi j f x} \diff x=\frac{1}{1+2\pi jf}.\]
+		If we now let $f$ vary, we have a new function; we have turned a function of $x$ into a function of a new variable $f$ by means of an integral to infinity; this new function is the Fourier transform of $H(x)e^{-x}$; we shall look at this in (much!) more detail later.
+\end{enumerate}
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The Fundamental Theorem of Calculus only applies if the integrand is continuous everywhere in the domain of integration.
+	\item When dealing with an integrand which has only finitely many discontinuities in the domain of integration, we can split the domain into finitely many chunks, each with a discontinuity at the endpoint and continuous in the middle.
+	\item When integrating up to a discontinuous endpoint, integrate most of the way there, then take the limit as you get closer:
+		\[\int_a^b f(x)\diff x = \lim_{\epsilon\to 0} \int_{a+\epsilon}^{b-\epsilon}f(x)\diff x.\]
+	\item To integrate to infinity, integrate up to a variable limit $a$, then let $a$ tend to infinity:
+		\[\int_{-\infty}^\infty f(x)\diff x = \lim_{a\to \infty}\int_{-a}^a f(x)\diff x.\]
+	\item Both integrals of discontinuous functions and integrals to infinity can fail to exist. Sometimes they do so in a meaningful way, and we can think of the function enclosing ``infinite area,'' but often the best we can say is that the integral does not exist.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,235 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+%%%\setlength{\tabcolsep}{1.8cm}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\cis}{\,\mathrm{cis}}
+
+\begin{document}
+
+\title{Polar Form of Complex Numbers}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand the polar form of complex numbers}}
+
+\textbf{\underline{and its uses. To be able to convert complex numbers between}}
+
+\textbf{\underline{polar and cartesian forms.}}
+
+\vspace{5mm}
+
+
+{\bf Recap of previous material:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Let $z=-1.3-9.4j$. Write down $\mathrm{Re}(z)$, $\mathrm{Im}(z)$, and $\bar{z}$.
+\item $(2-3j)+(4j-7)=$
+\item $j(1+5j)=$
+\item $(1-2j)(1+2j)=$
+\item $\frac{4-j}{1+4j}=$
+\end{enumerate}
+
+
+\clearpage
+
+{\bf Warm-up:}
+
+\vspace{5mm}
+
+We will explore a link between complex numbers and their complex conjugates, and polar coordinates.
+
+\begin{enumerate}
+\item Let $z=2-3j$.
+	\begin{enumerate}
+	\item Calculate $\sqrt{z\bar{z}}$.
+	\item We can represent $z$ graphically by the point $(2,-3)$ in the $(x,y)$-plane. Convert this point into polar coordinates.
+	\item Compare the two answers above.
+	\end{enumerate}
+\item Let $z=a+bj$ for some real numbers $a$ and $b$.
+	\begin{enumerate}
+	\item Calculate $z\bar{z}$ in terms of $a$ and $b$.
+	\item Is $z\bar{z}$ real, imaginary, or complex? What about $\sqrt{z\bar{z}}$?
+	\item Represent $z$ by the point $(a,b)$ in the $(x,y)$-plane. Convert this point into polar coordinates.
+	\item Compare the answers above.
+	\end{enumerate}
+\end{enumerate}
+
+\clearpage
+
+
+
+\textbf{Theory---Cartesian and Polar Forms of Complex Numbers:}
+
+\vspace{5mm}
+
+We have seen that a complex number $z$ has the form $a+bj$ for two real numbers $a$ and $b$---called the \textbf{real part} and \textbf{imaginary part} respectively. We can represent this as the point $(a,b)$ in the $(x,y)$-plane. Because we are treating the real and imaginary parts of $z$ as cartesian coordinates of a point, we call $a+bj$ the \textbf{cartesian form} of $z$. When we plot a point in the plane to represent a complex number, we call that diagram the \textbf{complex plane} or an \textbf{Argand diagram}.\medskip
+
+Suppose a complex number $z$ is represented in the Argand diagram by a point whose polar coordinates are $(r,\theta)$. Find the real and imaginary parts of $z$.
+
+\vfill
+
+So we see that
+\[z=r\cos(\theta)+rj\sin(\theta)=r\left[\cos(\theta)+j\sin(\theta)\right].\]
+
+We sometimes write $\cis(\theta)$ as shorthand for $\cos(\theta)+j\sin(\theta)$ (``cis'' stands for ``$\cos+i\sin$'', using $i$ in place of $j$). So then $z=r\cis(\theta)$. This is called the \textbf{polar form} of $z$ (whether written in terms of $\cis$ or longhand with $\sin$ and $\cos$).
+
+We saw in the second warm-up question that $z\bar{z}$ is always a non-negative real number, so has a non-negative real square root, which is precisely the $r$ coordinate of $z$ in polar coordinates. This number is called the \textbf{modulus} of $z$ and written $|z|$. The $\theta$-coordinate of $z$ is called the \textbf{argument} of $z$ and written $\arg(z)$. We have for $z=a+bj$:
+\[|z|=\sqrt{z\bar{z}}=\sqrt{a^2+b^2}\qquad \tan(\arg(z))=\frac{b}{a}.\]
+
+As always with polar coordinates, you have to think about the quadrant the point is in to figure out whether $\arg(z)=\tan^{-1}\left(\frac{b}{a}\right)$ or $\arg(z)=\pi+\tan^{-1}\left(\frac{b}{a}\right)$.
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+\textbf{Practice:}
+
+\vspace{5mm}
+
+We shall practise converting between cartesian and polar forms, then explore why polar form is useful.
+
+\begin{enumerate}
+\item Let $z=1-j$.
+	\begin{enumerate}
+	\item Calculate the modulus $|z|$.
+	\item Calculate the argument $\arg(z)$.
+	\item Hence express $z$ in polar form.
+	\end{enumerate}
+\item Let $w=2\cis\left(\frac{\pi}{3}\right)$.
+	\begin{enumerate}
+	\item Write down $|w|$.
+	\item Write down $\arg(w)$.
+	\item Calculate $\mathrm{Re}(w)$.
+	\item Calculate $\mathrm{Im}(w)$.
+	\item Hence express $w$ in cartesian form.
+	\end{enumerate}
+\item Take $z$ and $w$ from the previous two questions.
+	\begin{enumerate}
+	\item Working in cartesian form, calculate the product $zw$.
+	\item Calculate $|zw|$. Compare with $|z|$ and $|w|$.
+	\item Calculate $\arg(zw)$. Compare with $\arg(z)$ and $\arg(w)$.
+	\item Now calculate $\frac{z}{w}$, again working in cartesian form.
+	\item Calculate $\left|\frac{z}{w}\right|$. Compare with $|z|$ and $|w|$.
+	\item Calculate $\arg\left(\frac{z}{w}\right)$. Compare with $\arg(z)$ and $\arg(w)$.
+	\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Theory---Multiplication in Polar Form:}\bigskip
+
+Let $z=r\cis(\theta)$ and $w=s\,\cis(\phi)$ be two complex numbers written in polar form. Multiply them together and collect real and imaginary terms to find an expression for $zw$. Hence find $|zw|$.
+
+\vfill
+
+
+
+Use the compound angle formulae to expand $rs\,\cis(\theta+\phi)$. Compare with the above.
+
+\vfill
+
+
+So we see that if we multiply two complex numbers in polar form, we can use the compound angle formulae to simplify the answer to a single complex number in polar form, whose modulus is $|z|\times |w|$ and whose argument is $\arg(z)+\arg(w)$. This leads to the following simple rule for multiplying complex numbers:
+
+\begin{center}
+\textbf{\underline{M}ultiply the \underline{M}oduli and \underline{A}dd the \underline{A}rguments.}
+\end{center}
+
+As an equation,
+\[(r\cis(\theta))(s\,\cis(\phi))=rs\,\cis(\theta+\phi).\]
+
+
+
+\clearpage
+
+
+\textbf{Theory---Dividing in Polar Form:}
+
+We shall now apply the above method for multiplication to division of complex numbers in polar form.
+
+Suppose we have two complex numbers, $z$ and $w$, and want to compute $\frac{z}{w}$. Let $y=\frac{z}{w}$; then $y$ is defined by the property that $wy=z$. Since to multiply two complex numbers we \underline{M}ultiply the \underline{M}oduli and \underline{A}dd the \underline{A}rguments, we must have
+\[|w|\times |y|=|z|\qquad\mbox{ and }\qquad \arg(w)+\arg(y)=\arg(z).\]
+
+Rearranging these, we see that
+\[|y|=\frac{|z|}{|w|}\qquad\mbox{ and }\qquad \arg(y)=\arg(z)-\arg(w).\]
+
+So to divide complex numbers, we \textbf{divide the moduli and subtract the arguments.} As an equation,
+\[\frac{r\cis(\theta)}{s\,\cis(\phi)}=\frac{r}{s}\cis(\theta-\phi).\]
+
+
+In particular, if we want to find $\frac{1}{z}$ for some complex number $z$, we use that $|1|=1$ and $\arg(1)=0$, so
+\[\left|\frac{1}{z}\right|=\frac{1}{|z|}\qquad\mbox{ and }\qquad \arg\left(\frac{1}{z}\right)=-\arg(z).\]
+
+\vspace{5mm}
+
+Next time we shall see \textit{de Moivre's Theorem}---a simple but powerful use of this multiplication/division rule in polar form, to find powers and roots of complex numbers quickly and easily.
+
+
+
+
+
+
+\clearpage
+
+
+{\bf Key Points to Remember}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item The \textbf{cartesian form} of a complex number $z$ is its normal expression as $a+bj$ for some real numbers $a$ and $b$.
+\item The point $z=a+bj$ can be represented on the \textbf{complex plane} (or \textbf{Argand diagram}) by plotting it as the point $(a,b)$.
+\item If we express $(a,b)$ in polar coordinates $(r,\theta)$, then $r$ is called the \textbf{modulus} of $z$, written $|z|$, and $\theta$ the \textbf{argument} of $z$, written $\arg(z)$.
+\item The \textbf{polar form} of $z$ is the expression $|z|(\cos[\arg(z)]+j\sin[\arg(z)])$, often abbreviated to $|z|\cis(\arg(z))$.
+\item To multiply complex numbers in polar form, we use the rule: \textbf{\underline{M}ultiply the \underline{M}oduli and \underline{A}dd the \underline{A}rguments}:
+	\[|zw|=|z|\times |w|\qquad \mbox{ and }\qquad\arg(zw)=\arg(z)+\arg(w).\]
+\item To divide complex numbers in polar form, we use this in reverse, we \textbf{divide the moduli and subtract the arguments}:
+	\[\left|\frac{z}{w}\right|=\frac{|z|}{|w|}\qquad\mbox{ and }\qquad \arg\left(\frac{z}{w}\right)=\arg(z)-\arg(w).\]
+\item Cartesian form is (much) better to use when adding or subtracting complex numbers. Though multiplication and division aren't too hard in cartesian form, they're very easy in polar form.
+\end{enumerate}
+
+
+
+
+
+\end{document}

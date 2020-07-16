@@ -1,0 +1,373 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+\newcommand{\sinc}{\,\mathrm{sinc}}
+\newcommand{\rect}{\,\mathrm{rect}}
+
+
+
+\begin{document}
+
+\title{Dirac's Delta ``Function''}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+
+\textbf{\underline{Objective: To understand dual spaces and Dirac's Delta as a}}
+
+\textbf{\underline{functional arising in Fourier transforms.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Warm-up:}
+
+\bigskip
+
+
+We will take the convention that
+\begin{align*}
+	\hat{f}(\omega)&=\int_{-\infty}^\infty f(t)e^{-i\omega t}\diff t\\
+	f(t)&=\frac{1}{2\pi}\int_{-\infty}^\infty \hat{f}(\omega)e^{i\omega t}\diff \omega.
+\end{align*}\bigskip
+
+
+Let us look again at the ODE for simple harmonic motion we saw in the exercises last time:
+\[\deriv[2]{x}{t} + \beta^2 x =0.\]
+
+\begin{enumerate}
+	\item Show that
+		\[(-\omega^2 + \beta^2)\hat{x}=0.\]
+	\item Hence show that when $\omega\neq \pm\beta$, $\hat{x}(\omega)=0$.
+	\item Conclude that there are some constants $A$ and $B$ such that
+		\[\hat{x}(\omega) = \begin{cases} A: & \omega =-\beta\\ B:& \omega=\beta \\ 0:& \omega\neq\pm\beta.\end{cases}\]
+	\item By taking the inverse transform, show that $x(t)=0$ for all $t$, no matter what the values of $A$ and $B$ are.
+	\item Explain this result!
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Dual Spaces:}\bigskip
+
+
+In the warm-up example, the general solution to that ODE is $x(t)=A\cos(\beta t)+B \sin(\beta t)$ for some constants $A$ and $B$. The problem is the if $A$ and $B$ are not both 0, then the solution is not square-integrable, so we can't take its Fourier transform. So by simply taking the Fourier transform, we restricted ourselves to looking at square-integrable solutions, and our method correctly told us that the zero function is the only square-integrable solution---but it missed all the non-square-integrable solutions!
+
+To resolve this, we need to broaden our notion of ``function.'' First, we need some more linear algebra. So let $V$ be a vector space over a field $F$ (\textit{e.g.}, $F=\mathbb{R}$ or $F=\mathbb{C}$). A \textbf{linear form} on $V$ is a function $\phi:V\to F$ which is linear; \textit{i.e.}, $\phi(\lambda u + \mu v) = \lambda\phi(u)+\mu\phi(v)$ for any scalars $\lambda$ and $\mu$ and vectors $u$ and $v$. The \textbf{dual space} of $V$, denoted $V^*$, is the set of all linear forms on $V$.
+
+For example, if $V=\mathbb{R}^2$ is the real plane, vectors can be regarded as columns $\left(\begin{array}{c} x\\y\end{array}\right)$. Then a linear form on $V$ is any function of the form
+\[\phi\left(\begin{array}{c}x\\y\end{array}\right)=\alpha x + \beta y,\]
+where $\alpha$ and $\beta$ are fixed scalars. This can be written as a matrix multiplication:
+\[\phi\left(\begin{array}{c}x\\y\end{array}\right)=\left(\alpha, \beta\right)\left(\begin{array}{c}x\\y\end{array}\right).\]
+So we can identify $V^*$ with the space of \textit{row} vectors---a row vector can be regarded as a function taking a column vector to a number! In this case, we see that $V^*$ is also a vector space, just the space of row vectors, whereas $V$ is the space of column vectors. So $V$ and $V^*$ are almost the same; we will look more at this in the exercises.\medskip
+
+Although it isn't always true that $V$ and $V^*$ are ``almost the same'' as in the above example, it \textit{is} always true that $V^*$ is a vector space over the same field $F$. We can add two linear forms $\phi$ and $\psi$ by defining $(\phi+\psi)(v)=\phi(v)+\psi(v)$ for any $v\in V$, and we can multiply a linear form $\phi$ by a scalar $\lambda$, by defining $(\lambda\phi)(v)=\lambda(\phi(v))$. It is routine to check that the axioms of a vector space are satisfied.
+
+Because both $V$ and $V^*$ are vector spaces, we can refer to the elements of either as vectors; but this would get confusing, so we use ``vector'' to refer to an element of $V$ and ``linear form'' (or ``covector'') to refer to an element of $V^*$.
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+\begin{enumerate}
+	\item
+		 Let $V=\mathbb{R}^n$ (regarded as column vectors). Check that any length-$n$ row vector $\phi$ does indeed give a linear form on $V$ by matrix multiplication (sending the vector $v$ to the scalar $\phi v$), as claimed above in the case $n=2$. In fact, all linear forms on $V$ can be expressed in this way (though this is harder to prove, unless you know about bases of vector spaces).
+	\item Let $V=L_2(\mathbb{R})$ be the vector space of square-integrable (complex-valued) functions on the real line.
+		\begin{enumerate}
+			\item Show that for any $f\in L_2(\mathbb{R})$, the function $f^*:L_2(\mathbb{R})\to \mathbb{C}$ defined by
+				\[f^*(g)=\int_{-\infty}^\infty f(x)g(x)\diff x\]
+				is a linear form on $V$.
+			\item Show that the ``evaluate at 0'' function $\delta_0:L_2(\mathbb{R})\to \mathbb{C}$ defined by
+				\[\delta_0(g)=g(0)\]
+				is a linear form on $V$.
+			\item For each positive integer $n$, let $f_n(x)$ be the function
+				\[f_n(x)=\begin{cases}
+							n:& \frac{-1}{2n}\leq x \leq \frac{1}{2n}\\
+							0:& \mbox{otherwise}.
+						\end{cases}\]
+				Show that
+				\[\int_{-\infty}^\infty f_n(x)\diff x =1\]
+				for any $n$.
+			\item Draw sketches and expain them to convince yourself that $f_n^*$ tends to $\delta_0$ as $n\to\infty$.
+			
+				Note: strictly speaking, this statement doesn't even mean anything yet---we haven't defined what it means for a sequence of linear forms like $f_n^*$ to converge to another linear form. This is why I've just asked you to convince yourself with sketches rather than prove it! At this point, the intuition is more important than the technical details, so think what $f_n^*(g)$ is for some function $g$ and how it changes as $n$ grows, and convince yourself it tends to $\delta_0(g)$.
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+\textbf{Theory: Fourier Transforms and Functionals:}\bigskip
+
+
+Let $f$ be a square-integrable function, $f\in L_2(\mathbb{R})$. Then we can form the Fourier transform
+\[\hat{f}(\omega)=\frac{1}{2\pi}\int_{-\infty}^\infty f(t)e^{-i\omega t}\diff t.\]
+This is a function (on the frequency domain), but the main thing we're interested in doing with it---the key property it has---is that we can recover $f$ from it by the inverse transform:
+\[f(t)=\int_{-\infty}^\infty \hat{f}(\omega)e^{i\omega t}\diff \omega.\]
+
+For any fixed $t$, $f(t)$ is a number; so $\hat{f}(\omega)$ takes $e^{i\omega t}$, a function of $\omega$, and returns a number $f(t)$. So $\hat{f}(\omega)$ is a linear form! Or rather, integrating against $\hat{f}(\omega)$ is a linear form; really we have a linear form $\hat{f}^*$ (in the notation of the previous page), defined by
+\[\hat{f}^*(g)=\int_{-\infty}^\infty \hat{f}(\omega)g(\omega)\diff \omega,\]
+and the inverse Fourier transform is just applying this linear form to the functions $e^{i\omega t}$. So $f(t)=\hat{f}^*\left(e^{i\omega t}\right)$.
+
+So (integrating against) the Fourier transform of a function is a linear form on the space of (frequency-domain) functions! A linear form on a function space is often called a \textbf{functional}. We can also view the original function in this way. Since
+\[\hat{f}(\omega)=\frac{1}{2\pi}\int_{-\infty}^\infty f(t)e^{-i\omega t}\diff t,\]
+we have $\hat{f}(\omega)=\frac{1}{2\pi}f^*\left(e^{-i\omega t}\right)$.
+
+So we can regard the Fourier transform as switching between functions on the frequency domain and on the time domain, or as switching between linear forms on the frequency domain and on the time domain. But not all linear forms come from functions! The form $\delta_0$ from the exercises cannot be written as $f^*$ for any function $f$, though we did show (non-rigourously) that it is the limit of a sequence of forms $f_n^*$ coming from functions.
+
+So if $f$ is a function on the time domain, we can define the Fourier cotransform (not standard terminology) of $f$ as the linear form $\check{f}$ which satisfies the equation
+\[f(t)=\check{f}\left(e^{i\omega t}\right)\]
+for all $t$. If $f$ is square-integrable, then this forces $\check{f}=\hat{f}^*$, so the Fourier cotransform is just integration against the Fourier transform.
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Examples:}\bigskip
+
+
+The last page was quite difficult, so let's go over an example. We saw on the last sheet that if $f(t)=H(t)e^{-\alpha t}$, where $H$ is the Heaviside function and $\alpha>0$ is a constant, then $\hat{f}(\omega)=\frac{1}{\alpha+i\omega}$.
+
+We have a time domain function, $H(t)e^{-\alpha t}$, a time-domain functional $\left(H(t)e^{-\alpha t}\right)^*$, defined by
+\[\left(H(t)e^{-\alpha t}\right)^*(g)=\int_{-\infty}^\infty H(t)e^{-\alpha t}g(t)\diff t\]
+for any time-domain function $g$. We also have a frequency-domain function $\frac{1}{\alpha+i\omega}$, and a frequency-domain functional $\left(\frac{1}{\alpha+i\omega}\right)^*$, defined by
+\[\left(\frac{1}{\alpha+i\omega}\right)^*(h)=\int_{-\infty}^\infty \frac{1}{\alpha+i\omega} h(\omega)\diff \omega\]
+for any frequency-domain function $h$. We have
+\begin{align*}
+	H(t)e^{-\alpha t}&=\frac{1}{2\pi}\int_{-\infty}^\infty \frac{1}{\alpha+i\omega}e^{i\omega t}\diff \omega\\
+	&=\frac{1}{2\pi}\left(\frac{1}{\alpha+i\omega}\right)^*\left(e^{i\omega t}\right).
+\end{align*}
+That is, $f(t)=\frac{1}{2\pi}\check{f}\left(e^{i\omega t}\right)$, where $\check{f}=\hat{f}^*$ is the functional associated to $\hat{f}$.\bigskip
+
+Now consider the function $f(t)=e^{i\alpha t}$, where $\alpha$ is again a fixed real constant. The Fourier transform of this function does not exist---if we try to compute it, the integral does not converge. However, we can take $\delta_\alpha$ to be the functional defined by $\delta_\alpha(g)=g(\alpha)$ (the ``evaluate at $\omega=\alpha$'' functional), then we see that $f(t)=\delta\left(e^{i\omega t}\right)=e^{i\alpha t}=f(t)$. Of course, we can rewrite this as
+\[f(t)=\frac{1}{2\pi}\left(2\pi \delta_\alpha\left(e^{i\omega t}\right)\right),\]
+and this is now the equation $f(t)=\frac{1}{2\pi}\check{f}\left(e^{i\omega t}\right)$ where $\check{f}=2\pi\delta_\alpha$.
+
+So although there is no frequency-domain \textit{function} which is the Fourier transform of $e^{i\alpha t}$, there is still a frequency-domain \textit{functional} which plays the role of the ``Fourier cotransform.'' So we can say that if $\hat{f}$ did exist (which it doesn't), then the functional
+\[\hat{f}^*(g)=\int_{-\infty}^\infty \hat{f}(\omega)g(\omega)\diff\omega\]
+would be precisely $2\pi\delta_\alpha$; \textit{i.e.}, $\hat{f}^*(g)$ would equal $2\pi g(\alpha)$ for any $g$.
+
+\clearpage
+
+
+
+
+
+
+\textbf{Theory: Functionals and Differentiation:}\bigskip
+
+
+
+We have seen for square-integrable functions $f$ that $\widehat{\deriv[n]{f}{t}}=(i\omega)^n \hat{f}$. What is the analagous result for the associated functionals? We have, for any frequency-domain function $g(\omega)$, that
+\begin{align*}
+	\left(\widehat{\deriv[n]{f}{t}}\right)^*(g)&=\left((i\omega)^n\hat{f}\right)^*(g(\omega))\\
+	&= \int_{-\infty}^\infty (i\omega)^n \hat{f}(\omega)g(\omega)\diff \omega\\
+	&= \int_{-\infty}^\infty \hat{f}(\omega) \left[(i\omega)^n g(\omega)\right]\diff \omega\\
+	&=\hat{f}^*\left((i\omega)^n g(\omega)\right).
+\end{align*}
+
+So if $\check{f}$ is the frequency-domain functional associated to a time-domain function $f$ (\textit{i.e.}, $\check{f}=\hat{f}^*$), then
+\[\check{\deriv[n]{f}{t}}(g(\omega))=\check{f}((i\omega)^n g(\omega))\]
+for any frequency-domain function $g$.
+
+
+Therefore, taking the Fourier cotransform of the ODE $x''+\beta^2x=0$ from the warm-up, we get for any function $g$:
+\[\check{x}\left(-\omega^2 g(\omega)\right)+\beta^2\check{x}(g(\omega))=0.\]
+Since $\check{x}$ is a functional (linear form), it is linear, so we can reduce this to
+\[\check{x}\left(\left(\beta^2-\omega^2\right)g(\omega)\right)=0.\]
+It can be shown that every functional satisfying this equation has the form
+\[\check{x}=A\delta_{\beta}+B\delta_{-\beta}\]
+for some constants $A$ and $B$ (where $\delta$ is the evaluation functional). Therefore, although $x$ may not have a Fourier transform, we have found its Fourier cotransform, from which we can recover $x$ by the equation $x(t)=\frac{1}{2\pi}\check{x}\left(e^{i\omega t}\right)$. This gives
+\begin{align*}
+	x(t)&=\frac{A}{2\pi}e^{i\beta t}+\frac{B}{2\pi}e^{-i\beta t}\\
+	&=\frac{A+B}{2\pi}\cos(\beta t)+\frac{(A-B)i}{2\pi}\sin(\beta t),
+\end{align*}
+which is the general solution of the ODE.
+
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{Theory: The Dirac Delta Function(al):}\bigskip
+
+
+We saw above that if we take $\delta_\alpha$ to be the ``evaluate at $\alpha$'' functional defined by $\delta_\alpha(g)=g(\alpha)$, then for $f(t)=e^{i\alpha t}$, we have
+\[f(t)=\frac{1}{2\pi}\left(2\pi \delta_\alpha\left(e^{i\omega t}\right)\right).\]
+So although this $f$ does not have a Fourier transform, the functional $2\pi \delta_\alpha$ acts in place of the Fourier transform, and allows us to solve problems where the Fourier transform would be useful if it existed.
+
+Recall from the exercises the functions
+\[f_n(\omega)=\begin{cases}
+			n:& \frac{-1}{2n}\leq \omega \leq \frac{1}{2n}\\
+			0:& \mbox{otherwise}.
+		\end{cases}\]
+We saw that the functionals $f_n^*$ converged to $\delta_0$. Similarly, we can define functions $f_{\alpha,n}$ by translating the $f_n$'s by $\alpha$, and then the functionals $f_{\alpha,n}^*$ will converge to $\delta_\alpha$. The functions $f_n$ do not converge to anything, but if they did, it would be a function that is 0 everywhere except $\omega=0$, and infinite at $\omega=0$; moreover, the integral of this function would be 1. So we ``define'' the so-called \textbf{Dirac delta function} by
+\[\delta(\omega)=\begin{cases} \infty: & \omega=0\\ 0: & \omega \neq 0,\end{cases}\]
+and declare that
+\[\int_{-\infty}^\infty \delta(\omega)\diff \omega =1\quad \mbox{ and }\quad \int_{-\infty}^\infty \delta(\omega)g(\omega)\diff \omega = g(0)\]
+for any $g$. In other words, the associated functional $\delta^*$ is precisely the evaluation functional $\delta_0$. We can then obtain all other evaluation functionals $\delta_\alpha$ as
+\[\delta_\alpha(g)=g(\alpha)=\int_{-\infty}^\infty \delta(\omega-\alpha)g(\omega)\diff \omega.\]
+
+The Dirac delta function is not actually a function; it is a convenient lie. We think of it as if it were a function, and the limit of the sequence of functions $f_n$, but really the only thing about it that actually exists and is well-defined is the functional associated to it. The Dirac delta is simply a convenient notation and mental idea for studying the evaluation functional in the context of Fourier transforms. So although $e^{i\alpha t}$ does not actually have a Fourier transform, we say that its Fourier transform is the Dirac delta $2\pi\delta(\omega-\alpha)$. Whenever we work with this, we are secretly working with the associated functional, but it can be conceptually easier to think about the Dirac delta function and avoid having to deal with functionals.
+
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Practice:}\bigskip
+
+From now on, we will pretend that the Dirac delta function is a real thing, but you should be aware that it is just a convenient fiction to simplifying working with the associated functional. In particular, the Fourier transform of $e^{i\alpha t}$ is $2\pi\delta(\omega-\alpha)$.\bigskip
+
+We will revisit simple harmonic motion one more time; this time however, we will include a forcing term. The ODE is
+\[\deriv[2]{x}{t}+\beta^2x=\sin(\gamma t),\]
+where $\beta$ and $\gamma$ are real constants and $\beta\neq \pm\gamma$.
+
+\begin{enumerate}
+	\item By writing $\sin(\gamma t)$ in terms of exponentials, show that the Fourier transform of $\sin(\gamma t)$ is
+		\[i\pi\left(\delta(\omega+\gamma)-\delta(\omega-\gamma)\right).\]
+	\item By taking the Fourier transform of the above ODE, show that
+		\[-\omega^2\hat{x}+\beta^2\hat{x}=i\pi\left(\delta(\omega+\gamma)-\delta(\omega-\gamma)\right).\]
+	\item Hence show that
+		\[\hat{x}\left(\pm\gamma\right) = \frac{i\pi}{\beta^2 -\gamma^2}\infty.\]
+	\item Show also that when $\omega\neq \pm \gamma$,
+		\[\left(\beta^2-\omega^2 \right)\hat{x}(\omega)=0.\]
+	\item Hence show that $\hat{x}(\omega)=0$ whenever $\omega\neq\pm\gamma \mbox{ and } \omega\neq \pm\beta$.
+	\item Conclude that, for some unknown constants $A$ and $B$:
+		\[\hat{x}(\omega)=A\delta\left(\omega+\beta\right)+B\delta\left(\omega-\beta\right)+ \frac{i\pi}{\beta^2 -\gamma^2}\left(\delta(\omega+\gamma)- \delta(\omega-\gamma)\right).\]
+	\item By taking the inverse Fourier transform, show that
+		\[x(t)=Ae^{ i\beta t}+Be^{-i\beta t}+\frac{i}{2\left(\beta^2-\gamma^2\right)}\left(e^{\gamma it}-e^{-\gamma it}\right).\]
+	\item Rewrite this to show that, for some unknown constants $C$ and $D$:
+		\[x(t)=C\cos(\beta t) + D\sin(\beta t) + \frac{1}{\beta^2-\gamma^2}\sin(\gamma t).\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item A \textbf{linear form} on a vector space $V$ is a function $f$ from $V$ to the field of scalars such that
+		\[f(\lambda u+\mu v)=\lambda f(u)+\mu f(v)\]
+		for any vectors $u$ and $v$ and scalars $\lambda$ and $\mu$.
+	\item A linear form on a function space (such as an $L_2$ space) is often called a \textbf{functional}.
+	\item Any $L_2$ function $f$ has an associated functional $f^*$ defined by
+		\[f^*(g)=\int_{-\infty}^\infty f(x)g(x)\diff x.\]
+	\item For any $L_2$ function $f$, the Fourier transform $\hat{f}$ can be described by its associated functional $\hat{f}^*$, and we can recover $f$ by
+		\[f(t)=\frac{1}{2\pi}\hat{f}^*\left(e^{i\omega t}\right).\]
+	\item For a non-$L_2$ function $f$, it can occur that the Fourier transform does not exist, but the associated functional does! So there is no function $\hat{f}$ defined by
+		\[\hat{f}(\omega)=\int_{-\infty}^\infty f(t)e^{-i\omega t}\diff t,\]
+		but there is a functional $\check{f}$ satisfying
+		\[f(t)=\frac{1}{2\pi}\check{f}\left(e^{i\omega t}\right).\]
+	\item When the Fourier transform of a function does not exist but the associated functional does, we typically invent a false function for convenience of notation and working.
+	\item A key example of such an invented ``function'' is the \textbf{Dirac delta}, $\delta(\omega)$, which is the Fourier transform of $1$. Technically, only the associated functional actually exists, and it is the ``evaluation at 0'' functional:
+		\[\delta^*(g)\text{``$=\int_{-\infty}^\infty \delta(\omega)g(\omega)\diff \omega$''} = g(0).\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

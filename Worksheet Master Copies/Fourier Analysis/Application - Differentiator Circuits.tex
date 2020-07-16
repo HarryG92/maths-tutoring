@@ -1,0 +1,196 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{Application: Differentiator Circuits}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To understand how the properties of the Fourier transform }}
+
+\textbf{\underline{allow us to design a circuit that differentiates the input signal with}}
+
+\textbf{\underline{respect to time.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+
+Recall the Fourier transform (ordinary frequency version):
+\[\hat{f}(\xi) = \int_{-\infty}^\infty f(t)e^{-2\pi j \xi t}\diff t,\]
+and its inverse transform:
+\[f(t)=\int_{-\infty}^\infty \hat{f}(\xi)e^{2\pi j\xi t}\diff \xi.\]
+Recall also that
+\[\widehat{\deriv{f}{t}}(\xi)=(2\pi j \xi)\hat{f}(\omega).\]\bigskip
+
+
+
+
+
+
+
+
+The output voltage $V_\mathrm{out}$ of an op-amp (shown below) depends on the two input voltages $V_1$ and $V_2$ according to
+\[V_\mathrm{out}=G(V_1-V_2),\]
+where $G$ is some very large number (the gain of the amplifier).
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+	\draw (0,0) -- (0,6) -- (5,3) -- (0,0);
+	\draw (-1,2) -- (0,2);
+	\node[left] at (-1,2) {$V_1$};
+	\node[right] at (0,2) {$+$};
+	\draw (-1,4) -- (0,4);
+	\node[left] at (-1,4) {$V_2$};
+	\node[right] at (0,4) {$-$};
+	\draw (5,3) -- (6,3);
+	\node[right] at (6,3) {$V_\mathrm{out}$};
+\end{tikzpicture}
+\end{center}
+
+\clearpage
+
+
+Suppose we connect the output of the op-amp through a voltage divider to the negative input, as shown, and tie the positive input to ground:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+	\draw (0,0) -- (0,6) -- (5,3) -- (0,0);
+	\draw (-0.5,2) -- (0,2);
+	\node[right] at (0,2) {$+$};
+	\draw (-3,4) -- (-2,4) -- (-2,4.1) -- (-1,4.1) -- (-1,3.9) -- (-2,3.9) -- (-2,4.1) -- (-1,4.1) -- (-1,4) -- (0,4);
+	\node[below] at (-1.5,4) {$R_1$};
+	\node[left] at (-3,4) {$V_\mathrm{in}$};
+	\node[right] at (0,4) {$-$};
+	\draw (5,3) -- (6,3);
+	\node[right] at (6,3) {$V_\mathrm{out}$};
+	
+	\draw (5.5,3) -- (5.5,7) -- (3,7) -- (3,6.9) -- (2,6.9) -- (2,7.1) -- (3,7.1) -- (3,6.9) -- (2,6.9) -- (2,7) -- (-0.5,7) -- (-0.5,4);
+	\node[below] at (2.5,7) {$R_2$};
+	
+	\draw (-0.5,2) -- (-0.5,-1);
+	\draw (-0.7,-1) -- (-0.3,-1);
+	\draw (-0.6,-1.1) -- (-0.4,-1.1);
+	\draw (-0.55,-1.2) -- (-0.45,-1.2);
+\end{tikzpicture}
+\end{center}
+
+We assume that the input impedance of the op-amp is extremely high, so no current flows into or out of the op-amp inputs. Let $V_0$ denote the voltage at the negative input of the op-amp.
+
+\begin{enumerate}
+	\item By considering current, show that
+		\[\frac{V_\mathrm{out}-V_0}{R_2}=\frac{V_0-V_\mathrm{in}}{R_1}.\]
+	\item Hence show that
+		\[V_\mathrm{out} = V_0 \left(1+\frac{R_2}{R_1}\right) - \frac{R_2}{R_1}V_\mathrm{in}.\]
+	\item By considering the effect on $V_\mathrm{out}$ if $V_0>0$ and if $V_0<0$ respectively, show that the action of the circuit is to make $V_0=0$.
+	\item Hence conclude that the output of the circuit is given by
+		\[V_\mathrm{out}=-\frac{R_2}{R_1}V_\mathrm{in}.\]
+	\item Now suppose that $R_1$ is replaced by a capacitor, $C$. Recall that the impedance of a capacitor when a sinusoidal voltage of frequency $\xi$ is applied is given by
+		\[\frac{1}{2\pi \xi j C}.\]
+		\begin{center}
+		\begin{tikzpicture}[scale=0.7]
+			\draw (0,0) -- (0,6) -- (5,3) -- (0,0);
+			\draw (-0.5,2) -- (0,2);
+			\node[right] at (0,2) {$+$};
+			\draw (-3,4) -- (-2,4) -- (-2,4.5) -- (-2,3.5);
+			\draw (-1.8,3.5) -- (-1.8,4.5) -- (-1.8,4) -- (-1,4) -- (0,4);
+			\node[below] at (-1.5,4) {$C$};
+			\node[left] at (-3,4) {$V_\mathrm{in}$};
+			\node[right] at (0,4) {$-$};
+			\draw (5,3) -- (6,3);
+			\node[right] at (6,3) {$V_\mathrm{out}$};
+			
+			\draw (5.5,3) -- (5.5,7) -- (3,7) -- (3,6.9) -- (2,6.9) -- (2,7.1) -- (3,7.1) -- (3,6.9) -- (2,6.9) -- (2,7) -- (-0.5,7) -- (-0.5,4);
+			\node[below] at (2.5,7) {$R$};
+			
+			\draw (-0.5,2) -- (-0.5,-1);
+			\draw (-0.7,-1) -- (-0.3,-1);
+			\draw (-0.6,-1.1) -- (-0.4,-1.1);
+			\draw (-0.55,-1.2) -- (-0.45,-1.2);
+		\end{tikzpicture}
+		\end{center}
+		Show that if $V_\mathrm{in}$ is a sinusoid of amplitude $A$, then the amplitude of $V_\mathrm{out}$ is given by
+		\[-2\pi \xi jRC A.\]
+	\item Suppose that $V_\mathrm{in}=f(t)$ is some time-varying function. Show that the Fourier transform of $V_\mathrm{out}$ is given by
+		\[-2\pi\xi j RC\hat{f}(\omega).\]
+	\item Hence conclude that the (time-domain) output of the circuit is
+		\[V_\mathrm{out}(t)=-RC\deriv{V_\mathrm{in}}{t}.\]
+	\item Suppose instead that we leave $R_1$ as a resistor and replace instead $R_2$ by the capacitor $C$, as shown below. Suppose the circuit is switched on at time 0, and before that has 0V input and output. By carrying out a similar frequency-domain analysis, show that the output of the circuit is now given by
+		\[V_\mathrm{out}(t)=-\frac{1}{RC}\int_0^t V_\mathrm{in}(\tau)\diff \tau,\]
+		where $\tau$ is a dummy variable of integration.
+		\begin{center}
+		\begin{tikzpicture}[scale=0.7]
+			\draw (0,0) -- (0,6) -- (5,3) -- (0,0);
+			\draw (-0.5,2) -- (0,2);
+			\node[right] at (0,2) {$+$};
+			\draw (-3,4) -- (-2,4) -- (-2,4.1) -- (-1,4.1) -- (-1,3.9) -- (-2,3.9) -- (-2,4.1) -- (-1,4.1) -- (-1,4) -- (0,4);
+			\node[below] at (-1.5,4) {$R$};
+			\node[left] at (-3,4) {$V_\mathrm{in}$};
+			\node[right] at (0,4) {$-$};
+			\draw (5,3) -- (6,3);
+			\node[right] at (6,3) {$V_\mathrm{out}$};
+	
+			\draw (5.5,3) -- (5.5,7) -- (3,7) -- (3,7.5) -- (3,6.5);
+			\draw (2.8,6.5) -- (2.8,7.5) -- (2.8,7) -- (-0.5,7) -- (-0.5,4);
+			\node[below] at (2.5,7) {$C$};
+	
+			\draw (-0.5,2) -- (-0.5,-1);
+			\draw (-0.7,-1) -- (-0.3,-1);
+			\draw (-0.6,-1.1) -- (-0.4,-1.1);
+			\draw (-0.55,-1.2) -- (-0.45,-1.2);
+		\end{tikzpicture}
+		\end{center}
+\end{enumerate}
+
+
+
+
+
+
+
+
+\end{document}

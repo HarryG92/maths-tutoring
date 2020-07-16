@@ -1,0 +1,106 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+
+
+
+
+\begin{document}
+
+\title{Sequences and Series}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+
+
+
+\textbf{Binomial Series:}
+
+\vspace{5mm}
+
+
+\begin{enumerate}
+	\item Write out the binomial expansion of $(a+b)^n$.
+	\item Write out Pascal's triangle as far as the level which begins $1,6,\hdots$
+	\item Expand $(x+1)^6$.
+	\item Expand $2^n=(1+1)^n$ by the binomial theorem. Hence write down the sum of the $n^\mathrm{th}$ row of Pascal's triangle.
+	\item \begin{enumerate}
+			\item Expand $(1+x)^{-1/2}$ up to and including the term in $x^3$.
+			\item If we substitute $x=10$, then $(1+x)^{-1/2}=\frac{1}{\sqrt{11}}$; do you expect the series expansion with $x=10$ to give a good approximation to $\frac{1}{\sqrt{11}}$? Why/why not? Plug in $x=10$ to your series expansion and compare with what your calculator gives you for $\frac{1}{\sqrt{11}}$.
+			\item Show that
+				\[\frac{3}{10}\left(1-\frac{1}{100}\right)^{-1/2}=\frac{1}{\sqrt{11}}.\]
+			\item Substitute $x=-\frac{1}{100}$ into your series expansion for $(1+x)^{-1/2}$ and multiply by $\frac{3}{10}$ to estimate $\frac{1}{\sqrt{11}}$. Compare with the answer given by your calculator.
+		\end{enumerate}
+	\item Expand $(2+x)^{3/5}$ up to and including the term in $x^3$. For what values of $x$ is this expansion valid?
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+\textbf{Arithmetic Series:}\bigskip
+
+
+\begin{enumerate}
+	\item Write down the expression for the $n^\mathrm{th}$ term of an arithmetic sequence with first term $-7$ and common difference $3$. Find the $8^\mathrm{th}$ term.
+	\item Let $(a_k)$ be an arithmetic progression. Write down the formula for
+		\[\sum_{k=1}^n a_k\]
+		and prove it.
+	\item Find the sum of the first 1000 integers.
+	\item An arithmetic progression has first term $12$ and common difference $18.4$. What is the first term greater than 100? After how many terms does the sum first exceed 500?
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+\textbf{Geometric Series:}\bigskip
+
+
+\begin{enumerate}
+	\item Write down the expression for the $n^\mathrm{th}$ term of a geometric sequence with first term $3$ and common ratio $5$. Find the $3^\mathrm{rd}$ term.
+	\item Let $(a_k)$ be a geometric progression. Write down the formula for
+		\[\sum_{k=1}^n a_k\]
+		and prove it.
+	\item Find the sum of the first 10 terms of the geometric progression with first term $273$ and common ratio $-\frac{1}{3}$. Find the sum to infinity of the same series.
+	\item A savings account is set up with \pounds5000. It pays 4\% interest \textit{per annum} (believe it or not, there was a time this might have been a realistic question!). No money is withdrawn. After how many years will the interest payment first exceed \pounds100? After how many years will the account balance first exceed \pounds10000?
+	\item There is a classic (and bad) maths joke that begins as follows: an infinite number of mathematicians walk into a bar; the first orders a pint, the second orders half a pint, the third orders a quarter of a pint, and so on. Find the punchline by determining how many pints the bartender should pour, assuming the mathematicians don't mind sharing glasses.
+\end{enumerate}
+
+
+
+
+\end{document}

@@ -1,0 +1,104 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Integration by Change of Variables}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To practise identifying which method to use to integrate}}
+
+\textbf{\underline{a function, and applying the different techniques we have learnt.}}
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{A Checklist for Integration:}\bigskip
+
+\begin{enumerate}
+	\item Is the integrand continuous? If not, will need to split the domain of integration and miss out a strip or width $\epsilon$ around the discontinuity, then take the limit as $\epsilon\to 0$.
+	\item Is it a standard integral, such as $\sin(x)$, $\cos(x)$, $x^n$, $e^x$, $\sinh(x)$, or $\cosh(x)$? Possibly with constants multiplying/added to the variable.
+	\item Can I rewrite the integrand in some more convenient form? For instance, factorising or expanding out brackets, rewriting roots as fractional powers, using trig identities, etc.
+	\item Is it a chain rule integral? That is, can I split the integrand into a function $g(f(x))$, times the derivative of the inside function, $f'(x)$? Then this came from the chain rule and so an antiderivative is $f(g(x))$. Might have to multiply by a constant at the end to make it work out exactly.
+	\item Is there a subsitution I could make that might simplify the integral? Trig or hyperbolic substitutions are often useful when there are expressions involving squares, because of all the trig identities with squared functions in.
+	\item Can I split the integrand as a product of two functions, $u$ and $\deriv{v}{x}$, and use integration by parts?
+\end{enumerate}
+
+\clearpage
+
+
+
+\textbf{Practice:}\bigskip
+
+
+\begin{enumerate}
+	\item \[\int (7x^3+2e^{3x}-9\cos(x))\diff x=\]
+	\item \[\int_{-2}^2 \frac{1}{\sqrt{x}}\diff x=\]
+	\item \[\int t^3(t^2+t^{1/2})(t^7-3t^{-3/2})\diff t=\]
+	\item \[\int (2\sin(t)\cos(t)\sin(2t)+cos^2(2t) )\diff t=\]
+	\item \[\int t^2(t^3-4)^9\diff t=\]
+	\item \[\int y^{-1/2}\cos\left(\sqrt{y}\right)\diff y=\]
+	\item \[\int \left(y^2-\frac{2}{3}y\right)e^{y^3-y^2}\diff y=\]
+	\item \[\int \tan(\theta)\diff \theta=\]
+	\item \[\int\frac{1}{\sqrt{1+z^2}}\diff z=\]
+	\item \[\int\frac{\sqrt{z^3-1}}{z}\diff z=\]
+	\item \[\int ze^{z}\diff z=\]
+	\item \[\int u\cos(2u)\diff u=\]
+\end{enumerate}
+
+\clearpage
+
+
+Some standard useful tricks for particular integrals:
+
+\begin{enumerate}
+	\item To integrate $\ln(x)$, write as $1.\ln(x)$ and use parts, with $u=\ln(x)$, $\deriv{v}{x}=1$.
+	\item To integrate $\sin^2(x)$ or $\cos^2(x)$, use the double angle formulae for cosine to rewrite in terms of $\cos(2x)$.
+	\item To integrate products of exponentials and trig functions, use Euler's Equation to rewrite in terms of real or imaginary parts of complex exponentials.
+\end{enumerate}
+
+
+
+
+
+\end{document}

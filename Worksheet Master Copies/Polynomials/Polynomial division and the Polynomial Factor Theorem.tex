@@ -1,0 +1,120 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{array}
+
+\setlength{\tabcolsep}{1.8cm}
+\renewcommand{\arraystretch}{2.5}
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+\makeatother
+
+\begin{document}
+
+\title{Polynomial Divison and the Polynomial Factor Theorem}
+\date{}
+
+\maketitle
+
+\Large
+
+{\bf \underline{Objective: To be able to divide one polynomial by another,}}
+
+{\bf \underline{with remainder, and understand the Polynomial Factor Theorem}}
+
+\vspace{5mm}
+
+{\bf Warm-up:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Divide 138 by 11 with remainder.
+\item Hence write 138 in the form $11q+r$ with $0\leq r<11$.
+\item Multiply out $(x+1)(x+2)$.
+\item Hence write $x^2+3x+8$ in the form $(x+1)q(x)+r$, where $q(x)$ is a polynomial and $r$ is a constant.
+\item Substitute $x=10$ in your expression for $x^2+3x+8$ above and compare with questions 1 and 2.
+\item Evaluate $x^2+3x+8$ when $x=7$.
+\item Evaluate your expression from question 4 when $x=7$.
+\item Using the previous two questions, write 78 in the form $8q+r$. Check this!
+\end{enumerate}
+
+\clearpage
+
+
+{\bf Theory - Long Division with Polynomials}
+
+Divide $x^2+7x+19$ by $x+10$ with remainder.
+
+\vfill
+
+Divide $x^3-2x^2+6x-4$ by $x-1$ with remainder.
+
+\vfill
+\clearpage
+
+
+{\bf Practice:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Divide $x^2-5$ by $x+3$ with remainder.
+\item Divide $4x^2+6x-3$ by $x-2$ with remainder.
+\item Divide $x^4+3x^2-x+1$ by $x-2$ with remainder.
+\item Divide $x^2+6x + 6$ by $x+3$ with remainder. Hence factorise $x^2+6x+9$.
+\end{enumerate}
+
+\clearpage
+
+{\bf Application - the Polynomial Factor Theorem:}
+
+\vspace{5mm}
+
+Suppose $f(x)$ is a polynomial and can be factored as $f(x)=(x-a)g(x)$ for some constant $a$ and polynomial $g(x)$. Show that $f(a)=0$ - we say $a$ is a \underline{root} of $f$.
+
+\vfill
+
+Now we go the other way around. Suppose that $f(x)$ is a polynomial and $f(a)=0$. Prove that $f(x)=(x-a)g(x)$ for some polynomial $g(x)$.
+
+\vfill
+\clearpage
+
+{\bf Practice with the Polynomial Factor Theorem:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Factorise $x^2-6x+8$.
+\item Hence write down the two roots of $x^2-6x+8$.
+\item Let $f(x)=x^3-7x^2+14x-8$. Evaluate $f(1)$. Hence find $a$ such that $f(x)=(x-a)g(x)$ for some $g$.
+\item With the notation as above, find $g$.
+\item Hence factor $f$ completely into the form $f(x)=(x-a)(x-b)(x-c)$.
+\item Hence write down all three roots of $f$.
+\end{enumerate}
+
+
+\clearpage
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item A {\bf polynomial} is a function of a variable ($x$, say), which is built just from addition, subtraction, multiplication, and raising $x$ to positive whole-number powers. For instance, $8x^3-7x^2+3$ is a polynomial, but $\sin(x)+x^3$ is not, because of the $\sin$ term.
+\item The {\bf degree} of a polynomial is the largest power of the variable appearing. For instance, the degree of $-x^3+4x^2-2x$ is 3.
+\item A {\bf root} of a polynomial $f(x)$ is a number $a$ such that $f(a)=0$ - \textit{i.e.}, substituting $a$ in place of $x$ gives 0.
+\item A polynomial $f(x)$ is a {\bf factor} of another polynomial $g(x)$ if $f(x)$ can be multiplied by a polynomial to make $g(x)$ - just like a whole number $f$ is a factor of another whole number $g$ if $f$ can be multiplied by some other number to make $g$.
+\item Any degree-$n$ polynomial can be divided by a degree-1 polynomial to give a degree-$(n-1)$ polynomial and a constant remainder.
+\item To divide one polynomial by another, use long division, starting with the largest power and working down.
+\item The {\bf Polynomial Factor Theorem} says that a number $a$ is a {\bf root} of a polynomial if and only if $(x-a)$ is a {\bf factor} of that polynomial.
+\end{enumerate}
+
+
+\end{document}

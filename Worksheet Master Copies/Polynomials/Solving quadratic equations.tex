@@ -1,0 +1,161 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+%%%\setlength{\tabcolsep}{1.8cm}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\begin{document}
+
+\title{Solving Quadratic Equations}
+\date{}
+
+\maketitle
+
+\Large
+
+{\bf \underline{Objective: To be able to solve quadratic equations.}}
+
+\vspace{5mm}
+
+
+{\bf Recap of previous material:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Factorise $x^2-6x+8$.
+\item Hence write down the two roots of $x^2-6x+8$.
+\item Let $f(x)=x^3-7x^2+14x-8$. Evaluate $f(1)$. Hence find $a$ such that $f(x)=(x-a)g(x)$ for some $g$.
+\item With the notation as above, find $g$.
+\item Hence factor $f$ completely into the form $f(x)=(x-a)(x-b)(x-c)$.
+\item Hence write down all three roots of $f$.
+\end{enumerate}
+
+
+\clearpage
+
+{\bf Warm-up:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Solve $3x+4=11x-8$.
+\item Solve $2x^2+4x-3=5x^2+4x-6$.
+\item Expand $(x-1)^2$. Hence solve $x^2-2x+1=0$.
+\item Expand $(x-3)^2$. Hence solve $x^2-6x+9=0$.
+\item Solve $x^2-12x+36=0$.
+\item Let $a$ be a constant. Solve $x^2-2ax+a^2=0$.
+\end{enumerate}
+
+\clearpage
+
+
+{\bf Theory - Completing the Square:}
+
+Solve $x^2+2x+1=0$. Now solve $x^2+2x-3=0$.
+
+\vfill
+
+Solve $3x^2-18x-48=0$.
+
+\vfill
+\clearpage
+
+
+{\bf Practice:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Solve $x^2+16x=36$.
+\item Solve $4x^2-8x-7=0$.
+\item Solve $x^2+14x+50=0$.
+\item Let $b$ and $c$ be constants. Solve $x^2+bx+c=0$ in terms of $b$ and $c$.
+\item Let $a$, $b$, and $c$ be constants. Solve $ax^2+bx+c=0$ in terms of $a$, $b$, and $c$.
+\item Solve $2x^2+4x-3=0$ by completing the square. Now solve by the formula you derived in the last question. Compare your answers.
+\end{enumerate}
+
+\clearpage
+
+{\bf Application - Projectile Motion:}
+
+\vspace{5mm}
+
+Suppose a particle is thrown from $2m$ above flat ground. Initially, its sideways speed is $5ms^{-1}$, and its vertical velocity is $5ms^{-1}$ upwards. Ignore air resistance, so the only force acting on the particle is gravity, causing it to accelerate downwards at a constant rate of $9.81ms^{-2}$.
+
+\begin{center}
+\begin{tikzpicture}
+\draw[->] (0,0) -- (8,0);
+\node[right] at (8,0) {$x$};
+\draw[->] (0,0) -- (0,5);
+\node[above] at (0,5) {$y$};
+\node[below left] at (0,0) {0};
+\draw[fill] (0,2) circle [radius=0.15];
+\node[left] at (0,2) {$2$};
+\draw[thick, ->] (0,2) -- (1,3);
+\draw[dotted, thick, domain=0:6.6335] plot (\x, {2+\x-(9.81/50)*\x^2});
+\draw[fill] (6.6335,0) circle [radius=0.1];
+\node[below] at (6.6335,0) {$p$};
+\end{tikzpicture}
+\end{center}
+
+
+Given that the equation of motion is $s=ut+\frac{1}{2}at^2$, where $s$ is the change in position, $u$ is initial velocity, $t$ is time, and $a$ is acceleration, write down an equation for the $x$-position of the particle at time $t$ and another equation for the $y$-position of the particle at time $t$.
+
+\vspace{4cm}
+
+
+
+Eliminate $t$ from these equations to find an equation linking $x$ and $y$.
+
+\vspace{4cm}
+
+Use this equation to find the position $p$ where the particle lands on the ground.
+
+
+\clearpage
+
+
+{\bf Key Points to Remember}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item If $a$ is any constant, the unique solution to $x^2+2ax+a^2=0$ is $x=a$.
+\item You can solve a quadratic equation (\textit{e.g.}, $ax^2+bx+c=0$ with $a\neq 0$) by completing the square:
+	\begin{enumerate}
+	\item Divide through by $a$ to get
+	\[x^2+\frac{b}{a}x+\frac{c}{a}=0\]
+	\item Compare with $\left(x+\frac{b}{a}\right)^2$:
+	\[\left(x+\frac{b}{2a}\right)^2-\left(\frac{b}{2a}\right)^2+\frac{c}{a}=x^2+\frac{b}{a}x+\frac{c}{a}=0\]
+	\item Rearrange:
+	\[\left(x+\frac{b}{2a}\right)^2=\left(\frac{b}{2a}\right)^2-\frac{c}{a}=\frac{b^2-4ac}{4a^2}\]
+	\item Take square roots:
+	\[x+\frac{b}{2a}=\pm\frac{\sqrt{b^2-4ac}}{2a}\]
+	\item Rearrange to get just $x$ on the left-hand side:
+	\[x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}\]
+	\end{enumerate}
+	{\bf Note: Completing the square is a \underline{process} best learned by repeated practice, not by trying to memorise the above instructions!}
+\item The formula derived above can be used directly instead of the process of completing the square.
+\end{enumerate}
+
+
+
+
+
+\end{document}

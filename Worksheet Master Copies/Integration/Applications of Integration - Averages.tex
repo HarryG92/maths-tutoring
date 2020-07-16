@@ -1,0 +1,243 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Applications of Integration: Averages}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand how integration may be used to average}}
+
+\textbf{\underline{a function.}}
+
+
+
+
+
+
+\vspace{10mm}
+
+
+
+\textbf{Warm-up: Averages:}\bigskip
+
+
+Suppose a particle moves with velocity given by $v(t) = 4-t$ (for example, a mass thrown up in the air). Suppose we want to find the particle's average velocity over a time interval. Note the difference between average \textit{speed}, which ignores the direction of travel and so is always positive, and average \textit{velocity}, which takes into account the direction of travel. For instance, if the particle moves and then returns to its starting position, its average speed could be very high, but its average velocity will be 0. Average velocity from time $t=a$ to time $t=b$ is found by $\frac{x(b)-x(a)}{b-a}$.
+
+\begin{enumerate}
+	\item Find the distance travelled by the particle by time $t=4$.
+	\item Hence find the particle's average velocity over the first 4s.
+	\item Find the distance travelled by the particle by time $t=8$.
+	\item Hence find the particle's average velocity between $t=4$ and $t=8$.
+	\item Find the particle's average velocity over the first 8s.
+	\item Write down an expression for the particle's average velocity between $t=a$ and $t=b$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Averaging Functions:}
+
+\bigskip
+
+
+
+Suppose $f(t)$ is some quantity varying with time; we have seen that the instantaneous rate-of-change (derivative) of $f$ is the limit of the average rate-of-change of $f$ from $t$ to $t+h$, as $h$ tends to 0. If we want to find the average rate-of-change of $f$ between $t=a$ and $t=b$, we just evaluate
+\[\frac{f(b)-f(a)}{b-a}.\]
+
+So this is the average value of the \textit{derivative} of $f$. What if we want to find the average value of $f$ itself? Well, if we can express $f$ as the derivative of some other quantity $F$, then we can use this average rate-of-change formula to find the average rate-of-change of $F$, which will be the average value of $f$. For $f$ to be the derivative of $F$ means that $F$ is an antiderivative of $f$. So to find the average value of $f$ between $t=a$ and $t=b$, we find an antiderivative $F$ and evaluate
+\[\frac{F(b)-F(a)}{b-a}.\]
+
+The numerator of this expression is precisely the integral of $f(t)$ from $a$ to $b$; so we see that the average value of $f$ between $a$ and $b$ is simply
+\[\frac{1}{b-a}\int_a^b f(t)\diff t.\]
+
+If $f$ is the rate-of-change of some quantity, then this makes sense, as the integral is the total change in the quantity, then dividing by the time taken for the change gives the average rate-of-change. If $f$ is some quantity we wouldn't normally think of as a rate-of-change, this is less clear, but the point is that any function with an antiderivative can be regarded as the rate-of-change of the area under its own graph, even if that doesn't have any physical meaning.\bigskip
+
+Suppose the charge on a capacitor varies according to $Q=\sin(t)$. Find the average charge on the capacitor between $t=0$ and $t=\pi$. Note that the antiderivative of charge has no physical meaning (that I know of).
+
+\vfill
+
+
+Note that the average of a function over an interval is the value of the constant function that encloses the same area over that integral; equivalently, it is the height of the rectangle on that interval with the same area as under the graph of the function.
+
+
+\clearpage
+
+
+
+
+\textbf{Theory: Other Views on Averaging:}\bigskip
+
+There is another way to derive the integral formula for the average of a function. To estimate the average of $f(t)$ between $t=a$ and $t=b$, we might consider taking a sample of $n$ points between $a$ and $b$, adding up the values of the function at these points, and dividing by $n$. If we take our points evenly spaced, then we will sample at $t=a+\frac{k(b-a)}{n}$ for $k$ from 1 to $n$. So our estimate of the average value of $f$ will be
+\[\frac{1}{n}\sum_{k=1}^n f\left(a+\frac{k(b-a)}{n}\right).\]
+
+For instance, if we want to find the average temperature at a point over the course of a day, we will measure the temperature there regularly, say every hour, and divide by the number of measurements.
+
+As we take $n$ larger and larger, we are taking account of more and more of the values of $f$ between $a$ and $b$, so should get a better and better estimate of the average value of $f$. So the actual value of the average should be the limit of the above expression as $n$ tends to infinity. By multiplying top and bottom by $b-a$ and rearranging slightly, we see that the average value of $f$ between $t=a$ and $t=b$ is
+\begin{align*}
+	\lim_{n\to\infty}\frac{b-a}{n(b-a)}\sum_{k=1}^n f\left(a+\frac{k(b-a)}{n}\right) &= \frac{1}{b-a}\lim_{n\to\infty}\sum_{k=1}^n f\left(a+\frac{k(b-a)}{n}\right)\frac{b-a}{n}\\
+	&=\frac{1}{b-a}\int_a^b f(t)\diff t.
+\end{align*}
+
+So we can derive our averaging formula either by considering $f$ as the rate-of-change of an antiderivative $F$ and looking at the average rate-of-change of $f$, or by taking $n$ samples of $f$, averaging those, and taking the limit as $n\to\infty$.\medskip
+
+
+
+Of particular importance is the \textbf{root mean square} of a function $f(t)$ over an interval $[a,b]$; this is defined to be the square root of the average of $f(t)^2$ between $t=a$ and $t=b$. The reason for squaring is that it makes everything positive; if a function is sometimes positive and sometimes negative, these can cancel out and leave it with an average value of 0; but the square of the function is never negative, so the average of $f(t)^2$ gives a measure of how far away from 0 $f$ is on average, irrespective of whether $f$ is positive or negative. The square root is then taken to get things back in the same units as the original function.
+
+\[\mathrm{rms}_a^b(f)=\sqrt{\frac{1}{b-a}\int_a^b f(t)^2\diff t}.\]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+
+
+
+
+\begin{enumerate}
+	\item A ball is thrown in the air from ground level. Its velocity at time $t$ is given by $10-9.8t$ in $\mathrm{ms}^{-1}$, where positive is taken to be upwards.
+		\begin{enumerate}
+			\item By solving $v(t)=0$, find the time at which the ball reaches its maximum height.
+			\item Find the ball's average speed between being thrown and reaching its maximum height.
+		\end{enumerate}
+	\item Consider mains voltage $V(t)=230\sqrt{2}\sin(100\pi t)$.
+		\begin{enumerate}
+			\item Find the average voltage provided (over one period). Explain your answer.
+			\item Find the root mean square voltage (over one period).
+			\item The power dissipated in a resistor with voltage $V$ on it is given by $P=\frac{V^2}{R}$. Find an expression in terms of $R$ for the average power dissipated over one time period by mains voltage. Hence find what DC (constant) voltage would deliver the same average power as AC mains voltage.
+		\end{enumerate}
+	\item Suppose I am cooking a pie (like $\pi$, but tastier). The instructions tell me to preheat the oven to $180^\circ \mathrm{C}$, then put the pie in for 30mins. However, I am hungry and impatient, so I turn the oven to $200^\circ \mathrm{C}$ and put the pie in straight away without preheating. Suppose the temperature $T$ of the oven as it heats up is given by
+		\[T=200-180e^{- t/6},\]
+		where $t$ is given in minutes and $T$ in degrees Celsius.
+		\begin{enumerate}
+			\item Find the average temperature of the oven between $t=0$ and $t=30$.
+			\item Find an expression in terms of $a$ for the average temperature of the oven between $t=0$ and $t=a$.
+			\item Using your expression from part (b) and a Newton-Raphson process starting from $t_1=30$, find how long I should leave my pie in for so that the average temperature while it cooks is $180^\circ \mathrm{C}$ (warning: this would probably not actually result in a well-cooked pie!).
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The average of a function $f(x)$ between $x=a$ and $x=b$ is given by
+		\[\frac{1}{b-a}\int_a^b f(x)\diff x.\]
+	\item The \textbf{root mean square} of $f(x)$ between $x=a$ and $x=b$ is the square root of the average of $f(x)^2$ over this interval:
+		\[\sqrt{\frac{1}{b-a}\int_a^b f(x)^2\diff x}.\]
+	\item If a function is \textbf{periodic}, then averages and root means square are typically taken over one period.
+	\item The root mean square of a sinusoid is the amplitude divided by $\sqrt{2}$.
+	\item The root mean square of any varying voltage is the equivalent DC voltage that would develop the same average power across a resistor.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

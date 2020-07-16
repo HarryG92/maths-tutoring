@@ -1,0 +1,77 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{array}
+
+\pagestyle{empty}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Volumes of Revolution}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+
+
+
+
+\textbf{Theory: Volumes of Revolution:}\bigskip
+
+
+Let $y=f(x)$ be a curve in the $(x,y)$-plane, from $x=a$ to $x=b$. Rotate this curve around the $x$-axis to form a solid shape. Consider moving along the $x$-axis; how does the amount of volume to your left change as $x$ increases?
+
+Show that between $x$ and $x+\delta x$, the change in volume is approximately $\pi f(x)^2 \delta x$.\vfill
+
+
+Hence show that the rate-of-change of volume is given by
+\[\deriv{V}{x}=\pi f(x)^2.\]\vfill
+
+
+Hence show that the total volume is given by
+\[\pi\int_a^b f(x)^2\diff x.\]
+
+
+
+
+
+\clearpage
+
+
+\textbf{Worked Examples:}\bigskip
+
+By rotating the curve $y=\sqrt{r^2-x^2}$ for $-r\leq x\leq r$ around the $x$-axis, derive the well-known formula for the volume of a sphere:
+\[V=\frac{4}{3}\pi r^3.\]
+
+
+
+
+\clearpage
+
+
+{\bf Exercises:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item Rotate the region bounded by $y=\sqrt{x}$, $y=3$, and the $y$-axis about the $y$-axis. Find the area of the resulting solid.
+	\item Rotate the curve $y=\sin(x)$ about the $x$-axis, for $0\leq x \leq \pi$. Find the volume of the resulting shape.
+	\item Rotate the curve $x=\sqrt{y}e^{y^2}$ about the $y$-axis. Find the volume between $y=1$ and $y=2$.
+	\item Rotate the curve $y=\tan(x)$ about the $x$-axis. Find the volume bounded between $x=0$ and $x=\frac{\pi}{4}$.
+\end{enumerate}
+
+
+
+
+
+\end{document}

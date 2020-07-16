@@ -1,0 +1,218 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+\let\take\setminus
+\let\lamdba\lambda
+
+
+\begin{document}
+
+\title{The Heat Equation}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To apply Fourier analysis to solve the heat equation.}}
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Introduction: The Heat Equation (in 1D):}
+
+\bigskip
+
+
+Consider a uniform rod lying along the $x$-axis from $x=0$ to $x=L$. In this context, ``uniform'' means that the density $\rho$, cross-sectional area $A$, specific heat capacity $c$, and thermal conductivity $K$ of the rod are all constant. We also assume that any temperature differences in the rod are only in the $x$-direction, and the rod is insulated along its length, so that heat can only enter or leave the rod via the two ends.
+
+Let $\theta(x,t)$ be the temperature of the rod at the point $x$ and at the time $t$, and assume $\theta$ is sufficiently smooth. Consider a thin slice of the rod, from $x$ to $x+\delta x$; assume that the slice is thin enough that we can treat $\theta$ and $\frac{\partial \theta}{\partial x}$ as constant throughout the slice. The amount of heat energy in an object is found by multiplying its mass, specific heat capacity, and temperature; so the amount of heat energy in the slice at time $t$ is given by
+\[E=(\rho \,\delta x)c \,\theta(x,t).\]
+
+The change in the amount of heat energy of the slice between time $t$ and time $t+\delta t$ is therefore
+\[\delta E\approx (\rho \delta x)c\left[\theta(x,t+\delta t)-\theta(x,t)\right].\]
+Since the only way heat can enter or leave the slice is by conduction through the ends, this is equal to the heat transferred in through the point $x$ minus the heat transferred out through the point $x+\delta x$. The rate of transfer of heat energy is proportional to minus the cross-sectional area times the $x$-derivative of the temperature:
+\[\frac{\partial E}{\partial t}=-kA\frac{\partial \theta}{\partial x}.\]
+So the approximate amount of heat gained through the end of the slice at $x$, minus heat lost through the end at $x+\delta x$, between time $t$ and time $t+\delta t$, is
+\[\delta E\approx \frac{\partial E}{\partial t}\delta t \approx -kA \delta t\left[\theta_x(x,t) - \theta_x(x+\delta x,t)\right],\]
+where $\theta_x=\frac{\partial \theta}{\partial x}$.
+Therefore we have
+\[(\rho\,\delta x)c\left[\theta(x,t+\delta t)-\theta(x,t)\right] \approx kA \delta t\left[\theta_x(x+\delta x,t) - \theta_x(x,t)\right],\]
+where the approximation tends to equality as $\delta t$ and $\delta x$ tend to 0. Rearranging, we have
+\[\frac{\theta(x,t+\delta t)-\theta(x,t)}{\delta t}\approx \frac{kA}{pc}\frac{\theta_x(x+\delta x,t)-\theta_x(x,t)}{\delta x}.\]
+Taking the limit as $\delta x\to 0$ and $\delta t\to 0$:
+\[\frac{\partial \theta}{\partial t}=\kappa \frac{\partial^2\theta}{\partial x^2},\]
+where $\kappa=\frac{kA}{\rho c}$.
+
+For mathematical simplicity, we can choose to use units of measurement such that $\kappa=1$, therefore we say that the \textbf{1D heat equation} is the partial differential equation
+\[\frac{\partial \theta}{\partial t}=\frac{\partial^2 \theta}{\partial x^2}.\]\medskip
+
+
+A similar analysis for a solid body, allowing heat to flow in any direction, leads to the \textbf{3D heat equation} for $\theta(x,y,z,t)$:
+\begin{align*}
+	\frac{\partial\theta}{\partial t}&=\frac{\partial^2\theta}{\partial x^2}+\frac{\partial^2\theta}{\partial y^2}+\frac{\partial^2\theta}{\partial z^2}\\
+	&=\nabla^2\theta,
+\end{align*}
+where $\nabla^2$ (called the \textbf{Laplace operator} and read as ``del-squared'') is a shorthand for the sum of the second partial derivatives with respect to each spatial dimension (the right-hand side of the first line).
+
+In particular, the \textbf{steady-state heat equation}, when the temperature has settled and does not change with time at any point, is
+\[\nabla^2\theta=0,\]
+since the steady-state assumption means that $\theta_t=0$. This steady-state heat equation is typically called the \textbf{Laplace equation}.
+
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{Solving the Heat Equation with Fourier Series:}\bigskip
+
+Consider the uniform rod from $x=0$ to $x=L$ as before. The temperature $\theta(x,t)$ at a point $x$ and time $t$ is given by the heat equation:
+\[\frac{\partial \theta}{\partial t}=\frac{\partial^2 \theta}{\partial x^2}.\]
+In order to solve a differential equation, we also need initial and/or boundary conditions. Let us suppose that we know the temperature distribution of the rod at time $0$, $\theta(x,0)$ (an initial condition) and also that the ends of the rod have fixed and equal temperatures for all time, $\theta(0,t)=\theta(L,t)=a$ for some constant $a$ (boundary conditions). This now gives us enough information to solve the heat equation.
+
+The idea is that since $\theta$ is continuous in $x$ (we're assuming the temperature is sufficiently smooth) and defined on a closed interval $[0,L]$, it must be square-integrable (continuous implies measurable, and the fact that it's continuous on a closed interval means its bounded (doesn't blow up to infinity or anything), so $\theta^2$ is bounded, non-negative, and measurable, and hence has finite Lebesgue integral). Therefore $\theta\in L_2([0,L])$, and so the Fourier series of $\theta$ converges to $\theta$ almost everywhere (in fact, everywhere, since $\theta$ is continuous).
+
+Since $\theta$ is a function of 2 variables, we need to be a little more careful. Fix a time $t$ and consider the function $\theta_t(x)=\theta(x,t)$ (note that here $\theta_t$ does \textit{not} denote the partial derivative of $\theta$ with respect to time). Then $\theta_t$ is $L_2$, by the above argument, and so is given by its Fourier series
+\[\theta_t(x)=\sum_{n=-\infty}^\infty c_{n}(t)e^{2\pi i nx/L},\]
+where
+\[c_n(t)=\frac{2}{L}\int_0^L \theta(x,t)e^{-2\pi i nx/L}\diff x.\]
+
+Differentiating with respect to $t$:
+\begin{align*}
+	\frac{\partial \theta}{\partial t} &=\frac{\partial \theta_t}{\partial t}\\
+	&=\frac{\partial }{\partial t}\left(\sum_{n=-\infty}^\infty c_n(t)e^{2\pi i nx/L}\right)\\
+	&= \sum_{n=-\infty}^\infty \deriv{c_n(t)}{t}e^{2\pi inx/L}.
+\end{align*}
+Note that the partial derivative of $\theta$ (which depends on two variables) has become an ordinary derivative of $c_n$ (as this depends only on $t$).
+
+Differentiating twice with respect to $x$:
+\begin{align*}
+	\frac{\partial^2\theta}{\partial x^2}&=\frac{\partial^2}{\partial x^2}\sum_{n=-\infty}^\infty c_n(t)e^{2\pi i nx/L}\\
+	&=\sum_{n=-\infty}^\infty c_n(t)\frac{-4\pi^2 n^2}{L^2} e^{2\pi i nx/L}.
+\end{align*}
+
+Now we subsitute these two expressions into the heat equation and obtain
+\[\sum_{n=-\infty}^\infty \deriv{c_n(t)}{t}e^{2\pi inx/L}=\sum_{n=-\infty}^\infty \frac{-4\pi^2n^2}{L^2} c_n(t)e^{2\pi inx/L}.\]
+Since the functions $e^{2\pi inx/L}$ are orthonormal with respect to the inner product on $L_2([0,L])$, they are linearly independent, so the only way this equation can be true is if for each $n$ we have
+\[\deriv{c_n(t)}{t}=\frac{-4\pi^2 n^2}{L^2}c_n(t).\]
+
+For $n\neq 0$, this is a separable first-order ODE, which can be solved:
+\[c_n(t)=A_ne^{-4\pi^2n^2t/L^2},\]
+where $A_n$ is an unknown constant. For $n=0$, on the other hand, the equation reduces to $c_n'(t)=0$, so $c_n(t)=A_0$ is a constant. Of course, $A_0=A_0e^{-4\pi^2n^20/L^2}$, so actually we can group this together with the $n\neq 0$ case.
+
+
+Therefore the Fourier series of $\theta_t(x)$ is
+\[\theta_t(x)=\theta(x,t)=\sum_{n=-\infty}^\infty A_n e^{-4\pi^2n^2t/L^2}e^{2\pi inx/L},\]
+for a sequence of unknown constants $A_n$. Given an initial condition $\theta(x,0)=f(x)$, we have
+\[f(x)=\sum_{n=-\infty}^\infty A_n e^{2\pi inx/L},\]
+so the unknown coefficients $A_n$ are precisely the Fourier coefficients of the initial condition $f(x)$.
+
+
+
+\clearpage
+
+
+
+\textbf{Example:}\bigskip
+
+
+Suppose a uniform rod of length $2\pi$ is laid along the $x$-axis from $x=-\pi$ to $x=\pi$. Suppose that at time 0 the temperature at a point in the rod is given by $\theta(x,0)=\pi^2-x^2$, and that the ends of the rod are held at a constant temperature of $0$ for all time. Find the temperature in the rod at a point $x$ at time $t$, $\theta(x,t)$.
+
+%%%%%%%%
+\iffalse
+\[c_n=\frac{-4\pi\cos(\pi n)}{n^2}=(-1)^{n+1}\frac{\pi}{n^2}\]
+\[\theta(x,t) = \sum_{n=-\infty}^\infty \frac{(-1)^n\pi}{n^2}e^{n^2t+inx}\]
+\fi
+%%%%%%%%
+
+
+
+
+\clearpage
+
+
+
+\textbf{The Infinite Rod Problem:}\bigskip
+
+
+If we want to consider an infinitely long rod (or just one whose length is large and unknown, so best modelled as infinite), it is clear that we should use the Fourier transform instead of the Fourier series. So suppose that $\theta(x,t)$ is the temperature of the rod at point $x$ and time $t$, where $x$ can now take any real value, and suppose that $\theta_t(x)$ is square-integrable for all $t$. This requires that $\theta_t(x)\to 0$ sufficiently quickly as $x\to \pm\infty$, and can be thought of as an infinite analogue of the boundary conditions we had in the finite-length case. By allowing functionals, such as the Dirac delta, we can even avoid this constraint.
+
+Taking the Fourier transform of $\theta_t(x)$, then taking the inverse transform, we have
+\[\theta_t(x)=\frac{1}{2\pi}\int_{-\infty}^\infty \hat{\theta}_t(\omega)e^{i\omega x}\diff \omega.\]
+
+Taking the time derivative:
+\[\frac{\partial \theta}{\partial t} = \frac{1}{2\pi}\int_{-\infty}^\infty \frac{\partial \hat{\theta}_t}{\partial t}e^{i\omega x}\diff \omega,\]
+so we see that the Fourier transform of $\frac{\partial\theta_t}{\partial t}$ is simply $\frac{\partial\hat{\theta}_t}{\partial t}$, since the variable of differentiation, $t$, is independent of the transform variable $x$ (and the transformed variable $\omega$, which here is spatial frequency rather than temporal frequency).
+
+Of course, we know that if we differentiate $\theta_t(x)$ twice (with respect to $x$), the Fourier transform will be $(i\omega)^2\hat{\theta}_t(\omega)$. Therefore, taking the $x$-Fourier transform of the heat equation, we see that
+\[\frac{\partial\hat{\theta}_t}{\partial t}=-\omega^2\hat{\theta}_t(\omega).\]
+
+Solving this equation by separation of variables,
+\[\hat{\theta}_t(\omega)=A(\omega)e^{-\omega^2 t},\]
+where the constant of integration $A$ can depend on $\omega$, since this was a partial differential equation for the bivariate function $\hat{theta}_t(\omega)$. This is analagous to having a different constant $A_n$ for each harmonic $n$ in the finite length case.
+
+Now we use our initial condition $\theta(x,0)=f(x)$ for some known function $f$. Taking the Fourier transform, $\hat{f}(\omega)=\hat{\theta}_0(\omega)=A(\omega)e^0$, so $A(\omega)$ is precisely the Fourier transform of the initial condition, just as before the $A_n$ were the Fourier coefficients of the initial condition. Therefore, taking the inverse Fourier transform of $\hat{\theta}_t(\omega)$:
+\[\theta(x,t)=\frac{1}{2\pi}\int_{-\infty}^\infty \hat{f}(\omega)e^{-\omega^2 t}e^{i\omega x}\diff \omega.\]
+
+
+\clearpage
+
+
+
+\textbf{Example:}\bigskip
+
+
+Suppose there is a uniform rod of some large, indeterminate length, and that at time $0$ the temperature of the rod at a point $x$ is given by $\theta(x,0)=\cos(x)$. Solve the heat equation to find $\theta(x,t)$ for all $x$ and $t$. Hint: recall that the functional Fourier transform of $e^{i\alpha x}$ is $2\pi\delta(\omega-\alpha)$.
+
+Once you have your solution, check that it satisfies both the heat equation and the initial condition.
+
+
+\end{document}

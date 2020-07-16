@@ -1,0 +1,168 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+
+\begin{document}
+
+\title{Ordered Pairs, Relations, and Functions}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand how the ZF axioms allow us to define}}
+
+\textbf{\underline{relations and functions, and work with these.}}
+
+
+\vspace{5mm}
+
+
+\textbf{Ordered Pairs:}\bigskip
+
+Recall that $\langle a,b\rangle$ is defined to be $\{\{a\},\{a,b\}\}$.\bigskip
+
+\begin{enumerate}
+	\item Prove that $\langle a,b\rangle=\langle c,d\rangle$ if and only if $a=c$ and $b=d$.
+	\item Let's define $[a,b]$ to be $\{a,\{a,b\}\}$.
+		\begin{enumerate}
+			\item Prove that $[a,b]=[c,d]$ if and only if $a=c$ and $b=d$.
+			\item Recall that we define the natural numbers by $0=\varnothing$ and $n+1=n\cup\{n\}$. What is the difference between $2$ and $[0,0]$?
+		\end{enumerate}
+	\item Suggest a definition for the ordered triple $\langle a,b,c\rangle$. Prove that this satisfies the property you would expect of an ordered triple.
+	\item Prove that if $A$ and $B$ are sets, then $A\times B=\{\langle a,b\rangle\mid a\in A\wedge b\in B\}$ is a set.
+\end{enumerate}
+
+
+\clearpage
+
+
+
+
+
+\textbf{Relations:}\bigskip
+
+Recall that a \textbf{binary relation} on a set $A$ is a subset of $A\times A$.\bigskip
+
+
+
+Draw a picture of the relation $\leq$ on $\{0,1,2,3,4\}$.
+
+\vfill
+
+
+
+Assume $\mathbb{R}$ is a set with all the familiar properties. Draw a picture of the relation $\sim$ on $\mathbb{R}$ defined by $x\sim y$ if and only if $x^2\leq y \wedge y<2x+4$.
+
+\vfill
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Exercises:}\bigskip
+
+
+
+
+\begin{enumerate}
+	\item Let $R$ be a relation on $A$. Define what it means for $R$ to be:
+		\begin{enumerate}
+			\item Reflexive
+			\item Symmetric
+			\item Transitive
+			\item Antisymmetric
+			\item A partial order
+			\item A total order (linear order)
+			\item A well-order
+		\end{enumerate}
+	\item Let $(P,\leq)$ be a poset and define a new relation $\sim$ on $P$ by $a\sim b$ if and only if $b\leq a$. Prove that $\sim$ is a partial order, and is linear if and only if $\leq$ is linear.
+	\item Let $A$ be a set and $\equiv$ an equivalence relation (a symmetric, transitive, reflexive relation) on $A$. For each $a\in A$, let $[a]$ be the equivalence class of $A$---the class of  $b$ in $A$ such that $a\equiv b$. Prove that:
+		\begin{enumerate}
+			\item For each $a\in A$, $[a]$ is indeed a set.
+			\item For any $a$ and $b$ in $A$, $[a]=[b]$ or $[a]\cap[b]=\varnothing$, where $[a]\cap[b]=\{x\in A\mid x\in [a] \wedge x\in [b]\}$.
+			\item Prove that $A/\!\!\equiv$, the collection of all equivalence classes of $\equiv$ in $A$, is a set.
+		\end{enumerate}
+	\item Let $A$ be a set and $\sim$ a relation on $A$ which is transitive and reflexive (we call such a relation a pre-order). Prove that:
+		\begin{enumerate}
+			\item The relation $\equiv$ on $A$ defined by $a\equiv b$ if and only if $a\sim b\wedge b\sim a$ is an equivalence relation.
+			\item The relation $\leq$ on $A/\!\!\equiv$ defined by $[a]\leq [b]$ if and only if $a\sim b$ is well-defined and a partial order.
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Functions:}\bigskip
+
+
+
+Let $A$ and $B$ be sets. Give the definition of a \textbf{function} from $A$ to $B$.\bigskip
+
+
+Let $(A,\leq)$ and $(B,\sim)$ be posets. Define what it means for $f:A\to B$ to be \textbf{order-preserving}.
+
+
+
+\vfill
+
+
+
+
+Define what it means for a function $f:A\to B$ to be \textbf{injective}, \textbf{surjective}, and \textbf{bijective}.
+
+
+\vfill
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Exercises:}\bigskip
+
+\begin{enumerate}
+	\item Let $(P,\leq)$ be a poset and $Q$ a subset of $P$. Prove that the inclusion function $i:Q\to P:q\mapsto q$ is order-preserving with respect to the restricted order on $Q$.
+	\item Let $f:A\to B$ and $g:B\to  C$ be functions. Prove that $g\circ f:A\to C$ is a function.
+	\item Let $A$ and $B$ be non-empty sets and $f:A\to B$ a function. Say that $f$ is a \textbf{section} if there is a function $g:B\to A$ such that $g\circ f$ is the identity function on $A$, and say that $f$ is a \textbf{retraction} if there is a function $h:B\to A$ such that $f\circ h$ is the identity function on $B$.
+		\begin{enumerate}
+			\item Prove that if $f$ is a section, then $f$ is injective.
+			\item Prove the converse: if $f$ is injective, then $f$ is a section.
+			\item Prove that if $f$ is a retraction, then $f$ is surjective.
+			\item Attempt to prove that if $f$ is surjective, then $f$ is a retraction. What goes wrong?
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+\end{document}

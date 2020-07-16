@@ -1,0 +1,249 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Solving ODEs: Separation of Variables}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To be able to identify and solve separable, first-order}}
+
+\textbf{\underline{ODEs.}}
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+\textbf{Warm-up: Radioactive Decay:}\bigskip
+
+
+Consider a sample of a radioactive element, and let $N$ be the number of atoms in the sample that have not yet decayed. Each atom decays at some point \textit{at random}, each atom having the same probability $p$ of decaying within a given second (or other short time interval). The number of atoms you expect to decay in a given second is equal to the probability of any given atom decaying, $p$, times the number of atoms, $N$.
+
+Therefore in a small period of time, you expect $N$ to decrease by $pN$. In other words, the rate at which $N$ changes is equal to minus $pN$, so $N$ obeys the \textbf{first-order ordinary differential equation}
+\[\deriv{N}{t}=-p N.\]
+
+We shall solve this equation, and study its solution somewhat.
+
+\begin{enumerate}
+	\item Use the substitution formula for integration (in reverse!) to show that
+		\[\int \frac{1}{N}\deriv{N}{t}\diff t=\int\frac{1}{N}\diff N\]
+		and hence evaluate this integral.
+	\item Divide both sides of the ODE by $N$ and integrate with respect to $t$ to show that
+		\[\ln(N)=-pt+c,\]
+		where $c$ is an unknown constant.
+	\item Let $N_0$ be the number of undecayed atoms at time $t=0$. Hence find $c$.
+	\item Hence show that
+		\[N=N_0 e^{-pt}\]
+	\item Find an expression in terms of $p$ for the time after which eactly half of the original number of atoms has decayed.
+\end{enumerate}
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Separation of Variables:}
+
+\bigskip
+
+We shall generalise the idea we employed in the warm-up to develop a general technique called \textbf{separation of variables} for solving certain types of first-order ODE.
+
+A first-order ODE is called \textbf{separable} if it can be written in the form
+\[\deriv{x}{t} = f(x)g(t)\]
+for some functions $f$ and $g$. Then we can divide through by $f$ and integrate with respect to $t$ to get
+\begin{equation}
+	\int\frac{1}{f(x)}\deriv{x}{t}\diff t=\int g(t)\diff t.\tag{$\star$}
+\end{equation}
+Now we use the substitution formula for integrals, but in reverse from how we usually use it. Imagine we wanted to find
+\[\int\frac{1}{f(x)}\diff x;\]
+we could introduce a new variable $t$, vary $x$ according to some function of $t$, and have by substitution:
+\[\int \frac{1}{f(x)}\diff x = \int \frac{1}{f(x)}\deriv{x}{t}\diff t.\]
+But the right-hand side of this is precisely the left-hand side of equation $(\star)$! Therefore we can put this into equation $(\star)$ to get
+\[\int\frac{1}{f(x)}\diff x = \int g(t)\diff t.\]
+As long as we can integrate $\frac{1}{f(x)}$ and $g$, then, we can find an equation linking $x$ and $t$, which we can then hope to rearrange to get $x$ as a function of $t$ and thereby have a solution to our original ODE.\medskip
+
+
+Solve
+\[\deriv{x}{t} = x^2e^{-t}\]
+with the \textbf{initial condition} $x(0)=1$.
+
+\vfill
+
+
+Find the general solution to
+\[\deriv{y}{x} = x\tan(y).\]
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+
+
+\begin{enumerate}
+	\item Find the particular solution to
+		\[\deriv{y}{x}=y\sin(x)\]
+		satisfying the boundary condition that $y=2$ when $x=\frac{\pi}{2}$.
+	\item Find the general solution to
+		\[\deriv{y}{t}=\frac{t e^{t^2}}{y}.\]
+	\item A capacitor discharges from voltage $V_0$ at time 0 through a resistor.
+		\begin{enumerate}
+			\item Using the equations $Q=CV_\mathrm{C}$ (charge is capacitance times capacitor voltage) and $V_\mathrm{R}=IR$ (Ohm's Law: resistor voltage is current times resistance), set up and solve a differential equation describing the voltage $V_\mathrm{C}$ on the capacitor.
+			\item Find (in terms of $R$ and $C$) the time after which the voltage has decayed to $\frac{V_0}{e}$. This is called the \textbf{time constant} of the RC circuit. Note that it does not depend on the value of $V_0$!
+			\item Assume that $C=200\mu\mathrm{F}$, $R=1\mathrm{k\Omega}$, and $V_0=10\mathrm{V}$. After how long will the voltage across the capacitor be 1V?
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Application: Population Growth:}\bigskip
+
+
+\begin{enumerate}
+	\item A simple model for the growth of a population (of humans, animals, plants, bacteria, whatever...) says that the population grows at a rate proportional to its current size; so if $P$ is the number of organisms in the population, then
+		\[\deriv{P}{t}=\lambda P,\]
+		where $\lambda$ is the growth rate, which measures how many more births than deaths there are. Solve this differential equation subject to the condition that the initial population is $P_0$.
+	\item In your solution, what happens as $t\to\infty$ (assuming $\lambda$ is positive)? Does this seem realistic?
+	\item A more sophisticated model of population growth assumes that the habitat has a \textbf{carrying capacity} $P_\mathrm{max}$: a maximum population that it can support. If $P$ is small, we should have roughly the growth we had before, but when $P$ gets close to $P_\mathrm{max}$, the growth rate should drop towards 0. The following ODE has these properties:
+		\[\deriv{P}{t}=\lambda P\left(1-\frac{P}{P_\mathrm{max}}\right).\]
+		Consider the value of $\left(1-\frac{P}{P_\mathrm{max}}\right)$ for different values of $P$---much smaller than, slightly smaller than, equal to, and bigger than the carrying capacity---to convince yourself that this ODE has the properties we want.
+	\item By separating variables in this ODE, show that
+		\[\int \frac{P_\mathrm{max}}{P(P_\mathrm{max}-P)}\diff P = \int \lambda \diff t.\]
+	\item Show that
+		\[\frac{1}{P}+\frac{1}{P_\mathrm{max}-P}=\frac{P_\mathrm{max}}{P(P_\mathrm{max}-P)}.\]
+	\item Hence solve the ODE (with initial population $P_0$) to show that
+		\[\frac{P}{P_\mathrm{max}-P}=\frac{P_0}{P_\mathrm{max}-P_0} e^{\lambda t}.\]
+	\item Multiply both sides of this equation by $(P_\mathrm{max}-P)$ and rearrange to show that
+		\[P=\frac{P_\mathrm{max} P_0 }{P_0  +(P_\mathrm{max}-P_0)e^{-\lambda t}}.\]
+	\item What happens to the population as $t\to \infty$?
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item A first-order ODE is called \textbf{separable} if it can be written in the form
+		\[\deriv{x}{t} = f(x)g(t)\]
+		for some functions $f$ and $g$.
+	\item Given a separable ODE as above, we can solve by dividing through by $f(x)$ and integrating with respect to $t$ to obtain
+		\[\int\frac{1}{f(x)}\diff x = \int\frac{1}{f(x)}\deriv{x}{t}\diff t = \int g(t)\diff t +c.\]
+		This process is called \textbf{separation of variables}.
+	\item Initial conditions can be used to find the value of the constant of integration.
+	\item A very common type of separable equation has the simple form
+		\[\deriv{x}{t}=\lambda x\]
+		for some constant $\lambda$. The solution to this is
+		\[x=x_0e^{\lambda t},\]
+		where $x_0$ is the value of $x$ at $t=0$. If $\lambda>0$, the solution grows exponentially (\textit{e.g.}, population growth when the population is far smaller than the habitat can support), if $\lambda<0$, the solution decays exponentially towards 0 (\textit{e.g.}, voltage on a discharging capacitor, radioactive decay, metabolism of a drug in the body, attenuation of radiation as it passes through a material).
+	\item In exponential growth/decay, $e^{\lambda t}$, the constant $\lambda$ is called the growth rate (if positive) or the decay rate (if negative). If $\lambda<0$, then $\frac{-1}{\lambda}$ is called the \textbf{time constant}; it is the time taken for the function to decay to $\frac{1}{e}$ of its prior value.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

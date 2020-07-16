@@ -1,0 +1,160 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\pagestyle{empty}
+
+
+
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+\newcommand{\SP}[1]{\left\langle #1 \right\rangle}
+\newcommand{\mybox}[1]{\begin{minipage}{0.45\textwidth} \medskip #1 \medskip \end{minipage}}
+
+\let\uline\underline
+
+
+\begin{document}
+
+\title{Vector Spaces}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{Vector Spaces:}\bigskip
+
+A vector space is, roughly speaking, somewhere you can add things and multiply them by scalars. More precisely, a vector space is a set $V$ with operations $+:V\times V\to V$ and $\times :\mathbb{R}\times V\to V$, and a special element $\uline{0}\in V$ such that for any $u,v,w\in V$ and $\lambda,\mu\in\mathbb{R}$:\medskip
+
+\noindent\begin{tabular}{c|c}
+	\textbf{Addition axioms:} & \textbf{Multiplication Axioms:}\\ \hline
+	\mybox{$(u+v)+w=u+(v+w)$ (associativity)} & \mybox{$(\lambda \mu)v=\lambda(\mu v)$ (associativity)}\\ \hline
+	\mybox{$u+v=v+u$ (commutativity)} & \mybox{$(\lambda+\mu)v=\lambda v+\mu v$ (distributivity)}\\ \hline
+	\mybox{$v+\uline{0}=v$ (identity)} & \mybox{$\lambda(u+v)=\lambda u +\lambda v$ (distributivity)}\\ \hline
+	\mybox{$\exists (-v)\in V: v+(-v)=\uline{0}$ (inverses)} & \mybox{$1v=v$ (identity)}
+\end{tabular}\medskip
+
+Examples of vector spaces include:
+
+\vfill
+
+\clearpage
+
+
+\textbf{Subspaces:}\bigskip
+
+Given a vector space $V$, a subspace is just a subset which is itself a vector space, with the same operations. To check that $U\subseteq V$ is a subspace of $V$, we need to check that:
+\vfill
+
+
+For each of the examples of a vector space above, try to find an example of a subspace:
+\vfill
+
+
+\clearpage
+
+\textbf{Span:}\bigskip
+
+
+Let $V$ be a vector space and $S$ a subset of $V$. Define $\SP{S}$ to be the intersection of all subspaces of $V$ which contain $S$:
+\[\SP{S}=\bigcap\{U\subseteq V\mid \mbox{$U$ is a subspace of $V$ and }S\subseteq U\}.\]
+
+Prove that $\SP{S}$ is a subspace of $V$ and that for any subspace $U$, $S\subseteq U$ if and only if $\SP{S}\subseteq U$.
+\vfill
+
+Let $S$ be a finite set, $S=\{v_1,\hdots.v_n\}$. Prove that
+\[\SP{S}=\left\{\sum_{i=1}^n \lambda_iv_i \mid \lambda_1,\hdots,\lambda_n\in\mathbb{R}\right\};\]
+that is, prove that $\SP{S}$ consists of all linear combinations of $v_1,\hdots,v_n$. Hint: show that the set above is a subspace and contains $S$, then use the property of $\SP{S}$ we proved above.
+
+\vfill
+
+For each of the examples of a subspace $U$ given above, find a set which spans $U$.
+
+\clearpage
+
+\textbf{Span and Matrices:}\bigskip
+
+Consider $\mathbb{R}^3$ and the vectors $v_1=(3,-4,7)$ and $v_2=(-1,2,6)$. What is the span of these vectors?
+\begin{align*}
+	\SP{v_1,v_2}&=\{\alpha v_1+\beta v_2\mid \alpha,\beta\in\mathbb{R}\}\\
+	&=\{(3\alpha-\beta,-4\alpha + 2\beta,7\alpha+6\beta)\mid \alpha,\beta\in\mathbb{R}\}\\
+	&=\left\{(\alpha, \beta)\left(\begin{array}{ccc} 3 & -4 & 7\\ -1 & 2 & 6\end{array}\right)\mid \alpha,\beta\in\mathbb{R}\right\}\\
+	&=\left\{v\left(\begin{array}{ccc} 3 & -4 & 7\\ -1 & 2 & 6\end{array}\right)\mid v\in\mathbb{R}^2\right\}.
+\end{align*}
+
+In general, if $v_1,\hdots,v_n$ are vectors in $\mathbb{R}^m$, then we can form an $n\times m$ matrix $A$ with rows $v_1,\hdots,v_n$; then
+\[\SP{v_1,\hdots,v_n}=\{uA\mid u\in\mathbb{R}^n\}.\]
+Looking at this the other way around, if $A$ is any $n\times m$ matrix, then $\{uA\mid u\in\mathbb{R}^n\}$ is a subspace of $\mathbb{R}^m$ spanned by the rows of $A$. Can you see why?
+\vfill
+
+
+
+Given an $n\times m$ matrix $A$, there is a function $f_A:\mathbb{R}^n\to\mathbb{R}^m$ defined by $f_A(u)=uA$. Then the subspace $\{uA\mid u\in\mathbb{R}^n\}$ of $\mathbb{R}^m$ is exactly the image of this function $f_A$. When you see linear maps, you will see that this is actually true for any vector space $V$! Any subspace of $V$ is the image of a linear map from some other vector space, and the image of any linear map is a subspace. So the idea here is that a subspace is the image of another vector space within $V$; in the case of $\mathbb{R}^m$, a subspace is the image of $\mathbb{R}^n$ in $\mathbb{R}^m$ under the linear map defined by a matrix.\medskip
+
+Let $A$ be an $n\times m$ matrix and let $f_A:\mathbb{R}^n\to\mathbb{R}^m$ be the function $f_A(u)=uA$. Let $e_i$ be the $i^\mathrm{th}$ standard basis vector of $\mathbb{R}^n$ (so $e_i$ has a 1 in the $i^\mathrm{th}$ coordinate and 0 everywhere else). Show that $f_A(e_i)$ is the $i^\mathrm{th}$ row of $A$.
+
+\vfill
+
+The upshot of all this is that the map $f_A$ is surjective if and only if the rows of $A$ span $\mathbb{R}^m$.
+
+
+\clearpage
+
+\textbf{Linear Independence:}\bigskip
+
+
+What does it mean to say that vectors $v_1,\hdots,v_n$ are linearly independent?
+
+\vfill
+
+
+Prove that $v_1,\hdots,v_n$ are linearly independent if and only if no proper subset of $v_1,\hdots,v_n$ spans $\SP{v_1,\hdots.v_n}$. In other words, if we remove any $v_i$, the span becomes strictly smaller. Hint: prove that if they are linearly independent and we remove $v_i$, then the span of the remaining vectors does not include $v_i$; then prove that if they are linearly dependent, then there is some $i$ such that $v_i$ is the in the span of the remaining vectors.
+
+\vfill
+
+Is $\{1+x,1-x,2+2x+x^2\}$ linearly independent in the vector space of polynomials?
+
+\clearpage
+
+
+\textbf{Linear Independence and Matrices:}\bigskip
+
+We have seen that the span of some vectors in $\mathbb{R}^m$ is the image of the matrix whose rows are those vectors. Now we show a similar result for linear independence. Let $v_1,\hdots,v_n$ be vectors in $\mathbb{R}^m$ and let $A$ be the $n\times m$ matrix whose $i^\mathrm{th}$ row is $v_i$. Show that $v_1,\hdots,v_n$ are linearly independent if and only if the matrix equation $uA=0$ (for $u\in\mathbb{R}^n$) has the unique solution $u=0$.
+
+\vfill
+
+Let $f_A:\mathbb{R}^n\to\mathbb{R}^m$ be the function $f_A(u)=uA$. Show that $f_A$ is injective if and only if the rows of $A$ are linearly independent. Hint: first show that $f_A(u)=f_A(v)$ if and only if $f_A(u-v)=0$.
+
+\vfill
+
+So we have seen that the rows of $A$ span $\mathbb{R}^m$ if and only if $f_A$ is surjective, and the rows are linearly independent if and only if $f_A$ is injective.
+
+\clearpage
+
+\textbf{Bases:}\bigskip
+
+
+Define a basis of a vector space $V$.
+\vfill
+
+
+Show that $v_1,\hdots,v_n$ in $\mathbb{R}^m$ are a basis if and only if the map $f_A:\mathbb{R}^n\to\mathbb{R}^m$ is bijective, where $A$ is the $n\times m$ matrix whose $i^\mathrm{th}$ row is $v_i$ and $f_A$ is defined by $f_A(u)=uA$.
+
+\vfill
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,227 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d}#3^{#1}}}
+
+
+
+
+\begin{document}
+
+\title{The Newton Raphson Method}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To be able to apply the Newton-Raphson method to}}
+
+\textbf{\underline{estimate roots of functions.}}
+
+
+
+
+\vspace{5mm}
+
+
+\textbf{Recap: Higher Derivatives and the Second Derivative Test:}
+
+\vspace{5mm}
+
+
+\begin{enumerate}
+	\item Find the first, second, and third derivatives of the following functions:
+		\begin{enumerate}
+			\item $y=\cos(x)$
+			\item $y=e^x\sin(x)$
+			\item $y=\sec(x)$.
+		\end{enumerate}
+	\item Find and classify the stationary points of $\log_e(x^4-3x^2+3)$.
+\end{enumerate}
+
+\bigskip
+
+
+
+
+\clearpage
+
+
+{\bf Warm-Up: Straight Lines and Tangents:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item Consider the function $y=2x-3$.
+		\begin{enumerate}
+			\item If $x$ is increased by an amount $a$, how much does $y$ increase by?
+			\item Differentiate $y$ to find the rate of change of $y$ with respect to $x$.
+			\item Evaluate $y$ at $x=0$.
+			\item Sketch the graph of $y$ against $x$. Compare the gradient of the graph with the derivative of $y$.
+		\end{enumerate}
+	\item Consider the function $y=mx+c$, where $m$ and $c$ are constants.
+		\begin{enumerate}
+			\item If $x$ is increased by an amount $a$, how much does $y$ increase by?
+			\item Differentiate $y$ to find the rate of change of $y$ with respect to $x$.
+			\item Evaluate $y$ at $x=0$.
+			\item How does the derivative relate to the gradient of the graph of $y$ against $x$?
+		\end{enumerate}
+	\item Consider the line $y=4x-7$. Find the point where this line crosses the $x$-axis.
+	\item Find the equation of the line passing through the point $(-7,4)$ and with gradient $-3$.
+	\item Consider the function $y=x^3$.
+		\begin{enumerate}
+			\item Differentiate $y$ with respect to $x$.
+			\item Hence find the equation of the \textbf{tangent} to $y=x^3$ at the point $(2,8)$ (the tangent is the unique line passing through the same point with the same gradient).
+			\item For a general point $(a,a^3)$, find the equation of the tangent to $y=x^3$ at that point.
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Theory: The Newton-Raphson Method:}
+
+\vspace{5mm}
+
+Suppose we want to evaluate $\sqrt{11}$. We can form the function $f(x)=x^2-11$, and then $\sqrt{11}$ is a root of this function.\bigskip
+
+
+Show that $x^2-11$ has a root between $x=3$ and $x=4$.
+
+\vfill
+
+
+
+Take $x_1=3$ as a first estimate of the root. Find the equation of the tangent to $x^2-11$ at $x=3$.
+
+\vfill
+
+Find the point where the tangent found above intersects the $x$-axis. Call this point $x_2$.
+
+\vfill
+
+
+Repeat this process for $x_2$ to find $x_3$, and so on.
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{Theory: The Newton-Raphson Method (cont.):}
+
+\vspace{5mm}
+
+Let's generalise what we did on the last page. Suppose we have a differentiable function $f(x)$ and want to solve $f(x)=0$. The first step is to find a rough estimate of where a root is. One option for this is to plug in different values of $x$ and look for a change in sign; if $f(a)>0$ and $f(b)<0$ (or the other way around) and $f$ is continuous between $a$ and $b$, then there must be a root somewhere between $a$ and $b$.
+
+So we have a rough estimate $x_1$ of a root. Now the idea is to take the tangent to $f(x)$ at the point $(x_1,f(x_1))$; this has gradient $f'(x_1)$, because it is tangent, so has equation $y=f'(x_1)x+c$ for some $c$. To find $c$, we use the fact that $(x_1,f(x_1))$ is on the tangent. Find the equation of the tangent:
+
+%f(x_1)=f'(x_1)x_1+c. c=f(x_1)-f'(x_1)x_1.
+
+\vfill
+
+Now we find where the tangent intersects the $x$-axis. To do this, we solve $f'(x_1)x+c=0$, for the value of $c$ found above. Solve this now:
+
+% f'(x_1)x=f'(x_1)x_1-f(x_1). x=x_1-f/f'
+
+\vfill
+
+
+Now we take this solution to be $x_2$, our revised estimate. We can then repeat the process starting with $x_2$, to get a further estimate $x_3$, and continue until we are confident in the accuracy of our answer. We have the general formula
+\[x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}.\]
+
+If we want to work to $n$ significant figures of precision, we typically proceed until two successive iterates agree to at least $n+1$ significant figures. Then we can be confident that the first $n$ significant figures are the correct values.
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}
+
+
+\begin{enumerate}
+	\item Estimate the value of $\sqrt{5}$ using 3 iterations of the Newton-Raphson method. Give your answer to an appropriate degree of accuracy.
+	\item Solve $\cos(x)=x^2$ to 2 significant figures of precision.
+	\item Cautionary example: Let $f(t)=e^{-t}\sin(2\pi t)$. This sort of function occurs in practice as the position of a mass on a spring, with the exponential decay coming from friction or other resistive forces. Clearly $f(t)=0$ precisely when $\sin(2\pi t)=0$, so the roots of $f$ are $\frac{n}{2}$ for all integer values of $n$. Starting with $t_0=0.25$, perform the Newton-Raphson method. Can you explain what is happening?
+\end{enumerate}
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The equation of a (non-vertical) straight line is $y=mx+c$, where $m$ is the \textbf{gradient} (equal to the derivative $y'$) and $c$ is the \textbf{$y$-intercept}.
+	\item Given the gradient $m$ of a line, and a point $(a,b)$ on that line, the equation of the line can be found by substituting the known quantities into the general equation, so $b=am+c$, hence $c=b-am$, so $y=mx+(b-am)$.
+	\item The \textbf{tangent} to a curve $y=f(x)$ at the point $(a,f(a))$ is the line $y=f'(a)x + (f(a)-af'(a))$, which passes through $(a,f(a))$ with gradient $f'(a)$.
+	\item Given an estimated root $x_n$ of a function $f(x)$, the \textbf{Newton-Raphson method} gives an ``improved'' estimate by taking the tangent to $y=f(x)$ at $x_n$, and taking $x_{n+1}$ to be the intersection of this tangent with the $x$-axis. So
+		\[x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}.\]
+	\item The Newton-Raphson method does not always converge, and even when it does, it does not necessarily converge to the root closest to the starting point. However, this can usually be fixed by changing the starting point.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

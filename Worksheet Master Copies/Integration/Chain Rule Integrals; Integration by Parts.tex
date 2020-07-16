@@ -1,0 +1,244 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Techniques for Integration}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To be able to integrate ``chain rule integrals,'' and use}}
+
+\textbf{\underline{integration by parts.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+\textbf{Warm-up: Chain Rule Integrals:}\bigskip
+
+
+
+\begin{enumerate}
+	\item 
+		\begin{enumerate}
+			\item Differentiate $\sin(x^2)$.
+			\item Hence find
+				\[\int x\cos(x^2)\diff x.\]
+			\item Differentiate $\sin(x^n)$.
+			\item Hence find
+				\[\int x^{n-1}\cos(x^n)\diff x.\]
+		\end{enumerate}
+	\item
+		\begin{enumerate}
+			\item Differentiate $(e^t+\cos(t))^n$.
+			\item Hence find
+				\[\int (e^t-\sin(t))(e^t+\cos(t))^{n-1}\diff t.\]
+		\end{enumerate}
+	\item
+		\begin{enumerate}
+			\item Differentiate $(\ln(y))^2$.
+			\item Hence find
+				\[\int \frac{\ln(y)}{y}\diff y.\]
+		\end{enumerate}
+\end{enumerate}
+
+
+
+\clearpage
+
+
+\textbf{Theory: Chain Rule Integrals:}
+
+\bigskip
+
+
+Recall the chain rule: if $y=f(g(x))$, then
+\[\deriv{y}{x} = f'(g(x))g'(x).\]
+
+Therefore $f(g(x))$ is an antiderivative of $f'(g(x))g'(x)$. Put another way (setting $h(x)=f'(x)$), if $H$ is an antiderivative of $h$, then $H(g(x))$ is an antiderivative of $h(g(x))g'(x)$. So if we wish to integrate a function of the form $h(g(x))g'(x)$ (a function of a function, times the derivative of the inside function), we can simply integrate the outside function, then apply that to the inside function.\bigskip
+
+\[\int (\sin(\theta)+\cos(\theta))^7(\cos(\theta)-\sin(\theta))\diff \theta=\]
+
+\vfill
+
+
+\[\int 2x(x^2+3)\diff x=\]
+
+\vfill
+
+\[\int \tan(t)\diff t=\]
+
+\vfill
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+
+
+
+
+\begin{enumerate}
+	\item
+		\[\int \sin^5(\theta)\cos(\theta)\diff \theta=\]
+	\item
+		\[\int e^{x^3-4x}(3x^2-4)\diff x=\]
+	\item
+		\[\int_0^1 \frac{e^x+2x}{(e^x+x^2)^3}\diff x=\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Theory: Integration by Parts:}\bigskip
+
+
+We have seen how to integrate functions that came about by differentiating with the chain rule. How about functions that come from the product rule? The problem with this is that the product rule gives two terms; we could perhaps spot that $x\cos(x)+\sin(x)$ comes from differentiating $x\sin(x)$, for instance, but what if we are just asked to integrate $x\cos(x)$ without that $\sin(x)$ term to complete the product rule integral? We shall derive a formula called the \textbf{integration by parts} formula for addressing this.
+
+We start by recalling the product rule. If $u$ and $v$ are functions of $x$, then
+\[\deriv{(uv)}{x}=u\deriv{v}{x}+v\deriv{u}{x}.\]
+
+Therefore
+\[u\deriv{v}{x}=\deriv{(uv)}{x}-v\deriv{u}{x}.\]
+Integrating both sides with respect to $x$:
+\begin{align*}
+	\int u\deriv{v}{x}\diff x &= \int \deriv{(uv)}{x}\diff x - \int v\deriv{u}{x}\diff x\\
+	&= uv-\int v\deriv{u}{x}\diff x
+\end{align*}
+where we have used the fact that $uv$ is an antiderivative of $\deriv{(uv)}{x}$. Technically, we should add a constant of integration to the right-hand side, but there is still an integral on that side to evaluate, which will give a constant, so we can leave the constant of integration until the second integral is evaluated.
+
+This formula allows us to turn the problem of integrating $u\deriv{v}{x}$ into the problem of integrating $v\deriv{u}{x}$, which may be easier. Some examples will illustrate:\bigskip
+
+\[\int x\cos(x)\diff x=\]
+
+\vfill
+
+\[\int (3t+t^2)\sin(2t)\diff t=\]
+
+\vfill
+
+
+
+
+
+
+\clearpage
+
+
+\textbf{Practice:}\bigskip
+
+
+\begin{enumerate}
+	\item Integrate by parts:
+		\[\int x e^x \diff x.\]
+	\item Recall that when looking at chain rule integrals we showed that $-\ln(\cos(x))$ is an antiderivative of $\tan(x)$. Compute
+		\[\int_0^{\pi/4} (3-t)\tan(t)\diff t.\]
+	\item Use integration by parts with $u=\ln(x)$ and $\deriv{v}{x}=1$ to compute
+		\[\int \ln(x)\diff x.\]
+\end{enumerate}
+
+
+
+
+\clearpage
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item If we want to integrate ``a function of a function times the derivative of the inside function''---\textit{i.e.}, something of the form $f(g(x))g'(x)$, then this comes from the chain rule. We find an antiderivative $F$ of the outside function and apply to the inside function:
+		\[\int f(g(x))g'(x)\diff x = F(g(x))+c.\]
+	\item If we want to find
+		\[\int \frac{g'(x)}{g(x)^n}\diff x,\]
+		we can rewrite the integrand as $g(x)^{-n}g'(x)$ to see it as a chain rule integral.
+	\item One of the hardest cases to spot in chain rule integrals is when the outside function is the identity function! If asked to differentiate $g(x)g'(x)$, write this as $g(x)^1g'(x)$, then this is a chain rule integral and
+		\[\int g(x)g'(x)\diff x = \frac{1}{2}g(x)^2+c.\]
+	\item The \textbf{integration by parts} formula:
+		\[\int u\deriv{v}{x}\diff x = uv - \int v\deriv{u}{x}.\]
+	\item To integrate by parts, we split the integrand into two factors, choose one to be $u$ and the other to be $\deriv{v}{x}$. We will need to integrate $\deriv{v}{x}$ and differentiate $u$, so this should inform our choice of which is which.
+	\item A cunning trick that is (very occasionally) useful when trying to integrate a function $f(x)$ that we know how to differentiate but not integrate is to write $f(x)=1\times f(x)$ and integrate by parts with $u=f(x)$, $\deriv{v}{x}=1$. This allows us to integrate $\ln(x)$, for instance.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

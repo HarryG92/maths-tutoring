@@ -1,0 +1,222 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+
+
+
+
+
+\begin{document}
+
+\title{Matrices and Simultaneous Linear Equations}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand how to represent a system of simultaneous}}
+
+\textbf{\underline{linear equations by a matrix and solve by Gaussian elimination.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+\textbf{Warm-up:}\bigskip
+
+I am thinking of two numbers; if I add the numbers together, I get 7, whereas if I subtract the smaller from the larger, I get 3. What are the two numbers?
+
+
+
+\clearpage
+
+
+
+\textbf{Theory: Simultaneous Linear Equations:}\bigskip
+
+
+A system of \textbf{simultaneous equations} is simply a collection multiple equations in the same variables. For instance,
+\begin{align*}
+	x+y&=7\\
+	x-y&=3
+\end{align*}
+is a system of simultaneous equations representing the warm-up problem. Systems of simultaneous equations can be in any number of variables, and can be very complicated; for instance,
+\begin{align*}
+	3x^2y\sin(z)&=4e^w\frac{x}{z}-y\\
+	x^3-y&=z^2+w^{-9}\\
+	\cosh(yz)&=\log_2(x)
+\end{align*}
+is an absurdly complicated system of equations. Note that not every variable needs to appear in every equation---the variable $w$ does not appear in the last equation above---and the number of equations and number of variables can be different.
+
+Since there is so much variety and complexity possible in systems of simultaneous equations, we restrict to certain nice classes of equations to study them. The simplest class, and one which occurs often in applications, is the class of \textbf{linear} equations. An equation is linear if it is built from the variables only by adding and multiplying by constants; no raising to powers, no multiplying two variables together, nothing complicated.\bigskip
+
+
+When working with a system of simultaneous linear equations, it is useful to put them in a standard form. We pick an order for the variables, $x_1,\hdots,x_n$, and write each equation with their coefficients in that order (and with 0 if a variable is missing from a particular equation), and with any constants on the other side of the equals sign.\medskip
+
+Put the following system of equations in standard form:
+\begin{align*}
+	2x-z+3&=0\\
+	y+x&=4\\
+	x&=y+z.
+\end{align*}
+
+\clearpage
+
+
+
+\textbf{Matrices and Gaussian Elimination:}\bigskip
+
+When a system of simultaneous linear equations is in standard form, it is convenient to represent it by a matrix, which is simply a rectangular array of numbers, enclosed in parentheses. For instance, the system
+\begin{align*}
+	2x+3y+0z&=-9\\
+	7x+y-2z&=0
+\end{align*}
+would be represented by the matrix
+\[\left(\begin{array}{cccc}
+		2 & 3 & 0 & -9\\
+		7 & 1 & -2 & 0
+	\end{array}\right).\]
+
+Given a system of simultaneous linear equations, there are three standard operations we can do: multiply one of the equations by a non-zero constant, change the order of the equations, or add a multiple of one equation to another. None of these operations changes the solutions to the system of equations, so we can perform any combination of these to attempt to convert the system to a form where it is easier to solve.
+
+When the system is represented as a matrix, these three operations correspond to multiplying a row by a non-zero constant, swapping two rows, and adding a multiple of one row to another. These are called the \textbf{elementary row operations}. If a system of equations is represented by a matrix, and row operations are performed on the matrix, the system represented by the new matrix is equivalent to the original system (\textit{i.e.}, it has the same solutions).
+
+This leads to a strategy for solving systems of linear equations called \textbf{gaussian elimination}. The idea is to perform row operations to reduce the matrix to one in \textbf{reduced row-echelon form}, which is a fancy way of saying that each row starts strictly to the right of the row above, and the first non-zero entry in each row is 1. An example will illustrate:\medskip
+
+Use gaussian elimination to solve the system
+\begin{align*}
+	2x-3y+7z&=1\\
+	x-z&=5\\
+	3x+3y-9z&=12.
+\end{align*}
+
+
+\clearpage
+
+
+
+\textbf{Practice:}\bigskip
+
+Solve the following systems of simultaneous linear equations.
+
+\begin{enumerate}
+	\item \begin{align*}
+			3a-7b&=1\\
+			2a+4b&=-3
+		\end{align*}
+	\item \begin{align*}
+			x+y+z&=0\\
+			y-z&=1\\
+			x-y-z&=4
+		\end{align*}
+	\item \begin{align*}
+			\alpha-2\beta+3\gamma &=1\\
+			-7\alpha+6\beta + \gamma &=3\\
+			5\alpha-2\beta -7\gamma &=8\\
+		\end{align*}
+\end{enumerate}
+
+\clearpage
+
+
+
+\textbf{Solution Spaces:}\bigskip
+
+
+We saw in the last of the pratice questions that a system of equations can fail to have any solutions. It is also possible for a system to have infinitely many solutions; for instance, if we take a single equation in more than one variable, such as $y=x$, there are infinitely many solutions. In fact, any linear system has either no solutions, exactly one solution, or infinitely many solutions.
+
+If a system has no solutions, we say it is an \textbf{inconsistent} system; if it has infinitely many solutions, we say it is \textbf{underdetermined}, because there is not enough information provided by the equations to pin down a unique solution. Nonetheless, in an undetermined system, we can describe the set of solutions, called the \textbf{solution space}.\medskip
+
+Find the solution spaces of the following systems of linear equations:\medskip
+
+\begin{align*}
+	2x-3y&=7\\
+	-6x+9y&=21
+\end{align*}
+
+\vfill
+
+\begin{align*}
+	\alpha-2\beta+3\gamma &=1\\
+	-7\alpha+6\beta + \gamma &=3\\
+	5\alpha-2\beta -7\gamma &=-5\\
+\end{align*}
+
+\vfill
+
+\clearpage
+
+
+\textbf{Practice:}\bigskip
+
+
+Solve the following systems of linear equations. When the solution space is infinite, state its dimension.\medskip
+
+\begin{enumerate}
+	\item
+		\begin{align*}
+			2x + y &=0\\
+			x-7y &=9.
+		\end{align*}
+	\item
+		\begin{align*}
+			3x+7y-z&=1\\
+			-12x-28y+4x&=4.
+		\end{align*}
+	\item
+		\begin{align*}
+			12x +z = -6\\
+			4y-z=1\\
+			9x-2y=3.
+		\end{align*}
+\end{enumerate}
+
+
+
+\clearpage
+
+
+\textbf{Key Points to Remember:}\bigskip
+
+\begin{enumerate}
+	\item A \textbf{system of simultaneous linear equations} is a collection of equations in some number of variables $x_1,\hdots,x_n$, where each equation has the form
+		\[\sum_{i=1}^n a_ix_i=b,\]
+		where $a_1,\hdots,a_n$ and $b$ are constants.
+	\item The matrix representing a system of linear equations is the rectangular array of numbers containing all the coefficients, in order, so each row corresponds to an equation and each column to a variable, except the last column, which represents the right-hand sides of the equations.
+	\item The \textbf{elementary row operations} are:
+		\begin{enumerate}
+			\item Multiplying a row by a non-zero scalar;
+			\item Swapping two rows;
+			\item Adding a multiple of one row to another.
+		\end{enumerate}
+		These do not change the solutions of an equation.
+	\item \textbf{Gaussian elimination} is the process of using row operations to reduce a matrix so that each non-zero row starts with a 1, strictly to the right of where the previous row started. It is used to solve systems of linear equations.
+	\item A system of linear equations can have no solutions, one solution, or infinitely many solutions. When there are infinitely many, they form a line, plane, or higher-dimensional subspace of the space of all possible solutions.
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

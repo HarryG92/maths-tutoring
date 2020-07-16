@@ -1,0 +1,320 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\qed}{{}\par\hfill$\square$\bigskip}
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+\newcommand{\sinc}{\,\mathrm{sinc}}
+\newcommand{\rect}{\,\mathrm{rect}}
+
+\let\lamdba\lambda
+
+
+
+\begin{document}
+
+\title{Bases, Linear Maps, and Dual Spaces}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+
+
+
+\textbf{Warning:} All ``proofs'' in this are sketch proofs only, and are missing some details. They are meant to give you an idea of why a result is true, not to be a rigourous proof. Maybe see if you can find any holes in the arguments, and if you can figure out how to patch those holes!
+
+\vspace{5mm}
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Bases:}\bigskip
+
+
+Recall that if $F$ is a field (\textit{e.g.}, $\mathbb{R}$ or $\mathbb{C}$), then a vector space $V$ over $F$ is a set (whose elements we call vectors), with a distinguished element 0 (the zero vector), an operation $+:V\times V \to V$ (vector addition) and an operation $\cdot:F\times V\to V$ (scalar multiplication) satisfying various axioms.
+
+A (possibly infinite) set $S$ of vectors in $V$ is said to \textbf{span} $V$ (or be a \textbf{spanning set} for $V$) if every vector in $V$ can be written as a linear combination of finitely many vectors from $S$. For example, if $V=\mathbb{R}^2$, then the set $S=\{(1,0),(0,1)\}$ is a spanning set for $V$; so is $S'=\{(1,1),(1,-1)\}$, or any set containing either of these.
+
+A set $S$ in $V$ is said to be \textbf{linearly independent} if no vector in $S$ can be written as a linear combination of the others. If a set is not linearly independent, it is linearly dependent. For example, the set $\{(1,0),(1,3),(0,1)\}$ is linearly dependent in $\mathbb{R}^2$, because $(1,3)=1(1,0)+3(0,1)$ (and other linear combinations among these three vectors exist). On the other hand, $\{(1,1),(-1,1)\}$ is linearly independent in $\mathbb{R}^2$, because if $(1,1)=\lambda (-1,1)$, then $(1,1)=(-\lambda,\lambda)$, so $1=\lambda=-1$, which is false.
+
+A set is called a \textbf{basis} (plural bases) if it is both linearly independent and a spanning set. The rough idea is that a spanning set is ``big enough'' to contain all the information in $V$ (you can build any vector in $V$ from the spanning set by taking linear combinations) and a linearly independent set is ``small enough'' not to have redundant information (no vector in a linearly independent set can be built from the others), so a basis is a set that is just big enough to tell us everything about $V$, but not so big as to have redundancies.\medskip
+
+\textbf{Theorem:}
+If $B$ is a basis of $V$, then every vector in $V$ can be written in a unique way as a linear combination of elements of $B$.\medskip
+
+\textsc{Proof:}
+Since $B$ is a basis, it is a spanning set. So if $v\in V$, we can write
+\[v=\sum_{i=1}^n \lambda_i b_i\]
+for some scalars $\lambda_i$ and some $b_i$ in $B$. So we only need to show uniqueness, which comes from linear independence. If we also have
+\[v=\sum_{i=1}^n \mu_ib_i\]
+for some scalars $\mu_i$, then we have
+\[0=v-v=\sum_{i=1}^n (\lambda_i-\mu_i)b_i.\]
+If for some $j$, $\lambda_j\neq \mu_j$, then we would have
+\begin{align*}
+	0&=(\lambda_j-\mu_j)b_j + \sum_{i\neq j} (\lambda_i-\mu_i)b_i\\
+	&=b_j+\sum_{i\neq j}\frac{\lambda_i-\mu_i}{\lambda_j-\mu_j}b_i\\
+	b_j&=\sum_{i\neq j}\frac{\mu_i-\lambda_i}{\lambda_j-\mu_j}b_i,
+\end{align*}
+but then $b_j$ is written as a linear combination of other elements of $B$, which is not possible, by linear independence. So in fact we must have $\lambda_i=\mu_i$ for all $i$, so the two representations are the same.\qed
+
+
+
+For example, the set $\{(1,0),(0,1)\}$ is called the \textbf{standard basis} of $\mathbb{R}^2$; other bases of $\mathbb{R}^2$ exist, such as $\{(1,1),(1,-1)\}$. The set of all polynomials in the variable $x$ with real coefficients is a vector space over $\mathbb{R}$, with basis $\{1,x,x^2,x^3,\hdots\}$; this shows that bases are not always finite---no finite set can possibly span the space of all polynomials, because in a finite set of polynomials, there is a maximum degree, and no polynomial of higher degree could ever be written in terms of the set.
+
+It can be shown that every vector space has a basis (assuming the Axiom of Choice...) and that any two bases of the same space have the same size (with an appropriate notion of size for infinite bases...). These proofs are harder, so we won't go over them here. Since every vector space has a basis, and any two of its bases have the same size, we can define the \textbf{dimension} of a vector space $V$ to be the number of vectors in any basis of $V$.
+
+For instance, $\mathbb{R}^2$ is 2-dimensional, because it has a basis $\{(1,0),(0,1)\}$ of size 2. This means that any vector in $\mathbb{R}^2$ can be uniquely written as a linear combination of these two vectors, and so two pieces of information (the coefficients of the two basis vectors) are enough to specify any vector in this space. So we can think of the dimension of the space as being how many pieces of information you need to specify a single vector.
+
+
+Given a basis $B$ of a vector space $V$, we can describe any vector by the coefficients when it is written as a linear combination of the basis vectors. For example, if we take the basis $\{1,x,x^2,x^3,\hdots\}$ of the space of polynomials, then a polynomial such as $v=1-7x+3x^3$ can be described simply by listing its coefficients in terms of the basis; we write this as a column, called the \textbf{column vector} of $v$ \textbf{with respect to the basis} $B$:
+\[\left(\begin{array}{c} 1\\-7\\0\\3\\0\\0\\ \vdots\end{array}\right)\]
+In this case, since the vector space is infinite-dimensional, we have an infnitely long column. However, since only finitely many basis vectors can appear in a given linear combination, eventually all remaining entries must be 0. Nonetheless, it is generally only for finite-dimensional vector spaces that we use the column notation.\bigskip
+
+
+
+\textbf{Exercises:}
+
+\begin{enumerate}
+	\item Show that $\{(1,1),(1,-1)\}$ is a basis for $\mathbb{R}^2$.
+	\item Show that $\{(3,4,0),(2,-1,1)\}$ is linearly independent in $\mathbb{R}^3$. Find a third vector you can add to this set to make a basis.
+	\item Let $V$ be a vector space and $B=\{v_1,\hdots,v_n\}$ a finite spanning set in $V$. Show that $B$ contains a basis (hint: if $B$ is already linearly independent, you're done, and if not, you can write one vector as a linear combination of the others; show that throwing that vector out doesn't stop $B$ from spanning $V$; then repeat).
+\end{enumerate}
+
+
+
+\textbf{Linear Maps:}\bigskip
+
+Let $U$ and $V$ be two vector spaces (not necessarily distinct) over the same field $F$. A \textbf{linear map} from $U$ to $V$ is a function $f:U\to V$ such that for any $u_1$ and $u_2$ in $U$ and scalars $\lambda$ and $\mu$, we have
+\[f(\lambda u_1+\mu u_2)=\lambda f(u_1)+\mu f(u_2).\]
+So a linear map is a function which respects linear combinations. Strictly, we've only required that it respects linear combinations of \textit{two} vectors, but a simple induction argument shows it extends to any number:
+\[f\left(\sum_{i=1}^n \lambda_i u_i\right)=\sum_{i=1}^n \lambda_i f(u_i).\]
+
+Examples:
+
+\begin{enumerate}
+	\item $U=\mathbb{R}^2$, $V=\mathbb{R}^3$, $f(a,b)=(a,b,0)$.
+	\item $U=\mathbb{R}^2=V$, $f(a,b)=(2a-3b,7b+a)$.
+	\item $U=V$ is the space of polynomials with real coefficients in the variable $x$; $f=\deriv{}{x}$.
+	\item $U$ is the space of integrable, real-valued functions on the interval $[0,1]$, $V=\mathbb{R}$, $f(\phi)=\int_0^1 \phi(x)\diff x$.
+\end{enumerate}
+
+Let $f:U\to V$ be a linear map, and let $B$ be a basis for $U$. Since any element of $U$ can be uniquely expressed as a linear combination of basis vectors, and $f$ preserves linear combinations, it is enough to know what $f$ does to basis vectors to specify $f$ completely. That is, any $u\in U$ can be written
+\[u=\sum_{i=1}^n \lambda_i b_i\]
+for some scalars $\lambda_i$ and basis vectors $b_i\in B$, so
+\[f(u)=f\left(\sum_{i=1}^n \lambda_i b_i\right) = \sum_{i=1}^n \lambda_i f(b_i),\]
+so as long as we know $f(b_i)$ for each $i$, we know $f(u)$. For example, we can take a linear map $f:\mathbb{R}^2\to\mathbb{R}^2$ and define it by $f(1,0)=(17,8)$ and $f(0,1)=(-3,3)$; since $\{(1,0),(0,1)\}$ is a basis, this completely describes $f$: for any $(a,b)$, we have $(a,b)=a(1,0)+b(0,1)$, so
+\[f(a,b)=f(a(1,0)+b(0,1))=af(1,0)+bf(0,1)=a(17,8)+b(-3,3)=(17a-3b,8a+3b).\]
+
+If we have a basis for $U$ and also a basis for $V$, we can represent a linear map by a \textbf{matrix}---a rectangular array of numbers. For instance, using the basis $\{(1,0),(0,1)\}$ of $\mathbb{R}^2$, the above linear map is represented by
+\[\left(\begin{array}{cc} 17&-3\\ 8& 3\end{array}\right).\]
+Note that if we take the first basis vector $\left(\begin{array}{c}1\\0\end{array}\right)$ and apply $f$, we get the first column of the matrix. Similarly, if we apply $f$ to the second basis vector (written as a column), we get the second column of the matrix.
+
+If $U$ is $n$-dimensional and $V$ is $m$-dimensional, then any linear map $U\to V$ can be represented in this way by an $m\times n$ matrix. Note that the particular matrix associated to a linear map depends on the choice of basis; the same linear map can be represented by different matrices with respect to different bases. Sometimes it can be useful to change to a different basis in which a linear map has a simpler matrix. For instance, the linear map $f$ above can be written as 
+\[\left(\begin{array}{cc} 5 & 0\\ 0 & 15\end{array}\right)\]
+by using the basis
+\[\left(\begin{array}{c} 1\\4\end{array}\right),\left(\begin{array}{c}3\\2\end{array}\right).\]
+This is because
+\[f(1,4)=1f(1,0)+4f(0,1)=(17,8)+4(-3,3)=(5,20)=5(1,4)+0(3,2)\]
+and
+\[f(3,2)=3f(1,0)+2f(0,1)=3(17,8)+2(-3,3)=(45,30)=0(1,4)+15(3,2);\]
+so when we apply $f$ to the basis vectors (of our new basis), then write the results in terms of the new basis, the coefficients for the first one are $5,0$ and for the second are $0,15$, so these are the columns of our matrix.\bigskip
+
+Exercises:
+
+\begin{enumerate}
+	\item Let $f:U\to V$ be a linear map. Show that $f(0)=0$.
+	\item Let $f:U\to V$ be a linear map. Show that $\mathrm{ker}(f)=\{u\in U:f(u)=0\}$ is a vector space. We call this set the \textbf{kernel} of $f$; it is the subset of $U$ consisting of all vectors which are sent to 0 by $f$. Hint: you can already add and scalar multiply vectors in $\ker(f)$, because they're in $U$, which is a vector space; you just need to check that if you add two vectors in $\ker(f)$, or scale a vector in $\ker(f)$, the result is still in $\ker(f)$.
+\end{enumerate}
+
+
+
+\textbf{Linear Isomorphisms:}\bigskip
+
+
+In maths, particularly algebra and related fields, ``isomorphism'' is a general term for when two structures are ``basically the same.'' There are lots of different types of isomorphism, depending on the context, but the relevant one for vector spaces is as follows. Two vector spaces $U$ and $V$ over the same field $F$ are \textbf{isomorphic} if there is an invertible linear map $f:U\to V$ whose inverse is also linear. The map $f$ (and its inverse) are said to be \textbf{isomorphisms} between $U$ and $V$.
+
+In fact, we don't need to check that the inverse is also linear:\medskip
+
+\textbf{Theorem:}
+Let $U$ and $V$ be as above, and $f:U\to V$ an invertible linear map. Then $f^{-1}:V\to U$ is automatically linear, so $f$ is an isomorphism.\medskip
+
+\textsc{Proof:}
+Let $v_1$ and $v_2$ be in $V$ and $\lambda$ and $\mu$ be scalars from $F$. We need to show that
+\[f^{-1}(\lambda v_1+\mu v_2)=\lambda f(v_1)+\mu f(v_2).\]
+We have
+\begin{align*}
+	f^{-1}(\lambda v_1+\mu v_2)&=f^{-1}\left[\lambda ff^{-1}(v_1) + \mu ff^{-1}(v_2)\right]\\
+	&=f^{-1}\left[f(\lambda f^{-1}(v_1)+\mu f^{-1}(v_2)\right]\\
+	&= \lambda f^{-1}(v_1)+\mu f^{-1}(v_2).
+\end{align*}
+The first equality comes from $f$ and $f^{-1}$ being inverse to each other, the second from linearity of $f$, and the third from $f$ and $f^{-1}$ being inverses again.\qed
+
+
+\textbf{Theorem:}
+Let $f:U\to V$ be a linear map and $B$ a basis of $U$. Then $f$ is an isomorphism if and only if $f(B)$ is a basis of $V$ (where $f(B)$ means the set of all $f(b)$ where $b\in B$).\medskip
+
+\textsc{Proof:}
+First assume that $f$ is an isomorphism; we need to show that $f(B)$ is a basis; this means we need to show that it spans and it is linearly independent. Since $f$ is invertible, for any $v\in V$, we have $v=ff^{-1}(v)$; but $f^{-1}(v)$ is in $U$, so can be written as a linear combination of vectors from $B$:
+\[f^{-1}(v)=\sum_{i=1}^n \lambda _i b_i,\]
+so we have
+\[v=ff^{-1}(v)=f\left(\sum_{i=1}^n \lambda_i b_i\right)=\sum_{i=1}^n \lambda_i f(b_i),\]
+and we have written $v$ as a linear combination of vectors from $f(B)$. So $f(B)$ spans $V$. Now we show linear independence of $f(B)$; if $f(b)\in f(B)$ can be written in terms of other members of $f(B)$, then we have
+\[f(b)=\sum_{i=1}^n \lambda_i f(b_i)\]
+for some $b_i\neq b$ and scalars $\lamdba_i$. But then, taking $f^{-1}$, we get
+\[b=\sum_{i=1}^n \lambda_i b_i;\]
+but $B$ is linearly independent, so this is not possible. So $f(B)$ must be linearly independent, and so is a basis.
+
+Now we prove the converse; so suppose that $f(B)$ is a basis; we must show that $f$ is an isomorphism. By the preceding theorem, it is enough to show that $f$ is invertible. For any $v\in V$, we can uniquely express $v$ in terms of the basis $f(B)$:
+\[v=\sum_{i=1}^n \lambda_i f(b_i).\]
+So we can define a linear map $g:V\to U$ by $g(f(b_i))=b_i$; then
+\[g(v)=g\left(\sum_{i=1}^n \lambda_i f(b_i)\right)=\sum_{i=1}^n \lambda_i gf(b_i)=\sum_{i=1}^n \lambda_i b_i.\]
+It is clear now that $g$ is inverse to $f$, so $f$ is indeed invertible.\qed
+
+So to check if a linear map is an isomorphism, we only need to check that it sends a basis to a basis.\medskip
+
+\textbf{Theorem:}
+If $U$ and $V$ are isomorphic vector spaces, then they have the same dimension.\medskip
+
+\textsc{Proof:}
+Let $f:U\to V$ be an isomorphism, and let $B$ be a basis of $U$. Then, by the preceding theorem, $f(B)$ is a basis of $V$; moreover, since $f$ is invertible, $B$ and $f(B)$ have the same size. So the number of elements in a basis of $U$ ($B$) is the same as the number of elements in a basis of $V$ ($f(B)$), so $\dim(U)=\dim(V)$.\qed
+
+\textbf{Theorem:}
+The converse of the above statement is true: if two vector spaces $U$ and $V$ have the same dimension, then they are isomorphic!\medskip
+
+\textsc{Proof:}
+Let $B_U$ be a basis for $U$ and $B_V$ a basis for $V$. Since $\dim(U)=\dim(V)$, $B_U$ and $B_V$ have the same size. So we can define an invertible function $f:B_U\to B_V$ (just by pairing up the elements in any way we like), and then $f$ can be extended to a linear map $U\to V$ because any element of $U$ is a linear combination of vectors from $B_U$ in a unique way, and we know what $f$ does on $B_U$. So we get a linear map $U\to V$ which takes the basis $B_U$ to the basis $B_V$, so it is an isomorphism.\qed
+
+
+Examples:
+
+\begin{enumerate}
+	\item The map $f:\mathbb{R}^2\to\mathbb{R}^2$ defined by $f(a,b)=(a-b,2b)$ (or equivalently by $f(1,0)=(1,0)$, $f(0,1)=(-2,2)$) is an isomorphism; its inverse is $f(c,d)=\left(c+\frac{d}{2},\frac{d}{2}\right)$. Equivalently, the image of the basis $\{(1,0),(0,1)\}$ is $\{(1,0),(-2,2)\}$, which is a basis, so $f$ is an isomorphism.
+	\item The map $f:\mathrm{R}^2\to\mathrm{R}^2$ defined by $f(a,b)=(a-b,b-a)$ is \textbf{not} an isomorphism: $f(1,1)=0=f(0)$, so $f$ cannot be invertible. Equivalently, $f(1,0)=(1,-1)$, $f(0,1)=(-1,1)$, and $(1,-1)=-1(-1,1)$, so the image of the basis $\{(1,0),(0,1)\}$ is not linearly independent, hence not a basis, so $f$ is not an isomorphism. So although $\mathbb{R}^2$ is of course isomorphic to itself, not every linear map from it to itself is an isomorphism.
+	\item Differentiation from the space of real polynomials to itself is not an isomorphism, because $\deriv{}{x}(1)=0=\deriv{}{x}(0)$, so $\deriv{}{x}$ is not invertible.
+	\item A linear map $f:\mathbb{R}^2\to\mathbb{R}^3$ can \textit{never} be an isomorphism, because $\mathbb{R}^2$ and $\mathbb{R}^3$ have different dimensions, and we proved above that isomorphic spaces have the same dimension.
+\end{enumerate}
+
+
+
+Exercises:
+
+\begin{enumerate}
+	\item Let $f:\mathbb{R}^2\to \mathbb{R}^2$ be the linear map defined by $f(1,0)=(1,2)$, $f(0,1)=(-1,-2)$. Show that the kernel $\ker(f)$ is isomorphic to $\mathbb{R}$.
+	\item Let $f$ be as above. Show that the image of $f$, $\{f(v):v\in\mathbb{R}^2\}$ is also isomorphic to $\mathbb{R}$.
+\end{enumerate}
+
+
+
+\textbf{Linear Forms and Dual Spaces:}\bigskip
+
+
+Let $V$ be a vector space over $F$. A \textbf{linear form} (or \textbf{covector}) on $V$ is a linear map $f:V\to F$. The \textbf{dual space} of $V$, $V^*$, is the set of all linear forms on $V$; it is itself a vector space over $F$, under the addition operation $(f+g)(v)=f(v)+g(v)$ and the scalar multiplication $(\lambda f)(v)=\lambda f(v)$, and with the zero covector being the constant function $f(v)=0$.
+
+If $V$ is finite-dimensional, and $B=\{b_1,\hdots,b_n\}$ is a basis for $V$, we can define a basis $B^*$ for $V^*$ called the \textbf{dual basis} of $B$; $B^*=\{b^1,\hdots,b^n\}$, where
+\[b^i(b_j)=\delta_{ij}.\]
+The notation here can be slightly confusing, so is worth explaining; $b_1,\hdots,b_n$ are vectors in $V$, whereas $b^1,\hdots,b^n$ are covectors in $V^*$. So each $b^i$ is a linear map $V\to F$; therefore we can evaluate that map at $b_j$, and $b^i$ is defined to be 1 on $b_i$ and $0$ on $b_j$ for $j\neq i$. Since $b_1,\hdots,b_n$ form a basis for $V$, a linear map such as $b^i$ is completely specified by what it does on a basis.
+
+Given a basis $B$ for $V$, we can represent vectors in $V$ as column vectors with respect to $B$. The basis elements $b_1,\hdots,b_n$ are the columns
+\[\left(\begin{array}{c}1\\0\\ \vdots \\ 0\end{array}\right),\hdots,\left(\begin{array}{c}0\\ \vdots\\ 0 \\1\end{array}\right)\]
+Covectors (in $V^*$) are linear maps $V\to F$, so can be written as $1\times n$ matrices---\textit{i.e.}, as row vectors. The dual basis covectors $b^1,\hdots,b^n$ are the rows
+\[(1,0,\hdots,0),\hdots,(0,\hdots,0,1).\]
+Since any linear map $V\to F$ can be written as a $1\times n$ matrix (row vector) with respect to $B$, and it is clear that $b^1,\hdots,b^n$ span all such row vectors, we see that $B^*$ does indeed span $V^*$. To see that $B^*$ is linearly independent, suppose
+\[b^i=\sum_{j\neq i} \lambda_j b^j\]
+and evaluate at $b_i$:
+\[1=b^i(b_i)=\sum_{j\neq i}\lambda_j b^j(b_i)=0,\]
+a contradiction; so $b^i$ cannot be expressed as a linear combination of the other $b_j$'s, so $B^*$ is linearly independent. So $B^*$ really is a basis of $V^*$, as claimed.
+
+Note that if $V$ is infinite-dimensional, the proof of linear independence still works, so the set $B^*$ is linearly independent, but the proof of span stops working, because a \textit{finite} linear combination of $b^1,b^2,\hdots$ cannot express an \textit{infinite} row vector. So for infinite-dimensional vector spaces, we can turn a basis of vectors into a linearly independent set of covectors, but not into a basis. In fact, for $V$ infinite-dimensional, $V^*$ is always much bigger (a ``larger infinite''-dimensional).
+
+So for a finite-dimensional space $V$, we can turn a basis for $V$ into a basis for $V^*$ \textit{of the same size}. This means that $V$ and $V^*$ are isomorphic. For infinite-dimensional $V$, we can turn a basis for $V$ into a linearly independent set in $V^*$, which means we can embed $V$ into $V^*$ (we can regard $V$ as a subset of $V^*$), but they are not isomorphic---the dual space is bigger. However, there is no ``natural'' way to embed $V$ in $V^*$, and no ``natural'' choice of isomorphism when $\dim(V)$ is finite. It relies on choosing a basis for $V$, which is an arbitrary choice. You can choose a basis for $V$ and use it to find an isomorphism $V\to V^*$, but I might choose a different basis and find a different isomorphism $V\to V^*$, and there's nothing to make one choice ``better'' or ``more natural'' than the other.
+
+Aside: there is a precise meaning to the term ``natural isomorphism,'' coming from category theory, but that's getting much too complicated for this introduction, so we'll stick with a vague notion for now.
+
+However, there \textit{is} a natural embedding of $V$ into its \textit{double dual} $V^{**}$ (the dual of the dual space!). In the case where $\dim(V)$ is finite, this is even a natural isomorphism, because the dimensions of $V$ and $V^{**}$ end up being the same. We will describe this natural embedding now.
+
+We want to show that there is an embedding (a one-to-one linear map) $f:V\to V^{**}$, which is natural (doesn't require us to choose a basis). So for any $v\in V$ we need to define $f(v)\in V^{**}$; we will write $f_v$ instead of $f(v)$. Since $V^{**}$ is the dual space of $V^*$, an element of $V^{**}$ is a linear form taking a covector $\phi\in V^*$ and giving a scalar. So we need to define what $f_v(\phi)$ will be. But $\phi$ is a covector---a linear map $V\to F$, so we can evaluate $\phi$ at $v$ to get $\phi(v)\in F$. So for any $v\in V$ we have the ``evaluate at $v$'' map $f_v:V^*\to F$, defined by $f_v(\phi)=\phi(v)$. This is the embedding, and it doesn't require any ``unnatural'' choices, like an arbitrary choice of basis.\medskip
+
+Exercises:
+
+\begin{enumerate}
+	\item Show that for any $v$, $f_v$ really is a linear map. That is, show that for any covectors $\phi$ and $\psi$, and scalars $\lambda$ and $\mu$, we have
+		\[f_v(\lambda\phi+\mu\psi)=\lambda f(\phi) +\mu f(\psi).\]
+	\item Show that $f:V\to V^{**}$ defined by $f(v)=f_v$ is linear. That is, show that for any vectors $u$ and $v$, and scalars $\lambda$ and $\mu$, we have
+		\[f_{\lambda u+\mu v}=\lambda f_u + \mu f_v.\]
+	\item Show that $f$ is an embedding. That is, show that for $v\neq 0$, $f_v\neq 0$.
+\end{enumerate}
+
+
+\bigskip
+
+
+\textbf{Inner Products and Linear Forms:}\bigskip
+
+Let $V$ be a (real or complex) inner product space. Then we can define a linear map $f(v):V\to V^*$ by $f(v)=f_v$, where $f_v(u)=\braket{v}{u}$. Since an inner product takes two vectors and returns a scalar, if we feed it only one vector, we're left with a function that takes one vector and returns a scalar, and is linear because of linearity of inner products. So an inner product takes a single vector and returns a covector!
+
+We use ``bra-ket'' notation (``bracket'' notation split into parts) to denote this: we write the vector $u$ as $\ket{u}$ (read ``ket-$u$'') to emphasise that it is a vector, not a convector, and we write the covector $f_v$ as $\bra{v}$ (read ``bra-$v$''); then $f_v(u)=\bra{v}(\ket{u})$ in this notation, which is exactly what it is, $\braket{v}{u}$.
+
+Then the ``bra map'' $\bra{}$ is linear, which is expressed as
+\[\bra{\lambda u +\mu v}=\lambda \bra{u}+\mu \bra{v},\]
+and kets (vectors) can of course be written as linear combinations of other kets
+\[\ket{\lambda u + \mu v}=\lambda \ket{u}+\mu \ket{v},\]
+so this notation nicely captures the linear properties of the vector space $V$ (the ket space), its dual space $V^*$ (the bra space) and the inner product.
+
+So given an inner product on $V$, we have a bra map $\bra{}:V\to V^*$; by the properties of inner products, this map is linear and one-to-one; for finite-dimensional $V$, it is also an isomorphim.
+
+We have seen how, with Fourier transforms, we have an inner product on the space of square-integrable functions $L_2(\mathbb{R})$, given by
+\[\braket{f}{g}=\int_{-\infty}^\infty f(t)g(t)\diff t.\]
+We have looked at the functional (covector) $f^*$ associated with a function $f$, and saw that some functions, such as $e^{i\alpha t}$, though they don't have a Fourier transform, do still have a functional associated with them, the Dirac delta functional.
+
+The inner product on $L_2(\mathbb{R})$ gives us an embedding of $L_2(\mathbb{R})$ into $L_2(\mathbb{R})^*$, the bra map. Given an $L_2$ function $f$ on the time domain, we have $\hat{f}$ an $L_2$ function on the frequency domain, and
+\[f(t)=\frac{1}{2\pi}\bra{\hat{f}}{e^{i\omega t}}\]
+for all $t$. For a non-$L_2$ function like $e^{i\alpha t}$, there is no function acting as its Fourier transform, but since $L_2(\mathbb{R})$ is infinite-dimensional, its dual space is bigger, so there is still a possibility of having a functional $\delta_\alpha$ such that
+\[e^{i\alpha t}=\frac{1}{2\pi}\delta_\alpha\ket{e^{i\omega t}}.\]
+Indeed, $\delta_\alpha$ defined by $\delta_\alpha\ket{g}=g(\alpha)$ works. However, $\delta_\alpha$ cannot be written as $\bra{\delta}$ for any actual function $\delta$. The Dirac delta ``function'' is a fake function such that we can write $\delta_\alpha=\bra{\delta(\omega-\alpha)}$, and have
+\[e^{i\alpha t}=\frac{1}{2\pi}\braket{\delta(\omega-\alpha)}{e^{i\omega t}},\]
+but really we should work with the functional $\delta_\alpha$. However, since a space and its dual space are so closely related, all the results about Fourier transforms carry through nicely to the dual space, and so we don't go astray by treating $\delta$ as a function and using results about Fourier transforms as if it were a real function.\bigskip
+
+
+Exercises:
+
+\begin{enumerate}
+	\item Let $V=\mathbb{R}^3$, with the usual dot product as inner product. Show that if we take the standard basis, $\{(1,0,0), (0,1,0),(0,0,1)\}$ and the dual basis coming from it, the isomorphism this gives us between $V$ and $V^*$ is the same as the isomorphism coming from the inner product, sending $v$ to $\bra{v}$.
+	\item We have seen that an inner product on a finite-dimensional space gives an isomorphism with the dual space; show that converse. That is, if $V$ is finite-dimensional and $f:V\to V^*$ is an isomorphism, define an inner product on $V$ using $f$ (and check that it is an inner product). Since an isomorphism $V\to V^*$ is given by a choice of basis on $V$ (giving a dual basis on $V^*$, a choice of basis on $V$ automatically gives us an inner product on $V$! This is why question 1 works---the dot product is the inner product given by the standard basis, so the isomorphism with the dual coming from the inner product is the same as the one coming from the dual space.
+\end{enumerate}
+
+
+
+
+\end{document}

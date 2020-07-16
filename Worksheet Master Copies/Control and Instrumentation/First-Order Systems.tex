@@ -1,0 +1,236 @@
+
+\documentclass{article}
+
+\usepackage[left=1.8cm,right=1.8cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{First-Order Systems}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To understand the meaning of a differential equation, in}}
+
+\textbf{\underline{particular first-order ODEs.}}
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{Theory: Types of Equation:}
+
+\bigskip
+
+
+
+Though you may not have realised it, we have in fact seen two fundamentally different types of equation thus far. In an equation such as $x^2-3=0$, we have an \textit{unknown number}, which we denote $x$, and the equation asserts that if you apply a certain function to this number (in this case, squaring it and subtracting 3), the result is 0. We can then try to deduce the value of $x$, either exactly or by an approximate method like Newton-Raphson. In this case, we can deduce that $x$ must be either $\sqrt{3}$ or $-\sqrt{3}$, but without further information we cannot tell which.
+
+On the other hand, in an equation like $f(x)=\sin(x)$, we are not asserting anything about the symbol $x$, but rather about $f$. We are saying that $f$ is a \textit{function} which takes an input (which we are referring to as $x$) and outputs the sine of that input. So $x$ is not standing for any particular number, but is just a placeholder for whatever we might choose to input into $f$---we could just as well write $f(t)=\sin(t)$ or $f(\alpha)=\sin(\alpha)$, because really the equation makes a statement about $f$, not about the variable.
+
+It would not mean anything to ``solve'' the equation $f(x)=\sin(x)$, because $x$ is \textit{not} standing for a particular number, it's just a convenient bit of notation to help us make a statement about $f$, which is the real subject of the equation. Occasionally, people use the notation $\equiv$ as an alternative to equals, meaning ``equal for all values of the variable''---so they would write $f(x)\equiv \sin(x)$, to emphasise that $x$ is not a particular value. However, usually people rely on context to distinguish equations about numbers and equations about functions.
+
+Most of the equations about functions we have seen have been either simply defining a function (like $f(x)=\sin(x)$) or deducing something about a function. For instance, given $f(x)=\sin(x)$, we can deduce that $f'(x)=\cos(x)$. Again, $x$ is not standing for any particular number here, this is an equation of functions, but it is asserting that the derivative of $f$ is the cosine function, which is a consequence of the defining equation $f(x)=\sin(x)$.
+
+
+\clearpage
+
+
+
+
+
+
+
+
+\textbf{Theory: Ordinary Differential Equations:}\bigskip
+
+
+An \textbf{ordinary differential equation} (ODE) is a particular type of equation which gives us information about the \textit{derivatives} of an \textit{unknown function} $f(x)$. The aim is then to deduce what the unknown function actually is; just as we cannot always deduce the precise answer to an equation about numbers (\textit{e.g.}, $x^2-3=0$ has two roots) we do not generally expect to be able to deduce exactly the function. In particular, because antiderivatives are only unique up to a constant of integration, we expect to have unknown constants appearing in our solution. Extra information (called \textit{initial conditions} or \textit{boundary conditions}) can then let us find the values of these constants.
+
+There are several different types of equation about an unknown function that can be formed with derivatives, leading to different types of differential equation. You will likely see partial differential equations at some point (where the unknown function has \textit{more than one input}) and may also see stochastic differential equations (where there is a \textit{random, probabilistic element} to the equation) and delay differential equations (where the value of the derivative \textit{at an earlier time} influences the value of the function \textit{at the present time}). However, for now, we will limit ourselves to ODEs, which are already quite complicated enough to be getting on with!
+
+
+The \textbf{order} of a differential equation is the order of the highest derivative appearing. So if the equation only involves the unknown function and its first derivative, then it is \textbf{first-order}, if it involves the function and its first and second derivatives, it is \textbf{second-order}, and so on.\medskip
+
+
+A simple example of a differential equation is simply telling us the derivative of an unknown function; for instance,
+\[\deriv{y}{x}=\sin(x).\]
+In this equation, the variable $x$ is almost irrelevant; the equation is saying ``$y$ is a function whose derivative is the sine function;'' $x$ is simply there for notation. The equation $\deriv{y}{t}=\sin(t)$ would be equivalent. This differential equation can be easily solved by integrating, since we know from the Fundamental Theorem of Calculus that
+\[\int \deriv{y}{x}\diff x=y+c,\]
+so we deduce by integrating both sides that
+\[y=-\cos(x)+c\]
+for some unknown constant $c$.
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+\textbf{Theory: ODEs (cont.):}\bigskip
+
+
+A more complicated example of an ODE is
+\[\deriv{y}{x}=y.\]
+This might seem simpler---it doesn't involve the sine function, after all---but now both sides of the equation depend on the unknown function $y$. Since $x$ is simply a placeholder variable for the input, the previous equation $y'(x)=\sin(x)$ has a known right-hand side! Although $\sin(x)$ does not have a known value---because $x$ isn't taking a fixed value---it is a known function. So just as $x^2=4$ (with its known right-hand side) is easier to solve than $x^2=x$ (where both sides are unknown), so too is $y'(x)=\sin(x)$ easier to solve than $y'=y$.
+
+To solve $x^2=4$, we simply square root both sides to conclude $x=\pm 2$, and to solve $y'=\sin(x)$, we simply integrate both sides to conclude $y=-\cos(x)+c$. But if we try to solve $x^2=x$ by simply square-rooting, we find that $x=\pm\sqrt{x}$, which doesn't tell us the value of $x$ any more clearly than the original equation; similarly, if we try to solve $y'=y$ by simply integrating, we find
+\[y=\int y\diff x,\]
+which doesn't tell us what the function $y$ is.
+
+To solve $x^2=x$, we want to bring all the unknowns together; we can divide through by $x$ \underline{as long as $x\neq 0$} to get $x=1$; so either $x=0$ or $x=1$, and we have solved the equation. Similarly, we can divide $y'=y$ through by the unknown $y$ (as long as $y$ is not the constant zero function) to obtain
+\[\frac{1}{y}\deriv{y}{x}=1.\]
+Now we integrate, and use substitution, to conclude that
+\begin{align*}
+	\int \frac{1}{y}\deriv{y}{x}\diff x &= \int 1\diff x\\
+	\int \frac{1}{y}\diff y &= x+c\\
+	\ln(y)&=x+c\\
+	y&=Ae^x,
+\end{align*}
+where $A=e^c$. Note that, although $A$ can never be zero (since $e^c\neq 0$ for any value of $c$), we also have the possibility of $y$ being the constant 0 function, so allowing $A$ to be any value gives us all solutions in the form $Ae^x$ for an unknown constant $A$.
+
+
+
+
+
+
+
+
+
+\clearpage
+
+\textbf{Theory: Differential Equations in the Real World:}\bigskip
+
+Differential equations are ubiquitous in physics, chemistry, engineering, economics, geometry, epidemiology, and many more fields. Suppose we have some quantity of interest (the position of a particle, amount of a chemical in a solution, voltage on a capacitor, value of a stock, height of a curve, number of people infected with a disease, \&c.) which varies with time (most commonly, or position, or some other ``independent variable''). Let's call this quantity $y$; so at each time $t$, there is a value of $y$, so we can represent $y$ as a function of $t$. For instance, at a specific, fixed time, the voltage on a capacitor is a single, measurable number, but this number changes over time, so there is a function which takes time $t$ as input and returns $V(t)$, the capacitor voltage at that time.
+
+Essentially any quantitative problem then comes down to wanting to know a particular function: if a chemist knows how the amount of product in their reaction varies with time, they know how long to leave it for the reaction to produce the desired amount of product; if an investor can predict how the price of a stock will vary with time, they can make a profit; if an epidemiologist knows how the number of infected people will grow with time, they can advise how much PPE hospitals will need supplied (though politicians may or may not heed their advice...); \&c. So it is frequently the case that we wish to determine some unknown function (usually of time, but potentially of some other independent variable---but mathematically this doesn't matter, the nature of the variable is relevant only for interpreting the results).
+
+How then can we determine the relevant function in these cases? We could let things play out and observe what happens; it's possible to figure out what the capacitor voltage does in a DC charging circuit, for example, just by experimental observation. On the other hand, when we want to predict something in advance, rather than simply study it in hindsight, we need some way to derive the unknown function from known data. This is where differential equations come in. Very often, it is easier to work out from theoretical grounds how quickly a quantity will vary as a function of time than directly what the value of the quantity will be. In other words, we can typically figure out information about the derivative of the function we want to know; we can then write this information down as a differential equation, and solve it to find the unknown function.
+
+You have seen mass-spring systems, where Newton's Law $F=ma$ is interpreted as a second-order differential equation for position as a function of time, and RLC circuits, where essentially the same ODE arises from considering voltages in the circuit. We will look at some examples of first-order systems.
+
+\clearpage
+
+
+
+
+
+
+\textbf{Examples of First-Order ODEs:}\bigskip
+
+Consider a population (of people, animals, microbes, plants, \&c.); let $N$ be the number of living members of the population. This will vary over time, so $N$ is a function, $N(t)$. The number of births and deaths per unit time will both be proportional to the size of the population: the more organisms there are, the more births there will be, and the more deaths. So if $b$ and $d$ are the per capita birth and death rates, respectively, then in a time interval $h$ we will have (on average) $bNh$ new births and $dNh$ deaths. So the population will change by $(b-d)Nh$; therefore:
+\[\frac{N(t+h)-N(t)}{h}=(b-d)N(t);\]
+taking the limit as $h\to 0$, we see that
+\[\deriv{N}{t}=(b-d)N.\]
+In words, the rate at which the population grows is proportional to the size of the population.
+
+We must always be careful to take note of any assumptions we make. We tacitly assumed above that the birth and death rates $b$ and $d$ are constant; in reality, they might not be. For instance, as the population grows, so too will its food requirements. Once the population gets particularly large, a shortage of food might cause the death rate to increase. In practise, this differential equation tends to accurately model populations where there are no predators and abundant resources; more complicated equations are needed to take into account other factors.\bigskip
+
+
+
+Consider an RC charging circuit: a resistor $R$ and capacitor $C$ are connected in series to a DC supply $V_\mathrm{in}$. At time 0, the capacitor voltage $V$ is 0. The capacitor voltage is proportional to the capacitor charge, $V=\frac{Q}{C}$; so as well as the function $V$ we are interested in, there is another function, $Q(t)$, giving the charge on the capacitor at time $t$. This is helpful, because the rate-of-change of $Q$ is current $I$ (by definition!) and Ohm's Law tells us that $V_\mathrm{R}=IR$, where $V_\mathrm{R}$ is the resistor voltage. Moreover, $V_\mathrm{R}=V_\mathrm{in}-V$, so we have
+\begin{align*}
+	V&=V_\mathrm{in}-V_\mathrm{R}\\
+	&=V_\mathrm{in}-\deriv{Q}{t}R\\
+	&=V_\mathrm{in} - RC\deriv{V}{t},
+\end{align*}
+a differential equation for $V$ as a function of $t$.
+
+
+\clearpage
+
+
+
+\textbf{Differential Equations as Operator Equations; Systems with Input and Output Functions:}\bigskip
+
+
+In the previous example, of the charging capacitor, we had the differential equation
+\[RC\deriv{V}{t} + V = V_\mathrm{in}.\]
+We assumed that $V_\mathrm{in}$ was a constant, but actually this assumption is not necessary. If $V_\mathrm{in}$ is a function of time (a time-varying input voltage), then the analysis we used to derive the differential equation still holds at each value of $t$. So on the left-hand side of the differential equation, we have a function which depends on the unknown function $V$---it is obtained by differentiating $V$, multiplying by $RC$, then adding the original function $V$---and on the right-hand side we have a different function, which we will assume we know. So the question is: given a known input voltage $V_\mathrm{in}$, what is the output voltage?
+
+Of course, there is a different question that could be asked: given a known output voltage, what is the input voltage needed to produce that? This question is easier to answer, since the differential equation tells us the solution! Take the known output $V$ and form $RCV'+V$, then this is the input needed to produce that output. The harder question is to go the other way.
+
+Compare with an algebraic problem. Suppose we have the equation $x^2+2x=\alpha$; if $\alpha$ is a known constant, we can solve this equation. But we can also view $\alpha$ as an input into the system, and $x$ as the output: we can ask ``given a particular value of $\alpha$, what value must $x$ take?'' We could also ask what value of $\alpha$ corresponds to a given value of $x$, but that question is answered directly by the equation: given $x$, the value of $\alpha$ is $x^2+2x$.
+
+So we can consider the specific problem $x^2+2x=\alpha$ for a single, fixed value of $\alpha$ (\textit{e.g.}, $\alpha=-1$, in which case $x=-1$), or we can consider this as a problem of finding a method that takes $\alpha$ and produces the corresponding $x$. The latter is a problem of inverting the function $f(x)=x^2+2x$, while the former amounts to finding a specific value of the inverse function (for a specific input)---\textit{i.e.}, solving $f(x)=\alpha$.
+
+Similarly, we can view the differential equation for capacitor voltage as a problem of finding the voltage given a specific input (\textit{e.g.}, $V_\mathrm{in}=230\sqrt{2}\sin(100\pi t)$), or as finding a general method of determining the capacitor voltage $V$ for a given input $V_\mathrm{in}$. The latter point-of-view amounts to inverting the differential operator $D(V)=RCV'+V$, while the former amounts to finding the function given by applying the inverse operator to a specific input $V_\mathrm{in}$.
+
+
+\clearpage
+
+
+
+\textbf{Practice: A Series RL Circuit:}\bigskip
+
+Consider a resistor $R$ in series with an inductor $L$. An input voltage $V_\mathrm{in}$ is applied across the two, and we are interested in the voltage $V$ across the inductor. Let $V_\mathrm{R}$ be the resistor voltage, so $V_\mathrm{in}=V+V_\mathrm{R}$. Recall that, by the inductor equation,
+\[V=L\deriv{I}{t}.\]
+
+\begin{enumerate}
+	\item Use Ohm's Law and the above equation to show that
+		\[V=\frac{L}{R}\deriv{V_\mathrm{R}}{t}.\]
+	\item Hence deduce that
+		\[V=\frac{L}{R}\left(\deriv{V_\mathrm{in}}{t}-\deriv{V}{t}\right).\]
+	\item Conclude that
+		\[\deriv{V}{t} + \frac{R}{L}V = \deriv{V_\mathrm{in}}{t}.\]
+	\item Let $V_\mathrm{in}$ be $A\sin(\omega t)$, for some constants $A$ and $\omega$. Show that the inductor voltage obeys the differential equation
+		\[\deriv{V}{t}+\frac{R}{L}V = A\omega \cos(\omega t).\]
+	\item Multiplying both sides of this equation by $e^{Rt/L}$ gives
+		\[e^{Rt/L}\deriv{V}{t} + \frac{R}{L}e^{Rt/L}V = A\omega e^{Rt/L}\cos(\omega t).\]
+		Show that the left-hand side of this equation is equal to
+		\[\deriv{}{t}\left(e^{Rt/L}V\right),\]
+		and hence deduce that
+		\[\deriv{}{t}\left(e^{Rt/L}V\right)=A\omega e^{Rt/L}\cos(\omega t).\]
+	\item Write $\cos(\omega t)$ in terms of exponentials and hence integrate this equation to show that
+		\[e^{Rt/L}V=\frac{A\omega}{2}\left(\frac{e^{(R/L + j\omega)t}}{R/L + j\omega} + \frac{e^{(R/L - j\omega)t}}{R/L - j\omega}\right)+c.\]
+	\item Conclude that
+		\[V=\frac{A\omega L}{R^2 + L^2\omega^2}\left(R \cos(\omega t) +L\omega\sin(\omega t)\right)+ce^{-Rt/L}.\]
+\end{enumerate}
+
+
+
+\end{document}

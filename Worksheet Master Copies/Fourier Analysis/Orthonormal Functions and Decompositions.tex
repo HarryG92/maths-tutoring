@@ -1,0 +1,310 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+
+
+
+
+\begin{document}
+
+\title{Orthonormal Functions}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand the notion of orthogonal and orthonormal}}
+
+\textbf{\underline{functions, and how to use these notions to decompose a function}}
+
+\textbf{\underline{into a sum of orthonormal functions.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+\textbf{Warm-up: Orthonormal Decomposition:}\bigskip
+
+
+Consider the interval $[0,1]$ on the real $x$-axis. Let $f(x)=1$, $g(x)=\sqrt{3}(2x-1)$. For any two integrable functions $\phi(x)$ and $\psi(x)$ on this interval, let
+\[\langle \phi\mid\psi\rangle = \int_0^1 \phi(x)\psi(x)\diff x.\]
+
+Note on pronunciation: the left-hand side of the above equation can be read (amongst other possibilities) as ``phi bracket psi'', or ``bra-phi, ket-psi.''
+
+
+
+\begin{enumerate}
+	\item Show that for any three integrable functions $\phi$, $\psi$, and $\eta$ on the interval $[0,1]$, and constants $a$ and $b$:
+		\[\langle a\phi+b\psi\mid \eta\rangle = a\langle \phi\mid \eta \rangle + b\langle \psi\mid \eta\rangle,\]
+		and
+		\[\langle\phi\mid \psi\rangle = \langle \psi\mid\phi\rangle.\]
+	\item Show that
+		\[\langle f\mid g\rangle = 0.\]
+	\item Show that
+		\[\langle f\mid f\rangle = \langle g \mid g \rangle = 1.\]
+	\item Suppose $3x-5$ can be written as $\alpha f(x)+\beta g(x)$, for some constants $\alpha$ and $\beta$. We will find these constants.
+		\begin{enumerate}
+			\item Compute $\langle 3x-5\mid f\rangle$.
+			\item Compute $\langle 3x-5\mid g\rangle$.
+			\item Show that $3x-5 = \langle  3x-5\mid f\rangle f(x) + \langle 3x-5\mid g\rangle g(x)$.
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Inner Products and Orthogonality:}
+
+\bigskip
+
+
+
+An \textbf{inner product} of functions is a rule that takes two functions $\phi$ and $\psi$ and returns a real number, often denoted $\langle \phi\mid \psi\rangle$, and satisfies the following three conditions for any functions $\phi$, $\psi$, and $\eta$ and constants $a$ and $b$:
+\begin{alignat*}{2}
+	\langle a\phi+b\psi\mid \eta\rangle &= a\langle \phi\mid \eta \rangle + b\langle \psi\mid \eta\rangle\qquad&& \mbox{linearity in $1^\mathrm{st}$ argument}\\
+	\langle \phi\mid \psi\rangle &= \langle \psi\mid \phi\rangle\qquad&& \mbox{symmetry}\\
+	\langle \phi\mid\phi\rangle &> 0\qquad&& \mbox{positive-definiteness.}
+\end{alignat*}
+For the last condition, we need $\phi\neq 0$; it follows from linearity that $\langle 0\mid 0\rangle = 0$.
+
+Inner products are a more general notion than we present here; if you've ever seen the ``dot product'' of vectors, that is an example of an inner product. However, we shall only be interested in inner products of functions for the purposes of Fourier analysis. There are many different inner products one can define, but we will be particularly focused on ones arising from integrals. If we have a class of integrable functions on an interval $[a,b]$, then defining
+\[\langle\phi\mid \psi\rangle = \int_a^b \phi(x)\psi(x)\diff x\]
+gives an inner product (up to a slight issue with identifying functions that agree ``almost everywhere.''\medskip
+
+Given an inner product, the \textbf{norm} of a function $\phi$ (with respect to that inner product), denoted $\norm{f}$, is defined to be
+\[\norm{\phi}=\sqrt{\langle \phi\mid \phi\rangle}.\]
+Because of positive-definiteness, this is guaranteed to be a real number, and is strictly positive except when $\phi=0$. Note that the root-mean-square of a function is precisely the norm when the inner product used is an integral, as in our case. In general, the norm can be regarded as a measure of the ``size'' of a function.\medskip
+
+
+If $\phi_1,\hdots,\phi_n$ are a collection of functions, and $\langle\phi_i\mid\phi_j\rangle=0$ whenever $i\neq j$, we say that these functions are \textbf{orthogonal}. If also $\norm{\phi_i}=1$ for all $i$, then we say they are \textbf{orthonormal}. A convenient notation for this is the \textbf{Kronecker delta}, defined by:
+\[\delta_{ij}=\begin{cases} 1 & i=j\\ 0 & i\neq j. \end{cases}\]
+Then $\phi_1,\hdots,\phi_n$ are orthonormal if $\langle\phi_i\mid\phi_j\rangle=\delta_{ij}$.\medskip
+
+We can now see that the functions $f$ and $g$ of the warm-up were orthonormal with respect to the integral inner product on the interval $[0,1]$.
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Linear Combinations and Measuring ``Distances'':}\bigskip
+
+
+In the warm-up we had two orthonormal functions $f$ and $g$; we then took a third function, $3x-5$, and wrote it in the form $\alpha f(x)+\beta g(x)$, where $\alpha$ and $\beta$ were given by $\alpha = \langle f\mid 3x-5\rangle$, $\beta=\langle g\mid 3x-5\rangle$. This is a general phenomenon, and works for any number of orthonormal functions. If $\phi_1,\hdots,\phi_n$ are functions (not necessarily orthonormal), we say that another function $\psi$ is a \textbf{linear combination} of $\phi_1,\hdots,\phi_n$ if there are constants $a_1,\hdots,a_n$ such that
+\[\psi(x)=\sum_{i=1}^n a_i\phi_i(x).\]
+
+For example, a degree-$n$ polynomial is a linear combination of the functions $1,x,\hdots,x^n$, and the product-to-sum formulae allow us to express products of sinusoids as linear combinations of sinusoids.
+
+If we have an inner product and the functions $\phi_1,\hdots,\phi_n$ are orthonormal, then we can easily find the values of the coefficients $a_i$ in any linear combination of the $\phi_i$:\medskip
+
+Show that if
+\[\psi(x)=\sum_{i=1}^n a_i\phi_i(x),\]
+then $a_i=\langle\psi\mid\phi_i\rangle$.
+
+
+\vfill
+
+Another use of inner products is that they give us a notion of ``distance between functions.'' This comes from the idea of viewing the norm as a measure of the ``size'' of a function: the distance between two functions $\phi$ and $\psi$ should be the size of the difference $\psi(x)-\phi(x)$; so we define the distance from $\psi$ to $\phi$ to be the real number $\norm{\phi-\psi}$. Note that, by positive-definiteness, $\norm{\phi-\psi}$ is strictly positive, unless $\phi=\psi$, in which case it is 0. This agrees with our intuition about distance.
+
+If the inner product we are using is the integral inner product over some interval, then $\norm{\phi-\psi}$ is the root-mean-square of $\phi(x)-\psi(x)$, so is essentially the average difference between $\phi(x)$ and $\psi(x)$.
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Application: Orthonormal Approximations:}\bigskip
+
+
+ We have seen that if $\phi_1,\hdots,\phi_n$ are orthonormal with respect to some inner product, then given any function $\psi$ which can be written as a linear combination of the $\phi_i$, we can use the inner product to find the coefficients of this linear decomposition: they are $\langle\psi\mid\phi_i\rangle$. However, this assumes that $\psi$ can be written as a linear combination of the $\phi_i$, which means it wasn't that different a function from them to begin with.
+ 
+ We shall show that even if $\psi$ \textit{cannot} be written as a linear combination of the $\phi_i$, we can use this same calculation to find the best possible approximation to $\psi$ by a linear combination of the $\phi_i$. This means that if we have an orthonormal collection of functions $\phi_i$ which we understand well and a function $\psi$ which we want to understand, we can find the best approximation to $\psi$ by the $\phi_i$. We shall see that the key idea behind Fourier analysis is to approximate functions with sinusoids; since sinusoids are well understood, if a complicated function can be approximated by sinusoids, we can hope to understand it through this approximation.
+ 
+ What do we mean though by ``best possible'' approximation? We mean best possible \textit{with respect to the chosen inner product}. That is, we find a function $\Psi(x)$ which is a linear combination of the $\phi_i$ and is such that $\norm{\Psi-\psi}$ is as small as possible. A different inner product would give us a different notion of orthogonality, and a different measure of the closeness of an approximation.\medskip
+ 
+ We use a mathematical technique called \textbf{induction} which is useful for proving statements involving sequences (like our $\phi_1,\hdots,\phi_n$). Induction is a step-by-step process: first we find the best approximation to $\psi$ by a multiple of $\phi_1$, then show how to modify this to find the best approximation by a linear combination of $\phi_1$ and $\phi_2$, and so on. So we will first prove that $\langle\phi_1\mid\psi\rangle$ is the closest approximation to $\psi$ by a multiple of $\phi_1$, and then that if $\Psi_k$ is the closest approximation to $\psi$ by a linear combination of $\phi_1,\hdots,\phi_k$, then $\Psi_k+\langle\phi_{k+1}\mid\psi\rangle\phi_{k+1}$ is the closest approximation to $\psi$ by a linear combination of $\phi_1,\hdots,\phi_{k+1}$. We can then take this to be our $\Psi_{k+1}$, and continue.
+ 
+ Note that we work purely in terms of an inner product. Really, this has nothing to do with integrals, or even functions, but is purely about using an inner product to find a best approximation to a given object by a linear combination of orthonormal objects.
+ 
+ \clearpage
+ 
+ 
+ 
+ \textbf{Application: Orthonormal Approximations (cont.):}\bigskip
+ 
+ Let $\phi_1,\hdots,\phi_n$ be orthonormal and $\psi$ be a function we wish to approximate. We prove that the linear combination
+ \[\Psi=\sum_{i=1}^n \lambda_i\phi_i\]
+ which minimises $\norm{\Psi-\psi}$ (\textit{i.e.} gives the best approximation) is the one where $\lambda_i=\langle\psi\mid\phi_i\rangle$ for each $i$.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ \begin{enumerate}
+ 	\item First we show that
+ 		\begin{equation}
+ 			\norm{\psi-\sum_{i=1}^n \lambda_i\phi_i}^2=\norm{\psi}^2 - 2 \sum_{i=1}^n \left(\lambda_i\langle\psi\mid\phi_i\rangle\right) + \sum_{i=1}^n \lambda_i^2 .\tag{$\star$}
+		\end{equation}
+ 		This may seem intimidating, but we'll break it down and get there.
+ 		\begin{enumerate}
+ 			\item First prove that for any function $\eta$ and any $k$:
+ 				\[\norm{\eta-\lambda_k\phi_k}^2=\norm{\eta}^2-2\lambda_k\langle\eta\mid\phi_k\rangle + \lambda_k^2.\]
+			\item Take $\eta=\psi$ and $k=1$ to prove Equation ($\star$) in the case $n=1$.
+			\item Now take
+				\[\eta = \psi-\sum_{i=1}^{k-1}\lambda_i\phi_i\]
+				and show that, for this $\eta$, $\langle\eta\mid\phi_k\rangle=\langle\psi\mid\phi_k\rangle$. Hence conclude that if Equation ($\star$) is true for $n=k-1$, then it is true for $n=k$.
+			\item Now we know that ($\star$) is true for $n=1$, and if true for $n=k-1$, is also true for $n=k$. Why does this mean it is true for all $n$?
+ 		\end{enumerate}
+	\item By Equation ($\star$), in order to minimise
+		\[\norm{\psi-\sum_{i=1}^n \lambda_i\phi_i}^2,\]
+		it suffices to minimise $\lambda_i^2-2\lambda_i\langle\psi\mid\phi_i\rangle$ for each value of $i$. Why does minimising the square of the norm also minimise the norm itself?
+	\item Use Fermat's Method and the $2^\mathrm{nd}$ derivative test to show that $\lambda_i^2-2\lambda_i\langle\psi\mid\phi_i\rangle$ has its minimum value when $\lambda_i=\langle\psi\mid\phi_i\rangle$. This completes the proof.
+\end{enumerate}
+	
+	
+	
+	
+	
+	
+
+
+
+
+\clearpage
+
+\textbf{Practice:}\bigskip
+
+
+
+\begin{enumerate}
+	\item Prove (from the three defining conditions) that for any inner product, we have linearity in the $2^\mathrm{nd}$ argument: $\langle \phi\mid a\psi+b\eta\rangle= a\langle\phi\mid\psi\rangle + b\langle\phi\mid\eta\rangle$.
+	\item Check the three conditions to prove that the following are inner products of functions on the interval $[a,b]$:
+		\begin{enumerate}
+			\item \[\langle \phi\mid\psi\rangle = \phi(a)\psi(a).\]
+			\item \[\langle\phi\mid\psi\rangle = \int_a^b \phi(x)\psi(x)\diff x.\]
+		\end{enumerate}
+	\item Consider points in $\mathbb{R}^3$ (real, 3-dimensional space, so points have $(x,y,z)$-coordinates); define a pairing by
+		\[\langle (x_1,y_1,z_1)\mid(x_2,y_2,z_2)\rangle=x_1x_2 + y_1y_2 +z_1z_2.\]
+		This is called the \textbf{dot product}, and often written $(x_1,y_1,z_1)\cdot(x_2,y_2,z_2)$.
+		\begin{enumerate}
+			\item Show that the dot product is an inner product, by checking the three conditions. Note: for points in $\mathbb{R}^3$, addition and multiplying by a constant are done coordinate-wise; so $(x_1,y_1,z_1)+(x_2,y_2,z_2)=(x_1+x_2,y_1+y_2,z_1+z_2)$ and $a(x,y,z)=(ax,ay,az)$.
+			\item Show that
+				\[\phi_1=\left(\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}},0\right),\quad \phi_2=\left(\frac{1}{\sqrt{2}},\frac{-1}{\sqrt{2}},0\right)\]
+				are orthonormal with respect to the dot product.
+			\item Let $\psi$ be the point $(-1,7,4)$. Find the best approximation to $\psi$ by a linear combination of $\phi_1$ and $\phi_2$, and the error in this approximation (\textit{i.e.}, the distance from this approximation to $\psi$).
+		\end{enumerate}
+	\item Consider integrable functions from $0$ to $2\pi$, with the inner product given by integration (as in part (c) of question 1).
+		\begin{enumerate}
+			\item Show that $\phi_1=\frac{1}{\sqrt{\pi}}\cos(t)$ and $\phi_2=\frac{1}{\sqrt{\pi}}\cos(3t)$ are orthonormal.
+			\item Let $\psi(t)=\sin(t)\sin(2t)$. Given that $\langle\psi\mid\phi_1\rangle = \frac{\sqrt{\pi}}{2}$ and $\langle\psi\mid\phi_2\rangle=-\frac{\sqrt{\pi}}{2}$, write down the closest approximation to $\psi$ by a linear combination of $\phi_1$ and $\phi_2$.
+			\item Apply a product-to-sum formula to $\psi$ to verify your result from part (b).
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item An \textbf{inner product} is a pairing which takes two inputs (functions, points in space, etc.) and gives a real number output, satisfying the following three conditions:
+		\begin{alignat*}{2}
+			\langle a\phi+b\psi\mid \eta\rangle &= a\langle \phi\mid \eta \rangle + b\langle \psi\mid \eta\rangle\qquad&& \mbox{linearity in $1^\mathrm{st}$ argument}\\
+			\langle \phi\mid \psi\rangle &= \langle \psi\mid \phi\rangle\qquad&& \mbox{symmetry}\\
+			\langle \phi\mid\phi\rangle &> 0\qquad&& \mbox{positive-definiteness.}
+		\end{alignat*}
+	\item Given an inner product, the \textbf{norm} of an object $\phi$ is $\norm{\phi}=\sqrt{\langle\phi\mid\phi\rangle}$. This is 0 if $\phi=0$, and otherwise is strictly positive.
+	\item The \textbf{distance} between two objects $\phi$ and $\psi$ is the size of their difference, $\norm{\phi-\psi}$.
+	\item A \textbf{linear combination} of objects $\phi_1,\hdots,\phi_n$ is any expression of the form
+		\[\sum_{i=1}^n a_i\phi_i,\]
+		where the $a_i$ are constants.
+	\item We say objects $\phi_1,\hdots,\phi_n$ are \textbf{orthogonal} if $\langle\phi_i\mid\phi_j\rangle=0$ for all $i\neq j$. If also $\norm{\phi_i}=1$ for all $i$, we say they are \textbf{orthonormal}. We can concisely combine the two conditions for orthonormality by writing $\langle\phi_i\mid\phi_j\rangle=\delta_{ij}$ (\textit{i.e.}, is 1 if $i=j$ and 0 if $i\neq j$).
+	\item Given $\phi_1,\hdots,\phi_n$ orthonormal, and another object $\psi$, we can find the best approximation to $\psi$ by a linear combination of the $\phi_i$; it is
+		\[\sum_{i=1}^n \langle \psi\mid\phi_i\rangle\phi_i.\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

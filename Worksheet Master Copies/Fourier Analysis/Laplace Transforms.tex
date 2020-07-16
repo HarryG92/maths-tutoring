@@ -1,0 +1,209 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{Laplace Transforms}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To understand the Laplace transform as a}}
+
+\textbf{\underline{modification of the Fourier transform.}}
+
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+\textbf{Warm-up: Fixing Divergence of the Fourier Transform:}\bigskip
+
+
+We have seen that when finding the Fourier transform of $f(t)=e^{2\pi \alpha jt}$, (for $\alpha$ a real constant), the integral
+\[\hat{f}(\xi)=\int_{-\infty}^\infty f(t)e^{-2\pi j\xi t}\diff t\]
+diverges. We have looked at one way to fix this---broadening our notion of functions to include functionals, and introducing the Dirac delta---now we will see another.
+
+Intuitively, the problem with evaluating the above integral is that the integrand doesn't decay to 0 as $t$ goes to $\pm \infty$, so we end up with an infinite amount of area. So why not try multiplying by a function that decays rapidly to 0, such as $e^{-2\pi t}$? Of course, $e^{-2\pi t}\to 0$ as $t\to\infty$, but not as $t\to-\infty$, so let's also restrict our integration to positive $t$; since we're often only interested in the future behaviour of a function, not its past, this shouldn't be a problem. So we consider replacing the Fourier transform of $f$ by the integral
+\begin{equation*}
+	\int_0^\infty f(t)e^{-2\pi t}e^{-2\pi j\xi t}\diff t. \tag{$\star$}
+\end{equation*}
+
+\begin{enumerate}
+	\item For $f(t)=e^{2\pi j\alpha t}$, evaluate the integral $(\star)$. Call the result $F(\xi)$.
+	% \int_0^\infty e^{2\pi(-\alpha+j(1-\xi))t}\diff t = \left[\frac{e^{2\pi(-\alpha+j(1-\xi))t}}{2\pi(-\alpha+j(1-\xi))}\right]_0^\infty = \frac{1}{2\pi(1+j(\xi-1))}
+	\item Of course, there's nothing special about $e^{-2\pi t}$; any $e^{-2\pi\alpha t}$ will do for $\alpha>0$ (and maybe, for some functions $f(t)$, even for $\alpha\leq 0$). Then the $e^{-2\pi \alpha t}$ and $e^{-2\pi j\xi t}$ terms can be combined as $e^{-st}$ where $s=2\pi(\alpha+j\xi)$. Evaluate
+		\[\int_0^\infty f(t)e^{-st}\diff t\]
+		as a function of the complex number $s$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{Theory: The Laplace Transform:}
+
+\bigskip
+
+
+We saw above how multiplying a function by a decaying exponential and restricting the integral to positive $t$ can allow us to deal with a function that would otherwise fail to have a Fourier transform. So instead of integrating $f(t)e^{-2\pi j\xi t}$, we integrate $f(t)e^{-\alpha t}e^{-2\pi j\xi t}=f(t)e^{-(\alpha+2\pi \xi j)t}$. Therefore we can consider this as multiplying $f(t)$ by an arbitrary complex exponential and then integrating. So we define the \textbf{Laplace transform} of $f(t)$ to be the function $F(s)$ defined by
+\[F(s)=\int_0^\infty f(t)e^{-st}\diff t,\]
+where $s$ is a complex number.
+
+This is analagous to the Fourier transform, but the Fourier transform $\hat{f}(\xi)$ is a function that takes a real input $\xi$ and gives complex outputs, whereas the Laplace transform takes a complex input $s$ and gives a complex output. The Fourier variable $\xi$ was thought of as frequency; the Fourier transform splits a function $f(t)$ up as a combination of sinusoids $e^{2\pi j \xi t}$, with the amplitude of the sinusoid at frequency $\xi$ given by $\hat{f}(\xi)$. We can think of the Laplace transform in a similar way, but now we include amplitude information directly with the sinusoid. If $s=a+bj$, then $e^{-at}$ represents the amplitude of the sinusoid, and $b$ the (angular) frequency.
+
+For a Fourier transform, we can imagine infinitely many violins playing each frequency $\xi$ at a fixed amplitude $\hat{f}(\xi)$ for all time, and the sinusoidal sound waves combining to give $f(t)$. For a Laplace transform, on the other hand, we imagine infinitely many tuning forks, one for each frequency, with damping, so that after the tuning fork of frequency $\xi$ is struck with amplitude $F(a+2\pi \xi j)$ at time 0, its oscillations die down due to friction at a rate of $e^{-at}$; then by combining all the sounds from the tuning forks, we recover the original function.
+
+If the real part of $s$ is far enough to the left, we do not generally expect the Laplace transform $F(s)$ to converge. This is the same problem as for Fourier transforms with divergent integrals. But when $\mathrm{re}(s)$ is large enough, the exponential decay should be big enough to make the integral converge.
+
+To recover $f(t)$ from its Laplace transform $F(s)$, we have \textbf{Mellin's inverse formula}:
+\[f(t)=\frac{1}{2\pi j}\int_{-\infty}^\infty F(a+\omega j)e^{(a+\omega j)t}\diff \omega,\]
+for any $a$ sufficiently large that $F(a+\omega j)$ converges for all $\omega$.
+
+So we can pick any sufficiently large $a$ (friction coefficient for our tuning forks) and recover the original function by combining the decaying tuning fork notes at that rate of decay and all different frequencies.
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+The Laplace transform of $f(t)$ is the function $\mathcal{L}(f)=F(s)$ (of a complex variable $s$) defined by
+\[F(s)=\int_0^\infty f(t)e^{-st}\diff t.\]
+
+\begin{enumerate}
+	\item Let $\alpha=a+bj\in\mathbb{C}$ be a constant. Show that
+		\[\mathcal{L}\left(e^{\alpha t}\right)=\frac{1}{s-\alpha},\]
+		for values of $s$ such that $\mathrm{re}(\alpha-s)<0$.
+	\item Let $H(t)$ be the Heaviside step function and $\tau$ a positive real constant. Show that
+		\[\mathcal{L}(H(t-\tau))=\frac{e^{-\tau s}}{s}\]
+		for $\mathrm{re}(s)>0$.
+	\item Let $\tau$ be a positive real constant and $\delta$ the Dirac delta. Show that
+		\[\mathcal{L}(\delta(t-\tau))=e^{-\tau s}.\]
+	\item Let $f(t)$ be a differentiable function. Show that
+		\[\mathcal{L}\left(\deriv{f}{t}\right)=s\mathcal{L}(f) - f(0^+),\]
+		where $f(0^+)$ denotes the limit of $f(t)$ as $t$ tends to 0 from above only. What assumptions about $f$ must you make for this to hold? Compare this with the analagous result for Fourier transforms.
+	\item Let $f$ be a function, $\tau$ a real constant, and $H$ the Heaviside step function. Show that
+		\[\mathcal{L}(f(t-\tau)H(t-\tau))=e^{-\tau s}\mathcal{L}(f).\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The \textbf{Laplace transform} of a function $f(t)$ is the function of the \textit{complex} variable $s$:
+		\[\mathcal{L}(f)(s)=\int_{0}^\infty f(t)e^{-st}\diff t,\]
+		for values of $s$ where this converges.
+	\item We can think of the imaginary part of $s$ as a frequency, like in the Fourier transform, and the real part as a decay rate for the sinusoids which make up $f$.
+	\item The Laplace transform tends to give a well-defined function (at least for some values of $s$) on a broad range of input functions $f$, unlike the Fourier transform, whose integral only converges for a fairly narrow class of functions.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

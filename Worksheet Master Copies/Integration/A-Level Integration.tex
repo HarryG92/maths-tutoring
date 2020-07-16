@@ -1,0 +1,103 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Integration by Change of Variables}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+
+\section{Standard Functions}
+
+\begin{enumerate}
+	\item \[\int (x^7-3x^2+x^4)\diff x =\]
+	\item \[\int \left(\frac{1}{5}y^3 - 9y^{100}\right)\diff y=\]
+	\item \[\int \sqrt{x}\diff x =\]
+	\item \[\int \frac{x^{3/2}-x^7}{x^{1/3}}\diff x =\]
+	\item \[\int \sin(3t)\diff t=\]
+	\item \[\int 7\cos(-2t)\diff t =\]
+	\item \[\int e^{7x}\diff x =\]
+	\item \[\int \frac{1}{s}\diff s =\]
+\end{enumerate}
+
+
+\clearpage
+
+\section{Trigonometric Integrals}
+
+\begin{enumerate}
+	\item \[\int \cos^2(\theta)\diff \theta=\]
+	\item \[\int \tan^2(3\theta)\diff \theta=\]
+	\item Find the area under the curve $y=\sin(x)\cos(x)$ between $x=0$ and $x=\frac{\pi}{2}$.
+	\item Find the area under the curve $x=\sin(2t)\tan(t)$ between $x=\frac{-\pi}{4}$ and $x=\frac{\pi}{4}$.
+\end{enumerate}
+
+
+
+\clearpage
+
+\section{Integration by Substitution}
+
+\begin{enumerate}
+	\item \[\int x\sqrt{2x+1}\diff x =\]
+	\item \[\int x\cos(x^2)\diff x =\]
+	\item \[\int 4t e^{\sqrt{t^2-1}}\diff t =\]
+	\item \[\int \frac{r^2-3}{r^3-9r+1}\diff r =\]
+	\item \[\int \tan(\theta)\diff \theta=\]
+\end{enumerate}
+
+
+
+\clearpage
+
+\section{Integration by Parts}
+
+\begin{enumerate}
+	\item \[\int y\cos(y)\diff y=\]
+	\item \[\int (s^2-s+1)e^s\diff s =\]
+	\item Find the area beneath the graph of $y=xe^x$ and above the graph of $y=x\sin(x)$, for $2\leq x \leq 5$.
+	\item Let
+		\[I=\int e^x\cos(x)\diff x.\]
+		Use integration by parts twice to show that $I=e^x(\sin(x)+\cos(x))+I$. Hence find $I$.
+	\item \[\int \ln(x)\diff x=\]
+	Hint: use parts with $u=\ln(x)$; what must $\deriv{v}{x}$ be?
+\end{enumerate}
+
+
+
+
+\end{document}

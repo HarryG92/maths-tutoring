@@ -1,0 +1,124 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+%%%\usepackage{array}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\def\ihat{\hat{\i}}
+\def\jhat{\hat{\j}}
+\def\cosec{\mathrm{cosec}}
+
+\begin{document}
+
+\title{Reciprocal Trigonometric Functions.}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To know and apply reciprocal trig functions.}}
+
+
+
+
+\vspace{5mm}
+
+
+\textbf{The Reciprocal Trigonometric Functions:}
+
+\vspace{5mm}
+
+Historically, the main use of trigonometry for hundreds of years was navigation at sea. For this purpose, since calculators did not yet exist, tables of trig values were written up, so a navigator on a ship could measure the angle $\theta$ of a star above the horizon, say, then just look up $\cos(\theta)$, etc. in his trig tables. Since navigation formulae included expressions like $\frac{1}{2}(1-\cos(\theta))$, these were included in the tables---this one being called the ``haversine'' (half versed sine) of $\theta$. There are therefore about a dozen different trig functions, most of which are simple modifications of the standard 3 (sin, cos, and tan).
+
+Most of these extra trig functions, like the haversine, are no longer in use, since they are easily calculated from the standard functions. However, as well as the standard 3 trig functions, there are an extra 3, the \textbf{reciprocal trig functions} still in use. They are the \textbf{secant}, \textbf{cosecant}, and \textbf{cotangent} functions, usually called sec, cosec, and cot, respectively. They are defined by
+\begin{align*}
+\sec(\theta)&=\frac{1}{\cos(\theta)}\\
+\cosec(\theta)&=\frac{1}{\sin(\theta)}\\
+\cot(\theta)&=\frac{1}{\tan(\theta)}=\frac{\cos(\theta)}{\sin(\theta)}
+\end{align*}
+
+Because these are defined in terms of sin, cos, and tan, they are easy to work with---any problem in sec, cosec, and cot can be turned into one with sin, cos, and tan. Indeed, even tan can be turned into sin and cos, since $\tan(\theta)=\frac{\sin(\theta)}{\cos(\theta)}$. So the only trig functions you ever really need are sine and cosine; however, it can be convenient to have tan, sec, cosec, and cot around to keep formulae a little simpler.
+
+\clearpage
+
+
+
+
+
+\textbf{Practice:}
+
+\vspace{5mm}
+
+
+\begin{align*}
+\sec(\theta)&=\frac{1}{\cos(\theta)}\\
+\cosec(\theta)&=\frac{1}{\sin(\theta)}\\
+\cot(\theta)&=\frac{1}{\tan(\theta)}=\frac{\cos(\theta)}{\sin(\theta)}
+\end{align*}
+
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Starting with the pythagorean identity $\sin^2(\theta)+\cos^2(\theta)=1$:
+	\begin{enumerate}
+	\item Divide through by $\sin^2(\theta)$ to find an equation linking $\cot(\theta)$ and $\cosec(\theta)$.
+	\item Divide through by $\cos^2(\theta)$ to find an equation linking $\tan(\theta)$ and $\sec(\theta)$.
+	\end{enumerate}
+\item Find $\sec\left(\frac{\pi}{4}\right)$.
+\item Solve $\cosec(\theta)=\frac{2}{\sqrt{3}}$.
+\item Sketch the graph of $\sec(\theta)$.
+\item Sketch the graph of $\cosec(\theta)$.
+\item Sketch the graph of $\cot(\theta)$.
+\item Solve $5-6\sec(x) = \cos(x)$ for $0\leq x < 2\pi$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+\textbf{Key Points to Remember:}
+
+\begin{enumerate}
+\item The \textbf{reciprocal trigonometric functions} are \textbf{secant} (sec), \textbf{cosecant} (cosec), and \textbf{cotangent} (cot), defined by:
+	\begin{align*}
+	\sec(\theta)&=\frac{1}{\cos(\theta)}\\
+	\cosec(\theta)&=\frac{1}{\sin(\theta)}\\
+	\cot(\theta)&=\frac{1}{\tan(\theta)}=\frac{\cos(\theta)}{\sin(\theta)}
+	\end{align*}
+\item The pythagorean identity $\sin^2(\theta)+\cos^2(\theta)=1$ gives rise to two new identities:
+	\[1+\tan^2(\theta)=\sec^2(\theta),\]
+	\[1+\cot^2(\theta)=\cosec^2(\theta).\]
+\item Any problem involving sec, cosec, and cot can be solved by converting into a problem involving sin, cos, and tan (or just sin and cos).
+\end{enumerate}
+
+
+
+
+\end{document}

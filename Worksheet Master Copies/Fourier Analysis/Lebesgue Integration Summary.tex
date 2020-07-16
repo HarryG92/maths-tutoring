@@ -1,0 +1,71 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+\let\take\setminus
+\let\lamdba\lambda
+
+
+\begin{document}
+
+\title{Lebesgue Integration Summary}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+We define the Lebesgue measure of an interval $(a,b)$ (or $[a,b]$, the endpoints being in the interval or not don't matter for this) to be its length $b-a$. Any other set $A$ can be approximated by intervals, so the idea is to take a collection of intervals which covers $A$ and use the sum of the lengths of those intervals as an estimate for the measure of $A$. The problem is that our union of intervals will probably contain things outside $A$; so we take a better collection of intervals, which cover $A$ with less excess, and sum their lengths to get a better approximation of the measure of $A$. The limit as we take better and better approximations to $A$ by unions of intervals is the outer measure $\lambda^+(A)$.
+
+The question now is does this really give a good measure of the size of $A$? For a really weird set, it could be that no matter how carefully we choose our intervals, we always include a lot of points outside $A$, and so can never get a good estimate of the size of $A$. So we think about covering $A$ by a countable collection of intervals and taking the sum of their lengths; this will give at least the size of $A$, but maybe more, if the intervals contain a lot of extra points, so then we take a better cover of $A$ by intervals, and a better, and a better, and take the limit as our coverings by intervals get better and better. Technically, this isn't quite a limit, because there isn't a clear, ordered sequence of ways to cover $A$, so we use an infimum instead, but it's closely related to the notion of a limit, so there's no harm in thinking of it as a limit.
+
+This limit is called the outer measure of $A$, $\lambda^+(A)$. If $A$ has a sensible notion of size, it will be $\lambda^+(A)$; in particular, if $A$ is an interval, then clearly there is an unambiguous best way to cover $A$ by intervals---just cover it with itself---so the infimum (limit) will just be the length of $A$. So if $A$ is in interval, $\lambda^+(A)$ is its length. Similarly if $A$ can be built out of intervals in a sensible way. But if $A$ is really complicated, the outer measure might not give a sensible notion of its size.
+
+So then we say that a set $E$ is measurable if the outer measure behaves well on it. We check this by seeing how well we can find the outer measure of a \textit{different} set $A$ by splitting $A$ up into the part inside $E$ ($A\cap E$) and the part outside $E$ ($A\cap(\mathbb{R}\take E)$). If for any set $A$ we can still find its outer measure correctly by splitting it in this way, \textit{i.e.}, if
+\[\lambda^+(A)=\lambda^+(A\cap E)+\lambda^+(A\cap(\mathbb{R}\take E)),\]
+then $E$ clearly behaves nicely with $\lambda^+$, so we call $E$ measurable. Then measurable sets are the ones where $\lambda^+$ really does give a good idea of its size; so if $E$ is measurable, we write $\lambda(E)$ instead of $\lambda^+(E)$ just to emphasise that it really is the size of $E$, not just an overestimate.\bigskip
+
+Now, the motivation for thinking about measure was so we could use it to integrate. So we want to take a function $f$, divide up the $y$-axis into intervals, take the preimage of each interval, and measure that (to get a ``width,'' except it might be broken up into lots of pieces). Then we multiply this ``width'' by the height of the interval on the $y$-axis to get an area, add up each of these areas, and so get an estimate of the area under the graph. Then we take the limit as the size of the intervals on the $y$-axis tends to 0. The problem with this is that for a really weird function, the preimage of one of the intervals on the $y$-axis might be a really weird set, and might not be measurable. So we have to restrict to ``measurable functions''---\textit{i.e.}, functions where the preimage of an interval is measurable. This definition is made precisely to make measurable functions the ones for which Lebesgue integration should work.
+
+There is another problem when integrating, which is when you get infinite areas. As long as the infinite area is all positive or all negative, that's ok (you just say the integral is $\infty$ or $-\infty$ respectively), but if you take a function like $\frac{1}{x}$, between $x=-1$ and $x=1$, there's an infinite amount of negative area and an infinite amount of positive area. So we start by restricting to non-negative functions, so we don't have to worry about this. So for $f$ measurable (so we can take the ``widths'' using Lebesgue measure) and non-negative (so all the area we get is positive), we define the Lebesgue integral of $f$ to be the number (or infinity) we get by taking the limit of estimated areas as described in the last paragraph.
+
+Then for $f$ measurable and non-positive, the same idea works, because now all our area is negative. Then for $f$ which is sometimes positive and sometimes negative, we split it into the positive part and the negative part, integrate both separately, and then add the positive area to the negative area, as long as that doesn't require us to do $\infty-\infty$. So a function like $\frac{1}{x}$ still can't be integrated, because it has infinite positive \textit{and} negative areas, but something like $\frac{1}{x^2}-10$ is fine---it has a finite amount of negative area and an infinite amount of positive area, so its integral is positive infinity.
+
+The key advantage this gives us compared to Riemann integration is that if a function is non-negative (or non-positive), there's a clear criterion for integrability. As long as it's measurable, it's integrable. Whereas with Riemann integration, it can be much less clear when a function is integrable. So for things like checking the integral inner product on an $L_2$ space is well-defined, we can use moduli to make sure we're integrating non-negative functions, we know things are measurable because $L_2$ spaces only contain measurable functions \textit{by definition} (and this includes all functions we're likely to care about), and so we only need to show the integral is bounded above to know it converges to a finite value. So the tricks where we showed things like $|z+w|^2\leq 2|z|^2+2|w|^2$, or whatever, work because they give us an upper bound and that lets us conclude the integral is finite, whereas with Riemann integration, this would prove that \textit{if the integral exists} it must be finite, but we'd still be worrying whether the integral even exists!
+
+
+
+
+
+
+
+
+
+
+\end{document}

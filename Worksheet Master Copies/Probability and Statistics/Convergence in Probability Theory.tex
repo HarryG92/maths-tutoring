@@ -1,0 +1,157 @@
+
+\documentclass{article}
+
+\usepackage[left=1.8cm,right=1.8cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+
+
+
+\begin{document}
+
+\title{Convergence in Probability Theory}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To understand the different notions of convergence used in}}
+
+\textbf{\underline{probability theory, and how they relate to one another.}}
+
+
+\vspace{5mm}
+
+
+
+
+\textbf{Warm-up: Limits of Sequences and Functions:}\bigskip
+
+\begin{enumerate}
+	\item Let $(a_n)_{n\in\mathbb{N}}$ be a sequence of real numbers. Define what it means for $a_n$ to converge to a limit $L$ as $n$ tends to infinity.
+	\item Let $(a_n)$ and $(b_n)$ be sequences of real numbers, with $a_n\to A$ and $b_n\to B$ as $n\to \infty$. Prove that $a_n+b_n\to A+B$ and $a_nb_n\to AB$.
+	\item Let $f\colon\mathbb{R}\to\mathbb{R}$ be a function. Define what it means for $f(x)$ to tend to a limit $L$ as $x$ tends to some constant $a$.
+	\item Let $f\colon\mathbb{R}\to\mathbb{R}$ be a function. Prove that $f(x)\to L$ as $x\to a$ if and only if for every sequence $(x_n)$ with $x_n\to a$, we have $f(x_n)\to L$.
+\end{enumerate}
+
+\clearpage
+
+
+
+\textbf{Probabilistic Convergence:}\bigskip
+
+Let $(X_n)$ be a sequence of (real-valued) random variables, and $X$ a random variable. Give the definition of each of the following types of convergence:\bigskip
+
+\[X_n\xrightarrow{d} X\]
+
+\vfill
+
+
+\[X_n\xrightarrow{P} X\]
+
+\vfill
+
+\[X_n\xrightarrow{L_n}X\]
+
+
+\vfill
+
+\clearpage
+
+
+\textbf{Relationships between Different Types of Convergence:}\bigskip
+
+\begin{enumerate}
+	\item First we prove that convergence in probability implies convergence in distribution:
+		\[\left(X_n\xrightarrow{P}X\right)\quad\Rightarrow\quad \left(X_n\xrightarrow{d} X\right).\]
+		\begin{enumerate}
+			\item First a Lemma. Prove that, for random variables $Y$ and $Z$, and constants $a\in\mathbb{R}$ and $\epsilon>0$:
+				\[P(Y\leq a)\leq P(Z\leq a+\epsilon)+P(|Y-Z|>\epsilon).\]
+				Hint: show that $\{Y\leq a\}\subseteq \{Z\leq a+\epsilon\}\cup\{|Y-Z|>\epsilon\}$.
+			\item Let $a\in\mathbb{R}$ be such that $F_X$ is continuous at $a$. We need to show that $F_{X_n}(a)\to F_X(a)$.
+				\begin{enumerate}
+					\item Use the Lemma to show that
+						\[P(X\leq a-\epsilon)-P(|X_n-X|>\epsilon)\leq P(X_n\leq a)\leq P(X\leq a+\epsilon)+P(|X_n-X|>\epsilon).\]
+						Hint: Use the Lemma twice---once with $Y=X$, once with $Y=X_n$.
+					\item Hence conclude that
+						\[F_X(a-\epsilon)\leq \lim_{n\to \infty} F_{X_n}(a)\leq F_X(a+\epsilon).\]
+					\item Hence conclude that $X_n\xrightarrow{d}X$.
+				\end{enumerate}
+		\end{enumerate}
+	\item Next we show that convergence in mean implies convergence in probability:
+		\[\left(X_n\xrightarrow{L_1}X\right)\quad\Rightarrow\quad\left(X_n\xrightarrow{P}X\right).\]
+		\begin{enumerate}
+			\item First we need \textbf{Markov's Inequality}: if $Y$ is a non-negative random variable, then
+				\[P(Y\leq a)\geq \frac{E(Y)}{a}.\]
+				Prove this by writing out the definition of $E(Y)$ and relating it to $P(Y\geq a)$.
+			\item Now suppose that $X_n\xrightarrow{L_1}X$ and fix $\epsilon>0$. Show that
+				\[P(|X_n-X|>\epsilon)\to 0\]
+				as $n\to \infty$; \textit{i.e.}, that $X_n\xrightarrow{P}X$.
+		\end{enumerate}
+	\item As a bonus, conclude that convergence in mean implies convergence in distribution:
+		\[\left(X_n\xrightarrow{L_1}X\right)\quad\Rightarrow\quad \left(X_n\xrightarrow{d} X\right).\]
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{The Weak Law of Large Numbers:}\bigskip
+
+Let $(X_n)$ be a sequence of i.i.d. random variables with finite mean $\mu$, and let $\bar{X}_n$ be the sample mean:
+\[\bar{X}_n=\frac{1}{n}\sum_{i=1}^n X_i.\]
+The \textbf{Weak Law of Large Numbers} (WLLN) states that
+\[X_n\xrightarrow{P}\mu.\]
+\vfill
+
+To prove this, we assume that the $X_i$ have finite variance $\sigma^2$, though the result holds (with a harder proof) without this assumption. Assuming finite variance allows us to prove \textbf{Chebyshev's Inequality}: for a random variable $X$ with mean $\mu$ and variance $\sigma^2$, and for any $\lambda>0$, we have
+\[P(|X-\mu|\geq\lambda\sigma)\leq \frac{1}{\lambda^2}.\]
+
+Prove Chebyshev's Inequality by applying Markov's Inequality (see previous page) to the random variable $(X-\mu)^2$, with $a=(\lambda\sigma)^2$.
+
+\vfill
+
+Apply Chebyshev's Inequality to $\bar{X}_n$ to prove the WLLN.
+
+\vfill
+
+
+
+
+
+
+
+
+\end{document}

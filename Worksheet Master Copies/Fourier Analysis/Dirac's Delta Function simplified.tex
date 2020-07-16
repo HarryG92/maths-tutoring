@@ -1,0 +1,309 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+\newcommand{\sinc}{\,\mathrm{sinc}}
+\newcommand{\rect}{\,\mathrm{rect}}
+
+
+
+\begin{document}
+
+\title{Dirac's Delta ``Function''}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+
+\textbf{\underline{Objective: To understand linear functionals, in particular Dirac's}}
+
+\textbf{\underline{Delta, and how they arise in Fourier transforms.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Warm-up:}
+
+\bigskip
+
+
+We will take the convention that
+\begin{align*}
+	\hat{f}(\xi)&=\int_{-\infty}^\infty f(t)e^{-2\pi j\xi t}\diff t\\
+	f(t)&=\int_{-\infty}^\infty \hat{f}(\xi)e^{2\pi j\xi t}\diff \xi.
+\end{align*}\bigskip
+
+
+We haven't yet worried about the convergence of the integrals involved in Fourier transforms. An integral can fail to converge if there is a discontinuity in its domain of integration (such as $x^{-1}$---finite jumps like in Heaviside's step function are fine), or if it's over an infinitely long domain. The integral of the constant function 1 from $-\infty$ to $\infty$, for instance, clearly doesn't converge. Since Fourier transforms involve integrals over the whole real line, we should be worried about convergence. We will highlight the problem by considering the Fourier transform of the seemingly innocuous function $f(t)=e^{2\pi jt}$.
+
+\begin{enumerate}
+	\item First consider $\hat{f}(1)$; show that
+		\[\int_{-a}^a f(t)e^{-2\pi j(1) t}\diff t = 2a.\]
+		What does this tell us about $\hat{f}(1)$?
+	\item Now consider $\hat{f}(\xi)$ for $\xi\neq 1$. Show that
+		\[\int_{-a}^a f(t)e^{-2\pi j\xi t}\diff t = \frac{\sin(2\pi (1-\xi)a)}{\pi(1-\xi)}.\]
+		Hence show that $\hat{f}(\xi)$ is undefined.
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Linear Functionals:}\bigskip
+
+
+We have seen that when taking the Fourier transform a function, the integral might not exist, even for a ``nice'' function like a complex sinusoid, $e^{2\pi jt}$. This is a problem, but by extending our notion of what is acceptable as a function, we can work around it and obtain a Fourier transform for $e^{2\pi jt}$, and many other important functions. To do this, we require the notion of a linear functional.
+
+We have seen functions, which take numbers as input and give numbers as output, and operators (like differentiation), which take functions as input and give functions as output. A \textbf{functional} is a rule which takes a function as input but gives a number as output! For example, define a functional $\delta_a$ by the rule $\delta_a(f)=f(a)$: the ``evaluation at $a$'' functional. So $\delta_a(\sin(t))=\sin(a)$, $\delta_a(t^2-4t+2)=a^2-4a+2$, etc. Many important functionals are given by integration; for instance, define a functional $I_{a,b}$ by
+\[I_{a,b}(f)=\int_a^b f(t)\diff t.\]
+
+So actually, functionals are nothing new; we've seen evaluation at a number, and we've seen definite integration; all we've done is unify these two distinct concepts under a single name. Of course, there are many other functionals besides evaluation and integration functionals; however, these are the main ones of interest to us.
+
+A functional $L$ is \textbf{linear} if for any functions $f$ and $g$ and constants $\alpha$ and $\beta$, we have
+\[L(\alpha f + \beta g)=\alpha L(f)+\beta L(g).\]
+
+Show that the functionals $\delta_a$ and $I_{a,b}$ defined above are linear.
+\vfill
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+
+ Let $f$ be a function. Define a functional $f^*$ by the rule
+\[f^*(g)=\int_{-\infty}^\infty f(t)g(t)\diff t.\]
+For each positive integer $n$, let $f_n(t)$ be the function defined by
+\[f_n(t)=\begin{cases} n : & -\frac{1}{2n}\leq t\leq \frac{1}{2n}\\ 0 : & \mbox{otherwise.}\end{cases}\]
+		
+		
+\begin{enumerate}
+	\item Show that $f^*$ is linear (on those functions for which the integral converges).
+	\item Sketch the graph of $f_n(t)$; evaluate
+		\[\int_{-\infty}^\infty f_n(t)\diff t.\]
+	\item Let $g(t)$ be a continuous function. Show that $f_n^*(g)\to g(0)$ as $n\to \infty$. Hint: consider graphically what $f^*_n(g)$ is, and how this changes as $n$ gets larger and larger.
+\end{enumerate}
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Fourier Transforms and Functionals:}\bigskip
+
+
+Let $f$ be a ``nice enough'' function. Then we can form the Fourier transform
+\[\hat{f}(\xi)=\int_{-\infty}^\infty f(t)e^{-2\pi j\xi t}\diff t.\]
+This is a function (on the frequency domain), but the main thing we're interested in doing with it---the key property it has---is that we can recover $f$ from it by the inverse transform:
+\[f(t)=\int_{-\infty}^\infty \hat{f}(\xi)e^{2\pi j\xi t}\diff \xi.\]
+
+Using the asterisk notation from the previous page, we have a linear functional $\hat{f}^*$, defined by
+\[\hat{f}^*(g)=\int_{-\infty}^\infty \hat{f}(\xi)g(\xi)\diff \xi,\]
+and the inverse transform equation can be written as
+\[f(t)=\hat{f}^*\left(e^{2\pi j\xi t}\right).\]
+So the Fourier transform $\hat{f}$ gives us a functional $\hat{f}^*$ which, for each $t$, sends the frequency-domain function $e^{2\pi j\xi t}$ to the number $f(t)$. The idea now is that even if the Fourier transform $\hat{f}$ does not exist, there could still exist a functional $\tilde{f}$ which plays the role of $\hat{f}^*$.\medskip
+
+For example, we saw in the warm-up that $f(t)=e^{2\pi jt}$ does not have a Fourier transform. However, there is a functional $\delta_1$, defined by $\delta_1(g)=g(1)$ (the ``evaluation at $\xi=1$'' functional) with the property that
+\[e^{2\pi jt}=\delta_1\left(e^{2\pi j\xi t}\right).\]
+So we can say that if $f(t)=e^{2\pi jt}$ had a Fourier transform, then the associated functional $\hat{f}^*$ would be $\delta_1$. Even though the transform $\hat{f}$ does not exist, the functional $\delta_1$ does. As such, we can use $\delta_1$ like we would use the transform $\hat{f}$; or rather, like we would use $\hat{f}^*$. Since $\hat{f}^*$ is the ``multiply by $\hat{f}$ and integrate'' functional, whenever we would have an expression like
+\[\int_{-\infty}^\infty \hat{f}(\xi)g(\xi)\diff \xi\]
+for some function $g$, we can write $\delta_1(g)$, and proceed as we would with the transform.
+
+
+
+\clearpage
+
+
+
+\textbf{The Dirac Delta:}\bigskip
+
+We saw on the last page that even if there is no \textit{function} $\hat{f}$ playing the role of the Fourier transform of $f$, there can be a \textit{functional} $F$ such that
+\[F\left(e^{2\pi j\xi t}\right)=f(t)\]
+for all $t\in\mathbb{R}$. If $f$ does have a Fourier transform, then $F=\hat{f}^*$, so the above formula is just the inverse Fourier transform.
+
+For notational convenience, we tend to pretend that the Fourier transform exists, even when actually only a functional version of it does. We define a (pretend!) function, the \textbf{Dirac delta function}, $\delta(\xi)$, such that
+\[\int_{-\infty}^\infty \delta(\xi)g(\xi)\diff \xi=g(0).\]
+So the ``integrate against $\delta$'' functional, $\delta^*$, is just the ``evaluation at 0'' functional. We can easily modify this to obtain evaluation at any other point $a$:
+\[\int_{-\infty}^\infty \delta(\xi-a)g(\xi)\diff \xi = \int_{-\infty}^\infty \delta(\eta)g(\eta+a)\diff \eta=g(a),\]
+by ``substitution in the integral'' (though really this is just notation, since $\delta$ is not actually a function!). So for $f(t)=e^{2\pi jt}$, where we saw that the functional Fourier transform is the ``evaluation at $\xi=1$'' functional, we can say that the Fourier transform of $f$ is $\delta(\xi-1)$.
+
+There does not actually exist any function $\delta$ with the properties of the Dirac delta, so it isn't a real function! However, there \textit{is} a linear function\textit{al} with the right properties, and the Dirac delta is just a notational convenience to pretend this functional comes from a function, so we can work with it easily.\bigskip
+
+We saw in the practice questions a family of functions $f_n(t)$, defined by $f_n(t)=n$ for $t$ between $-\frac{1}{2n}$ and $\frac{1}{2n}$ and $f_n(t)=0$ otherwise. We saw that the integral of $f_n(t)$ is 1 (for any $n$), and that when we take the associated functionals $f_n^*$, we have $f_n^*(g)\to g(0)$ as $n\to \infty$. So the functionals $f_n^*$ converge to the ``evaluation at 0'' functional; so the Dirac delta should be the limit of the $f_n$'s themselves.
+
+However, $f_n(t)\to 0$ for $t\neq 0$ and $f_n(0)\to \infty$; so the $f_n$'s do not converge to a well-defined function. Roughly speaking, however, we can think of the Dirac delta as the limit of the $f_n$'s, so $\delta(0)=\infty$ and $\delta(t)=0$ for $t\neq 0$. Then $\delta(t-a)$ is simply a horizontal translation of $\delta$, so is infinite at $t=a$ and 0 elsewhere. Again, the Dirac delta function is only a pretend function, but it gives a convenient way of working with evaluation functionals.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Practice:}\bigskip
+
+From now on, we will pretend that the Dirac delta function is a real thing, but you should be aware that it is just a convenient fiction to simplifying working with the associated functional. In particular, the Fourier transform of $e^{2\pi j\alpha t}$ is $\delta(\xi-\alpha)$.\bigskip
+
+Consider a forced, undamped harmonic oscillator; this could be a mass-spring system being regularly pushed, or an LC circuit being driven by a radio wave or AC voltage source. The ODE governing the system is
+\[\deriv[2]{x}{t}+\beta^2x=\sin(2\pi \gamma t),\]
+where $\beta$ and $\gamma$ are real constants and $\beta\neq \pm\gamma$.
+
+\begin{enumerate}
+	\item By writing $\sin(2\pi\gamma t)$ in terms of exponentials, show that the Fourier transform of $\sin(2\pi \gamma t)$ is
+		\[\frac{1}{2j}\left(\delta(\xi+\gamma)-\delta(\xi-\gamma)\right).\]
+	\item By taking the Fourier transform of the above ODE, show that
+		\[-\xi^2\hat{x}(\xi)+\beta^2\hat{x}(\xi)=\frac{1}{2j}\left(\delta(\xi+\gamma)-\delta(\xi-\gamma)\right).\]
+	\item Hence show that
+		\[\hat{x}\left(\pm\gamma\right) = \frac{\mp\infty}{2j\left(\beta^2 -\gamma^2\right)}\]
+		(pretending, in the spirit of Dirac deltas, that this equation makes sense!).
+	\item Show also that when $\xi\neq \pm \gamma$,
+		\[\left(\beta^2-\xi^2 \right)\hat{x}(\xi)=0.\]
+	\item Hence show that $\hat{x}(\xi)=0$ whenever $\xi\neq\pm\gamma \mbox{ and } \xi\neq \pm\beta$.
+	\item Conclude that, for some unknown constants $A$ and $B$:
+		\[\hat{x}(\xi)=A\delta\left(\xi+\beta\right)+B\delta\left(\xi-\beta\right)+ \frac{1}{2j\left(\beta^2 -\gamma^2\right)}\left(\delta(\xi+\gamma)- \delta(\xi-\gamma)\right).\]
+	\item By taking the inverse Fourier transform, show that
+		\[x(t)=Ae^{ 2\pi j\beta t}+Be^{-2\pi j\beta t}+\frac{1}{2j\left(\beta^2-\gamma^2\right)}\left(e^{2\pi j\gamma t}-e^{-2\pi j\gamma t}\right).\]
+	\item Rewrite this to show that, for some unknown constants $C$ and $D$:
+		\[x(t)=C\cos(2\pi \beta t) + D\sin(2\pi\beta t) + \frac{1}{\beta^2-\gamma^2}\sin(2\pi \gamma t).\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item A \textbf{linear functional} is a rule $F$ that takes a function $g$ and returns a number, $F(g)$, and satisfies
+		\[F(ag+bh)=aF(g)+bF(h)\]
+		for any functions $g$ and $h$ and constants $a$ and $b$.
+	\item Any nice enough (\textit{e.g.} integrable) function $f$ has an associated functional $f^*$ defined by
+		\[f^*(g)=\int_{-\infty}^\infty f(x)g(x)\diff x.\]
+	\item For any nice enough function $f$, the Fourier transform $\hat{f}$ can be described by its associated functional $\hat{f}^*$, and we can recover $f$ by
+		\[f(t)=\hat{f}^*\left(e^{2\pi j\xi t}\right).\]
+	\item For many functions $f$, it can occur that the Fourier transform does not exist, but the associated functional does! So there is no function $\hat{f}$ defined by
+		\[\hat{f}(\xi)=\int_{-\infty}^\infty f(t)e^{-2\pi j\xi t}\diff t,\]
+		because the integral fails to converge, but there is a functional $\check{f}$ satisfying
+		\[f(t)=\check{f}\left(e^{2\pi j\xi t}\right).\]
+	\item When the Fourier transform of a function does not exist but the associated functional does, we typically invent a false function for convenience of notation and working.
+	\item A key example of such an invented ``function'' is the \textbf{Dirac delta}, $\delta(\xi)$, which is the Fourier transform of $1$. Technically, only the associated functional actually exists, and it is the ``evaluation at 0'' functional:
+		\[\delta^*(g)\text{``$=\int_{-\infty}^\infty \delta(\xi)g(\xi)\diff \xi$''} = g(0).\]
+		By translation:
+		\[\int_{-\infty}^\infty \delta(\xi - a)g(\xi)\diff\xi = g(a).\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,205 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d}#3^{#1}}}
+
+
+
+
+\begin{document}
+
+\title{Higher Derivatives}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand the higher derivatives and the second}}
+
+\textbf{\underline{derivative test for classifying extrema.}}
+
+
+
+
+\vspace{5mm}
+
+
+\textbf{Recap: The Mean Value Theorem and Fermat's Method:}
+
+\vspace{5mm}
+
+
+\begin{enumerate}
+	\item State the Mean Value Theorem for a differentiable function $f(t)$.
+	\item Suppose a car travels a distance of 1 mile in 1 minute. Show that at some point in the journey the car's instantaneous speed is exactly 60mph. Hint: apply the Mean Value Theorem to the car's distance-travelled function.
+	\item Let $y=e^x\sin(5x)$. Use Fermat's method to find the maximum and minimum values of $y$ for $0\leq x\leq 1$.
+\end{enumerate}
+
+\bigskip
+
+
+
+
+\clearpage
+
+
+{\bf Warm-Up: Velocity and Acceleration:}
+
+\vspace{5mm}
+
+
+A mass hangs from a spring. It is given a push, and bounces up and down on the spring, gradually slowing due to air resistance. The height $y$ of the mass at time $t$ is given by $y=e^{- t}\cos(t)$. Note that the rest position of the mass is taken to be 0, so a positive $y$-value means the mass is above its rest position, and a negative $y$-value means it is below the rest position.\medskip
+
+\begin{enumerate}
+	\item Show by differentiating that the velocity $v$ of the mass at time $t$ is given by
+		\[v=-e^{- t}\left(\sin( t)+\cos(t)\right).\]
+	\item By expressing $\sin(t)+\cos(t)$ in the form $R\cos(t-\alpha)$, find when the velocity of the mass is 0.
+	\item Acceleration $a$ is the rate of change of velocity; by differentiating $v$, show that the acceleration of the mass is given by
+		\[a=2e^{- t}\sin(t).\]
+	\item Let $t_0$ be the smallest positive value of $t$ at which $v=0$ (from part 2). Find the value of $a(t_0)$ and hence decide in which direction the mass is accelerating at time $t_0$. Hence conclude whether $t_0$ is a local maximum, local minimum, or point of inflexion of $y$.
+	\item Let $t_1$ be the smallest value bigger than $t_0$ at which $v=0$. Find $a(t_1)$, decide which way the mass is accelerating at $t_1$, and hence determine whether $t_1$ is a local maximum, local minimum, or point of inflexion for $y$.
+	\item Show that $a+2v+2y=0$.
+	\item From Newton's Second Law, force is equal to mass times acceleration: $F=ma$. The forces on the mass are the spring tension and air resistance. By Hooke's Law, the spring tension is proportional to the amount the spring is stretched or squashed and acts in the opposite direction, so is $-ky$ for some positive constant $k$ expressing the stiffness of the spring. Air resistance can be taken to be proportional to the speed of the moving object---the faster the mass is moving, the faster it hits the air particles, and so the more resistance it feels---so air resistance is $-\lambda v$ for some positive constant $\lambda$ describing the air density and the aerodynamics of the mass. So the total force on the mass is $F=-\lambda v-ky$, and $F=ma$. Eliminate $F$ from these equations and compare with $a+2v+2y=0$ to obtain equations describing the relationships between $m$, $k$, and $\lambda$. 
+\end{enumerate}
+
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Theory: Higher Derivatives:}
+
+\vspace{5mm}
+
+
+Recall the differentiation is an \textbf{operator}: it takes a function as input and returns another function (the derivative) as output. So there is no reason we can't take that output function and feed it back in as input to find the derivative of the derivative---the second derivative. Similarly, we can differentiate the second derivative to find the third derivative, and so on. Our notation is that if $y$ is a function of $x$, then
+\[\deriv{y}{x}\mbox{   is the (first) derivative,}\]
+\[\deriv[2]{y}{x}=\deriv{}{x}\left(\deriv{y}{x}\right)\mbox{   is the second derivative,}\]
+\[\deriv[3]{y}{x}=\deriv{}{x}\left(\deriv[2]{y}{x}\right)\mbox{   is the third derivative,}\]
+\[\vdots\]
+\[\deriv[n]{y}{x}=\deriv{}{x}\left(\deriv[n-1]{y}{x}\right)\mbox{   is the $n^\mathrm{th}$ derivative.}\]
+
+Using the ``prime'' notation, if we have $f(x)$ a function, then $f'(x)$ is the derivative, $f''(x)$ is the second derivative, and $f'''(x)$ is the third derivative. If we want to take a fourth or higher derivative, rather than continuing to add primes, we switch to writing the order of the derivative in parentheses:  $f^{(4)}(x)$ is the fourth derivative, and so on. So $f^{(n)}(x)$ is the $n^\mathrm{th}$ derivative.\bigskip
+
+
+
+Recall that the derivative of a function gives its instantaneous rate of change at each point: if $f(t)$ is some function, then $f'(t)$ tells you at each time $t$ how quickly $f(t)$ is changing. If $f(t)$ is position, for instance, $f'(t)$ is velocity---the rate of change of position. Then the second derivative is the rate of change of the rate of change; so if $f(t)$ is position, then $f'(t)$ is velocity and $f''(t)$ is the rate of change of velocity---the acceleration.
+
+If $Q(t)$ is the amount of charge on the plate of a capacitor, $Q'(t)$ is the rate at which charge flows onto the capacitor, so is the current, and $Q''(t)$ is the rate of change of current; so if $Q''(a)$ is large and positive, then the current is increasing rapdily at time $a$, and if $Q''(a)$ is large and negative, then the current is decreasing rapdily at time $a$.\bigskip
+
+
+If a function has a second derivative, we say it is \textbf{twice differentiable}. Similarly we say it is $n$-times differentiable if it has an $n^\mathrm{th}$ derivative. Beware that a function can be differentiable without being twice differentiable; we shall see a cautionary example in the practice questions later.
+
+
+\clearpage
+
+
+
+
+\textbf{Theory: The Second Derivative Test:}
+
+\vspace{5mm}
+
+
+We have seen Fermat's method: to find local extrema of a function $f(x)$, solve $f'(x)=0$ to find the stationary points, since all local extrema must be stationary points. We then have to check each stationary point to see if it is a maximum, minimum, or point of inflexion. So far, the way we have down this is by looking at the sign of $f'(x)$ to either side of the stationary point: if $f'(x)>0$ to the left and $f'(x)<0$ to the right, then $f(x)$ is increasing to the left and decreasing to the right, so we have a maximum. Conversely, if $f'(x)<0$ to the left and $f'(x)>0$ to the right, then we have a minimum, since $f(x)$ is decreasing to the left and increasing to the right. If $f'(x)$ has the same sign on both sides of the stationary point, then we have a point of inflexion.
+
+There is an alternative method we can use, called the \textbf{second derivative test}. If $a$ is a stationary point (so $f'(a)=0$) and $f''(a)>0$, then $f'(x)$ is increasing at $a$, so must be negative to the left and positive to the right. So $f(x)$ is decreasing to the left and increasing to the right, so $a$ is a local minimum. Similarly, if $f''(a)<0$, then $f'(x)$ is decreasing at $a$, so must be positive to the left and negative to the right, so $f(x)$ is increasing to the left and decreasing to the right. So $a$ is a local maximum.
+
+So to find local extrema of a function $f(x)$, we solve $f'(x)=0$ to find stationary points. Then at each stationary point $a$, we evaluate $f''(a)$; if $f''(a)>0$, then $a$ is a local minimum, and if $f''(a)<0$, then $a$ is a local maximum. If $f''(a)=0$, then unfortunately we cannot tell whether $a$ is a maximum, minimum, or point of inflexion; we shall see a cautionary example in the practice questions.\bigskip
+
+
+Find and classify all stationary points of $y=36x+74-2x^3-3x^2$.
+
+\vfill
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}
+
+
+\begin{enumerate}
+	\item Find and classify all stationary points of $e^{x^2-2x}(x^2-4x-2)$.
+	\item Cautionary example: Let 
+		\[f(x)=\begin{cases}
+				-x^2 & x\leq 0\\
+				x^2 & x>0
+			\end{cases}\]
+		Sketch the graph of $y=f(x)$, and find $f'(x)$ (hint: treat the cases of positive and negative $x$ separately). Hence show that $f(x)$ is differentiable, but not twice differentiable.
+	\item Cautionary example: For the following functions $x$, find the stationary point of $x$, and apply the second derivative test. Determine whether the stationary point is a maximum, minimum, or point of inflexion.
+		\begin{enumerate}
+			\item $x=t^4$.
+			\item $x=-t^4$.
+			\item $x=t^3$.
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The \textbf{second derivative} of a function $f(t)$ is the function $f''(t)=\deriv[2]{f}{t}$ obtained by differentiating the derivative.
+	\item The $n^\mathrm{th}$ derivative of a function $f(t)$ is the function $f^{(n)}(t)=\deriv[n]{f}{t}$ obtained by differentiating $n$ times.
+	\item The \textbf{second derivative test}: if $f'(a)=0$ and $f''(a)>0$, then $a$ is a local minimum of $f$; if $f'(a)=0$ and $f''(a)<0$, then $a$ is a local maximum of $f$. If $f'(a)=0=f''(a)$, then $a$ is a stationary point of $f$ but could be a maximum, minimum, or point of inflexion.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

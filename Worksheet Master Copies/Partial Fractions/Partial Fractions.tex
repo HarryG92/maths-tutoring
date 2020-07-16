@@ -1,0 +1,169 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+\let\take\setminus
+\let\lamdba\lambda
+
+
+\begin{document}
+
+\title{Partial Fractions}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To be able to compute partial fraction decompositions.}}
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{Warm-up:}\bigskip
+
+
+\begin{enumerate}
+	\item Simplify
+		\[\frac{6}{7}-\frac{1}{2}.\] %\frac{12}{14}-\frac{7}{14} = \frac{5}{14}.
+	\item Hence write
+		\[\frac{1}{14}\]
+		in the form
+		\[\frac{A}{7}+\frac{B}{2}\]
+		where $A$ and $B$ are real numbers (not necessarily integers!).
+	\item Write
+		\[\frac{6}{n+3}-\frac{1}{n-2}\]
+		as a single fraction in simplest terms. % \frac{5n-15}{n^2+n-6}
+	\item Hence write
+		\[\frac{n-3}{n^2+n-6}\]
+		in the form
+		\[\frac{A}{n+3}+\frac{B}{n-2},\]
+		where $A$ and $B$ are real numbers. % A = \frac{6}{5}, B=\frac{1}{5}
+	\item Evaluate your expressions from questions 3 \& 4 at $n=4$ and compare with your answers to questions 1 \& 2.
+\end{enumerate}
+
+
+\clearpage
+
+\textbf{Theory: Partial Fractions:}\bigskip
+
+
+
+The idea of partial fractions is essentially the reverse of combining fractions over a common denominator. When given two (or more) fractions that are being added together or subtracted, it is often convenient to combine them as a single fraction. It can also be useful to do the reverse: to split a single fraction into a sum of two (or more) simpler fractions; this is particularly the case for fractions of algebraic expressions.
+
+An expression of the form
+\[\frac{f(x)}{g(x)},\]
+where $f$ and $g$ are polynomials, is called a \textbf{rational function} in $x$. Given a rational function $\frac{f(x)}{g(x)}$, an equation of the form
+\[\frac{f(x)}{g(x)}=p_0(x)+\frac{A_1}{p_1(x)}+\frac{A_2}{p_2(x)}+\hdots+\frac{A_n}{p_n(x)}\]
+where $A_1,\hdots,A_n$ are constants and $p_0,\hdots,p_n$ are distinct polynomials, is called a \textbf{partial fraction decomposition} of $\frac{f(x)}{g(x)}$.\medskip
+
+
+
+
+Find a partial fraction decomposition of $\frac{x}{x^2-1}$.
+
+\vfill
+
+
+
+Write $\frac{2t^3+3t^2+7}{t^2+t-2}$ in partial fractions.
+% 2t+1 + \frac{4}{t-1}-\frac{1}{t+2} = \frac{(2t+1)(t-1)(t+2) +4(t+2) - (t-1)}{t^2+t-2} = \frac{2t^3+3t^2 +7}{t^2+t-2}
+
+
+
+\clearpage
+
+
+\textbf{Practice:}\bigskip
+
+Compute partial fraction decompositions for the following rational functions.
+
+\begin{enumerate}
+	\item $\frac{17x-53}{x^2-2x-15}$.
+	\item $\frac{34-12y}{3y^2-10y-8}$.
+	\item $\frac{s^5-16s^3+2s^2+70s-33}{s^2-9}$.
+	\item $\frac{2t+1}{t^2+2t+1}$.
+\end{enumerate}
+
+
+\clearpage
+
+
+We saw on the last page that if we attempt to write
+\[\frac{2t+1}{t^2+2t+1}\]
+in partial fractions, we struggle. This is a problem that occurs when we have powers of a polynomial in the denominator; here it arises because $t^2+2t+1=(t+1)^2$. However, we can write
+\[\frac{2t+1}{t^2+2t+1}=\frac{2(t+1)-1}{(t+1)^2}=\frac{2}{t+1}-\frac{1}{(t+1)^2}.\]
+
+So when finding a partial fraction decomposition of a rational function whose denominator factors with a power of a simpler polynomial, we have to consider all smaller powers of that polynomial. For instance, if the original denominator is $(x-3)(2x+1)^3$, then our partial fraction decomposition will involve fractions with denominators $(x-3)$, $(2x+1)$, $(2x+1)^2$, and $(2x+1)^3$.\bigskip
+
+Decompose
+\[\frac{6x^4-2x^3+x^2-7}{x^3}\]
+into partial fractions.
+
+\vfill
+
+Decompose
+\[\frac{s^3}{(3s-1)(s+2)^2}\]
+into partial fractions.
+
+
+\clearpage
+
+
+
+\textbf{Practice and Applications:}\bigskip
+
+
+\begin{enumerate}
+	\item Find a partial fractions decomposition for
+		\[\frac{2t^4-9t^3+t^2-2t+1}{t^3+2t^2}.\]
+		Hence find
+		\[\int \frac{2t^4-9t^3+t^2-2t+1}{t^3+2t^2}\diff t.\]
+	\item Find a partial fractions decomposition for
+		\[\frac{s}{s^2+\omega^2},\]
+		where $\omega$ is a real constant. (Hint: you will need to use complex numbers to factorise the denominator). Hence find the inverse Laplace transform of
+		\[\frac{s}{s^2+\omega^2}.\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,164 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+\begin{document}
+
+\title{Even and Odd Functions}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+
+\textbf{Theory: Even and Odd Functions:}\bigskip
+
+
+We say that a function $f(x)$ is \textbf{even} if $f(-x)=f(x)$. We say $f(x)$ is \textbf{odd} if $f(-x)=-f(x)$. Note that most functions are neither even nor odd (\textit{e.g.}, $f(x)=1+x$); the zero function is the only function that is both even and odd. Examples of even functions are $\cos(x)$ and $x^{2n}$ for any integer $n$; examples of odd functions are $\sin(x)$ and $x^{2n+1}$. The names come from the fact that even powers of $x$ are even functions and odd powers of $x$ are odd functions. Note that the Taylor series of $\sin(x)$ only involves odd powers, and the Taylor series of $\cos(x)$ only involves even powers.\medskip
+
+Exercise: show that, for functions, odd times odd is even, even times even is even, and odd times even is odd. Note that this is not the same as for even and odd numbers (in fact, it is like \textit{adding} even and odd numbers, because $x^ax^b=x^{a+b}$).\bigskip
+
+Although most functions are neither even nor odd, any function can be split into the sum of an even function and an odd function. This is clear enough from thinking about Taylor series---you can just group together the terms with even powers into one part and the terms with odd powers into the other part---but not every function has a Taylor series. We define the \textbf{even part} and \textbf{odd part} of $f$ to be
+\begin{align*}
+	f_\mathrm{even}(x) &= \frac{f(x)+f(-x)}{2}\\
+	f_\mathrm{odd}(x)&= \frac{f(x)-f(-x)}{2}.
+\end{align*}
+
+\medskip
+
+Exercise: check that for any function $f$, $f_\mathrm{even}$ is even and $f_\mathrm{odd}$ is odd. Check also that $f(x)=f_\mathrm{even}(x)+f_\mathrm{odd}(x)$.\bigskip
+
+
+When we take a Fourier series, we are only interested in the function over some interval, $[0,2\pi]$ say. Outside this interval, the Fourier series repeats periodically, whatever the original function does. We define the \textbf{periodic extension} of a function $f$ on an interval to be the function which just repeats what $f$ does on the interval everywhere. Then given a function $f$, the Fourier series approximates the periodic extension of $f$.
+
+If (the periodic extension of) $f$ is an even function, then it should not be possible to approximate it by sines, as these are odd. Similarly, it should not be possible to approximate an odd function by cosines. So in fact the cosine coefficients $a_n$ depend only on the even part of $f$, and the sine coefficients $b_n$ depend only on the odd part. We will prove this in exercises on the next page.
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+Recall that the Fourier series of $f$ is
+\[\tilde{f}=\frac{a_0}{2}+\sum_{n=1}^\infty \left[a_n\cos(nx) + b_n\sin(nx)\right],\]
+where
+\begin{align*}
+	a_n&=\braket{f}{\cos(nx)}=\frac{1}{\pi}\int_0^{2\pi} f(x)\cos(nx)\diff x\\
+	b_n &= \braket{f}{\sin(nx)}=\frac{1}{\pi}\int_0^{2\pi} f(x)\sin(nx)\diff x.
+\end{align*}
+
+\begin{enumerate}
+	\item Prove that if we replace $f$ and $g$ by their periodic extensions, we can change the limits of the integral in the inner product to
+		\[\braket{f}{g}=\frac{1}{\pi}\int_{-\pi}^\pi f(x)g(x)\diff x.\]
+		Hint: if $f$ and $g$ are ($2\pi$)-periodic, then the values of $f$ and of $g$ between $-\pi$ and $0$ are the same as between $\pi$ and $2\pi$.
+	\item Hence prove that if (the periodic extension of) $f$ is an even function, then $\braket{f}{\sin(nx)}=0$ for all $n$.
+	\item Similarly, prove that if (the periodic extension of) $f$ is an odd function, $\braket{f}{\cos(nx)}=0$ for all $n$.
+	\item Hence prove that, when finding the Fourier coefficients of $f$:
+		\begin{align*}
+			a_n&=\braket{f_\mathrm{even}}{\cos(nx)}\\
+			b_n&=\braket{f_\mathrm{odd}}{\sin(nx)}.
+		\end{align*}
+	\item Find the Fourier series of $f(x)=x$.
+		Hint: first find the even and odd parts of $f$. Be warned: $f$ may look like an odd function, but when we periodically extend, it isn't! Sketching the graph of $f$ and periodically extending will help you figure out the even and odd parts.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The Fourier series of $f$ is
+		\[\tilde{f}=\frac{a_0}{2}+\sum_{n=1}^\infty \left[a_n\cos\left(\frac{2\pi nx}{L}\right) + b_n\sin\left(\frac{2\pi nx}{L}\right)\right],\]
+		where
+		\begin{align*}
+			a_n&=\braket{f}{\cos\left(\frac{2\pi nx}{L}\right)}=\frac{2}{L}\int_a^{a+L}\!\!\! f(x)\cos\left(\frac{2\pi nx}{L}\right)\diff x\\
+			b_n &= \braket{f}{\sin\left(\frac{2\pi nx}{L}\right)}=\frac{2}{L}\int_a^{a+L}\!\!\! f(x)\sin\left(\frac{2\pi nx}{L}\right)\diff x.
+		\end{align*}
+	\item The sum of the first $N$ terms of the Fourier series is the best approximation to $f$ by a linear combination of the orthonormal functions
+		\[\frac{1}{L},\sin\left(\frac{2\pi x}{L}\right),\cos\left(\frac{2\pi x}{L}\right),\hdots,\sin\left(\frac{2\pi Nx}{L}\right),\cos\left(\frac{2\pi Nx}{L}\right).\]
+	\item A function $f$ is \textbf{even} if $f(-x)=f(x)$ and \textbf{odd} if $f(-x)=-f(x)$.
+	\item Any function can be written as the sum of even and odd parts: $f=f_\mathrm{even}+f_\mathrm{odd}$, where
+		\begin{align*}
+			f_\mathrm{even}(x) &= \frac{f(x)+f(-x)}{2}\\
+			f_\mathrm{odd}(x)&= \frac{f(x)-f(-x)}{2}.
+		\end{align*}
+	\item The Fourier cosine coefficients $a_n$ depend only on the even part of $f$, whereas the sine coefficients $b_n$ depend only on the odd part:
+		\begin{align*}
+			a_n&=\braket{f}{\cos\left(\frac{2\pi nx}{L}\right)}=\braket{f_\mathrm{even}}{\cos\left(\frac{2\pi nx}{L}\right)}\\
+			b_n&=\braket{f}{\sin\left(\frac{2\pi nx}{L}\right)}=\braket{f_\mathrm{odd}}{\sin\left(\frac{2\pi nx}{L}\right)}.
+		\end{align*}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

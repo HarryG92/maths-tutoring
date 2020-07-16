@@ -1,0 +1,81 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+
+\begin{document}
+
+\title{Sums of Sinusoids ``Cheat Sheet''}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+
+\Large
+
+A step-by-step guide to converting a sum of two sinusoids with the same frequency into a single sinusoid, with a running example of expressing
+\[3\cos\left((2t+\frac{\pi}{3}\right))-\sin(2t)\]
+in the form $R\sin(2t+\alpha)$:
+
+\vspace{5mm}
+
+
+\textbf{Step-by-step instructions:}
+
+\begin{enumerate}
+\item Expand out any phase shifts using compound angle formulae.
+\item Expand the desired expression using the compound angle formula.
+\item Compare the expressions obtained by the last two steps.
+\item Deduce two equations relating $R$ and $\alpha$ to known quantities.
+\item Square these two equations and add.
+\item Use the pythagorean identity to simplify and get a value for $R^2$.
+\item Take the positive square root (or negative, but positive makes step 9 slightly easier).
+\item Going back to the equations from step 4, divide the sin equation by the cos equation to find $\tan(\alpha)$. Simplify if possible.
+\item Using the equations from step 4 (and the fact that $R$ is positive), work out which quadrant $\alpha$ is in.
+\item Use the previous two steps to find $\alpha$, taking arctan and possibly adding $\pi$.
+\item Put the values for $R$ and $\alpha$ back into the desired expression, which is now equal to the original expression.
+\item If desired, plug values into a calculator for a numerical answer.
+\end{enumerate}
+
+\clearpage
+
+
+
+\textbf{Running example:}
+\[3\cos\left((2t+\frac{\pi}{3}\right))-\sin(2t)\]
+
+\begin{enumerate}
+\item We have a phase-shifted term, $\cos\left(2t+\frac{\pi}{3}\right)$, which expands to
+	\[\cos(2t)\cos\left(\frac{\pi}{3}\right)-\sin(2t)\sin\left(\frac{\pi}{3}\right)=\frac{1}{2}\cos(2t)-\frac{\sqrt{3}}{2}\sin(2t)\]
+	So our expression becomes:
+	\[\frac{3}{2}\cos(2t)-\frac{3\sqrt{3}}{2}\sin(2t)-\sin(2t)=\frac{3}{2}\cos(2t)-\frac{3\sqrt{3}-2}{2}\sin(2t).\]
+\item Our desired expression is
+	\[R\sin(2t+\alpha)=R\sin(\alpha)\cos(2t)+R\cos(\alpha)\sin(2t).\]
+\item Compare
+	\[\frac{3}{2}\cos(2t)-\frac{3\sqrt{3}-2}{2}\sin(2t)\quad\mbox{  and  }\quad R\sin(\alpha)\cos(2t)+R\cos(\alpha)\sin(2t).\]
+\item Hence
+	\[R\sin(\alpha)=\frac{3}{2}\qquad\mbox{ and }\qquad R\cos(\alpha)=\frac{2-3\sqrt{3}}{2}.\]
+\item \[R^2\sin^2(\alpha)+R^2\cos^2(\alpha)=\left(\frac{3}{2}\right)^2+\left(\frac{2-3\sqrt{3}}{2}\right)^2=\frac{40-12\sqrt{3}}{4}.\]
+\item \[R^2\sin^2(\alpha)+R^2\cos^2(\alpha)=R^2(\sin^2(\alpha)+\cos^2(\alpha))=R^2\]
+	\[\mbox{ so}\qquad R^2=\frac{40-12\sqrt{3}}{4}.\]
+\item \[R=\frac{\sqrt{40-12\sqrt{3}}}{2}.\]
+\item \[\tan(\alpha)=\frac{\sin(\alpha)}{\cos(\alpha)}=\frac{R\sin(\alpha)}{R\cos(\alpha)}=\frac{3/2}{(2-3\sqrt{3})/2}=\frac{3}{2-3\sqrt{3}}.\]
+\item Since $R\sin(\alpha)=\frac{3}{2}$, $\sin(\alpha)$ is positive. Since $R\cos(\alpha)=\frac{2-3\sqrt{3}}{2}$ and $3\sqrt{3}>2$, $\cos(\alpha)$ is negative. So $\alpha$ is in the top left 		quadrant.
+\item Since $\alpha$ is in the top left quadrant, arctan will not give us the correct value, so we need to add $\pi$. So
+	\[\alpha=\tan^{-1}\left(\frac{3}{2-3\sqrt{3}}\right)+\pi.\]
+\item So we have
+	\[3\cos\left((2t+\frac{\pi}{3}\right))-\sin(2t)=\frac{\sqrt{40-12\sqrt{3}}}{2}\sin\left(2t+\tan^{-1}\left(\frac{3}{2-3\sqrt{3}}\right)+\pi\right).\]
+\item \[3\cos\left((2t+\frac{\pi}{3}\right))-\sin(2t)\approx 2.192\sin(2t+2.388).\]
+\end{enumerate}
+
+
+\end{document}

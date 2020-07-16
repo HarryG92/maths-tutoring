@@ -1,0 +1,209 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+%%%\setlength{\tabcolsep}{1.8cm}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\begin{document}
+
+\title{Complex Numbers}
+\date{}
+
+\maketitle
+
+\Large
+
+\textbf{ \underline{Objective: To understand complex numbers as ``imaginary'' roots}}
+
+\textbf{\underline{of polynomials, and be able to perform arithmetic on complex}}
+
+\textbf{\underline{numbers in cartesian form.}}
+
+\vspace{5mm}
+
+
+{\bf Recap of previous material:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item State the \textbf{Polynomial Factor Theorem}.
+\item Solve $x^2+11x+28=0$ by completing the square.
+\item Hence factorise $x^2+11x+28$.
+\item Let $f(x)=x^3+10x^2+17x-28$. Evaluate $f(1)$. Hence find $a$ such that $f(x)=(x-a)g(x)$ for some $g$.
+\item With the notation as above, find $g$.
+\item Hence factor $f$ completely into the form $f(x)=(x-a)(x-b)(x-c)$.
+\item Hence write down all three roots of $f$.
+\end{enumerate}
+
+
+\clearpage
+
+{\bf Warm-up:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Solve $x^2+1=0$.
+\item Solve $x^2+4=0$.
+\item Solve $x^2-4x+5=0$.
+\end{enumerate}
+
+\clearpage
+
+
+\textbf{History---Types of Numbers:}
+
+Historically, the ancient Greeks thought the only numbers were positive integers, and ratios of these, like $\frac{2}{3}$. Then a mathematician named Hippasus of Metapontum proved that a rational number squared could never equal 2; this was a problem, because by Pythagoras' Theorem, the hypotenuse of an isosceles right-angled triangle with legs of length 1 should be $\sqrt{2}$.
+
+Supposedly Hippasus was murdered for his discovery, as it challenged the py\-tha\-g\-orean worldview that all numbers were rational. Regardless, people eventually accepted the existence of ``irrational'' numbers like $\sqrt{2}$.
+
+Negative numbers actually took a lot longer to be accepted. Even as recently as the 1600s, Descartes (of \textit{cartes}ian coordinates and ``cogito, ergo sum'' fame) would only give the positive solutions to equations. He remarked in one of his influential works that sometimes quadratic equations would seem to have solutions involving negative numbers or---even worse---square roots of negative numbers. He dismissed these solutions as ``imaginary quantities.'' The name stuck, and we now call the square root of a negative number an \textbf{imaginary number}.
+
+Slightly before Descartes, Italian mathematicians were working on solving cubic equations. The mathematician del Ferro found a technique for solving equations of the form $x^3+ax=b$. Another Italian, Tartaglia, found a general method for solving any cubic equation; he and del Ferro had a cubic-solving ``maths duel,'' and Tartaglia won, as he could solve any cubic, but del Ferro could only solve ones in the right form.
+
+Tartaglia kept his method secret for a long time, but eventually it got out, and alarmed mathematicians, because as part of the method it was sometimes necessary to take a square root of a negative number---Descartes' ``imaginary quantities''---and this was outrageous at the time. Even some cubics with positive, integer roots sometimes required imaginary numbers to solve, in an intermediate step! Thus, eventually, and like irrational numbers centuries beforehand, imaginary numbers became accepted as a valid mathematical tool which produce useful results, even if they seem outlandish and fictitious. A \textbf{complex number} is simply a real number plus an imaginary number.
+
+This might seem to lead to a worrying possibility of having to define a new type of number every time we want to solve a new problem. However, this isn't so. One of the most famous results in mathematics, due to Gauss (perhaps the greatest mathematician of all time) is the pompously (and inaccurately!) named \textbf{Fundamental Theorem of Algebra}:
+
+\textbf{Any degree $n$ polynomial with complex number coefficients has exactly $n$ complex number roots (counting repetitions).}
+
+
+\clearpage
+
+
+
+\textbf{Theory---Complex Numbers:}
+
+\vspace{5mm}
+
+The imaginary number $j$ (to electrical and electronic engineers) or $i$ (to everyone else) is defined to be a solution to the equation $x^2+1=0$; \textit{i.e.}, a square root of $-1$.
+
+Of course, any number should have two square roots, one positive, one negative, so we must also have $-j$ as the second solution to $x^2+1=0$. We then find that indeed $x^2+1$ factors as $x^2+1=(x+j)(x-j)$, showing the correspondence between roots and factors we expect from the Polynomial Factor Theorem.
+
+We can then solve $x^2+a=0$ for any real number $a$ by taking multiples of $j$. Any such multiple $rj$ where $r$ is real is called an \textbf{imaginary number}.
+
+\vspace{5mm}
+
+Solve $x^2+18=0$:
+
+\vfill
+
+
+A general quadratic equation has the form $ax^2+bx+c=0$ and has roots
+\[x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}.\]
+
+If $b^2-4ac\geq 0$, there are two real roots of the quadratic. If $b^2-4ac<0$, then there are two imaginary square roots $\sqrt{b^2-4ac}$, and we get two solutions to the quadratic of the form $\alpha\pm\beta j$ for real numbers $\alpha=\frac{-b}{2a}$ and $\beta=\frac{\sqrt{4ac-b^2}}{2a}$.
+
+\vspace{5mm}
+
+Solve $x^2+3x-11=0$:
+
+\vfill
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+\textbf{Theory---Arithmetic with Complex Numnbers:}
+
+\vspace{5mm}
+
+
+Compute the sum, difference, and product of $z=(3-j)$ and $w=(7+4j)$.
+
+\vfill
+
+In a complex number $z=a+bj$, we call $a$ the \textbf{real part}: $a=\mathrm{Re}(z)$, and $b$ the \textbf{imaginary part}: $b=\mathrm{Im}(z)$. Be careful---the imaginary part is the \textit{real} number $b$.
+
+The \textbf{complex conjugate} of $z=a+bj$ is the complex number $\bar{z}=a-bj$---so with the same real part, but minus the imaginary part.
+
+Let  $z=-2+\pi j$ and $w=-5j$. Write down $\bar{z}$, $\bar{w}$, and the real and imaginary parts of $z$, $\bar{z}$, $w$, and $\bar{w}$.
+
+\vfill
+
+
+
+
+
+\clearpage
+
+
+\textbf{Practice:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item Compute $(-1-j)(2+3j)-(7+4j)$.
+\item Let $z=a+bj$. Compute $z+\bar{z}$ and $z\bar{z}$. What do you notice about these answers?
+\item We have seen how to add, subtract, and multiply complex numbers. What about division? We will compute $\frac{1-j}{2+3j}$ by the following steps:
+	\begin{enumerate}
+	\item Write down the complex conjugate of the denominator.
+	\item Multiply $\frac{1-j}{2+3j}$ by this conjugate top and bottom.
+	\item Split the fraction into real and imaginary parts and simplify to obtain a complex number answer.
+	\end{enumerate}
+	Check the answer by multiplying it by $2+3j$; you should get $1-j$.
+\item Now we shall look at this for a general complex fraction, $\frac{a+bj}{c+dj}$:
+	\begin{enumerate}
+	\item Write down the complex conjugate of the denominator.
+	\item Multiply $\frac{a+bj}{c+dj}$ by this conjugate top and bottom.
+	\item Split the fraction into real and imaginary parts and simplify to obtain a complex number answer.
+	\end{enumerate}
+	Check the answer by multiplying it by $c+dj$; you should get $a+bj$.
+\item Using the method of the above question, compute $\frac{1}{2+3j}$.
+\item Compute $\frac{4j}{1-j}$.
+\item Compute $\frac{3-j}{3+j}$.
+\end{enumerate}
+
+
+
+
+
+\clearpage
+
+
+{\bf Key Points to Remember}
+
+\vspace{5mm}
+
+\begin{enumerate}
+\item The \textbf{imaginary unit} $j$ (or $i$) is defined to be a solution to the equation $x^2=-1$.
+\item The second solution to this equation is $-j$.
+\item Any number of the form $a+bj$ is called a \textbf{complex number}.
+\item The \textbf{real part} and \textbf{imaginary part} of a complex number are defined by $\mathrm{Re}(a+bj)=a$, $\mathrm{Im}(a+bj)=b$.
+\item The \textbf{complex conjugate} of a complex number $z=a+bj$ is $\bar{z}=a-bj$.
+\item Complex numbers can be added, subtracted, and multiplied straightforwardly.
+\item To divide by a complex number, multiply top and bottom by its complex conjugate.
+\item \textbf{The Fundamental Theorem of Algebra}: Let $f(z)$ be a polynomial of degree $n\geq 1$ with complex coefficients. Then, counting repetitions, $f$ has \textit{exactly} $n$ complex number roots. Note: as all real numbers are complex numbers (just with imaginary part zero), the coefficients and/or the roots could in fact be real.
+\end{enumerate}
+
+
+
+
+
+\end{document}

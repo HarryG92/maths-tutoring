@@ -1,0 +1,137 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=1cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+%%%\setlength{\tabcolsep}{1.8cm}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newenvironment{test}[1]
+{%begin code
+	\textbf{Test (#1):}\begin{itshape}
+}
+{% end code
+\end{itshape}
+}
+
+\newcommand{\Test}{Testing...}
+\makeatletter
+\g@addto@macro\Test{1...2...}
+\makeatother
+
+\newcommand{\nulltext}{}
+\newcommand{\firstcolumntext}{}
+\newcommand{\secondcolumntext}{}
+\newcommand{\placeholder}{}
+
+\makeatletter
+\newcommand{\additem}[2]{
+	\g@addto@macro\firstcolumntext{\item #1}
+	\g@addto@macro\secondcolumntext{\item #2}
+	%\edef\firstcolumntext{\firstcolumntext \noexpand\item #1}
+	%\edef\secondcolumntext{\secondcolumntext \noexpand\item #2}
+}
+\makeatother
+
+\newenvironment{colenum}{
+	% begin code
+	\let\firstcolumntext\nulltext
+	\let\secondcolumntext\nulltext
+}{
+	%end code
+	\newlength{\ColumnWidth}
+	\setlength{\ColumnWidth}{0.5\textwidth}
+	\begin{minipage}{\ColumnWidth}{
+		\begin{enumerate}
+		\firstcolumntext
+		\end{enumerate}
+	}
+	\end{minipage}
+	\begin{minipage}{\ColumnWidth}{
+		\begin{enumerate}
+		\secondcolumntext
+		\end{enumerate}
+	}
+	\end{minipage}
+	\let\firstcolumntext\nulltext
+	\let\secondcolumntext\nulltext
+}
+
+
+\begin{document}
+
+\title{Completing the Square ``Cheat Sheet''}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+
+\Large
+
+A step-by-step guide to solving quadratic equations by completing the square, with a running example of $-7x^2+7x+42=0$:
+
+\vspace{5mm}
+
+\begin{colenum}
+\additem{\textbf{Step-by-step instructions:}}{\textbf{Running example:} $-7x^2+7x+42=0$}
+\additem{If the coefficient on the $x^2$-term is not 1, divide through by this coefficient (including the sign)}{$x^2-x-6=0$}
+\additem{Take $a$ to be half of the $x$-coefficient (including the sign)}{Take $a=-\frac{1}{2}$}
+\additem{Write out the expansion of $(x+a)^2=x^2+2ax+a^2$ with your particular value of $a$}{$\left(x-\frac{1}{2}\right)^2=x^2-x+\frac{1}{4}$}
+\additem{Subtract $a^2$ to be left with the first two terms of the original equation}{$\left(x-\frac{1}{2}\right)^2-\frac{1}{4}=x^2-x$}
+\additem{Add the constant term from the original equation, so that your new expression is equal to the original one}{$\left(x-\frac{1}{2}\right)^2-\frac{1}{4}-6=x^2-x-6=0$}
+\additem{Move the constant terms across to the other side of the equation and simplify}{$\left(x-\frac{1}{2}\right)^2=6+\frac{1}{4}=\frac{24}{4}+\frac{1}{4}=\frac{25}{4}$}
+\additem{Square root both sides, remembering plus or minus}{$x-\frac{1}{2}=\pm\sqrt{\frac{25}{4}}=\frac{\pm\sqrt{25}}{\sqrt{4}}=\frac{\pm5}{2}$}
+\additem{Move the remaining constant term to the other side of the equation to leave $x$ isolated on the left}{$x=\frac{1}{2}\pm\frac{5}{2}$}
+\additem{Evaluate the two possibilities of the plus or minus to get the roots}{$x=\frac{6}{2} \mbox{ or } \frac{-4}{2}=3\mbox{ or } -2$}
+\end{colenum}
+
+
+
+
+
+
+
+\iffalse
+\noindent\parbox[t]{8cm}{\raggedright%
+\begin{enumerate}[topsep=0pt,itemsep=4pt,leftmargin=13pt]
+
+
+
+
+
+
+\end{enumerate}
+}%
+\parbox[t]{1cm}{\hfill}
+\parbox[t]{9cm}{\raggedright%
+\begin{enumerate}[topsep=0pt,itemsep=10pt,leftmargin=15pt]
+
+
+
+
+
+
+\end{enumerate}
+}
+\fi
+
+
+
+
+\end{document}

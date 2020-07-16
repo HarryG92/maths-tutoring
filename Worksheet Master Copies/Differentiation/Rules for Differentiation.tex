@@ -1,0 +1,364 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+
+
+
+
+\begin{document}
+
+\title{Rules for Differentiation.}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand rules for differentiating various functions.}}
+
+
+
+
+
+\vspace{5mm}
+
+
+\textbf{Recap: Monotonicity and Extrema:}
+
+\vspace{5mm}
+
+Let $f(t)=4t-t^2$.
+\begin{enumerate}
+	\item Find the derivative of $f(t)$ with respect to $t$.
+	\item Solve $f'(t)=0$.
+	\item By examining whether $f'(t)$ is positive or negative, determine for which $t$ values $f(t)$ is increasing, and for which it is decreasing.
+	\item Hence determine whether your solution to part 2 is a maximum or minimum.
+\end{enumerate}
+
+
+
+\clearpage
+
+
+\textbf{Warm-up:}
+
+\vspace{5mm}
+
+We will prove that
+\[\deriv{x^n}{x}=nx^{n-1}\]
+for $n$ a positive integer. To do this, we will need to evaluate
+\[\lim_{h\to 0} \frac{(x+h)^n-x^n}{h}.\]
+
+\begin{enumerate}
+	\item Consider
+		\[(x+h)^n=(x+h)(x+h)\hdots(x+h).\]
+		Without knowing $n$, we cannot multiply this out---we do not know how many brackets there are. However, we can say (in terms of $n$) what the term with $x^n$ in will be. What is it?
+	\item When multiplying out, we pick one item from each bracket, and do this in all possible ways. How many ways are there of picking out $h$ from one bracket and $x$ from all the othes? Therefore, what is the term involving $hx^{n-1}$ in the expansion?
+	\item Every other term in the expansion must involve $h$ at least twice---\textit{i.e.}, must be a multiple of $h^2$. So we can write
+		\[(x+h)^n=x^n+nhx^{n-1}+h^2F,\]
+		where $F$ is some unknown combination of $x$ and $h$. Using this, show that
+		\[\lim_{h\to 0} \frac{(x+h)^n-x^n}{h}=nx^{n-1}.\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+\clearpage
+
+
+{\bf Theory: Linearity, and the Chain and Product Rules:}
+
+\vspace{5mm}
+
+So far we have seen the definition of the derivative, and some uses - determining whether a function is increasing or decreasing, and finding maxima and minima. But we don't have any techniques for computing the derivative of a function, apart from directly applying the definition. Now we will study three extremely useful rules for differentiation.\bigskip
+
+Suppose $f(t)$ and $g(t)$ are functions such that $f'(t)$ and $g'(t)$ are known. Find the derivative of $af(t)+bg(t)$, where $a$ and $b$ are constants.
+
+\vfill
+
+
+Suppose $f$ and $g$ are as above. Find the derivative of the product, $p(t)=f(t)g(t)$.
+
+\vfill
+
+
+Suppose $f$ and $g$ are as above. Find the derivative of the composition $c(t)=f(g(t))$.
+
+\vfill
+
+
+
+\clearpage
+
+
+
+\textbf{Examples of Computing Derivatives:}
+
+\vspace{5mm}
+
+
+Let $y=x^{-n}$, where $n$ is a positive integer. Compute $\deriv{y}{x}$.
+
+\vfill
+
+
+Let $y=x^{m/n}$, where $m$ and $n$ are positive integers. Compute $\deriv{y}{x}$.
+
+\vfill
+
+Suppose that $f(x)$ is an invertible function and $\deriv{f}{x}$ is known. Find $\deriv{f^{-1}}{x}$ by considering $g(x)=f(f^{-1}(x))$.
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+\textbf{Theory: Derivatives of Trigonometric and Exponential Functions:}
+
+\vspace{5mm}
+
+
+Differentiate $\sin(x)$ and $\cos(x)$, making use of the small-angle approximations:
+\[\sin(h)\approx h\qquad\mbox{ and } \qquad\cos(h)\approx 1-\frac{h^2}{2}\]
+for $h$ close to 0.
+
+
+\vfill
+
+
+Let $b>0$, $b\neq 1$. Differentiate $b^x$ with respect to $x$.
+
+\vfill
+
+We will need the following Python code, which can be executed at \begin{verbatim} https://www.onlinegdb.com/online_python_interpreter \end{verbatim}
+
+\begin{verbatim}
+
+def f(base):
+    print("base = %f" % base)
+    for i in range(7):
+        h=10**(-i)
+        derivative_at_zero = (base**h - 1) / h
+        print("h=%f, f'(0)=%f" % (h,derivative_at_zero))
+    print("\n")
+        
+f(2)
+f(3)
+f(2.5)
+f(2.7)
+f(2.71828183)
+
+\end{verbatim}
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+\textbf{Further Examples of Computing Derivatives:}
+
+\vspace{5mm}
+
+
+From a previous page, we have that
+\[\deriv{x^n}{x}=nx^{n-1}\]
+for any rational number $n$.
+
+\bigskip
+
+Differentiate $\log_e(x)$ with respect to $x$.
+
+\vfill
+
+
+Differentiate $4x^2+3x-2$ with respect to $x$.
+
+\vfill
+
+Differentiate $(2x-1)(x+1)$ with respect to $x$.
+
+\vfill
+
+
+Differentiate $(12t^2+2t-3)^7$ with respect to $x$.
+
+\vfill
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+\textbf{Key Derivatives to Know:}
+
+\bigskip
+
+\[\deriv{x^n}{x}=nx^{n-1}\]
+
+\vfill
+
+\[\deriv{\sin(x)}{x}=\cos(x)\]
+
+\vfill
+
+\[\deriv{\cos(x)}{x}=-\sin(x)\]
+
+\vfill
+
+\[\deriv{e^x}{x}=e^x\]
+
+\vfill
+
+\[\deriv{\log_e(x)}{x}=\frac{1}{x}\]
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Practice:}
+
+\vspace{5mm}
+
+The chain rule:
+\[\mbox{if } h(t)=f(g(t)),\mbox{ then } h'(t)=g'(t)f'(g(t)).\]
+
+The product rule:
+\[\mbox{if } h(t)=f(t)g(t),\mbox{ then } h'(t)=f(t)g'(t)+f'(t)g(t).\]
+
+Linearity, for constants $a$ and $b$:
+\[\deriv{\,(af(t)+bg(t))}{t}=a\deriv{f(t)}{t}+b\deriv{g(t)}{t}.\]
+
+
+
+\begin{enumerate}
+	\item Let $f(t)=2t+1$ and $g(t)=4t-6$.
+		\begin{enumerate}
+			\item Compute $f'(t)$.
+			\item Compute $g'(t)$.
+			\item Use the product rule to differentiate $h(t)=f(t)g(t)$.
+			\item Use the chain rule to differentiate $i(t)=f(g(t))$.
+		\end{enumerate}
+	\item Differentiate $(x^2+2x+3)^{10}$ with respect to $x$ (hint: apply the chain rule with $f(x)=x^{10}$, $g(x)=x^2+2x+3$).
+	\item Differentiate $(7x-3)^{500}$ with respect to $x$ (hint: chain rule).
+	\item Differentiate $(4x-1)(2x+1)$ with respect to $x$ (hint: apply the product rule with $f(x)=4x-1$, $g(x)=2x+1$).
+	\item Differentiate $(13x^2-2)(4x+6)$ with respect to $x$ (hint: product rule).
+	\item Differentiate $(4x^2+6x-2)^5(x^3+1)$ with respect to $x$ (hint: use both the product and chain rules).
+	\item Let $y=\sin(4x+1)$. Find $\deriv{y}{x}$.
+	\item Let $y=2\sin(x)\cos(x)$.
+		\begin{enumerate}
+			\item Find $\deriv{y}{x}$ by the product rule.
+			\item By the compound angle formula for sine, $y=\sin(2x)$. Hence find $\deriv{y}{x}$ by the chain rule.
+			\item Show that your two answers are the same.
+		\end{enumerate}
+	\item Differentiate $\tan(x)$ with respect to $x$ (hint: write $\tan(x)=\sin(x)(\cos(x))^{-1}$ and apply the product and chain rules).
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+\textbf{Application:}
+
+\vspace{5mm}
+
+
+Suppose a 10V DC supply is used to drive current through a variable resistor. The resistance is varied according to $R=\frac{1000}{(t^2-10t+26)(t+1)}$.
+
+
+
+\begin{enumerate}
+	\item Find the current $I$ through the resistor at time $t$.
+	\item By differentiating, find the rate of change of current with respect to time, $\deriv{I}{t}$.
+	\item Solve $\deriv{I}{t}=0$.
+	\item By considering whether $\deriv{I}{t}$ is positive or negative to either side of the solutions from the previous part, determine whether these points are maxima, minima, or points of inflexion.
+	\item Find the maximum and minimum current through the resistor at any time between $t=0$ and $t=10$, and the times these currents occur.
+\end{enumerate}
+
+
+\clearpage
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item Linearity:
+		\[\deriv{ax+by}{t}=a\deriv{x}{t}+b\deriv{y}{t}.\]
+		for any constants $a$ and $b$.
+	\item The product rule:
+		\[\deriv{xy}{t}=x\deriv{y}{t}+y\deriv{x}{t}.\]
+	\item The chain rule:
+		\[\mbox{if } h(t)=f(g(t)),\mbox{ then } h'(t)=f'(g(t))g'(t).\]
+	\item \[\deriv{x^n}{x}=nx^{n-1}.\]
+	\item \[\deriv{\sin(x)}{x}=\cos(x).\]
+	\item \[\deriv{\cos(x)}{x}=-\sin(x).\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,122 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{tikz}
+
+\setlength{\tabcolsep}{1.8cm}
+\renewcommand{\arraystretch}{2.5}
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+\makeatother
+
+\newcommand{\cis}{\,\mathrm{cis}}
+
+\begin{document}
+
+\title{Complex Numbers--Summary}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\Large
+
+
+\section{Key Points - Fill in the Blanks:}
+
+Fill in the blanks in the key points below with a word, phrase, or mathematical expression. The unblanked versions are on the next page. Note that the size of the blank does not indicate the size of the missing word or phrase!
+
+\begin{enumerate}
+\item The \textbf{imaginary unit} $j$ (or $i$) is defined to be a solution to the equation ........ The other solution to this equation is .....
+\item A \textbf{complex number} is any expression of the form $a+bj$ where $a$ and $b$ are real numbers. This is called the ......... form of the complex number; $a$ is called the ......... and $b$ is called the .........
+\item If $z=a+bj$, then the complex number $\bar{z}$ is equal to .......... and is called the ............ of $z$.
+\item We can represent the complex number $a+bj$ by the point $(a,b)$ in the .........
+\item If $z$ is a complex number, the non-negative real number $|z|$ is called the .......... of $z$ and the angle $\arg(z)$ is called the ......... of $z$. These are the ......... of the point $(a,b)$ in the Argand diagram.
+\item If $z=a+bj$, then $|z|=$........ and $\tan(\arg(z))=$........
+\item The abbreviation $\cis(\theta)$ is shorthand for .............
+\item We can write any complex number $z$ in the form $r\cis(\theta)$, where $r=$...... and $\theta=$....... This is called the .......... of $z$.
+\item To multiply two complex numbers in polar form, we ..............................
+\item \textbf{De Moivre's Theorem} states that if $z=r\cis(\theta)$, then ..........
+\item When using de Moivre's Theorem with $b\neq 1$ (\textit{e.g.}, to find roots of a complex number) we must always remember ..........
+\end{enumerate}
+
+\clearpage
+
+\section{Key Points to Remember}
+
+The statements from the previous page, with the blanks filled in.
+
+\begin{enumerate}
+\item The \textbf{imaginary unit} $j$ (or $i$) is defined to be a solution to the equation $x^2=-1$. The other solution to this equation is $-j$.
+\item A \textbf{complex number} is any expression of the form $a+bj$ where $a$ and $b$ are real numbers. This is called the \textit{cartesian} form of the complex number; $a$ is called the \textit{real part} and $b$ is called the \textit{imaginary part}.
+\item If $z=a+bj$, then the complex number $\bar{z}$ is equal to $a-bj$ and is called the \textit{complex conjugate} of $z$.
+\item We can represent the complex number $a+bj$ by the point $(a,b)$ in the \textit{Argand diagram} (or \textit{complex plane}).
+\item If $z$ is a complex number, the non-negative real number $|z|$ is called the \textit{modulus} of $z$ and the angle $\arg(z)$ is called the \textit{argument} of $z$. These are the \textit{polar coordinates} of the point $(a,b)$ in the Argand diagram.
+\item If $z=a+bj$, then $|z|=\sqrt{a^2+b^2}$ and $\tan(\arg(z))=\frac{b}{a}$.
+\item The abbreviation $\cis(\theta)$ is shorthand for $\cos(\theta)+j\sin(\theta)$.
+\item We can write any complex number $z$ in the form $r\cis(\theta)$, where $r=|z|$ and $\theta=\arg(z)$. This is called the \textit{polar form} of $z$.
+\item To multiply two complex numbers in polar form, we \textit{multiply the moduli and add the arguments}.
+\item \textbf{De Moivre's Theorem} states that if $z=r\cis(\theta)$, then $z^{a/b}=r^{a/b}\cis\left(\frac{a\theta}{b}\right)$.
+\item When using de Moivre's Theorem with $b\neq 1$ (\textit{e.g.}, to find roots of a complex number) we must always remember \textit{to add multiples of $2\pi$ to the argument to get all the roots}.
+\end{enumerate}
+
+
+\clearpage
+
+\section{Revision Questions}
+
+\begin{enumerate}
+\item Let $z=1-j$ and $w=4+3j$. Compute $z+w$, $zw$, $\bar{z}$, $\bar{w}$, $\frac{z}{w}$ and $z^2$.
+\item Express $5-12j$ in polar form.
+\item Express $14\cis\left(\frac{-5\pi}{6}\right)$ in cartesian form.
+\item Let $z=\frac{1}{2}(\sqrt{3}-j)$. Compute $z^{100}$.
+\item Find all cube roots of $-2+j$.
+\end{enumerate}
+
+
+
+
+\clearpage
+
+\section{Solutions}
+
+It is possible I've made a mistake or two in these, so if your answer is different from mine and after checking you can't find a mistake in your work, ask me about it!
+
+\begin{enumerate}
+\item 
+	\begin{align*}
+		z+w &= 5+2j\\
+		zw&= 7-j\\
+		\bar{z}&=1+j\\
+		\bar{w}&=4-3j\\
+		\frac{z}{w}&=\frac{(1-j)(4-3j)}{4^2+3^2}=\frac{1}{25} -\frac{7}{25}j\\
+		z^2 &= -2j
+	\end{align*}
+\item $|5-12j| = \sqrt{5^2+12^2} = \sqrt{169} = 13$; $\tan(\arg(5-12j))=\frac{-12}{5}$ and we're in the bottom right quadrant, so $\arg(5-12j) = \tan^{-1}\left(\frac{-12}{5}\right)\approx -1.176$. So $5-12j=13\cis(-1.176)$.
+
+\item The real part is $14\cos\left(\frac{-5\pi}{6}\right)$; $\frac{-5\pi}{6}$ is in the bottom left quadrant, at an angle of $\frac{\pi}{6}$ below the negative real axis, so $\cos\left(\frac{-5\pi}{6}\right)=-\cos\left(\frac{\pi}{6}\right)=-\frac{\sqrt{3}}{2}$. So $\mathrm{Re}(14\cis\left(\frac{-5\pi}{6}\right)=-7\sqrt{3}$. The imaginary part is $14\sin\left(\frac{-5\pi}{6}\right)=14\sin\left(\frac{\pi}{6}\right) = 7$ (again by considering the quadrants). So $14\cis\left(\frac{-5\pi}{6}\right) = -7\sqrt{3}+7j$.
+
+\item We use de Moivre's Theorem. First we put $z$ into polar form; $|z|=\sqrt{\frac{3}{4}+\frac{1}{4}}=1$, $\tan(\arg(z))=\frac{-1}{\sqrt{3}}$, and $z$ is in the bottom right quadrant, so $\arg(z)=\tan^{-1}\left(\frac{-1}{\sqrt{3}}\right)=-\tan^{-1}\left(\frac{1}{\sqrt{3}}\right)=\frac{-\pi}{6}$. So $z=\cis\left(\frac{-\pi}{6}\right)$. Then $z^{100}=\cis\left(\frac{-100\pi}{6}\right)=\cis\left(\frac{-50\pi}{3}\right)$. We have $2\pi=\frac{6\pi}{3}$, so $\frac{48\pi}{3}=8\times 2\pi$, so $\cis\left(\frac{-50\pi}{3}\right)=\cis\left(\frac{-2\pi}{3}\right)$. We can leave this as our final answer in polar form, or revert to cartesian form: $\frac{-1}{2}+\frac{\sqrt{3}}{2}j$.
+
+\item Again, we use de Moivre's Theorem. $|-2+j|=\sqrt{4+1}=\sqrt{5}$, and $\tan(\arg(-2+j))=\frac{1}{-2}$; we are in the top right quadrant, so $\arg(-2+j)=\pi+\tan^{-1}\left(\frac{-1}{2}\right)\approx 2.678$. So we have
+\[-2+j = \sqrt{5}\cis(2.678) = \sqrt{5}\cis(8.961) = \sqrt{5}\cis(15.244)\]
+by adding $2\pi$ and $4\pi$ to the argument. Now, $\sqrt[3]{\sqrt{5}}=\sqrt[6]{5}\approx 1.308$ and dividing the three arguments by 3 gives $0.893$, $2.987$, and $5.081$ respectively. So the cube roots are:
+\[1.308\cis(0.893),\qquad 1.308\cis(2.987),\qquad 1.308\cis(5.081).\]
+We could convert these back to cartesian form if we wished.
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

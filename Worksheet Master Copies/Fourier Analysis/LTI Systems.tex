@@ -1,0 +1,282 @@
+
+\documentclass{article}
+
+\usepackage[left=1.8cm,right=1.8cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{Linear, Time-Invariant Systems}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To understand the solution of equations with a linear,}}
+
+\textbf{\underline{time-invariant operator by use of the impulse response.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Warm-up: Physical Problems as Operators:}
+
+\bigskip
+
+
+Consider a mass-spring-damper system. The mass $m$, when displaced to position $x$ away from its rest position at the origin, experiences a restoring force $-kx$ from the spring, and when moving with velocity $v$ experiences a damping force $-\mu v$ from friction. We may also apply an additional force $f$, which may vary with time. The total force on the mass is therefore
+\[f(t)-kx-\mu v.\]
+
+Using $F=ma$, we can equate the above expression to $ma$. Rearranging:
+\[a+\frac{\mu}{m}v+\frac{k}{m}x=\frac{1}{m}f(t).\]
+Since $v$ is the first derivative of $x$ (with respect to $t$) and $a$ is the second derivative, we can rewrite this as a second-order ordinary differential equation:
+\[\deriv[2]{x}{t}+b\deriv{x}{t}+cx=g(t),\]
+where $b=\frac{\mu}{m}$, $c=\frac{k}{m}$, and $g(t)=\frac{1}{m}f(t)$.
+
+Differentiation is an operator: it takes functions and returns functions. Combinations of derivatives are therefore also operators; we can define an operator $D$ by
+\[D(h)=\deriv[2]{h}{t}+b\deriv{h}{t}+ch\]
+for any function $h(t)$. Then the above ODE can be written concisely as
+\[D(x)=g.\]
+
+Our goal in solving this ODE is therefore to find an inverse operator $D^{-1}$, such that $D^{-1}D(h)=h$ for any function $h$, since then we will have the solution
+\[x=D^{-1}(g).\]
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Linear, Time-Invariant Operators:}\bigskip
+
+
+We have seen that physical problems such as solving a mass-spring-damper system, or an RLC problem, amount to solving an equation
+\[D(x)=g,\]
+where $g$ is a known function, $D$ is an operator, and $x$ is an unknown function to be found. In general, this is extremely difficult, but in practice the operator often has certain properties we can exploit. Two particularly important properties an operator may have are linearity and time-invariance.\medskip
+
+
+The operator $D$ is \textbf{linear} if $D(\alpha f+\beta g)=\alpha D(f)+\beta D(g)$ for any functions $f$ and $g$ and constants $\alpha$ and $\beta$. We have seen linearity plenty!\medskip
+
+The operator $D$ is \textbf{time-invariant} if it preserves time-shifts; \textit{i.e.}, if the result of applying $D$ to a time-shifted input function is just found by applying $D$ to the original function and time-shifting the result:
+\[D(f(t-\alpha))=D(f)(t-\alpha).\]
+
+\medskip
+
+
+Suppose $D$ is a \textbf{differential operator with constant coefficients}; this means that
+\[D(f)=\sum_{i=0}^n a_n\deriv[n]{f}{t}\]
+for some constants $a_n$. So $D$ just takes the first few derivatives of its input function and combines them linearly. For example, the operators arising from mass-spring-damper systems, or RLC circuits, fall into this class of operators. Since differentiation is linear, it is clear that a differential operator $D$ as above is linear (even without constant coefficients!). By repeated applications of the chain rule, we have
+\[\deriv[n]{f(t-\alpha)}{t}=\deriv[n]{f}{t}(t-\alpha);\]
+that is, if we time-shift $f$, then differentiate, the result is simply the time-shift of the derivative of $f$. So any differential operator with constant coefficients is time-invariant (the fact that the coefficients $a_n$ are constant matters here!). So mass-spring-dampers and RLC circuits are both described by linear, time-invariant operators, as are many other important physical systems.
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Linear Operators and Convolution; the Impulse Response:}\bigskip
+
+
+Let $D$ be a linear, time-invariant operator. Let $f$ and $g$ be functions and consider the convolution $g\ast D(f)$, given by the integral
+\[\int_0^\infty g(\tau)D(f)(t-\tau)\diff \tau.\]
+
+Since $D$ is time-invariant, $D(f)(t-\tau)=D(f(t-\tau))$. Write $f_\tau(t)=f(t-\tau)$, so we can write simply
+\[\int_0^\infty g(\tau)D(f_\tau)\diff \tau.\]
+
+For each value of $\tau$, $g(\tau)$ is a constant with respect to $t$, and $D$ is a linear operator in $t$, so $D(f_\tau)g(\tau)=D(g(\tau)f_\tau)$. An integral is the limit of a sequence of sums (of areas of rectangles). Since $D$ is linear in $t$ (and is independent of $\tau$, the variable of integration), we can pull $D$ outside a sum and hence outside the integral, obtaining
+\[D\left(\int_0^\infty g(\tau)f_\tau(t)\diff \tau\right).\]
+
+Now, recalling that $f_\tau(t)=f(t-\tau)$, we can rewrite this as
+\[D\left(\int_0^\infty g(\tau)f(t-\tau)\diff \tau\right)=D(g\ast f).\]
+But we started with $g\ast D(f)$. So we have shown that for a linear, time-invariant operator $D$, we have
+\[g\ast D(f)=D(g\ast f).\]
+
+\medskip
+
+Why is this property of LTI operators and convolution important? Well, consider convolution with the Dirac delta; we have seen that $f\ast\delta=f$ for any function $f$. So suppose we find some function $I$ satisfying $D(I)=\delta$; then for any function $f$:
+\[f=f\ast \delta = f\ast D(I)=D(f\ast I),\]
+so $f\ast I$ is a solution of the equation $D(x)=f$!
+
+Such a function $I$ (satisfying $D(I)=\delta$) is called the \textbf{impulse response} of the operator $D$ (or of the system it represents), and it gives us a method for solving the equation $D(x)=f$ for any $f$---simply convolve $f$ with $I$. So the inverse operator is convolution with $I$:
+\[D^{-1}(f)=f\ast I.\]
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Example: Mass-Spring Systems:}\bigskip
+
+
+Consider the mass-spring-damper system from before, governed by the ODE
+\[\deriv[2]{x}{t}+b\deriv{x}{t}+cx=g(t).\]
+
+Recall that $g(t)$ was $\frac{1}{m}$ times the external force applied to the mass; since rate-of-change of momentum is force (by Newton's Second Law), the integral of force is total change in momentum. In physics, change in momentum is called ``impulse,'' and this is where the term ``impulse response'' comes from. So the integral of $g(t)$ gives $\frac{1}{m}$ times the total change in momentum of the mass; since momentum is mass times velocity, this amounts to the total change in velocity. So
+\[\int_a^b g(t)\diff t = v(b)-v(a),\]
+so long as $a$ and $b$ are close enough together in time that no action from the spring or resistive forces needs to be taken into account. Over any finite period of time, this will not be true, but for $g(t)=\delta(t)$, the only non-zero value occurs at $t=0$. So if $g(t)=\delta(t)$, the effect is to provide a velocity change of $1$ at time 0, and then provide no extra force for the rest of time, as $\delta(t)=0$ for $t>0$.
+
+So solving our ODE for $g(t)=\delta(t)$ (\textit{i.e.}, finding the impulse response) amounts to solving the equation
+\[\deriv[2]{x}{t}+b\deriv{x}{t}+cx=0\]
+for $t>0$ with the initial conditions $x(0)=0$ and $v(0)=x'(0)=1$ from the Dirac delta.
+
+We will show in the exercises that the solution to this is $x(t)=H(t)\frac{1}{\omega}e^{-bt/2}\sin(\omega t)$, where $\omega = \frac{1}{2}\sqrt{4c-b^2}$ and $H$ is the Heaviside function. So the impulse response of a mass-spring-damper system is $H(t)\frac{1}{\omega}e^{-bt/2}\sin(\omega t)$, and therefore the solution to
+\[\deriv[2]{x}{t}+b\deriv{x}{t}+cx=g(t)\]
+for any function $g$ is given by the convolution
+\[g\ast \left(H(t)\frac{1}{\omega}e^{-bt/2}\sin(\omega t)\right).\]
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+Let $D$ be the linear, time-invariant operator
+\[D(f)=\deriv[2]{f}{t}+b\deriv{f}{t}+cf.\]
+
+\begin{enumerate}
+	\item Let $x(t)=H(t)\frac{1}{\omega}e^{-bt/2}\sin(\omega t)$, where $\omega = \frac{1}{2}\sqrt{4c-b^2}$. We will show that $x$ is the impulse response of the operator $D$; \textit{i.e.}, that $D(x)=\delta$.
+		\begin{enumerate}
+			\item Show that
+				\[\deriv{x}{t}=\frac{e^{-bt/2}}{\omega}\left(\omega \cos(\omega t) - \frac{b}{2}\sin(\omega t)\right).\]
+			\item Hence show that
+				\[\deriv[2]{x}{t} = \frac{e^{-bt/2}}{\omega}\left(\frac{b^2}{4}\sin(\omega t) -b\omega\cos(\omega t) -\omega^2\sin(\omega t)\right).\]
+			\item Hence show that $D(x)=0$.
+			\item Show that $x(0)=0$ and $x'(0)=1$.
+		\end{enumerate}
+	\item Suppose that $b=0$; \textit{i.e.}, that there is no damping. Substituting $b=0$ into the impulse response from question 1, we see that the undamped impulse response is $x(t)=H(t)\frac{\sin(\omega t)}{\omega}$, where $\omega=\sqrt{c}$.
+		\begin{enumerate}
+			\item Suppose $\alpha\neq \omega$ is a real constant. By convolution with the impulse response, show that the equation
+				\[D(f)=H(t)\sin(\alpha t)\]
+				has solution
+				\[f(t)=\frac{\alpha\sin(\omega t)-\omega\sin(\alpha t)}{\omega(\alpha^2-\omega^2)}.\]
+			\item Now show that the equation
+				\[D(f)=H(t)\sin(\omega t)\]
+				has solution
+				\[\frac{\sin(\omega t) - \omega t\cos(\omega t)}{2\omega^2}.\]
+				Why does the solution have a different form when $\alpha=\omega$ compared to when $\alpha\neq \omega$?
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item A \textbf{linear, time-invariant operator} is a rule $D$ that takes a function $f$ and returns a new function $D(f)$, satisfying the conditions
+		\begin{align*}
+			D(\alpha f+\beta g)&=\alpha D(f)+\beta D(g)\\
+			D(f(t-\alpha))&=D(f)(t-\alpha).
+		\end{align*}
+	\item The \textbf{impulse response} of a linear, time-invariant operator $D$ is the function $I$ solving the equation
+		\[D(I)=\delta,\]
+		if such a function exists.
+	\item If $D$ is an LTI operator with impulse response $I$, then the solution to the equation
+		\[D(f)=g\]
+		is the function
+		\[g\ast I.\]
+		In other words, the inverse operator to $D$ is the ``convolve with $I$'' operator.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

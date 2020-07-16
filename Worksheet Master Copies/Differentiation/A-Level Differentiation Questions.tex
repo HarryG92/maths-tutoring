@@ -1,0 +1,197 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[2]{\frac{\mathrm{d}#1}{\mathrm{d}#2}}
+
+
+
+
+\begin{document}
+
+\title{Differentiation}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+
+
+
+\textbf{The Chain Rule:}
+
+\vspace{5mm}
+
+Differentiate the following functions:
+
+
+\begin{enumerate}
+	\item $(2x-7)^3$
+	\item $\cos(2x-7)$
+	\item $2\cos(x)-7$
+	\item $e^{\cos(x)}$
+	\item $\ln(\sin(x))$
+	\item $\ln(x)^3$
+	\item $\ln(x^3)$
+	\item $e^{\cos^2(x^3)}$
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+\textbf{The Product Rule:}
+
+\vspace{5mm}
+
+Differentiate the following functions:
+
+\begin{enumerate}
+	\item $x^2\cos(x)$
+	\item $\cos(x)\sin(x)$
+	\item $e^x\ln(x)$
+	\item $x^n\tan(x)$
+	\item $xe^x\cos(x)$
+	\item $x^{-3/4}\ln(x)\sin(x)$
+\end{enumerate}
+
+
+
+\clearpage
+
+\textbf{The Quotient Rule:}
+
+\vspace{5mm}
+
+Differentiate the following functions:
+
+\begin{enumerate}
+	\item $\frac{e^x}{x^2}$
+	\item $\frac{\sin(x)}{x}$
+	\item $\frac{\ln(x)}{x^7}$
+	\item $\frac{\cos(x)}{e^x}$
+\end{enumerate}
+
+
+\clearpage
+
+
+\textbf{Combining the Rules:}
+
+\vspace{5mm}
+
+Differentiate the following functions:
+
+\begin{enumerate}
+	\item $e^{2x-7}\cos(2x-7)$
+	\item $\sin(xe^x)$
+	\item $\frac{\ln(x^3)}{x^2\sin(x)}$
+	\item $(4x^2+1)^8e^x + \frac{\cos(x^2)}{x^5}$
+\end{enumerate}
+
+
+
+\clearpage
+
+\textbf{Definition and Meaning of Differentiation:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item Prove from first principles that the derivative of $x^2$ is $2x$.
+	\item Prove from first principles that the derivative of $x^3$ is $3x^2$.
+	\item A mass is suspended from a spring and bounces up and down; the bounces get smaller over time due to friction. The graph of the mass' position against time is shown below. On the same axes, sketch graphs of the mass' velocity and acceleration.
+		\begin{center}
+		\begin{tikzpicture}
+			\draw[->] (0,0) -- (10,0);
+			\node[right] at (10,0) {$t$};
+			\draw[->] (0,-3) -- (0,5);
+			
+			\draw[thick,blue,samples=200,domain=0:10] plot (\x, { 5*exp(-\x/3)*cos(\x r) });
+		\end{tikzpicture}
+		\end{center}
+\end{enumerate}
+
+
+
+
+\clearpage
+
+
+\textbf{Stationary Points:}
+
+\vspace{5mm}
+
+For each of the following functions, find all stationary points in the specified domain and classify them as maxima, minima, or points of inflexion. Find also the global maximum and minimum values of the function over the specified domain.
+
+\begin{enumerate}
+	\item $e^{-t}\sin(2\pi t)$, where $t\geq 0$.
+	\item $\frac{x^2-1}{x^2+1}$, where $-2\leq x\leq 2$.
+	\item $-x^4$ where $x\in\mathbb{R}$.
+	\item $t\sin(t)$ where $0\leq t \leq 2\pi$.
+	\item $x^5$ where $-1\leq x\leq 1$.
+\end{enumerate}
+
+
+\clearpage
+
+\textbf{Tangents and Normals:}
+
+\vspace{5mm}
+
+
+\begin{enumerate}
+	\item Find the tangent and normal to the curve $y=x^2e^x-\cos(2x)$ at the point $x=0$.
+	\item Find the tangent and normal to the curve $x=\sin(2t)\cos(t)$ at the point $x=\frac{\pi}{4}$.
+	\item Consider the curve $y=e^{-t}\sin(2\pi t)$. Show that for any integer $n$, the tangent to this curve at $t=n+\frac{1}{4}$ meets the $t$-axis at $t=(n+1)+\frac{1}{4}$.
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+\textbf{Implicit and Parametric Differentiation:}
+
+\vspace{5mm}
+
+
+\begin{enumerate}
+	\item Suppose that $y$ is defined implicitly by $\sin(xy)=1$. By differentiating, find a relation satisfied by $\deriv{y}{x}$.
+	\item Find the tangent to the curve $\frac{x^2y}{x+2y}=1$ at the point $(2,1)$.
+	\item An ellipse is given parametrically by $(x,y)=(3\cos(t),4\sin(t))$, for $0\leq t < 2\pi$. Show that on the ellipse
+		\[\deriv{y}{x} = -\frac{16x}{9y}.\]
+\end{enumerate}
+
+
+
+
+
+\end{document}

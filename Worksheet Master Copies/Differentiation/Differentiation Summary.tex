@@ -1,0 +1,534 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{tikz}
+
+\usetikzlibrary{arrows.meta}
+
+\setlength{\tabcolsep}{0.3cm}
+\renewcommand{\arraystretch}{1.4}
+
+\makeatletter
+\newcommand{\thickhline}{%
+    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+    \futurelet \reserved@a \@xhline
+}
+\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+\makeatother
+
+\newcommand{\cis}{\,\mathrm{cis}}
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1} #2}{\mathrm{d}#3^{#1}}}
+
+\begin{document}
+
+\title{Differentiation--Summary}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\Large
+
+
+\section{Key Points - Fill in the Blanks:}
+
+Fill in the blanks in the key points below with a word, phrase, or mathematical expression. The unblanked versions are on the next page. Note that the size of the blank does not indicate the size of the missing word or phrase!
+
+\begin{enumerate}
+	\item The quantity
+		\[\frac{f(t+h)-f(t)}{h}\]
+		is the ......... of the function $f$ between time $t$ and time $t+h$.
+	\item If a function $g(x)$ can be made to land within any ............ of a number $L$ by choosing $x$ within a suitable ............ around $a$, then we say that $L$ is the ................., written .........
+	\item The function
+		\[f'(t)=\lim_{h\to 0}\frac{f(t+h)-f(t)}{h}\]
+		is called the ......... of $f(t)$ (with respect to $t$); it models the ............... of $f$ at time $t$, and is also denoted .....
+	\item The function $f''(t)$, or $\deriv[2]{f}{t}$, is called the .......... It models the ........... For instance, if $f(t)$ gives position of an object at time $t$, $f'(t)$ gives the ......... and $f''(t)$ gives the .......
+	\item Derivatives of standard functions:
+
+		\hfill\begin{tabular}{c|c|c|c|c|c|c|c}
+			$y=$ & $x^n$ & $e^x$ & $\ln(x)$ & $\sin(x)$ & $\cos(x)$ & $\sinh(x)$ & $\cosh(x)$\\ \hline
+			$\deriv{y}{x}=$ & $\hdots$ & $\hdots$ & $\hdots$ & $\hdots$ & $\hdots$ & $\hdots$ & $\hdots$
+		\end{tabular}\hfill
+	\item \textbf{Linearity}: if $y$ \& $z$ are functions of $x$ and $a$ \& $b$ are constants, then
+		\[\deriv{}{x}\left(ay+bz\right) = \hdots\]
+		or equivalently
+		\[(ay+bz)'=\hdots\]
+	\item The \textbf{Product Rule}: if $y$ and $z$ are functions of $x$, then
+		\[\deriv{yz}{x} = \hdots\]
+		or equivalently
+		\[(yz)'=\hdots\]
+	\item The \textbf{Chain Rule}: if $y$ is a function of $x$ and $z$ is a function of $y$, then
+		\[\deriv{z}{x}=\hdots\]
+		or equivalently, writing $f=z(y(x))$:
+		\[f'(x)=\hdots\]
+	\item If $f'(x)$ is positive, then $f(x)$ is ........., whereas if $f'(x)$ is negative, then $f(x)$ is ..........
+	\item A point where $f'(x)=0$ is called a ............
+	\item \textbf{Fermat's Method} says that every local extremum is a ........, so to find local maxima and minima we solve the equation ..........
+	\item The \textbf{second derivative test} says that if $x=a$ is a stationary point and $f''(a)>0$, then $a$ is a ........., whereas if $f''(a)<0$, then $a$ is a ..........; if $f''(a)=0$, then .............
+	\item A stationary point which is neither a local maximum nor a local minimum is called a ..........
+	\item When finding the maximum or minimum value of a function over a restricted range, as well as applying Fermat's method we must remember ..........
+	\item The method for approximating solutions to an equation $f(x)=0$ by starting with an estimated solution, taking the tangent to $y=f(x)$ at that point, and finding where that tangent meets the $x$-axis is called the ............; the iterative formula for this method is ..............
+	\item The unique polynomial $f_n(x)$ of degree at most $n$ which has the same value and first $n$ derivatives as $f(x)$ at $x=a$ is called the ................. of $f(x)$ around $x=a$.
+	\item If a function $f(x)$ can be made to land in any .............. of a number $L$ by choosing $x$ sufficiently large, then we say that $L$ is the ............, written ..........
+	\item The sum of an infinite series $\sum\limits_{n=0}^\infty$ is defined to be the limit .......... If this limit exists, we say the sum ...........; otherwise, it ............
+	\item The \textbf{Taylor series} of $f(x)$ about $x=a$ is the infinite series ..........
+	\item The shortest distance from $a$ to a point where the Taylor series of $f(x)$ about $x=a$ diverges is called the ............ of the Taylor series.
+	\item \textbf{Euler's Equation}: .............
+	\item If a complex number is written in the form $re^{j\theta}$, where $r$ is the ......... and $\theta$ is the ........., then we say the number is in ........... form.
+\end{enumerate}
+
+\clearpage
+
+\section{Key Points to Remember}
+
+The statements from the previous page, with the blanks filled in.
+
+\begin{enumerate}
+	\item The quantity
+		\[\frac{f(t+h)-f(t)}{h}\]
+		is the \textit{average rate of change} of the function $f$ between time $t$ and time $t+h$.
+	\item If a function $g(x)$ can be made to land within any \textit{target zone} of a number $L$ by choosing $x$ within a suitable \textit{launch zone} around $a$, then we say that $L$ is the \textit{limit of $g(x)$ as $x$ tends to $a$}, written
+		\[L=\lim_{x\to a}f(x).\]
+	\item The function
+		\[f'(t)=\lim_{h\to 0}\frac{f(t+h)-f(t)}{h}\]
+		is called the \textit{derivative} of $f(t)$ (with respect to $t$); it models the \textit{instantaneous rate of change} of $f$ at time $t$, and is also denoted $\deriv{f}{t}$.
+	\item The function $f''(t)$, or $\deriv[2]{f}{t}$, is called the \textit{second derivative of $f$ with respect to $t$}. It models the \textit{rate of change of the rate of change}. For instance, if $f(t)$ gives position of an object at time $t$, $f'(t)$ gives the \textit{velocity} and $f''(t)$ gives the \textit{acceleration}.
+	\item Derivatives of standard functions:
+
+		\hfill\begin{tabular}{c|c|c|c|c|c|c|c}
+			$y=$ & $x^n$ & $e^x$ & $\ln(x)$ & $\sin(x)$ & $\cos(x)$ & $\sinh(x)$ & $\cosh(x)$\\ \hline
+			$\deriv{y}{x}=$ & $nx^{n-1}$ & $e^x$ & $\frac{1}{x}$ & $\cos(x)$ & $-\sin(x)$ & $\cosh(x)$ & $\sinh(x)$
+		\end{tabular}\hfill
+	\item \textbf{Linearity}: if $y$ \& $z$ are functions of $x$ and $a$ \& $b$ are constants, then
+		\[\deriv{}{x}\left(ay+bz\right) = a\deriv{y}{x} + b\deriv{z}{x},\]
+		or equivalently
+		\[(ay+bz)'=ay'+bz'.\]
+	\item The \textbf{Product Rule}: if $y$ and $z$ are functions of $x$, then
+		\[\deriv{yz}{x} = y\deriv{z}{x}+z\deriv{y}{x},\]
+		or equivalently
+		\[(yz)'=y'z+yz'.\]
+	\item The \textbf{Chain Rule}: if $y$ is a function of $x$ and $z$ is a function of $y$, then
+		\[\deriv{z}{x}=\deriv{z}{y}\deriv{y}{x},\]
+		or equivalently, writing $f=z(y(x))$:
+		\[f'(x)=z'(y)y'(x).\]
+	\item If $f'(x)$ is positive, then $f(x)$ is \textit{increasing}, whereas if $f'(x)$ is negative, then $f(x)$ is \textit{decreasing}.
+	\item A point where $f'(x)=0$ is called a \textit{stationary point}.
+	\item \textbf{Fermat's Method} says that every local extremum is a \textit{stationary point}, so to find local maxima and minima we solve the equation $f'(x)=0$.
+	\item The \textbf{second derivative test} says that if $x=a$ is a stationary point and $f''(a)>0$, then $a$ is a \textit{local minimum}, whereas if $f''(a)<0$, then $a$ is a \textit{local maximum}; if $f''(a)=0$, then \textit{the test is inconclusive}.
+	\item A stationary point which is neither a local maximum nor a local minimum is called a \textit{point of inflexion}.
+	\item When finding the maximum or minimum value of a function over a restricted range, as well as applying Fermat's method we must remember \textit{to check the endpoints of the range under consideration}.
+	\item The method for approximating solutions to an equation $f(x)=0$ by starting with an estimated solution, taking the tangent to $y=f(x)$ at that point, and finding where that tangent meets the $x$-axis is called the \textit{Newton-Raphson method}; the iterative formula for this method is
+		\[x_{n+1} = x_n -\frac{f(x_n)}{f'(x_n)}.\]
+	\item The unique polynomial $f_n(x)$ of degree at most $n$ which has the same value and first $n$ derivatives as $f(x)$ at $x=a$ is called the $n^\mathrm{th}$\textit{-order Taylor polynomial} of $f(x)$ around $x=a$.
+	\item If a function $f(x)$ can be made to land in any \textit{target zone} of a number $L$ by choosing $x$ sufficiently large, then we say that $L$ is the \textit{limit of $f(x)$ as $x$ tends to infinity}, written
+		\[L=\lim_{x\to \infty}f(x).\]
+	\item The sum of an infinite series $\sum\limits_{n=0}^\infty a_n$ is defined to be the limit
+		\[\lim_{k\to \infty}\sum_{n=0}^k a_n.\]
+		If this limit exists, we say the sum \textit{converges}; otherwise, it \textit{diverges}.
+	\item The \textbf{Taylor series} of $f(x)$ about $x=a$ is the infinite series
+		\[\sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x-a)^n.\]
+	\item The shortest distance from $a$ to a point where the Taylor series of $f(x)$ about $x=a$ diverges is called the \textit{radius of convergence} of the Taylor series.
+	\item \textbf{Euler's Equation}:
+		\[e^{jx}=\cos(x)+j\sin(x).\]
+	\item If a complex number is written in the form $re^{j\theta}$, where $r$ is the \textit{modulus} and $\theta$ is the \textit{argument}, then we say the number is in \textit{exponential} form.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+\section{Revision Questions}
+
+\begin{enumerate}
+	\item For each of the following functions $y$, find $\deriv{y}{x}$:
+		\begin{enumerate}
+			\item $y=7x^2-4x^3+2x-1$
+			\item $y=(3x^2-7x+4)^{20}$
+			\item $y=e^{4x^2}+\ln(x^3)$
+			\item $y=\sin(4x^3)$
+			\item $y=e^{\sin(x)}\cos(x^2)$
+			\item $y=10^x$ (hint: rewrite $y=e^{x\ln(10)}$)
+			\item $y=x^x$ (hint: try adapting the trick in the last question)
+			\item $y=e^{\cos^2(x)}$
+		\end{enumerate}
+	\item A mass on a spring moves with position $x(t)=e^{-t}\sin(2\pi t)$. Find the velocity and acceleration of the particle.
+	\item Find the maximum and minimum values of the function $f(x)=4x+2-7x^2$ between $x=-2$ and $x=2$.
+	\item Find and classify all stationary points of the function $(7-t)^3+(t-2)^2$.
+	\item Use the Newton-Raphson method to find a solution of $e^x=15\sin(x)$, accurate to $3$ significant figures, starting with $x_1=2$.
+	\item Find the degree 3 Taylor polynomial of $\log_2(x^2+1)$ about $x=0$ (hint: use the change-of-base rule for logarithms to first convert into natural logs).
+	\item Find the first three non-zero terms of the Taylor series of $\sin(\pi-x)$ about $x=\frac{\pi}{2}$.
+\end{enumerate}
+
+
+
+
+\clearpage
+
+\section{Solutions}
+
+It is possible I've made a mistake or two in these, so if your answer is different from mine and after checking you can't find a mistake in your work, ask me about it!
+
+\begin{enumerate}
+	\item 
+		\begin{enumerate}
+			\item
+				\[\deriv{y}{x}=14x-12x^2+2\]
+			\item
+				\[\deriv{y}{x}=20(3x^2-7x+4)^{19}(6x-7)\]
+			\item
+				\[\deriv{y}{x}=8xe^{4x^2}+\frac{3x^2}{x^3}=8xe^{4x^2}+\frac{3}{x}\]
+			\item
+				\[\deriv{y}{x} = 12x^2\cos(4x^3)\]
+			\item
+				\[\deriv{y}{x} = e^{\sin(x)}\cos(x)\cos(x^2) - 2xe^{\sin(x)}\sin(x^2)\]
+			\item
+				\[\deriv{y}{x} = \ln(10)e^{x\ln(10)}=\ln(10)10^x\]
+			\item
+				\[\deriv{y}{x} = e^{x\ln(x)}\left(1+\ln(x)\right) = x^x\left(1+\ln(x)\right)\]
+			\item
+				\[\deriv{y}{x} = -e^{\cos^2(x)}2\cos(x)\sin(x)\]
+		\end{enumerate}
+	\item Velocity = $e^{-t}\left(2\pi\cos(2\pi t)-\sin(2\pi t)\right)$.
+	
+		Acceleration = $e^{-t}\left(\sin(2\pi t)-2\pi\cos(2\pi t) -4\pi^2\sin(2\pi t)-2\pi \cos(2\pi t)\right)$, which simplifies to $e^{-t}\left((1-4\pi^2)\sin(2\pi t) - 4\pi\cos(2\pi t)\right)$.
+	\item We use Fermat's method; $f'(x)=4-14x$, so $f'(x)=0$ at $14x=4$, so $x=\frac{2}{7}$. We also need to check the endpoints, because the range is restricted; $f(-2)=-34$, $f(2/7)=(8+14-4)/7=18/7\approx2.57$, and $f(2)=-18$. So on the specified range of $x$-values, the maximum of the function is $\frac{18}{7}\approx 2.57$, and the minimum is $-34$.
+	\item First we find the stationary points by Fermat's method: $f'(x)=3(7-t)^2(-1)+2(t-2)=3(-49+14t-t^2)+2t-4=-3t^2+44t-151$. We must solve $f'(x)=0$, so
+		\begin{align*}
+			3t^2-44t+151&=0\\
+			t^2-\frac{44}{3}t+\frac{157}{3}&=0\\
+			\left(t-\frac{22}{3}\right)^2-\frac{484}{9}+\frac{157}{3}&=0\\
+			\left(t-\frac{22}{3}\right)^2&=\frac{484-471}{9}=\frac{13}{9}\\
+			t-\frac{22}{3}&=\pm\frac{\sqrt{13}}{3}\\
+			t&=\frac{22\pm\sqrt{13}}{3}\\
+			&\approx 8.54\mbox{ or } 6.13
+		\end{align*}
+		Now we find the value of the function at these points; $f(6.13)\approx 17.72$ and $f(8.54)\approx 39.09$. Now we apply the second derivative test; $f''(x)=6(7-t)(-1)^2+2=44-6t$; so $f''(8.54)<0$ and $f''(6.13)>0$. So the function has a local minimum at $(6.13,17.72)$ and a local maximum at $(8.54,39.09)$.
+	\item Set $f(x)=e^x-15\sin(x)$ and $x_1=2$. We have $f'(x)=e^x-15\cos(x)$, so our Newton-Raphson formula is
+		\[x_{n+1}=x_n-\frac{e^x-15\sin(x)}{e^x-15\cos(x)}.\]
+		We find $x_2\approx 2.4585$, $x_3\approx 2.3633$, $x_4\approx 2.3588$, $x_5\approx 2.3588$, and we now have two solutions agreeing to 5 significant figures of precision. So we expect the true answer is $2.359$ to 4 significant figures.
+	\item By the change-of-base rule, we have
+		\[\log_2(x^2+1)=\frac{\ln(x^2+1)}{\ln(2)}.\]
+		So let $f(x)=\frac{1}{\ln(2)}\ln(x^2+1)$. Then $f(0)=0$, and
+			\[f'(x)=\frac{2x}{\ln(2)(x^2+1)},\]
+			so $f'(0)=0$. Writing $f'(x)$ as
+			\[\frac{2x}{\ln(2)}(x^2+1)^{-1},\]
+			we can apply the product and chain rules to obtain
+			\[f''(x)=\frac{2}{\ln(2)}(x^2+1)^{-1}-\frac{4x^2}{\ln(2)}(x^2+1)^{-2},\]
+			so $f''(0)=\frac{2}{\ln(2)}$. Finally,
+			\[f'''(x)=-\frac{4x}{\ln(2)}(x^2+1)^{-2}-\frac{8x}{\ln(2)}(x^2+1)^{-2}+\frac{16x^3}{\ln(2)}(x^2+1)^{-3},\]
+			so $f'''(0)=0$. So the degree 3 Taylor polynomial of $f(x)$ about $x=0$ is simply
+			\[\frac{2}{\ln(2)}\frac{x^2}{2!}=\frac{x^2}{\ln(2)}.\]
+	\item Let $f(x)=\sin(\pi-x)$. Then $f\left(\frac{\pi}{2}\right)=\sin\left(\frac{\pi}{2}\right) = 1$; $f'(x)=-\cos(\pi-x)$, so $f'\left(\frac{\pi}{2}\right)=-\cos\left(\frac{\pi}{2}\right)=0$; $f''(x)=-\sin(\pi-x)$, so $f''\left(\frac{\pi}{2}\right)=-\sin\left(\frac{\pi}{2}\right)=-1$; $f'''(x)=\cos(\pi-x)$, so $f'''\left(\frac{\pi}{2}\right)=0$; and $f^{(4)}(x)=\sin(\pi-x)=f(x)$, so from this point on all values repeat. So $f^{(4)}\left(\frac{\pi}{2}\right)=f\left(\frac{\pi}{2}\right)=1$, etc. So the Taylor series is
+		\[\sin(\pi-x)=1-\frac{\left(x-\frac{\pi}{2}\right)^2}{2!}+\frac{\left(x-\frac{\pi}{2}\right)^4}{4!}-\hdots\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+\section{Application Question: RC Circuits}
+
+\textbf{Warning: hard!}\bigskip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Consider an RC circuit, as pictured below.
+
+\begin{center}
+\begin{tikzpicture}
+	\draw (0,4) -- (2,4) -- (2,3) -- (2.2,3) -- (2.2,2) -- (1.8,2) -- (1.8,3) -- (2,3);
+	\node[right] at (2.2,2.5) {$R$};
+	\draw (2,2) -- (2,1);
+	\draw (1.3,1) -- (2.7,1);
+	\draw (1.3,0.7) -- (2.7,0.7);
+	\node[right] at (2.7,0.85) {$C$};
+	\draw (2,0.7) -- (2,0) -- (0,0);
+	\node[left] at (0,4) {$V_\mathrm{in}$};
+	\node[left] at (0,0) {0V};
+	\draw (2,1.5) -- (6,1.5);
+	\draw[->] (2,1.5) -- (4,1.5);
+	\node[above] at (4,1.5) {$I$};
+	\draw[thick,-Latex] (6,0) -- (6,1.4);
+	\node[right] at (6,0.75) {$V_\mathrm{out}$};
+\end{tikzpicture}
+\end{center}
+
+Here $I$ is the load---the current drawn out through the output connection.
+
+Assume that the supply voltage $V_\mathrm{in}$ is a sinusoid, $V_\mathrm{in}=A\sin(\omega t)$, and that the load $I$ is 0; it doesn't really make it much more complicated to include, say, a constant load, but for simplicity we'll leave it out entirely. Note that we will work in generality, so the amplitude, angular frequency, resistance, and capacitance will remain as $A$, $\omega$, $R$, and $C$ respectively, for most of the problem, before we specialise to particular values later on. Remember, these quantities are just unknown (constant) numbers.
+
+
+First we will derive an equation for the voltage $V_\mathrm{out}$.
+
+\begin{enumerate}
+	\item Find an expression for the voltage on and current through the resistor in terms of the input voltage $V_\mathrm{in}$ and the capacitor voltage $V_\mathrm{out}$.
+	\item The capacitor voltage $V_\mathrm{out}$ and charge $Q$ are related by the equation $Q=CV_{\mathrm{out}}$. By differentiating this expression with respect to $t$ (note that $C$ is a constant), and using the expression for current derived above, show that
+		\[\deriv{V_\mathrm{out}}{t}+\frac{1}{RC}V_\mathrm{out}=\frac{A}{RC}\sin(\omega t).\]
+\end{enumerate}
+
+Note that this is a type of equation we haven't seen before, called a \textbf{differential equation}. Equations we have seen before, such as $x^2-2x+1=0$, involve an unknown \textit{number} $x$, which is to be found. A differential equation, on the other hand, involves an unknown \textit{function} $V_\mathrm{out}$, and relates this function and its derivative to another function (in this case, $\sin(\omega t)$). So the objective with this differential equation is to find a \textit{function} of $t$, $V_\mathrm{out}=f(t)$, such that if we differentiate $f$ to form $f'(t)$, then add $\frac{1}{RC}$ times the original function $f(t)$, we end up with the known function $\frac{A}{RC}\sin(\omega t)$.
+
+Differential equations occur naturally in lots of problems, where theoretical arguments allow us to understand how the rate-of-change of a function behaves, from which we must recover the original function. For instance, here, we have been able to describe how the rate-of-change of charge (\textit{i.e.}, the current) will relate to the voltage, and also how the current relates to the voltage (by Ohm's Law), and hence write down a differential equation governing the voltage. We will see more differential equations when we study integration shortly.\bigskip
+
+
+{\color{red}
+
+We will now solve this differential equation; this is difficult, and we will look at these ideas in more detail in our integration chapter. For now, I'll walk you through the steps. Feel free to skip this part, especially on the first attempt! In part 8 we will finally reach the solution, and part 9 consists of checking that it is indeed a solution, so you can skip straight to part 9 if you wish.
+
+I'd suggest that when attempting this part, you first read through all the parts without attempting them, to try to get some idea of the structure of the argument. Then attempt each part as a purely technical calculation, without worrying about how it relates to the other parts or the whole argument. Then look back through and try to understand how each of the calculations fits together to lead to build our solution.
+
+The general structure of the argument is that we will introduce a new variable $x=e^{t/RC}V_\mathrm{out}$, and manipulate our differential equation to turn it into an equation of the form
+\[\deriv{x}{t}=f(t)\]
+where $f(t)$ is a known function. Then we will find a function which differentiates to give $f(t)$, and conclude that this function is $x$; then, since $x=e^{t/RC}V_\mathrm{out}$, we can divide through by $e^{t/RC}$ to find $V_\mathrm{out}$.
+
+We start by manipulating the differential equation to a more amenable form (similar to how we use completing the square to manipulate quadratics into a form we can solve).
+
+Our first step is to multiply our differential equation by $e^{t/RC}$, giving us
+\begin{equation}
+	e^{t/RC}\deriv{V_\mathrm{out}}{t}+\frac{e^{t/RC}}{RC}V_\mathrm{out}= \frac{Ae^{t/RC}}{RC}\sin(\omega t).\tag{$\star$}
+\end{equation}\bigskip
+
+
+
+\begin{enumerate}\setcounter{enumi}{2}
+	\item Show by the product rule that
+		\[\deriv{}{t}\left(e^{t/RC}V_\mathrm{out}\right) = e^{t/RC}\deriv{V_\mathrm{out}}{t}+\frac{e^{t/RC}}{RC}V_\mathrm{out}\]
+		and hence conclude that
+		\[\deriv{}{t}\left(e^{t/RC}V_\mathrm{out}\right) = \frac{Ae^{t/RC}}{RC}\sin(\omega t).\]
+	\item Using Euler's equation, show that
+		\[\mathrm{im}\left(\frac{A}{RC}e^{\left(1/RC+ \omega j\right)t}\right)=\frac{Ae^{t/RC}}{RC}\sin(\omega t),\]
+		where $\mathrm{im}$ denotes the `imaginary part' function. Therefore, letting $x=e^{t/RC}V_\mathrm{out}$ and combining parts 3 and 4, we conclude that
+		\[\deriv{x}{t}=\mathrm{im}\left(\frac{A}{RC}e^{\left(1/RC+ \omega j\right)t}\right).\]
+	\item Now we can make an educated guess at a function which differentiates to give the right-hand side:
+		\[\frac{A}{1+RC\omega}e^{\left(1/RC+\omega j\right)t} + c,\]
+		where $c$ is any constant. By differentiating with the chain rule, show that
+		\[\deriv{}{t}\left( \frac{A}{1+RC\omega j}e^{\left(1/RC+\omega j\right)t}  + c \right) = \frac{A}{RC}e^{\left(1/RC+\omega j\right)t}.\]
+\end{enumerate}\bigskip
+
+
+So we have shown that, for any constant $c$,
+\[\deriv{}{t}\left(\frac{A}{1+RC\omega j}e^{(1/RC+\omega j)t}+c\right)=\frac{A}{RC}e^{(1/RC+\omega j)t}\]
+and
+\[\deriv{x}{t}=\mathrm{im}\left(\frac{A}{RC}e^{(1/RC+\omega j)t}\right),\]
+so we have
+\begin{align*}
+	\deriv{x}{t}&=\mathrm{im}\left[\deriv{}{t}\left(\frac{A}{1+RC\omega j}e^{(1/RC+\omega j)t}+c\right)\right]\\
+	&=\deriv{}{t}\left[\mathrm{im}\left(\frac{A}{1+RC\omega j}e^{(1/RC+\omega j)t}+c\right)\right].
+\end{align*}
+
+Note that here we have used the fact that
+\[\deriv{}{t}\left(\mathrm{im}f(t)\right)=\mathrm{im}\left(\deriv{f(t)}{t}\right)\]
+for any function $f(t)$. This is true for for following reason: for any complex number $z$, $\mathrm{im}(z)=(z-\bar{z})/2j$, and differentiation is linear (bonus exercise: fill in the details in this argument!).
+
+So we have shown that $x$ and $\mathrm{im}\left(A/(1+RC\omega j)e^{(1/RC+\omega j)t}+c\right)$ have the same derivative; it follows that these two functions are equal (we shall show this in our integration section). Therefore we have almost solved our differential equation $(\star)$! Just a little work remains to tidy up and extract our solution. We have
+\[e^{t/RC} V_\mathrm{out} =x= \mathrm{im}\left(\frac{A}{1+RC\omega j}e^{(1/RC+\omega j)t}+c\right).\]
+\bigskip
+
+}
+
+
+
+\begin{enumerate}\setcounter{enumi}{5}{\color{red}
+	\item Show by Euler's Equation that
+		\[ \frac{A}{1+RC\omega j}e^{(1/RC+\omega j)t} = \frac{Ae^{t/RC}}{1+RC\omega j}\left(\cos(\omega t)+j\sin(\omega t)\right)\]
+		and hence
+		\[e^{t/RC} V_\mathrm{out} = \mathrm{im}\left[\frac{Ae^{t/RC}}{1+RC\omega j}\left(\cos(\omega t)+j\sin(\omega t)\right)+c\right].\]
+	\item	By multiplying top and bottom by the complex conjugate of the denominator, show that
+		\[\mathrm{im}\left[\frac{Ae^{t/RC}}{1+RC\omega j}\left(\cos(\omega t)+j\sin(\omega t)\right)\right] = \frac{Ae^{t/RC}}{1+R^2C^2\omega^2}\left(\sin(\omega t) - RC\omega\cos(\omega t)\right).\]
+	\item Hence conclude that {\color{blue}
+		\[V_\mathrm{out} = \frac{A}{1+R^2C^2\omega^2}\big(\sin(\omega t) - RC\omega\cos(\omega t)\big)+de^{-t/RC},\]}
+		where $d=\mathrm{im}(c)$, so is an unknown constant.}
+	\item So we have found the solution to our differential equation! Let's check it, to be sure: differentiate the expression in blue and substitute back into the equation
+		\[\deriv{V_\mathrm{out}}{t} +\frac{1}{RC}V_\mathrm{out} = \frac{A}{RC}\sin(\omega t)\]
+		from part 2 to verify that this is indeed a valid solution to this equation, and therefore is the correct expression for the capacitor voltage (though we still need to find the value of the constant $d$).
+	\item At time $0$, the capacitor has no charge, so $V_\mathrm{out}(0)=0$. Use this to show that
+		\[d=\frac{ARC\omega}{1+R^2C^2\omega^2}\]
+		and hence
+		\[V_\mathrm{out} = \frac{A}{1+R^2C^2\omega^2}\left(\sin(\omega t) - RC\omega\cos(\omega t)+RC\omega e^{-t/RC}\right).\]
+\end{enumerate}\bigskip
+
+Thus far we have worked in general terms. Now we will specialise to specific values; henceforth, we will assume the supply is mains voltage, so $A=230\sqrt{2}$ and $\omega=100\pi$. Moreover, we shall assume that $R=1\mathrm{k\Omega}$ and $C=10\mathrm{\mu F}$. Therefore
+\begin{align*}
+	V_\mathrm{out}&=\frac{230\sqrt{2}}{1+\pi^2}\left(\sin(100\pi t)-\pi \cos(100\pi t) + \pi e^{-100t}\right)\\
+	&\approx 30\sin(100\pi t)-94\cos(100\pi t)+94e^{-100 t}\\
+	&=30\sin(100\pi t)-94\cos(100\pi t) + 94e^{-100t}
+\end{align*}\bigskip
+
+\begin{enumerate}\setcounter{enumi}{10}
+	\item Show that
+		\[30\sin(100\pi t)-94\cos(100\pi t)\approx 99\sin(100\pi t-1.26).\]
+	\item Hence show that stationary points of the capacitor voltage occur when
+		\[99\pi\cos(100\pi t-1.26)-94e^{-100t}=0.\]
+	\item By using the Newton-Raphson method, starting with an initial estimate of $t_1=10\mathrm{ms}$, show that a stationary point occurs after roughly $8.6\mathrm{ms}$.
+	\item By using the second derivative test, show that this point is a maximum.
+	\item Give an approximate expression for $V_\mathrm{out}$ which is accurate for large values of $t$. This is called the \textbf{steady-state} solution.
+	\item The remaining parts of the question will explore an alternative route to the steady-state solution. The reactance of a capacitor is given by the expression
+		\[Z_C=-\frac{j}{\omega C},\]
+		where $\omega$ is the angular frequency of the supply voltage and $C$ is the capacitance. Find the reactance of the capacitor in this circuit and hence the total impedance of the RC circuit (impedance is (real) resistance plus (imaginary) reactance). Give your answers in ohms.
+	\item The resistor and capacitor act as a voltage divider, dividing the supply voltage in the ratio of their impedances. So we have
+		\[\frac{V_\mathrm{out}}{V_\mathrm{in}}=\frac{Z_C}{Z_R+Z_C},\]
+		where $Z_R$ is the resistance and $Z_C$ the capacitative reactance (so $Z_R+Z_C$ is the total impedance). By expressing the reactance and total impedance in polar form, calculate the right-hand side of this expression.
+	\item The input voltage $V_\mathrm{in}$ has amplitude $230\sqrt{2}$ and phase $0$; therefore the voltage $V_\mathrm{out}$ on the capacitor has amplitude $230\sqrt{2}$ times the modulus of the impedance ratio you found above, and phase $0$ plus the argument of the impedance ratio you found. Hence calculate $V_\mathrm{out}$, and compare with our previous expression for the steady-state output voltage.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+\section{RC Circuit Solution}
+
+
+\begin{enumerate}
+	\item The voltage on the resistor is $V_\mathrm{in}-V_\mathrm{out}=A\sin(\omega t)-V_\mathrm{out}$. From Ohm's Law, the current through it is therefore
+		\[\frac{A\sin(\omega t)-V_\mathrm{out}}{R}.\]
+	\item Differentiating $Q=CV_\mathrm{out}$ gives $Q'=CV'_\mathrm{out}$. Now, $Q'$ is the current onto the capacitor; the current through the resistor splits to give the current onto the capacitor and the load $I=0$. So $Q'+I=Q'$ is the current through the resistor, found above:
+		\[\frac{A\sin(\omega t)-V_\mathrm{out}}{R}=CV'_\mathrm{out}.\]
+		Dividing through by $C$ and rearranging, we obtain
+		\[V'_\mathrm{out}+\frac{1}{RC}V_\mathrm{out}=\frac{A}{RC}\sin(\omega t),\]
+		as required.
+	\item By the product rule,
+		\[\deriv{}{t}\left(e^{t/RC}V_\mathrm{out}\right)=e^{t/RC}\deriv{V_\mathrm{out}}{t}+\frac{e^{t/RC}}{RC}V_\mathrm{out},\]
+		and by the above, the right-hand side of this expression is equal to
+		\[\frac{Ae^{t/RC}}{RC}\sin(\omega t),\]
+		as required.
+	\item By Euler's equation,
+		\begin{align*}
+			\frac{A}{RC}e^{\left(1/RC+\omega j\right)t}&=\frac{A}{RC}e^{t/RC}e^{\omega jt}\\
+			&=\frac{Ae^{t/RC}}{RC}\left(\cos(\omega t)+j\sin(\omega t)\right)\\
+			\mbox{so   }\mathrm{im}\left(\frac{A}{RC}e^{\left(1/RC+\omega j\right)t}\right)&= \frac{Ae^{t/RC}}{RC}\sin(\omega t).
+		\end{align*}
+		Therefore, letting $x=e^{t/RC}V_\mathrm{out}$, we get
+		\[\deriv{x}{t}=\mathrm{im}\left(\frac{A}{RC}e^{(1/RC+\omega j)t}\right).\]
+	\item Since $A/(1+RC\omega j)$ and $c$ are constants, we have
+		\begin{align*}
+			\deriv{}{t}\left(\frac{A}{1+RC\omega j}e^{(1/RC+\omega j)t}+c\right)&=\frac{A}{1+RC\omega j}\deriv{e^{(1/RC+\omega j)t}}{t}\\
+			&=\frac{A(1/RC+\omega j)}{1+RC\omega j}e^{(1/RC+\omega j)t}\\
+			&=\frac{A}{(1/RC+\omega j)}{RC(1/RC+\omega j)}e^{(1/RC+\omega j)t}\\
+			&=\frac{A}{RC}e^{(1/RC+\omega j)t}.
+		\end{align*}
+	\item We have
+		\begin{align*}
+			\frac{A}{1+RC\omega j}e^{(1/RC+\omega j)t}&=\frac{A}{1+RC\omega j}e^{t/RC}e^{\omega jt}\\
+			&=\frac{Ae^{t/RC}}{1+RC\omega j}e^{\omega jt}\\
+			&=\frac{Ae^{t/RC}}{1+RC\omega j}\left(\cos(\omega t)+j\sin(\omega t)\right)
+		\end{align*}
+		and hence
+		\begin{align*}
+			e^{t/RC} V_\mathrm{out} &= \mathrm{im}\left(\frac{A}{1+RC\omega j}e^{(1/RC+ \omega j)t}+c\right)\\
+			&=\mathrm{im}\left[\frac{Ae^{t/RC}}{1+RC\omega j}\left(\cos(\omega t)+j\sin(\omega t)\right)+c\right].
+		\end{align*}
+	\item Multiplying through top and bottom by $1-RC\omega j$, we have
+		\begin{align*}
+			\frac{Ae^{t/RC}}{1+RC\omega j}\left(\cos(\omega t)+j\sin(\omega t)\right) &=\frac{Ae^{t/RC}}{1+R^2C^2\omega^2}\left(\cos(\omega t)+j\sin(\omega t)\right)\\
+			&{\color{white} =1+R^2C^2\omega^2}\times (1-RC\omega j)
+		\end{align*}
+		Multiplying out the brackets on the right-hand side and taking imaginary parts:
+		\[\mathrm{im}\left[\frac{Ae^{t/RC}}{1+RC\omega j}\left(\cos(\omega t)+j\sin(\omega t)\right)\right] = \frac{Ae^{t/RC}}{1+R^2C^2\omega^2}\left(\sin(\omega t)-RC\omega \cos(\omega t)\right).\]
+	\item By the equation from part 6, we have
+		\[e^{t/RC}V_\mathrm{out} = \mathrm{im}\left[\frac{Ae^{t/RC}}{1+RC\omega j}\left(\cos(\omega t)+j\sin\omega(t)\right)+c\right],\]
+		and by part 7 the right-hand side of this is equal to
+		\[\frac{Ae^{t/RC}}{1+R^2C^2\omega^c}\left(\sin(\omega t)-RC\omega\cos(\omega t)\right)+ d,\]
+		and so dividing through by $e^{t/RC}$ gives
+		\[V_\mathrm{out}=\frac{A}{1+R^2C^2}\omega^c\left(\sin(\omega t)-RC\omega\cos(\omega t)\right)+de^{-t/RC}.\]
+	\item Differentiating, we get
+		\[\deriv{V_\mathrm{out}}{t}=\frac{A}{1+R^2C^2\omega^2}\left(\omega\cos(\omega t)+RC\omega^2\sin(\omega t)\right) -\frac{d}{RC}e^{-t/RC}.\]
+		Therefore
+		\begin{align*}
+			\deriv{V_\mathrm{out}}{t}+\frac{1}{RC}V_\mathrm{out}&= \frac{A}{1+R^2C^2\omega^2}\left(\omega\cos(\omega t) + RC\omega^2\sin(\omega t) + \frac{1}{RC}\sin(\omega t)\right.\\
+			&\left.{\color{white} = \frac{A}{1+R^2C^2\omega^2}(} -\omega\cos(\omega t)\right)\\
+			&{\color{white}=\quad} -\frac{d}{RC}e^{-t/RC}+\frac{d}{RC}e^{-t/RC}\\
+			&= \frac{A}{1+R^2C^2\omega^2}\left( RC\omega^2+\frac{1}{RC}\right)\sin(\omega t)\\
+			&= \frac{A}{1+R^2C^2\omega^2}\frac{1+R^2C^2\omega^2}{RC}\sin(\omega t)\\
+			&=\frac{A}{RC}\sin(\omega t),
+		\end{align*}
+		as required, so our expression for $V_\mathrm{out}$ is indeed a solution of our differential equation.
+	\item Setting $t=0$ and $V_\mathrm{out}=0$, we get
+		\[0=\frac{A}{1+R^2C^2\omega^2}\left(0-RC\omega\right)  + d,\]
+		so
+		\[d=\frac{ARC\omega}{1+R^2C^2\omega^2}.\]
+		The result follows.
+	\item Suppose $30\sin(100\pi t)-94\cos(100\pi t)=R\sin(100\pi t-\alpha)$. Then we have $R^2=30^2+94^2$, so $R\approx 99$, and $\tan(\alpha)=\frac{94}{30}$, with $\alpha$ in the top right quadrant, so $\alpha\approx 1.26$. Note that, since we are given $R$ and $\alpha$ in the question, we could simply apply the compound angle formula to $99\sin(100\pi t-1.26)$ and compare with the left-hand side, but in general you need to be able to combine a sum of sinusoids into a single sinusoid, as we have done here. I have omitted some details, so look back at the relevant parts of our trigonometry work if you aren't sure you can do a problem like this.
+	\item By parts 10 and 11, we have
+		\[V_\mathrm{out}\approx 99\sin(100\pi t-1.26)+94e^{-100t},\]
+		hence
+		\[\deriv{V_\mathrm{out}}{t}\approx 9900\pi\cos(100\pi t-1.26)-9400e^{-100 t}.\]
+		Stationary points occur when the derivative is 0; we can cancel a factor of 100, and therefore have that stationary points occur when
+		\[99\pi\cos(100\pi t-1.26)-94e^{-100t}=0,\]
+		as required.
+	\item Let $f(t)=99\pi\cos(100\pi t-1.26)-94e^{-100t}$; we wish to solve $f(t)=0$. First we find $f'(t)=-9900\pi^2\sin(100\pi t-1.26) +9400e^{-100t}$, and apply the Newton-Raphson iteration formula:
+		\[t_{n+1}=t_n-\frac{f(t_n)}{f'(t_n)}.\]
+		Starting from $t_1=0.01$, we find $t_2\approx 0.008552$, $t_3\approx 0.008603$, $t_4\approx0.008603$. Since we now have two consecutive iterates agreeing to more than the desired precision, we can conclude that $t=0.0086$ is approximately a root.
+	\item The function $f(t)$ defined above was $V'_\mathrm{out}/100$, so $V''_\mathrm{out}=100f'(t)$, and we have found $f'(t)=-9900\pi^2\sin(100\pi t-1.26)+9400e^{-100t}$, so $f'(0.0086)\approx-93000<0$, so the stationary point at $8.6\mathrm{ms}$ is a local maximum, by the second derivative test.
+	\item As $t$ gets very large, $94e^{-100t}$ becomes very small in comparison to $99$ (the amplitude of the sinusoidal term), so we have
+		\[V_\mathrm{out}\approx 99\sin(100\pi t-1.26)\]
+		for large values of $t$. The $94e^{-100t}$ term is called the \textbf{transient term}.
+	\item We have $\omega=100\pi$ and $C=10^{-5}$, so the reactance is
+		\[-\frac{j}{100\pi\times10^{-5}}=-\frac{10^3j}{\pi}\approx -318j\Omega.\]
+		Therefore the total impedance is $(1000 - 318j)\Omega$.
+	\item Since $Z_C=-318j$, the modulus is $318$ and the argument is $-\frac{\pi}{2}$, so $Z_C=318\cis\left(-\frac{\pi}{2}\right)$. For the total impedance, we have
+		\[|1000-318j|=\sqrt{10^6+318^2}\approx 1049,\]
+		and
+		\[\tan(\arg(1000-318j))=\frac{-318}{1000},\]
+		so $\arg(1000-318j)=\tan^{-1}(-0.318)\approx-0.308$. Therefore $Z_R+Z_C= 1049\cis(-0.308)$. By dividing the moduli and subtracting the arguments, we have
+		\[\frac{Z_C}{Z_R+Z_C}=\frac{318}{1049}\cis\left(-\frac{\pi}{2}+0.308\right)\approx 0.3\cis(-1.26).\]
+	\item Multiplying $230\sqrt{2}$ by $0.3$ gives roughly 98, and adding $-1.26$ to $0$ gives $-1.26$, so $V_\mathrm{out}\approx 98\sin(100\pi t-1.26)$. Up to rounding errors, this agrees with the expression we found from solving the differential equation, but with a lot less work! This method misses out the transient term, but working with complex impedance allows us to quickly find steady-state solutions to otherwise difficult problems.
+\end{enumerate}
+
+
+
+
+
+\end{document}

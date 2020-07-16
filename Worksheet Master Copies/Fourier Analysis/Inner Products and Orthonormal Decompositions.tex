@@ -1,0 +1,317 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+\begin{document}
+
+\title{Inner Products and Orthonormal Decompositions}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand the notion of an inner product, with}}
+
+\textbf{\underline{examples; to understand orthogonality and norm, and be able to}}
+
+\textbf{\underline{express a vector in terms of an orthonormal basis.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+\textbf{Warm-up: Dot Product of Vectors:}\bigskip
+
+
+We work in three-dimensional real space, $\mathbb{R}^3$, with the usual dot product (Euclidean inner product):
+\[(x_1,y_1,z_1)\cdot (x_2,y_2,z_2)=x_1x_2+y_1y_2+z_1z_2).\]
+
+
+
+\begin{enumerate}
+	\item Show that the three standard unit vectors $e_1=(1,0,0)$, $e_2=(0,1,0)$, and $e_3=(0,0,1)$ satisfy the relations
+		\[e_i\cdot e_j = \begin{cases} 1: & i=j\\ 0: & i\neq j\end{cases}\]
+	\item Let $u$ be the vector $(3,-7,4)$. Calculate $u\cdot e_i$ for $i=1,\hdots,3$, and express $u$ as a linear combination of $e_1$, $e_2$, and $e_3$.
+	\item Let $v$ be the vector $(v_1,v_2,v_3)$. Calculate $v\cdot e_i$ for $i=1,\hdots,3$, and express $v$ as a linear combination of $e_1$, $e_2$, and $e_3$.
+	\item Define three vectors:
+		\begin{align*}
+			f_1&=\left(\frac{1}{\sqrt{3}},-\frac{1}{\sqrt{3}},\frac{1}{\sqrt{3}}\right)\\
+			f_2&= \left(2\sqrt{\frac{2}{21}},-\frac{1}{\sqrt{42}}, -\frac{5}{\sqrt{42}}\right)\\
+			f_3&= \left(\sqrt{\frac{2}{7}},\frac{3}{\sqrt{14}},\frac{1}{\sqrt{14}}\right).
+		\end{align*}
+		Show that
+		\[f_i\cdot f_j=\begin{cases} 1: & i=j\\ 0: & i\neq j\end{cases}\]
+	\item Let $u$, $v$ be as above. Express $u$ and $v$ as linear combinations of $f_1$, $f_2$, and $f_3$.
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Inner Products and Orthogonality:}
+
+\bigskip
+
+
+
+
+Let $V$ be a real vector space (\textit{i.e.}, a collection of objects, called \textbf{vectors}, which can be added together and multiplied by real scalars. An \textbf{inner product} on $V$ is a function that takes two vectors $u$ and $v$ and returns a real number, often denoted $\braket{u}{v}$, satisfying the following three conditions, for any vectors $u$, $v$, and $w$, and real scalars $\lambda$ and $\mu$:
+\begin{alignat*}{2}
+	\braket{\lambda u + \mu v}{w} &= \lambda\braket{u}{w} + \mu\braket{v}{w}\qquad&& \mbox{linearity in $1^\mathrm{st}$ argument}\\
+	\braket{u}{v} &= \braket{v}{u}\qquad&& \mbox{symmetry}\\
+	\braket{u}{u} &> 0\mbox{ if $u\neq 0$}\qquad&& \mbox{positive-definiteness.}
+\end{alignat*}
+Show that $\braket{0}{0}=0$.\bigskip
+
+There is also a notion of inner product on a complex vector space (when scalars can be complex numbers, instead of just real). There, the symmetry condition must be replaced by \textbf{conjugate symmetry}:
+\[\braket{u}{v}=\overline{\braket{v}{u}},\]
+where bar denotes complex conjugation.\bigskip
+
+
+Given an inner product, we can define the \textbf{norm} of a vector $v$ to be
+\[\norm{v}=\sqrt{\braket{v}{v}}.\]
+By positive-definiteness, $\norm{v}>0$ whenever $v\neq 0$; moreover, $\norm{0}=\sqrt{\braket{0}{0}}=0$. So a vector has norm 0 if and only if it is the zero vector. A \textbf{unit vector} is any vector of norm 1; given any non-zero vector $v$, we can scale $v$ to get a unit vector:
+\[\hat{v}=\frac{v}{\norm{v}}.\]
+Show that for any $v\neq 0$,
+\[\norm{\hat{v}}=1.\]
+\bigskip
+
+We say vectors $v_1,\hdots,v_n$ are \textbf{orthogonal} if $\braket{v_i}{v_j}=0$ whenever $i\neq j$. If also each $v_i$ is a unit vector, we say these vectors are \textbf{orthonormal}. We define the \textbf{Kronecker delta symbol} $\delta_{ij}$ by
+\[\delta_{ij}=\begin{cases} 1: & i=j\\ 0: & i\neq j.\end{cases}\]
+Then $v_1,\hdots,v_n$ are orthonormal if and only if
+\[\braket{v_i}{v_j}=\delta_{ij}.\]
+
+
+\clearpage
+
+
+\textbf{Practice:}\bigskip
+
+
+\begin{enumerate}
+	\item Show that the dot product of vectors is an inner product on $\mathbb{R}^n$.
+	\item Show that any inner product is linear in the \textbf{second} argument:
+		\[\braket{u}{\lambda v + \mu w}=\lambda\braket{u}{v}+\mu\braket{u}{w}.\]
+	\item Prove the important \textbf{Cauchy-Schwarz inequality}:
+		\[\left| \braket{u}{v}\right| \leq \norm{u}\times \norm{v}.\]
+		Hint: consider
+		\[\norm{u-\frac{\braket{u}{v}}{\norm{v}^2}v}^2.\]
+	\item Let $F(\mathbb{R})$ be the set of (real-valued) functions on $\mathbb{R}$. Let $a\in\mathbb{R}$ be any fixed real number. Does the rule
+		\[\braket{f}{g}=f(a)g(a)\]
+		defines an inner product on $F(\mathbb{R})$?
+	\item Let $L_2([0,2\pi])$ be the set of square-integrable functions on the interval $[0,2\pi]$---\textit{i.e.}, functions $f$ from $[0,2\pi]$ to $\mathbb{R}$ such that
+		\[\int_0^{2\pi} f(x)^2\diff x\]
+		exists and is finite. Show that the rule
+		\[\braket{f}{g}=\frac{1}{\pi}\int_0^{2\pi} f(x)g(x)\diff x\]
+		defines an inner product on $L_2([0,2\pi])$.
+	\item Consider $L_2([0,2\pi])$ with the inner product defined in question 4. Show that the functions $\cos(nx)$ for all different positive integer values of $n$ are orthonormal. That is, show that
+		\[\braket{\cos(nx)}{\cos(mx)}=\delta_{nm}.\]
+	\item Let $V$ be a real vector space with an inner product. Suppose $v_1,\hdots,v_n$ are orthonormal, and
+		\[v=\sum_{i=1}^n \lambda_i v_i\]
+		for some scalars $\lambda_i\in\mathbb{R}$. Show that
+		\[\lambda_i=\braket{v}{v_i}.\]
+\end{enumerate}
+
+\clearpage
+
+
+
+
+
+
+
+
+
+\textbf{Application: Orthonormal Approximations:}\bigskip
+
+We have seen that if $v_1,\hdots,v_n$ are orthonormal with respect to some inner product and $v$ is a \textbf{linear combination} of $v_1,\hdots,v_n$,
+\[v=\sum_{i=1}^n \lambda_i v_i,\]
+then the coefficients are given by inner products: $\lambda_i=\braket{v}{v_i}$.
+
+What if $v$ is \textit{not} a linear combination of $v_1,\hdots,v_n$? Then we cannot hope to express $v$ exactly as a linear combination of $v_1,\hdots,v_n$, but we can still consider \textit{approximating} $v$ by a linear combination of $v_1,\hdots,v_n$. One might expect that the same choice of coefficients will give the best approximation to $v$, and indeed we shall show this. But what do we mean by ``best'' approximation? We want to define a notion of distance, and then measure the error of an approximation $u$ by the distance from $u$ to $v$.
+
+A \textbf{metric} (distance function) on a set is a function $d$ taking two inputs and giving a real output, $d(x,y)\in\mathbb{R}$, satisfying the following three conditions for any $x$, $y$, and $z$:
+\begin{alignat*}{2}
+	d(x,y) &= d(y,x)\qquad&& \mbox{symmetry}\\
+	d(x,y) &\geq 0,\mbox{ with $>$ if $x\neq y$}\qquad&& \mbox{positive-definiteness}\\
+	d(x,z) &\leq d(x,y) + d(y,z)\qquad&& \mbox{the triangle inequality.}\\
+\end{alignat*}
+
+Show that, on an inner product space, defining
+\[d(u,v)=\norm{u-v}\]
+satisfies the conditions of a metric. Hint: you will need the Cauchy-Schwarz inequality (exercise 3 on the preceding page).
+
+So if $u$ is an approximation of $v$, then the error of the approximation will be defined to be $\norm{v-u}$. So we want to show that choosing $\lambda_i=\braket{v}{v_i}$ minimises the error
+\[\norm{v-\sum_{i=1}^n \lambda_i v_i}.\]
+
+
+
+
+ 
+\clearpage
+ 
+ 
+ 
+\textbf{Application: Orthonormal Approximations (cont.):}\bigskip
+ 
+ Let $v_1,\hdots,v_n$ be orthonormal and let $v$ be a function we wish to approximate. We prove that the linear combination
+ \[u=\sum_{i=1}^n \lambda_i v_i\]
+ which minimises $\norm{v-u}$ (\textit{i.e.} gives the best approximation) is the one where $\lambda_i=\braket{v}{v_i}$ for each $i$.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ \begin{enumerate}
+ 	\item First we show that
+ 		\begin{equation}
+ 			\norm{v-\sum_{i=1}^n \lambda_iv_i}^2=\norm{v}^2 - 2 \sum_{i=1}^n \lambda_i\braket{v}{v_i} + \sum_{i=1}^n \lambda_i^2 .\tag{$\star$}
+		\end{equation}
+ 		\begin{enumerate}
+ 			\item First prove that for any vector $w$ and any integer $k$ between 1 and $n$:
+ 				\[\norm{w-\lambda_kv_k}^2=\norm{w}^2-2\lambda_k\braket{w}{v_k} + \lambda_k^2.\]
+			\item Take $w=v$ and $k=1$ to prove Equation ($\star$) in the case $n=1$.
+			\item Now take
+				\[w = v-\sum_{i=1}^{k-1}\lambda_i v_i\]
+				and show that, for this $w$, $\braket{w}{v_i}=\braket{v}{v_i}$. Hence conclude that if Equation ($\star$) is true for $n=k-1$, then it is true for $n=k$.
+			\item Now we know that ($\star$) is true for $n=1$, and if true for $n=k-1$, is also true for $n=k$. Why does this mean it is true for all $n$?
+ 		\end{enumerate}
+	\item By Equation ($\star$), in order to minimise
+		\[\norm{v-\sum_{i=1}^n \lambda_iv_i}^2,\]
+		it suffices to minimise $\lambda_i^2-2\lambda_i\braket{v}{v_i}$ for each value of $i$. Why does minimising the square of the norm also minimise the norm itself?
+	\item Use Fermat's Method to show that $\lambda_i^2-2\lambda_i\braket{v}{v_i}$ has its minimum value when $\lambda_i=\braket{v}{v_i}$. This completes the proof.
+\end{enumerate}
+	
+	
+	
+	
+	
+	
+
+
+
+
+\clearpage
+
+\textbf{Practice:}\bigskip
+
+
+
+\begin{enumerate}
+	\item Consider 3D real space, $\mathbb{R}^3$, with the usual dot product.
+		\begin{enumerate}
+			\item Show that the vectors
+				\[v_1=\left(\frac{1}{\sqrt{2}},0,\frac{1}{\sqrt{2}}\right),\quad v_2=\left(\frac{1}{\sqrt{2}},0,\frac{-1}{\sqrt{2}}\right)\]
+				are orthonormal.
+			\item Let $v$ be the point $(-1,7,4)$. Find the best approximation to $v$ by a linear combination of $v_1$ and $v_2$, and the error in this approximation.
+		\end{enumerate}
+	\item Consider $L_2([0,2\pi])$, the space of square-integrable functions from $[0,2\pi]$ to $\mathbb{R}$, with the inner product given by
+		\[\braket{f}{g}=\frac{1}{\pi}\int_0^{2\pi} f(x)g(x)\diff x.\]
+		\begin{enumerate}
+			\item Show that the functions $\sin(nx)$ are orthonormal for different positive integer values of $n$. That is, show that
+				\[\braket{\sin(nx)}{\sin(mx)}=\delta_{nm}.\]
+			\item Let $f(x)$ be the function defined by
+				\[f(x)=\begin{cases} 1: & 0\leq x<\pi\\ -1: & \pi\leq x\leq 2\pi.\end{cases}\]
+				Find $\braket{f(x)}{\sin(nx)}$ in terms of $n$.
+			\item Hence write down an expression for the best approximation to $f(x)$ by a linear combination of sine waves $\sin(nx)$ for $1\leq n\leq N$. This is called the $N^\mathrm{th}$ partial Fourier series of $f(x)$.
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item An \textbf{inner product} is a pairing which takes two vectors and gives a real number output, satisfying the following three conditions:
+		\begin{alignat*}{2}
+			\braket{\lambda u + \mu v}{w} &= a\braket{u}{w} + b\braket{v}{w}\qquad&& \mbox{linearity in $1^\mathrm{st}$ argument}\\
+			\braket{u}{v} &= \braket{v}{u}\qquad&& \mbox{symmetry}\\
+			\braket{u}{u} &> 0\mbox{ if $u\neq 0$}\qquad&& \mbox{positive-definiteness.}
+		\end{alignat*}
+	\item Given an inner product, the \textbf{norm} of a vector $v$ is $\norm{v}=\sqrt{\braket{v}{v}}$. This is 0 if $v=0$, and otherwise is strictly positive.
+	\item The \textbf{distance} between two vectors $u$ and $v$ is the norm of their difference, $\norm{u-v}$.
+	\item A \textbf{linear combination} of vectors $v_1,\hdots,v_n$ is any expression of the form
+		\[\sum_{i=1}^n \lambda_i v_i,\]
+		where the $\lambda_i$ are scalars.
+	\item We say vectors $v_1,\hdots,v_n$ are \textbf{orthogonal} if $\braket{v_i}{v_j}=0$ for all $i\neq j$. If also $\norm{v_i}=1$ for all $i$, we say they are \textbf{orthonormal}. We can concisely combine the two conditions for orthonormality by writing $\braket{v_i}{v_j}=\delta_{ij}$.
+	\item Given $v_1,\hdots,v_n$ orthonormal, and another object $v$, we can find the best approximation to $v$ by a linear combination of the $v_i$; it is
+		\[\sum_{i=1}^n \braket{v}{v_i}v_i.\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

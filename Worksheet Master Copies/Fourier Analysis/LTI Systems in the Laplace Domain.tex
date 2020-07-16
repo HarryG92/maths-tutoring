@@ -1,0 +1,343 @@
+
+\documentclass{article}
+
+\usepackage[left=1.8cm,right=1.8cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{Laplace Analysis of LTI Systems}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To understand the transfer function as Laplace transform}}
+
+\textbf{\underline{of the impulse response, and use it to solve LTI systems.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Warm-up: A Laplacian Approach to Mass-Spring-Damping Systems:}
+
+\bigskip
+
+
+We saw on the last sheet that the impulse response of the LTI operator
+\[D(x)=\deriv[2]{x}{t}+b\deriv{x}{t}+cx\]
+is given by
+\[I(t)=H(t)\frac{e^{-bt/2}}{\omega}\sin(\omega t),\]
+where $\omega = \frac{1}{2}\sqrt{4c-b^2}$.
+
+Recall that the Laplace transform of $e^{\alpha t}$ is given by $\frac{1}{s-\alpha}$.
+
+\begin{enumerate}
+	\item Find the Laplace transform of the impulse response $I$ above.
+	\item Let $\alpha\neq \omega$ be a constant. To solve the LTI operator equation $D(x)=H(t)\sin(\alpha t)$, we convolve the signal $H(t)\sin(\alpha t)$ with the impulse response $I$. Convolution in the time domain corresponds to multiplication in the Laplace domain. Compute
+		\[\mathcal{L}(H(t)\sin(\alpha t))\mathcal{L}(I)\]
+		and, by comparing with known Laplace transforms, take the inverse transform to find $H(t)\sin(\alpha t)\ast I$ and hence solve the equation $D(x)=H(t)\sin(\alpha t)$.
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: The Transfer Function:}\bigskip
+
+
+We have seen that solving an equation
+\[D(x)=f\]
+where $D$ is a linear, time-invariant operator comes down to finding the impulse response $I$, which satsifies $D(I)=\delta$. Then we can solve any $D(x)=f$ by convolution:
+\[x=f\ast I.\]
+
+Covolution can be difficult to compute, but we have seen that under a Laplace transform, it becomes multiplication. Therefore the Laplace transform of the solution to $D(x)=f$ is given by
+\[\mathcal{L}(f)\mathcal{L}(I).\]
+It is often easier to take the Laplace transforms of $f$ and $I$, multiply them, and find the inverse Laplace transform (usually by comparing with known transforms in a table, rather than by direct application of Mellin's inverse formula) than it is to convolve $f$ with $I$ directly. Therefore the Laplace transform of the impulse response, $\mathcal{L}(I)$, is of paramount importance. We call it the \textbf{transfer function}.
+
+So to solve an LTI problem in the time domain, we convolve with the input response, and in the Laplace domain this is equivalent to multiplying by the transfer function.\bigskip
+
+
+Not only does the transfer function allow us to compute the solution more easily---by multiplying instead of convolving---it can actually be easier to find the transfer function directly than it is to find the impulse response and then transform it! Consider the mass-spring-damper system we've been using as an example:
+\[\deriv[2]{x}{t}+b\deriv{x}{t}+cx=f(t).\]
+I asserted that the impulse response is $H(t)\frac{e^{-bt/2}}{\omega}\sin(\omega t)$, and even then it was difficult to simply check that this was correct. How would we even go about finding the impulse response if it weren't given to us in the first place?
+
+We will see how the transfer function can be found much more simply. We can then find the impulse response, if we wish, using an inverse Laplace transform, or we can simply stay in the Laplace domain, and use multiplication by the transfer function to solve our LTI problem.
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice/Theory: Transfer Functions:}\bigskip
+
+
+Recall that, for any (suitably decaying) function $f$,
+\[\mathcal{L}\left(f'\right) = s\mathcal{L}(f)-f(0^+).\]
+Recall also that
+\[\mathcal{L}\left(e^{\alpha t}f(t)\right)=\mathcal{L}(f)(s-\alpha)\]
+and that
+\[\mathcal{L}\left(H(t)e^{\alpha t}\right)=\frac{1}{s-\alpha}\qquad \mathcal{L}(H(t)\sin(\alpha t))=\frac{\alpha}{s^2+\alpha^2}.\]
+
+\begin{enumerate}
+	\item Show that $\mathcal{L}(f'')=s^2\mathcal{L}(f) - sf(0^+)- f'(0^+)$.
+	\item Apply the Laplace transform to the differential equation
+		\[\deriv[2]{x}{t}+b\deriv{x}{t}+cx = 0\]
+		to show that
+		\[(s^2+bs+c)X(s) - (b+s)x(0^+) - x'(0^+)=0,\]
+		where $X(s)=\mathcal{L}(x)$.
+	\item Use the initial conditions $x(0^+)=0$, $x'(0^+)=1$ to conclude that
+		\[X(s)=\frac{1}{s^2+bs+c}.\]
+	\item Hence show that
+		\[X(s)=\frac{1}{\omega}\frac{\omega}{\left(s+\frac{b}{2}\right)^2+\omega^2},\]
+		where $\omega=\sqrt{c-b^2/4}$.
+	\item Hence find the inverse transform of $X(s)$, using the properties and transforms recalled at the top of the page; compare with the impulse response found previously.
+	\item Solve the equation
+		\[\deriv[2]{x}{t}+b\deriv{x}{t}+cx=\sin(\alpha t),\]
+		treating separately the cases $\alpha=\omega$ and $\alpha\neq \omega$, by using the transfer function found above.
+\end{enumerate}
+
+
+
+%%%%%%%%%%%
+\iffalse
+
+Let $D$ be the linear, time-invariant operator
+\[D(f)=\deriv[2]{f}{t}+b\deriv{f}{t}+cf.\]
+
+\begin{enumerate}
+	\item Let $x(t)=H(t)\frac{1}{\omega}e^{-bt/2}\sin(\omega t)$, where $\omega = \frac{1}{2}\sqrt{4c-b^2}$. We will show that $x$ is the impulse response of the operator $D$; \textit{i.e.}, that $D(x)=\delta$.
+		\begin{enumerate}
+			\item Show that
+				\[\deriv{x}{t}=\frac{e^{-bt/2}}{\omega}\left(\omega \cos(\omega t) - \frac{b}{2}\sin(\omega t)\right).\]
+			\item Hence show that
+				\[\deriv[2]{x}{t} = \frac{e^{-bt/2}}{\omega}\left(\frac{b^2}{4}\sin(\omega t) -b\omega\cos(\omega t) -\omega^2\sin(\omega t)\right).\]
+			\item Hence show that $D(x)=0$.
+			\item Show that $x(0)=0$ and $x'(0)=1$.
+		\end{enumerate}
+		\begin{align*}
+			x(t)&=\frac{H(t)}{2j\omega}e^{-bt/2}(e^{\omega j t}-e^{-\omega j t})\\
+			&=\frac{H(t)}{2j\omega}\left[e^{(-b/2 + \omega j)t}-e^{(-b/2-\omega j)t}\right]\\
+			X(s)&=\frac{1}{2j\omega}\left[\frac{1}{s+b/2 - \omega j}-\frac{1}{s+b/2+\omega j}\right]\\
+			&=\frac{1}{j\omega}\left[\frac{1}{2s+b-2\omega j}-\frac{1}{2s+b+2\omega j}\right]\\
+			&=\frac{1}{j\omega}\frac{(2s+b+2\omega j)-(2s+b-2\omega j)}{(2s+b)^2+4\omega^2}\\
+			&=\frac{4}{4s^2+4bs+b^2+4\omega^2}\\
+			&=\frac{4}{4s^2+4bs+4c}\\
+			&=\frac{1}{s^2+bs+c}.\\
+			x'(t) &=\frac{H(t)}{2j\omega}\left[(-b/2 +\omega j)e^{(-b/2+\omega j)t} - (-b/2-\omega j)e^{(-b/2-\omega j)t}\right]\\
+			\mathcal{L}(x')&= \frac{1}{2j\omega}\left[\frac{-b/2+\omega j}{s-(-b/2+\omega j)} + \frac{b/2+\omega j}{s-(-b/2-\omega j)}\right]\\
+			&=\frac{1}{2j\omega}\left[\frac{(-b+2\omega j)(2s+b+2\omega j) + (b+2\omega j)(2s+b-2\omega j)}{(2s+b)^2 + 4\omega^2}\right]\\
+			&=\frac{1}{2j\omega}\frac{-2sb-b^2+ 4\omega js -4\omega^2 + 2sb + b^2+4s\omega j +4\omega^2}{4s^2+4bs+b^2+4\omega^2}\\
+			&=\frac{1}{2j\omega}\frac{8\omega s j}{4s^2+4bs+4c}\\
+			&=\frac{s}{s^2+bs+c}\\
+			&=s\mathcal{L}(x)-x(0)
+			\end{align*}
+			\begin{align*}
+			x''(t) &= \frac{H(t)}{2j\omega}\left[(-b/2+\omega j)^2e^{(-b/2+\omega j)t}-(b/2+\omega j)^2e^{(-b/2-\omega j)t}\right]\\
+			\mathcal{L}(x'')&=\frac{1}{2j\omega}\left[\frac{(-b/2+\omega j)^2}{s-(-b/2+\omega j)}-\frac{(b/2+\omega j)^2}{s+(b/2+\omega j)}\right]\\
+			&=\frac{1}{2j\omega}\left[\frac{b^2-4b\omega j - 4\omega^2}{2(2s+b-2\omega j)}-\frac{b^2+4b\omega j - 4\omega^2}{2(2s+b+2\omega j)}\right]\\
+			&=\frac{1}{2j\omega}\left[\frac{b^2-2c-2b\omega j}{2s+b-2\omega j} - \frac{b^2 -2c+ 2b\omega j}{2s+b+2\omega j}\right]\\
+			&=\frac{1}{2j\omega}\frac{(b^2-2c-2b\omega j)(2s+b+2\omega j)- (b^2-2c+2b\omega j)(2s+b-2\omega j)}{(2s+b)^2+4\omega^2}\\
+			&=\frac{1}{2j\omega}\frac{ -4c\omega j - 4bs\omega j -4c\omega j - 4bs\omega j }{4s^2+4bs + 4c}\\
+			&=\frac{-c-bs}{s^2+bs+c}\\
+			&=-c\mathcal{L}(x)-b\mathcal{L}(x')\\
+			&= \frac{(-c-bs-s^2)+s^2}{s^2+bs+c}\\
+			&=\frac{s^2}{s^2+bs+c} - 1\\
+			&=s^2\mathcal{L}(x)-x'(0^+)\\
+			&=s^2\mathcal{L}(x) -sx(0^+)-x'(0^+).
+		\end{align*}
+		\begin{align*}
+			\frac{1}{s^2+bs+c} &= \frac{1}{(s+b/2)^2 + (c-b^2/4)}\\
+			&= F(s+b/2),\\
+			\mbox{where } F(s)&=\frac{1}{s^2+(c-b^2/4)}\\
+			\mbox{ so } x(t)&=e^{-bt/2}f(t)\\
+			F(s)&=\frac{1}{s^2+\omega^2}\\
+			&=\frac{1}{\omega}\frac{\omega}{s^2+\omega^2}\\
+			f(t) &= \frac{1}{\omega}H(t)\sin(\omega t).
+		\end{align*}
+		\begin{align*}
+			s^2F(s)-sf(0)-f'(0) + bsF(s) - bf(0) + cF(s) &= 1\\
+			(s^2+bs+c)F(s) - (b+s)f(0) - f'(0)&=1\\
+			\lim_{h\to 0^+}\frac{x(h)-x(0)}{h} &= \lim_{h\to 0^+}\frac{\frac{e^{-bh/2}}{\omega}\sin(\omega h)}{h}\\
+			\frac{e^{-bh/2}}{\omega}\to \frac{1}{\omega} &\quad \frac{\sin(\omega h)}{h}\to \omega\\
+			x'(0)&=\frac{1}{\omega}\omega=1.
+		\end{align*}
+	\item Suppose that $b=0$; \textit{i.e.}, that there is no damping. Substituting $b=0$ into the impulse response from question 1, we see that the undamped impulse response is $x(t)=H(t)\frac{\sin(\omega t)}{\omega}$, where $\omega=\sqrt{c}$.
+		\begin{enumerate}
+			\item Suppose $\alpha\neq \omega$ is a real constant. By convolution with the impulse response, show that the equation
+				\[D(f)=H(t)\sin(\alpha t)\]
+				has solution
+				\[f(t)=H(t)\frac{\alpha\sin(\omega t)-\omega\sin(\alpha t)}{\omega(\alpha^2-\omega^2)}.\]
+				
+				
+				
+				%%%%%%%%%%%%%%
+				\iffalse
+				
+				
+				
+				
+				
+				\begin{align*}
+					&=(H(t)\sin(\alpha t))\ast \left(\frac{H(t)}{\omega}\sin(\omega t)\right)\\
+					&= \frac{1}{\omega}\int_0^\infty H(\tau)\sin(\alpha \tau)H(t-\tau)\sin(\omega t-\omega \tau)\diff \tau\\
+					&=\frac{1}{\omega}\int_0^t \sin(\alpha\tau)\sin(\omega t-\omega\tau)\diff \tau\\
+					&=\frac{1}{\omega}\int_0^t \sin(\alpha\tau)\left[\sin(\omega t)\cos(\omega \tau)-\cos(\omega t)\sin(\omega\tau)\right]\diff\tau\\
+					&=\frac{\sin(\omega t)}{\omega}\int_0^t \sin(\alpha \tau)\cos(\omega \tau)\diff\tau - \frac{\cos(\omega t)}{\omega}\int_0^t \sin(\alpha \tau)\sin(\omega \tau)\diff \tau\\
+					&=\frac{\sin(\omega t)}{2\omega}\int_0^t (\sin((\alpha  +\omega) \tau)+\sin((\alpha-\omega) \tau))\diff\tau\\
+					&\qquad- \frac{\cos(\omega t)}{2\omega}\int_0^t (\cos((\alpha -\omega)\tau) - \cos((\alpha+\omega)\tau))\diff\tau\\
+					&=\frac{\sin(\omega t)}{2\omega}\left[\frac{-\cos((\alpha+\omega)\tau)}{\alpha + \omega} - \frac{\cos((\alpha-\omega)\tau)}{\alpha-\omega}\right]_{\tau =0}^t\\
+					&\qquad -\frac{\cos(\omega t)}{2\omega}\left[\frac{\sin((\alpha-\omega)\tau)}{\alpha-\omega}-\frac{\sin((\alpha+\omega)\tau)}{\alpha+\omega}\right]_{\tau=0}^t\\
+					&=\frac{\sin(\omega t)}{2\omega}\left[\frac{(\omega-\alpha)\cos((\alpha+\omega)\tau)-(\alpha+\omega)\cos((\alpha-\omega)\tau)}{\alpha^2-\omega^2}\right]_{\tau=0}^t\\
+					&\qquad +\frac{\cos(\omega t)}{2\omega}\left[\frac{(\alpha-\omega)\sin((\alpha+\omega)\tau)-(\alpha+\omega)\sin((\alpha-\omega)\tau)}{\alpha^2-\omega^2}\right]_{\tau=0}^t\\
+					&=\frac{\sin(\omega t)}{2\omega}\left[\frac{\omega c_ac_w -\omega s_as_w - \alpha c_ac_w + \alpha s_as_w - \alpha c_ac_w-\alpha s_as_w-\omega c_ac_w - \omega s_as_\omega}{\alpha^2-\omega^2}\right]_{\tau=0}^t\\
+					&\qquad +\frac{\cos(\omega t)}{2\omega}\left[\frac{\alpha s_ac_w + \alpha s_wc_a - \omega s_ac_w - \omega s_wc_a - \alpha s_ac_w + \alpha s_wc_a -\omega s_ac_w + \omega s_wc_a}{\alpha^2-\omega^2}\right]_{\tau=0}^t\\
+					&=\frac{\sin(\omega t)}{\omega}\left[\frac{ -\omega s_as_w - \alpha c_ac_w }{\alpha^2-\omega^2}\right]_{\tau=0}^t +\frac{\cos(\omega t)}{\omega}\left[\frac{\alpha s_wc_a - \omega s_ac_w}{\alpha^2-\omega^2}\right]_{\tau=0}^t\\
+					&= \frac{s_w}{w}\frac{-ws_as_w - a c_ac_w + a}{\alpha^2-\omega^2} + \frac{c_w}{w}\frac{as_wc_a - ws_ac_w}{\alpha^2-\omega^2}\\
+					&=\frac{as_w -ws_as_w^2 - as_wc_ac_w + as_wc_ac_w - ws_ac_w^2}{\omega(\alpha^2-\omega^2)}\\
+					&=\frac{\alpha\sin(\omega t)-\omega\sin(\alpha t)}{\omega(\alpha^2-\omega^2)}
+				\end{align*}
+				
+				\begin{align*}
+					f'(t)&=\frac{\alpha\omega(\cos(\omega t) -\cos(\alpha t))}{\omega(\alpha^2-\omega^2)}\\
+					f''(t)&=\frac{-\alpha\omega^2\sin(\omega t) + \alpha^2\omega\sin(\alpha t)}{\omega(\alpha^2-\omega^2)}\\
+					b&=0\\
+					D(f) &= \frac{(-\alpha\omega^2+c\alpha)\sin(\omega t) + (\alpha^2\omega-c\omega)\sin(\alpha t)}{\omega(\alpha^2-\omega^2)}\\
+					&=\frac{\alpha(c-\omega^2)\sin(\omega t) + \omega(\alpha^2-c)\sin(\alpha t)}{\omega(\alpha^2-\omega^2)}\\
+					\omega^2&=c\\
+					D(f) &= \frac{0+\omega(\alpha^2-\omega^2)\sin(\alpha t)}{\omega(\alpha^2-\omega^2)}\\
+					&=\sin(\alpha t).
+				\end{align*}
+				
+				
+				\fi
+				%%%%%%%%%%%%
+				
+				
+				
+				
+			\item Now show that the equation
+				\[D(f)=H(t)\sin(\omega t)\]
+				has solution
+				\[\frac{\sin(\omega t) - \omega t\cos(\omega t)}{2\omega^2}.\]
+				Why does the solution have a different form when $\alpha=\omega$ compared to when $\alpha\neq \omega$?
+		\end{enumerate}
+\end{enumerate}
+
+\fi
+%%%%%%%%%%%%%
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item For a linear, time-invariant operator $D$, the \textbf{impulse response} is the function $I$ satisfying 
+		\[D(I)=\delta,\]
+		and its Laplace transform is the \textbf{transfer function}.
+	\item The solution to the equation $D(x)=f$ can be found by convolution with the impulse response in the time domain:
+		\[x=f\ast I,\]
+		or, equivalently, by multiplication with the transfer function in the Laplace domain:
+		\[\mathcal{L}(x)=\mathcal{L}(f)\cdot\mathcal{L}(I).\]
+	\item If $D$ is a differential operator, we can find the transfer function directly by using the property
+		\[\mathcal{L}\left(\deriv{x}{t}\right) = s\mathcal{L}(x)-x(0^+).\]
+		We can then either solve
+		\[\mathcal{L}(D(x))=0\]
+		with initial conditions derived from the Dirac delta, or treat the initial conditions as 0 and the transform of $\delta$ as 1, and solve
+		\[\mathcal{L}(D(x))=1\]
+		with initial conditions 0.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

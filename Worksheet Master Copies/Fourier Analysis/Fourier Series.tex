@@ -1,0 +1,253 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{Fourier Series}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand how an even periodic function can be}}
+
+\textbf{\underline{approximated by a series of cosines, and any periodic function can}}
+
+\textbf{\underline{be approximated by a series of sines and cosines.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{Recap/Warm-up: Fourier Sine Series and Orthonormality of Cosines:}\bigskip
+
+
+
+Recall that the Fourier sine series of a function $f(x)$ on the interval $[a,a+L]$ is
+\[f_\mathrm{sin}(x)=\sum_{n=1}^\infty b_n\sin\left(\frac{2\pi nx}{L}\right),\]
+where
+\[b_n=\frac{2}{L}\int_a^{a+L} f(x)\sin\left(\frac{2\pi nx}{L}\right)\diff x.\]
+Outside the interval $[a,a+L]$, $f_\mathrm{sin}$ approximates the periodic extension of $f$.\bigskip
+
+
+\begin{enumerate}
+	\item Let $E(x)$ be an even function defined on $\left[-\frac{L}{2},\frac{L}{2}\right]$. Show that for all $n$, $b_n=0$.
+	\item Show that the functions
+		\[\cos\left(\frac{2\pi nx}{L}\right)\]
+		for $n\geq 1$, and also the constant function $\frac{1}{2}$, are orthonormal with respect to the inner product on $[a,a+L]$ defined by
+		\[\braket{f}{g}=\frac{2}{L}\int_a^{a+L}\!\!\! f(x)g(x)\diff x.\]
+	\item Show that for any $n$ and $m$ (whether equal or not):
+		\[\left\langle \sin\left(\frac{2\pi nx}{L}\right)\,\Bigg|\,\cos\left(\frac{2\pi mx}{L}\right)\right\rangle=0\]
+		with respect to the integral inner product on $[a,a+L]$. That is, that the cosine and sine functions of any harmonics of $L$ are orthogonal. Hint: use question 1!
+	\item Show also that the constant function $\frac{1}{2}$ is orthogonal to the sines of the harmonics of $L$.
+\end{enumerate}
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Fourier Cosine Series:}
+
+\bigskip
+
+
+
+We have seen in the warm-up that the Fourier sine series of an even function (or rather a function whose periodic extension is even) is always 0; essentially, since the sine functions of various harmonics are all odd, they cannot ever give a good approximation to an even function. We also saw that the cosine functions
+\[\cos\left(\frac{2\pi nx}{L}\right)\]
+and the constant function $\frac{1}{2}$ are orthonormal; so we can approximate a function by a linear combination of cosines:
+\[f(x)\approx \left\langle f(x)\,\Bigg|\,\frac{1}{2}\right\rangle\frac{1}{2} + \sum_{n=1}^N \left\langle f(x)\,\Bigg|\,\cos\left(\frac{2\pi nx}{L}\right)\right\rangle \cos\left(\frac{2\pi nx}{L}\right).\]
+As with the Fourier sine series, we take the limit as $N$ tends to infinity. So we write the \textbf{Fourier cosine series} of $f(x)$:
+\[f_\mathrm{cos}=\frac{a_0}{2}+\sum_{n=1}^\infty a_n\cos\left(\frac{2\pi nx}{L}\right),\]
+where
+\[a_n = \frac{2}{L}\int_a^{a+L}f(x)\cos\left(\frac{2\pi nx}{L}\right)\diff x.\]
+
+Just as a Fourier sine series is zero for an even function, a Fourier cosine series is zero for an odd function:\medskip
+
+Show that if $O(x)$ is an odd function on the interval $\left[-\frac{L}{2},\frac{L}{2}\right]$, then $a_n=0$ for all $n$.
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Fourier Series for Arbitrary Functions:}\bigskip
+
+
+We have seen how an even function can be approximated by a series of cosines, and an odd function by a series of sines. It is now clear how to extend to a general (square-integrable) function: we know that any function $f(x)$ can be decomposed as $f(x)=f_\mathrm{even}(x)+f_\mathrm{odd}(x)$, where
+\begin{align*}
+	f_\mathrm{even}(x)&=\frac{f(x)+f(-x)}{2}\\
+	f_\mathrm{odd}(x)&=\frac{f(x)-f(-x)}{2}.
+\end{align*}
+Then, when finding our Fourier coefficients,
+\begin{align*}
+	a_n=\frac{2}{L}\int_a^{a+L} f(x)\cos\left(\frac{2\pi nx}{L}\right)\diff x &= \frac{2}{L}\int_a^{a+L}f_\mathrm{even}(x)\cos\left(\frac{2\pi nx}{L}\right)\diff x\\
+	b_n=\frac{2}{L}\int_a^{a+L}f(x)\sin\left(\frac{2\pi nx}{L}\right)\diff x &=\frac{2}{L}\int_a^{a+L}f_\mathrm{odd}(x)\sin\left(\frac{2\pi nx}{L}\right)\diff x.
+\end{align*}
+So the Fourier sine series of $f$ is the same as the Fourier sine series of $f_\mathrm{odd}$, and the Fourier cosine series of $f$ is the same as the Fourier cosine series of $f_\mathrm{even}$. Then we simply add these two series together to obtain the \textbf{Fourier series} of $f$ on the interval $[a,a+L]$:
+\[f_\mathrm{Fourier}(x)=\frac{a_0}{2}+\sum_{n=1}^\infty \left[a_n\cos\left(\frac{2\pi nx}{L}\right)+b_n\sin\left(\frac{2\pi nx}{L}\right)\right].\]
+
+As with the sine and cosine series, the general Fourier series is periodic of period dividing $L$; so outside the interval $[a,a+L]$, it approximates the periodic extension of $f$.
+
+When computing the Fourier coefficients $a_n$ and $b_n$, we can either use $f$ in our inner product integral, or $f_\mathrm{even}$ and $f_\mathrm{odd}$ respectively, whichever is more convenient. For instance, if $f(x)=x^2+x$, the decomposition of $f$ into even and odd parts is very straightforward, so we would use the even part ($x^2$) to find the $a_n$ and the odd part ($x$) to find the $b_n$. However, for some functions, it may be easier simply to leave the original function in than find its even and odd parts and integrate with those; it's really a matter of what makes the integrals easiest to evaluate.
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+\[f_\mathrm{Fourier}(x)=\frac{a_0}{2}+\sum_{n=1}^\infty\left[ a_n\cos\left(\frac{2\pi nx}{L}\right)+ b_n\sin\left(\frac{2\pi nx}{L}\right)\right],\]
+where
+\begin{align*}
+	a_n &=\frac{2}{L}\int_a^{a+L} f(x)\cos\left(\frac{2\pi nx}{L}\right)\diff x\\
+	b_n &= \frac{2}{L}\int_a^{a+L} f(x)\sin\left(\frac{2\pi nx}{L}\right)\diff x.
+\end{align*}
+
+\begin{enumerate}
+	\item Let $f(x)$ be the ``staircase'' function defined by
+		\[f(x)=\begin{cases}
+				0: & 0\leq x\leq 1\\
+				1: & 1\leq x\leq 2\\
+				2: & 2\leq x \leq 3\\
+				3: & 3\leq x\leq 4.
+			\end{cases}\]
+		Sketch the graph of the periodic extension of $f$ and find its Fourier series.
+	\item Let $f(t)$ be the decaying sinusoid function defined by
+		\[f(x) = e^{-|t|}\cos(10\pi t)\]
+		on the interval $[-1,1]$; the graph of $f$ is shown below. Find the Fourier series of $f$.
+\end{enumerate}
+
+\begin{center}
+\begin{tikzpicture}
+	\draw[->] (-5,0) -- (5,0);
+	\node[right] at (5,0) {$t$};
+	\draw[->] (0,-2) -- (0,2.5);
+	\node[above] at (0,2.5) {$f(t)$};
+	\node[left] at (0,2) {1};
+	\node[below] at (5,0) {1};
+	\node[below] at (-5,0) {-1};
+	
+	\draw[blue,thick,domain=0:5,samples=200] plot (\x, { 2*exp(-\x)*cos(6.28*\x r) });
+	\draw[blue,thick,domain=-5:0,samples=200] plot (\x, { 2*exp(\x)*cos(6.28*\x r) });
+\end{tikzpicture}
+\end{center}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The \textbf{Fourier series} of a function $f(x)$ on the interval $[a,a+L]$ is the trigonometric series
+		\[f_\mathrm{Fourier}(x)=\frac{a_0}{2}+\sum_{n=1}^\infty \left[a_n\cos\left(\frac{2\pi nx}{L}\right) + b_n\sin\left(\frac{2\pi nx}{L}\right)\right],\]
+		where
+		\begin{align*}
+			a_n &= \frac{2}{L}\int_a^{a+L} f(x)\cos\left(\frac{2\pi nx}{L}\right)\diff x\\
+			b_n &= \frac{2}{L}\int_a^{a+L} f(x)\sin\left(\frac{2\pi nx}{L}\right)\diff x.
+		\end{align*}
+	\item The $N^\mathrm{th}$ partial sum of the Fourier series is the best approximation to $f$ by a linear combination of the orthonormal functions
+		\[\frac{1}{2},\cos\left(\frac{2\pi x}{L}\right),\sin\left(\frac{2\pi x}{L}\right),\hdots, \cos\left(\frac{2\pi N x}{L}\right),\sin\left(\frac{2\pi Nx}{L}\right)\]
+		(with respect to the integral inner product on $[a,a+L]$).
+	\item The cosine coefficients $a_n$ depend only on the even part of the original function, while the sine coefficients $b_n$ depend only on the odd part.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

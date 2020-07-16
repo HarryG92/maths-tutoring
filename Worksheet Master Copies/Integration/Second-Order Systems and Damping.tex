@@ -1,0 +1,177 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Second-Order Systems and Damping}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand the derivation of RLC and mass-spring}}
+
+\textbf{\underline{systems, and the three damping regimes.}}
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+\textbf{Warm-Up: Mass-Spring-Damper Systems:}\bigskip
+
+
+Let $m$ be a mass on a spring. We require 3 equations from physics; firstly, Newton's 2nd Law of motion (for constant mass):
+\[F=ma,\]
+where $F$ is the \textit{total} force on an object, and $a$ is its acceleration; secondly, Hooke's Law for Springs:
+\[F_\mathrm{spring}=-kx,\]
+where $F_\mathrm{spring}$ is the force exerted by the spring on the mass, $k$ is a constant measuring the stiffness of the spring, and $x$ is the displacement of the mass from its rest position; and thirdly,
+\[F_\mathrm{resistance}=-\mu v,\]
+where $F_\mathrm{resistance}$ is the resistive (friction/damping) force, $\mu$ a constant (the drag coefficient), and $v$ is the velocity. Hooke's Law says that the more you stretch or squash a spring, the harder it pulls/pushes you back to the rest position. The resistance equation says that the faster you move, the more resistance you encounter; this is not necessarily true, but provides a reasonable model for air resistance and the like.
+
+Suppose we apply an external (time-varying) force $f(t)$ to the mass.
+
+\begin{enumerate}
+	\item Write down an expression for the total force $F$ acting on the mass.
+	\item Substituting this expression into Newton's 2nd Law, rearrange to show that
+		\[a+\frac{\mu}{m}v+\frac{k}{m}x=f(t).\]
+	\item Hence conclude that the position $x(t)$ of the mass is the solution to the 2nd order ODE
+		\[\deriv[2]{x}{t}+\frac{\mu}{m}\deriv{x}{t}+\frac{k}{m}x = f(t).\]
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: RLC Circuits:}
+
+\bigskip
+
+Consider a series RLC circuit. Let $V_\mathrm{in}$ be the voltage applied (as a function of time); let $V_L$, $V_C$, and $V_R$ be the voltages across the three components. Let $Q$ be the charge on the capacitor and $I$ the current through the resistor; so $I$ is the derivative of $Q$ with respect to time. We require several equations: Ohm's Law
+\[V_R=RI\]
+(compare with the resistance equation from the mass-spring system); Faraday's Law of Induction
+\[V_L=L\deriv{I}{t}\]
+(compare with Newton's 2nd Law); and the capacitor equation
+\[V_C=\frac{1}{C}Q\]
+(compare with Hooke's Law).
+
+\begin{enumerate}
+	\item Show that
+		\[I=C\deriv{V_C}{t}.\]
+	\item Hence show that
+		\[V_L=LC\deriv[2]{V_C}{t}\quad\mbox{ and }\quad V_R=RC\deriv{V_C}{t}.\]
+	\item Hence show that
+		\[\deriv[2]{V_C}{t}+\frac{R}{L}\deriv{V_C}{t}+\frac{1}{LC}V_C=\frac{1}{LC}V_\mathrm{in}\]
+		and compare with the mass-spring-damper equation.
+	\item Use the Laplace transform to show that the transfer function for an RLC circuit is
+		\[\frac{1/LC}{s^2+\frac{R}{L}s+\frac{1}{LC}}.\]
+		Note: we could write the transfer function in a nicer form as
+		\[\frac{1}{LCs^2 + RCs + 1}.\]
+		However, it is convenient to have the leading coefficient of the denominator be 1 for finding poles and partial fraction decompositions.
+\end{enumerate}
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{Damping Regimes:}\bigskip
+
+
+
+Recall the quadratic formula: the roots of $s^2+bs+c$ are
+\[\frac{-b}{2}\pm\frac{1}{2}\sqrt{b^2-4c}.\]
+
+Consider an RLC circuit with transfer function
+\[\frac{1/LC}{s^2+\frac{R}{L}s+\frac{1}{LC}}.\]
+
+\begin{enumerate}
+	\item Show that the denominator of the transfer function factors as
+		\[\left(s+\frac{R}{2L}+\sqrt{\frac{R^2}{4L^2}-\frac{1}{LC}}\right)\left(s+\frac{R}{2L}-\sqrt{\frac{R^2}{4L^2}-\frac{1}{LC}}\right).\]
+	\item Suppose
+		\[\frac{R^2}{4L^2}-\frac{1}{LC}< 0.\]
+		Considering the partial fraction decomposition of the transfer function, show that the impulse response has the form
+		\[H(t)e^{-Rt/2L}\left(A\sin(\omega t)+B\cos(\omega t)\right),\]
+		where $A$ and $B$ are constants and
+		\[\omega=\sqrt{\frac{1}{LC}-\frac{R^2}{4L}}\in\mathbb{R}.\]
+	\item Suppose
+		\[\frac{R^2}{4L^2}-\frac{1}{LC}> 0.\]
+		Considering the partial fraction decomposition of the transfer function, show that the impulse response has the form
+		\[H(t)e^{-Rt/2L}\left(Ae^{\gamma t}+Be^{-\gamma t}\right),\]
+		where
+		\[\gamma=\sqrt{\frac{R^2}{4L^2}-\frac{1}{LC}}\in\mathbb{R}.\]
+	\item Suppose $\frac{R^2}{4L^2}-\frac{1}{LC}=0$.
+		Show that the transfer function has partial fraction decomposition:
+		\[\frac{1/LC}{\left(s+\frac{R}{2L}\right)^2}.\]
+		This has inverse transform
+		\[\frac{H(t)}{LC}te^{-Rt/2L}.\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

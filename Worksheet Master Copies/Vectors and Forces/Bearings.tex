@@ -1,0 +1,85 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\ihat}{\hat{\i}}
+\newcommand{\jhat}{\hat{\j}}
+\newcommand{\khat}{\hat{k}}
+\let\rarrow\overrightarrow
+
+\begin{document}
+
+\title{Bearings and Moments}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+\section{Bearings}
+
+
+\begin{enumerate}
+	\item A ship leaves port at $O$ and sails 12 nautical miles at a bearing of $115^\circ$, to $A$. It then sails 5 nautical miles at a bearing of $242^\circ$ to $B$, before returning directly to $O$.
+		\begin{enumerate}
+			\item Find the position vector of $A$ relative to $O$.
+			\item Find the position vector of $B$ relative to $O$.
+			\item Find the bearing taken on the last leg of the journey.
+		\end{enumerate}
+	\item Two ships set sail, one from a point with position vector $-3\ihat-4\jhat$, and the other from $9\ihat-6\jhat$. They plan to travel in straight lines and rendezvous at the origin. Find the bearing each ship must move on, and the distance it must travel.
+\end{enumerate}
+
+\clearpage
+
+
+\section{Moments}
+
+\begin{enumerate}
+	\item A seesaw of length 2m pivots smoothly about its midpoint. A child of mass 20kg sits on one end, and a child of mass $m$ sits 30cm away from the opposite end. The seesaw remains balanced. Find $m$.
+	\item A light, horizontal shelf of length 5m is fastened at the left and has masses $m$, $2m$, and $3m$ suspended from it, at distances of 1m, 3m, and 5m respectively.
+		\begin{enumerate}
+			\item Find the moment about the fastening point.
+			\item The fastening consists of a 10cm nail extending from the shelf into the wall, shown in red below. Modelling the reaction force of the wall on this nail as acting at a single point, 5cm into the wall, find the force exerted by the wall on this nail to keep the shelf stationary.
+		\end{enumerate}
+		\begin{center}
+		\begin{tikzpicture}
+			\draw (0,0) -- (1,0) -- (1,4) -- (0,4) -- (0,0);
+			\node[left] at (0,2) {Wall};
+			\draw[ultra thick] (1,2) -- (6,2);
+			\node[right] at (6,2) {Shelf};
+			\draw[red,thick] (1,2) -- (0.5,2);
+			\node[red,below] at (0.5,2) {Nail};
+			
+			\draw[fill] (2,2) circle[radius=0.1];
+			\draw[fill] (4,2) circle[radius=0.1];
+			\draw[fill] (6,2) circle[radius=0.1];
+		\end{tikzpicture}
+		\end{center}
+	\item A ramp of length 6m and mass 10kg rests with one end on rough ground and the other against a smooth wall. The angle formed by the ramp with the ground is $30^\circ$. A person of mass 70kg stands 5m up the ramp and the ramp is on the point of slipping against the ground. By modelling the ramp as a uniform rod and the person as a particle, find the coefficient of friction between the base of the ramp and the ground.
+\end{enumerate}
+
+
+
+
+
+
+\end{document}

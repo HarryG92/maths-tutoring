@@ -1,0 +1,266 @@
+
+\documentclass{article}
+
+\usepackage[left=1.8cm,right=1.8cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.10}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{An Example of Solving an LTI System by Laplace Methods}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+
+\section{The Problem}
+
+We solve the ODE
+\[\deriv[2]{x}{t}+b\deriv{x}{t}+cx=H(t)\sin(\alpha t),\]
+where $\alpha$ is a real constant.\bigskip
+
+This models a mass-spring-damper system; if $m$ is the mass of the object, $\mu$ is the drag/friction coefficient, and $k$ is the spring constant, then $b=\frac{\mu}{m}$ and $c=\frac{k}{m}$. The right-hand side represents a ``forcing function''---\textit{i.e.}, an external force we are applying to the mass independently of the friction and spring forces; in essence, a push we are giving the mass.
+
+
+\section{Finding the Transfer Function}
+
+
+The transfer function is the Laplace transform of the impulse response $I$; the impulse response is the solution to the ODE with a Dirac delta on the right-hand side:
+\[\deriv[2]{I}{t}+b\deriv{I}{t}+cI=\delta.\]
+
+We use the fact that, for any (nice enough) function $f$:
+\[\mathcal{L}(f')=s\mathcal{L}(f)-f(0^+);\]
+recall that $f(0^+)$ is the limit of $f(t)$ as $t$ tends to 0 from above; so for a Heaviside, for instance, $H(0)=\frac{1}{2}$, but $H(0^+)=1$, since as $t$ tends to 0 from the right, the Heaviside tends to 1 (in fact, is constantly equal to 1).
+
+Applying the result for Laplace transforms of derivatives with $f(t)=g'(t)$, we see that
+\begin{align*}
+\mathcal{L}(g'')&=s\mathcal{L}(g')-g'(0^+)\\
+&=s\left[s\mathcal{L}(g)-g(0^+)\right]-g'(0^+)\\
+&=s^2\mathcal{L}(g)-sg(0^+)-g'(0^+).
+\end{align*}
+
+We will use these results for Laplace transforms of first and second derivatives to transform the ODE into the Laplace domain.
+
+
+
+\subsection{Method 1: The Engineer's Method:}
+
+We take the Laplace transform of both sides of the ODE; the transform of a Dirac delta is 1, and by the results for derivatives above, we can transform the left-hand side. We get
+\[s^2\mathcal{L}(I)-sI(0^+)-I'(0^+)+b\left(s\mathcal{L}(I)-I(0^+)\right) + c\mathcal{L}(I)=1.\]
+Rearranging:
+\[(s^2+bs+c)\mathcal{L}(I)-(b+s)I(0^+) - I'(0^+)=1.\]
+
+Now, before applying the Dirac delta, the system should be at rest, so we take our initial conditions to be 0, and hence this simplifies to
+\[(s^2+bs+c)\mathcal{L}(I)=1,\]
+and hence
+\[\mathcal{L}(I)=\frac{1}{s^2+bs+c}\]
+is the transfer function.\bigskip
+
+
+
+
+This method is nice, except that it's built on a lie. The system being at rest before applying the Dirac delta means that $I(0)$ and $I'(0)$ are both 0, but we substituted $I(0^+)=I'(0^+)=0$ to simplify and find the transfer function. If the impulse response is continuously differentiable at 0, then $I(0)=I(0^+)$ and $I'(0)=I'(0^+)$, so this is fine, but given the use of Heavisides to restrict things to positive time only, it will very often be the case that the impulse response is \textit{not} continuously differentiable at 0.
+
+Indeed, if we take the example above, taking the inverse Laplace transform of the transfer function shows that the impulse response is
+\[I=H(t)e^{-bt/2}\sin(\omega t),\]
+where $\omega=\frac{1}{2}\sqrt{4c-b^2}$. Now $I(0)=I(0^+)=0$, which is fine, but when we differentiate we find that
+\[I'=H(t)e^{-bt/2}\left(\omega\cos(\omega t) - \frac{b}{2}\sin(\omega t)\right),\]
+from which $I'(0)=0$ (with an appropriate convention for $H(0)$, at least), but $I'(0^+)=1$, which is a problem! So the ``engineer's method'' for finding the transfer function assumed that $I'(0^+)=0$, and then resulted in an answer for which this assumption demonstrably fails!\bigskip
+
+
+
+
+\subsection{Method 2: The Mathematician's Method:}
+
+We've seen that the ``engineer's method'' is rather suspect. Let's take a more careful analysis. The Dirac delta isn't really a well-defined function, so we shouldn't be too blas{\'e} about including it in a differential equation and taking its Laplace transform. However, for all $t\neq 0$, $\delta(t)=0$, so having $\delta$ on the right-hand side of our ODE means having 0 there, as long as we restrict to $t>0$. So we write our equation for the impulse response as
+\[\deriv[2]{I}{t}+b\deriv{I}{t}+cI=0,\]
+for $t>0$ and take the Laplace transform of this to obtain
+\[s^2\mathcal{L}(I)-sI(0^+)-I'(0^+)+b\left(s\mathcal{L}(I)-I(0^+)\right) + c\mathcal{L}(I)=0.\]
+Rearranging as before, we get
+\begin{equation}
+(s^2+bs+c)\mathcal{L}(I)-(b+s)I(0^+) - I'(0^+)=0.\tag{$\star$}
+\end{equation}
+This is almost the same equation as we had previously, but we have 0 instead of 1 on the right-hand side.
+
+Now we need to consider our initial conditions. Our original ODE was
+\[\deriv[2]{I}{t}+b\deriv{I}{t}+cI=\delta;\]
+integrating the ODE from 0 to $T>0$ gives
+\[\left[\deriv{I}{t}\right]_0^T + b\left[I\right]_0^T + c\int_0^T I\diff t=1,\]
+so
+\[I'(T)-I'(0)+bI(T)-bI(0)+c\int_0^T I\diff t = 1.\]
+Now we consider the limit of this as $T$ tends to 0 from above.
+
+First consider
+\[\int_0^T I\diff t.\]
+This is the area under the graph of $I$ between $t=0$ and $t=T$; as $T$ tends to 0, this must tend to 0, as it becomes the area of an infinitesimally thin slice.
+
+Now consider $b(I(T)-I(0))$; since $I(t)$ is the position of the particle at time $t$ after the unit impulse is applied, $I$ must be continuous. Therefore $I(T)\to I(0)$ as $T\to 0$, so
+\[\lim_{T\to 0^+} b(I(T)-I(0)) = 0.\]
+In other words, $I(0^+)=0$, because position is continuous (the mass cannot teleport!).
+
+Therefore we see that
+\[\lim_{T\to 0^+} \left[I'(T)-I'(0)\right] = 1;\]
+but this is precisely saying that
+\[I'(0^+)-I'(0)=1.\]
+Before the unit impulse is applied, the system is at rest, so $I'(0)=0$; therefore $I'(0^+)=1$.\medskip
+
+
+So we substitute the conditions $I(0^+)=0$ and $I'(0^+)=1$ into equation $(\star)$ gives
+\[(s^2+bs+c)\mathcal{L}(I)-1=0,\]
+and then rearranging gives, as before
+\[\mathcal{L}(I)=\frac{1}{s^2+bs+c}.\]\bigskip
+
+
+
+So we see that both methods (taking initial conditions to be 0 and transform of Dirac delta to be 1, or taking the transform for positive time and so having the right-hand side be 0, but taking a more careful consideration of the initial conditions to see that $I(0^+)=1$) give the same answer. In fact, the ``mathematician's method'' presented here is still not entirely rigorous, but at least it doesn't make an assumption that the answer it produces fails to satisfy! Regardless, both methods produce the correct answer, and for many people that's all that matters; to me though, a method that contradicts itself should never be used, so I prefer the second method.
+
+
+
+\section{Finding the Laplace-Domain Solution}
+
+So we have the transfer function
+\[\mathcal{L}(I)=\frac{1}{s^2+bs+c}.\]
+
+We wish to solve
+\[\deriv[2]{x}{t}+b\deriv{x}{t}+cx = H(t)\sin(\alpha t),\]
+so we convolve the right-hand side with the impulse response $I$. In the Laplace domain, this amounts to multiplying by the transfer function. So we compute the Laplace transform of the right-hand side, then multiply by $\mathcal{L}(I)$.
+
+We could use a table of standard transforms, or simply compute
+\begin{align*}
+	\mathcal{L}(H(t)\sin(\alpha t))&=\int_0^\infty \sin(\alpha t)e^{-st}\diff t\\
+	&=\int_0^\infty \frac{e^{j\alpha t}-e^{-j\alpha t}}{2j}e^{-st}\diff t\\
+	&= \frac{1}{2j}\int_0^\infty \left(e^{(-s+\alpha j)t}-e^{(-s-\alpha j)t}\right)\diff t\\
+	&=\frac{1}{2j}\left[\frac{e^{(-s+\alpha j)t}}{-s+\alpha j} - \frac{e^{(-s-\alpha j)t}}{-s-\alpha j}\right]_{t=0}^\infty\\
+	&=\frac{1}{2j}\left(0-0\right)-\frac{1}{2j}\left(\frac{1}{-s+\alpha j}-\frac{1}{-s-\alpha j}\right)\\
+	&=-\frac{1}{2j}\left(\frac{(-s-\alpha j) - (-s+\alpha j)}{(-s+\alpha j)(-s-\alpha j)}\right)\\
+	&=-\frac{1}{2j}\frac{-2\alpha j}{s^2+\alpha^2}\\
+	&=\frac{\alpha}{s^2+\alpha^2}.
+\end{align*}
+
+Therefore, multiplying by the transfer function, the solution to the ODE has Laplace transform
+\[\frac{\alpha}{(s^2+\alpha^2)(s^2+bs+c)}.\]\bigskip
+
+
+
+\section{Reverting to the Time-Domain}
+
+We have the Laplace transform of the solution; now we wish to take the inverse transform to recover the time-domain solution. This gets nasty, so we will specialise to the case $b=0$ (\textit{i.e.}, undamped). Then $c=\omega^2$.
+
+To take the inverse Laplace transform, we wish to simplify our Laplace-domain solution using a partial fractions decomposition. First we factorise the denominator:
+\[(s^2+\alpha^2)(s^2+\omega^2)=(s+j\alpha)(s-j\alpha)(s+j\omega)(s-j\omega).\]
+
+First we consider the case where $\alpha\neq \omega$---so the forcing frequency (the frequency we're pushing the mass at) is different from the natural frequency of the oscillator.
+
+We seek constants $W$, $X$, $Y$, and $Z$ such that
+\[\frac{\alpha}{(s^2+\alpha^2)(s^2+\omega^2)}=\frac{W}{s+j\alpha}+\frac{X}{s-j\alpha}+\frac{Y}{s+j\omega}+\frac{Z}{s-j\omega}.\]
+Multiplying through by the denominator of the right-hand side, we have
+\[\alpha=W(s-j\alpha)(s^2+\omega^2) + X(s+j\alpha)(s^2+\omega^2)+Y(s^2+\alpha^2)(s-j\omega)+Z(s^2+\alpha^2)(s+j\omega).\]
+
+Substituting $s=-j\alpha$ gives:
+\begin{align*}
+	\alpha&=W(-2j\alpha)(\omega^2-\alpha^2)+0X+0Y+0Z\\
+	W&=\frac{1}{-2j(\omega^2-\alpha^2)}.
+\end{align*}
+Similarly, subsituting $s=j\alpha$, we find that
+\[X=\frac{1}{2j(\omega^2-\alpha^2)}.\]
+Substituting $s=-j\omega$ gives
+\[Y=\frac{\alpha}{2j\omega(\omega^2-\alpha^2)},\]
+and $s=j\omega$ gives
+\[Z=\frac{\alpha}{-2j\omega(\omega^2-\alpha^2)}.\]
+
+Therefore we have a partial fraction decomposition:
+\begin{align*}
+	\frac{\alpha}{(s^2+\alpha^2)(s^2+\omega^2)}&=\frac{\frac{1}{-2j(\omega^2-\alpha^2)}}{s+j\alpha}+\frac{\frac{1}{2j(\omega^2-\alpha^2)}}{s-j\alpha}+\frac{\frac{\alpha}{2j\omega(\omega^2-\alpha^2)}}{s+j\omega}+\frac{\frac{\alpha}{-2j\omega(\omega^2-\alpha^2)}}{s-j\omega}\\
+	&=\frac{1}{2j(\omega^2-\alpha^2)}\left(\frac{-1}{s+j\alpha}+\frac{1}{s-j\alpha}+\frac{\alpha}{s+j\omega}+\frac{-\alpha}{s-j\omega}\right).
+\end{align*}
+
+We could proceed directly with this, but actually it is convenient to recombine some terms:
+\begin{align*}
+	\frac{\alpha}{(s^2+\alpha^2)(s^2+\omega^2)}&=\frac{1}{2j(\omega^2-\alpha^2)}\left(\frac{2j\alpha}{s^2+\alpha^2}-\frac{2j\alpha\omega}{s^2+\omega^2}\right)\\
+	&=\frac{1}{\omega^2-\alpha^2}\left(\frac{\alpha}{s^2+\alpha^2}-\alpha\frac{\omega}{s^2+\omega^2}\right).
+\end{align*}
+
+Now, taking the inverse Laplace transform and using the fact that
+\[\mathcal{L}\left(H(t)\sin(\beta t)\right) = \frac{\beta}{s^2+\beta^2},\]
+we see that
+\[\mathcal{L}^{-1}\left(\frac{\alpha}{(s^2+\alpha^2)(s^2+\omega^2)}\right) = \frac{1}{\omega^2-\alpha^2}\left(\sin(\alpha t) - \alpha\sin(\omega t)\right).\]\bigskip
+
+
+If we have $\alpha=\omega$, then the Laplace-domain solution becomes
+\[\frac{\omega}{(s^2+\omega^2)^2}.\]
+
+
+
+
+A partial fractions decomposition of this will have the form
+\[\frac{\omega}{(s^2+\omega^2)^2}=\frac{W}{s+j\omega}+\frac{X}{s-j\omega}+\frac{Y}{(s+j\omega)^2}+\frac{Z}{(s-j\omega)^2}.\]
+
+Clearing denominators, we get
+\[\omega = W(s-j\omega)(s^2+\omega^2)+X(s+j\omega)(s^2+\omega^2)+Y(s-j\omega)^2 + Z(s+j\omega)^2.\]
+
+Substituting $s=j\omega$ gives
+\[\omega = 0W+0X+0Y-4\omega^2Z,\]
+So $Z=\frac{-1}{4\omega}.$ Similarly, substituting $s=-j\omega$ gives $Y=\frac{-1}{4\omega}$ too.
+
+Therefore
+\begin{align*}
+	\omega&=W(s-j\omega)(s^2+\omega^2)+X(s+j\omega)(s^2+\omega^2)-\frac{1}{4\omega}(s-j\omega)^2-\frac{1}{4\omega}(s+j\omega)^2\\
+	&= W(s-j\omega)(s^2+\omega^2)+X(s+j\omega)(s^2+\omega^2)-\frac{1}{2\omega}s^2 +\frac{\omega}{4}.
+\end{align*}
+The only $s^3$ terms in this expression are $Ws^3$ and $Xs^3$, which must be equal to 0 as there is no cubic term on the left-hand side. So $W=-X$. Looking at constant terms, we have
+\[\omega = -j\omega^3W + j\omega^3X +\frac{\omega}{4}.\]
+Substituting $W=-X$ and simplifying:
+\[1=j\omega^2X+j\omega^2X+\frac{1}{4},\]
+so
+\[X=\frac{3}{8j\omega^2}.\]
+
+Therefore our partial fractions decomposition becomes
+\[\frac{\omega}{(s^2+\omega^2)^2}=\frac{-\frac{3}{8j\omega^2}}{s+j\omega}+\frac{\frac{3}{8j\omega^2}}{s-j\omega}-\frac{\frac{1}{4\omega}}{(s+j\omega)^2}-\frac{\frac{1}{4\omega}}{(s-j\omega)^2}.\]
+The first two terms can be combined into
+\[\frac{3}{8j\omega^2}\frac{2j\omega}{s^2+\omega^2}=\frac{3}{4\omega^2}\frac{\omega}{s^2+\omega^2},\]
+which has inverse Laplace transform
+\[\frac{3}{4\omega^2}H(t)\sin(\omega t).\]
+The second two terms have the form
+\[\frac{-1}{4\omega}F(s-a),\]
+where
+\[F(s)=\frac{1}{s^2}\]
+and $a=\pm j\omega$. The inverse transform of $\frac{1}{s^2}$ is $tH(t)$, the ramp function, and frequency shift gives us the inverse transform of $F(s-a)$ as
+\[e^{at}tH(t).\]
+
+Therefore the inverse Laplace transform of the Laplace-domain solution is
+\[\frac{3}{4\omega^2}H(t)\sin(\omega t)-\frac{1}{4\omega}tH(t)\left(e^{j\omega t}+e^{-j\omega t}\right)=\frac{H(t)}{2\omega^2}\left(6\sin(\omega t) - \omega t\cos(\omega t)\right).\]
+This, therefore, is the time-domain solution; in other words, this tells us the position at time $t$ of the mass when pushed by a force $H(t)\sin(\omega t)$.
+
+\end{document}

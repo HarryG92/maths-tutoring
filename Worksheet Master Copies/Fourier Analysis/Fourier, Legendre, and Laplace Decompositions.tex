@@ -1,0 +1,232 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{Fourier, Legendre, and Laplace Decompositions}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand how orthonormal decompositions of}}
+
+\textbf{\underline{vectors and functions}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{Warm-up: Orthonormal Vectors:}\bigskip
+
+
+
+\begin{enumerate}
+	\item Let $e_1=(1,0), e_2=(0,1)$ in $\mathbb{R}^2$. Let $u=(-7,4)$ and $v=(a,b)$ for some unknown constants $a$ and $b$.
+		\begin{enumerate}
+			\item Find $u\cdot e_1$ and $u\cdot e_2$ (where $\cdot$ denotes the usual dot product of vectors in $\mathbb{R}^n$).
+			\item Find scalars $\lambda$ and $\mu$ such that $u=\lambda e_1+\mu e_2$.
+			\item Find $v\cdot e_1$ and $v\cdot e_2$.
+			\item Find scalars $\lambda$ and $\mu$ such that $v=\lambda e_1 + \mu e_2$.
+		\end{enumerate}
+	\item Let $f_1=\left(\frac{1}{\sqrt{2}},\frac{1}{\sqrt{2}}\right)$, $f_2=\left(\frac{1}{\sqrt{2}},-\frac{1}{\sqrt{2}}\right)$ in $\mathbb{R}^2$. Let $u$ and $v$ be as above.
+		\begin{enumerate}
+			\item Show that $f_1\cdot f_2=0$.
+			\item Show that $f_1\cdot f_1=1=f_2\cdot f_2$.
+			\item Find $u\cdot f_1$ and $u\cdot f_2$.
+			\item Find scalars $\lambda$ and $\mu$ such that $u=\lambda f_1+\mu f_2$.
+			\item Find $v\cdot f_1$ and $v\cdot f_2$.
+			\item Find scalars $\lambda$ and $\mu$ such that $v=\lambda f_1 + \mu f_2$.
+		\end{enumerate}
+\end{enumerate}
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Inner Products and Orthonormal Bases:}
+
+\bigskip
+
+
+
+Let $V$ be a real vector space. An \textbf{inner product} on $V$ is a function $f\colon V^2\to \mathbb{R}$, usually written $f(u,v)=\braket{u}{v}$, satisfying three properties: for any $u,v,w\in V$ and $\lambda,\mu\in\mathbb{R}$:
+\begin{alignat*}{2}
+	\braket{\lambda u + \mu v}{w} &= \lambda\braket{u}{w} + \mu\braket{v}{w}\qquad&& \mbox{linearity in $1^\mathrm{st}$ argument}\\
+	\braket{u}{v} &= \braket{v}{u}\qquad&& \mbox{symmetry}\\
+	\braket{u}{u} &> 0\mbox{ if $u\neq 0$}\qquad&& \mbox{positive-definiteness.}
+\end{alignat*}
+
+Exercises: show that any inner product is linear in the second argument, and that $\braket{v}{v}=0$ for any $v$.
+
+The standard example is the dot product (also called the Euclidean inner product) on $\mathbb{R}^n$. Given an inner product on $V$, we say that vectors $v_1,v_2\hdots\in V$ are \textbf{orthogonal} if $\braket{v_i}{v_j}=0$ whenever $i\neq j$. If $v_1,v_2,\hdots\in V$ are orthogonal and also $\braket{v_i}{v_i}=1$ for all $i$, we say that they are \textbf{orthonormal}. We can express this concisely with the Kronecker delta symbol: $v_1,v_2,\hdots$ are orthonormal if
+\[\braket{v_i}{v_j}=\delta_{ij}.\]\medskip
+
+Suppose $v_1,v_2,\hdots\in V$ are orthonormal and $v$ is in the span of $v_1,v_2,\hdots$; then we have
+\[v=\sum_{i} \lambda_i v_i\]
+for some scalars $\lambda_i$. Because inner products are linear in each argument, we have for each $j$
+\begin{align*}
+	\braket{v}{v_j} &=\braket{\sum_i \lambda_i v_i}{v_j}\\
+	&=\sum_i \lambda_i \braket{v_i}{v_j}\\
+	&=\sum_i\lambda_i \delta_{ij}\\
+	&= \lambda_j.
+\end{align*}
+
+\fbox{\begin{minipage}{0.95\textwidth}
+{\Large\textbf{Key point:} if we write $v$ as a linear combination of orthonormal vectors $v_1,v_2,\hdots$, we can find the coefficients by simplying taking the inner product of $v$ with each $v_i$ in turn!}
+\end{minipage}
+}
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Fourier Series:}\bigskip
+
+Let $V=C[-\pi,\pi]$ be the set of continuous (real-valued) functions on the interval $[-\pi,\pi]$. This is an infinite-dimensional real vector space (exercise!). We can define an inner product on $V$:
+\[\braket{f(x)}{g(x)}=\frac{1}{\pi}\int_{-\pi}^\pi f(x)g(x)\diff x.\]
+
+You should think of this as just like taking the dot product of vectors, except that your ``vectors'' are actually functions. So just like if we have an orthonormal basis $v_1,\hdots,v_n$ on $\mathbb{R}^n$, we can write a vector $v$ in terms of $v_1,\hdots,v_n$ by dotting it with each $v_i$ in turn, if we can find an orthonormal basis $f_1(x),f_2(x),\hdots$ for $C[-\pi,\pi]$, then we can write any function $f(x)\in C[-\pi,\pi]$ in terms of $f_1(x),f_2(x),\hdots$ by simply integrating it against each $f_i(x)$ in turn!\smallskip
+
+\fbox{\begin{minipage}{0.95\textwidth}
+	\textbf{The Fourier basis functions:} The functions $a_0=\frac{1}{2}$, $a_n(x)=\cos(nx)$, and $b_n(x)=\sin(nx)$ for $n\geq 1$ form an orthonormal basis of $C[-\pi,\pi]$. So \textit{any} continuous function $f(x)$ on $[-\pi,\pi]$ can be written as a series of sines and cosines, with coefficients given by the integral inner product:
+	\[f(x)=\frac{a_0}{2}+\sum_{n=1}^\infty \left[a_n\cos\left(\frac{2\pi nx}{L}\right) + b_n\sin\left(\frac{2\pi nx}{L}\right)\right],\]
+		where
+		\begin{align*}
+			a_n &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\cos(nx)\diff x\\
+			b_n &= \frac{1}{\pi}\int_{-\pi}^{\pi} f(x)\sin(nx)\diff x.
+		\end{align*}
+\end{minipage}
+}\smallskip
+
+There is nothing special about the interval $[-\pi,\pi]$; we can do the same thing over any interval $[a,a+L]$ by using the functions $a_n(x)=\cos\left(\frac{2\pi nx}{L}\right)$ and $b_n(x)=\sin\left(\frac{2\pi nx}{L}\right)$, and taking the inner product to be
+\[\braket{f(x)}{g(x)}=\frac{2}{L}\int_a^{a+L}f(x)g(x)\diff x.\]
+
+We can also work with piecewise continuous functions, instead of just continuous, although at points of discontinuity the Fourier series will not generally converge to the correct value.
+
+
+\clearpage
+
+
+\textbf{Theory: Legendre Polynomials:}\bigskip
+
+So Fourier series are about decomposing functions into sums of sines and cosines. If you think about sound, a pure note is a sine wave of pressure in the air; several pure notes can combine to create more complicated pressure waves; \textit{e.g.}, three pure notes can combine to make a chord. You can think of a Fourier series as if you have an orchestra of musicians, each playing a different note; the coefficients $a_n$ and $b_n$ tell each musician how loud to play so that the notes will combine to make a pressure wave that follows the function $f(x)$---and for any continuous function $f(x)$ on a bounded interval, it is possible to play it with an orchestra in this way!\medskip
+
+What about other orthnormal bases for the space of continuous functions, or similar vector spaces? Legendre polynomials are an alternative orthogonal basis (not usually ortho{\textit{normal}}, but that's less important). They can be defined by the properties: each $P_n(x)$ is a polynomial of degree $n$ with leading coefficient 1, the $P_n$'s are orthogonal, and $P_n(1)=1$ for each $n$.
+
+The Legendre polynomials are not orthonormal, but instead have $\braket{P_n(x)}{P_n(x)}=\frac{2}{2n+1}$. This is fine, it just means that when finding coefficients to write a general function in terms of Legendre polynomials, we have to divide by this. Sofor any continuous function $f(x)$ on $[-1,1]$, we have a decomposition, the \textbf{Fourier-Legendre series}:
+\[f(x)=\sum_{n=0}^\infty a_nP_n(x),\]
+where
+\[a_n=\frac{2n+1}{2}\int_{-1}^1 f(x)P_n(x)\diff x.\]
+As with the Fourier series, think of this integral as a dot product of $f(x)$ with a basis ``vector'' to extract the coefficient of that basis vector in $f(x)$.\bigskip
+
+
+The \textbf{Legendre generating function} is
+\[G(x,r)=\frac{1}{\sqrt{1-2rx+r^2}}=\left(1-2rx+r^2\right)^{-1/2}.\]
+
+This is just a convenient way of carrying information about all the Legendre polynomials at once, because the Taylor series of $G(x,r)$ in the variable $r$ is
+\[G(x,r)=\sum_{n=0}^\infty P_n(x)r^n.\]
+
+This can be used to derive recurrence relations involving the Legendre polynomials, and compute values of them at specific values of $x$.
+
+
+\clearpage
+
+
+
+\textbf{Practice:}\bigskip
+
+
+\begin{enumerate}
+	\item Let $f(x)$ be the triangle function on $[0,2]$ defined by
+		\[f(x)=\begin{cases}
+			x: & 0\leq x\leq 1\\
+			1-x: & 1<x\leq 2.
+			\end{cases}\]
+		Find the Fourier series of $f(x)$.
+	\item Let $f(x)$ be as above and recall that the first four Legendre polynomials are given by $P_0(x)=1$, $P_1(x)x,$ $P_2(x)=\frac{1}{2}\left(3x^2-1\right)$, and $P_3(x)=\frac{1}{2}\left(5x^3-3x\right)$. Find the Fourier-Legendre series of $f(x)$ up to and including the $n=3$ term.
+	\item Differentiate the Legendre generating function with respect to $r$ to show that
+		\[(n+1)P_{n+1}(x)=(2n+1)xP_n(x)-nP_{n-1}(x).\]
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

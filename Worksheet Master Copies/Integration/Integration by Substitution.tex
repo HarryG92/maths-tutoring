@@ -1,0 +1,236 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Integration by Change of Variables}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand and be able to use the substitution formula}}
+
+\textbf{\underline{for integration.}}
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+\textbf{Warm-up: Integrating by Change of Variable:}\bigskip
+
+Using the techniques we have covered thus far, we cannot integrate the function $\sqrt{1-x^2}$, for example. We shall use this function as an example to explore an extremely powerful technique for integration. The function is graphed below.
+
+\begin{center}
+\begin{tikzpicture}
+	\draw[->] (0,0) -- (6,0);
+	\node[right] at (6,0) {$x$};
+	\draw[->] (0,0) -- (0,4);
+	\node[above] at (0,4) {$\sqrt{1-x^2}$};
+	\node[below] at (0,0) {0};
+	\node[below] at (6,0) {1};
+	\node[left] at (0,3.5) {1};
+	\node[left] at (0,0) {0};
+	
+	\draw[thick,blue,domain=0:6,samples=100] plot (\x,{3.5*sqrt(1-(\x/6)^2)});
+\end{tikzpicture}
+\end{center}
+
+We will evaluate
+\[\int_0^1 \sqrt{1-x^2}\diff x.\]
+
+\begin{enumerate}
+	\item Imagine the graph of the function is a road and we drive along it in such a way that our position is given by $x=\sin(t)$, starting from $t=0$. Find the time at which we reach $x=1$.
+	\item Show that the road height beneath our car at time $t$ is $\cos(t)$.
+	\item Find the velocity $v$ of our car as a function of $t$.
+	\item Recall that we define the integral by drawing rectangles of width $\delta x$ under the curve and multiplying this width by the height $\sqrt{1-x^2}$, then adding the areas $\sqrt{1-x^2}\,\delta x$ of all these rectangles together. We then take the limit as $\delta x\to 0$ and the number of rectangles tends to infinity. When drawing one of these thin rectangles under the curve, the area of the rectangle is its height times its width, but its width is equal to our velocity $v$ times the time $\delta t$ it take us to cover that distance. Therefore the width of the rectangle over $x$ is $\sqrt{1-x^2}\,v\,\delta t$. It follows (we shall justify this more carefully shortly) that
+		\[\int_0^1 \sqrt{1-x^2}\diff x = \int_{0}^{t_1} \sqrt{1-x^2}\,v\diff t,\]
+		where $t_1$ is the time you found in part 1 and $v$ is the velocity you found in part 3. Hence show that
+		\[\int_0^1 \sqrt{1-x^2}\diff x = \int_{0}^{\frac{\pi}{2}} \cos^2(t)\diff t.\]
+	\item Hence show that
+		\[\int_0^1\sqrt{1-x^2}\diff x = \frac{\pi}{4}.\]
+		Hint: you may find the formula $\cos(2t)=2\cos^2(t)-1$ helpful...
+\end{enumerate}
+
+
+
+\clearpage
+
+
+\textbf{Theory: The Substitution Formula for Integrals:}
+
+\bigskip
+
+
+We saw in the warm up how an integral can be transformed into a totally different integral (but with the same value!) by a change of variable. We shall explore now how to do this; the general formula is that if $f(x)$ is a function of $x$ and a new variable $t$ is introduced such that $x$ varies \textbf{invertibly} according to some function of $t$, then
+\[\int f(x)\diff x = \int f(x(t))\deriv{x}{t}\diff t.\]
+By choosing $x(t)$ carefully, we can make $f(x(t))$ simplify greatly, or make part of it cancel with $\deriv{x}{t}$, allowing us to integrate an otherwise intractable integral. Choosing a good change of variables can be difficult, and is largely a matter of experience and educate guesswork, but this technique, \textbf{integration by substitution}, vastly extends the range of functions we can integrate.\bigskip
+
+
+We shall prove the substitution formula by two different methods; the first is quick and easy, but doesn't show what's going on very deeply. The second is lengthier and more complicated, but also more illuminating.
+
+For our quicker first approach, we simply observe that if $x=x(t)$ is an invertible function of $t$ and if $F(x)$ is an antiderivative of $f(x)$ (so $F'(x)=f(x)$), then by the chain rule
+\[\deriv{F(x)}{t}=f(x)\deriv{x}{t},\]
+so
+\begin{align*}
+	\int f(x(t))\deriv{x}{t}\diff t &=\int \deriv{F(x)}{t}\diff t\\
+	&= F(x)+c\\
+	&= \int f(x)\diff x,
+\end{align*}
+where the second line follows from the first by the Fundamental Theorem of Calculus and the last line follows because $F$ is an antiderivative of $f$. So this proves that the substitution formula holds (and illustrates the power of the Fundamental Theorem to prove non-trivial results very easily), but doesn't really explain \textit{why} the substitution formula is true. We shall explore this next.
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Theory: Looking Deeper at the Substitution Formula:}\bigskip
+
+
+
+
+To understand the substitution formula more clearly, let's look back at the definition of the integral. Given $f(x)$ defined between $x=a$ and $x=b$, we have
+\[\int_a^b f(x)\diff x = \lim_{n\to\infty}\sum_{k=1}^n \left[f\left(a+\frac{k(b-a)}{n}\right)\frac{b-a}{n}\right].\]
+
+For convenience, we shall write
+\[w_n = \frac{b-a}{n}\]
+for the rest of this discussion.
+
+Recall that this definition of integration comes by dividing up the interval from $a$ to $b$ into $n$ equal subintervals, each of width $w_n$, and drawing a rectangle on the $k^\mathrm{th}$ such subinterval up to the height of $f(x)$ at the right-hand endpoint of that interval, so of height $f\left(a+k w_n\right)$. We then add up the areas of all these rectangles and take the limit as $n\to\infty$.
+
+Suppose we take a walk along the $x$-axis, from $x=a$ at time $t=\alpha$, to $x=b$ at time $t=\beta$, with our position given by some invertible and differentiable function $x=g(t)$ (so we must have $g(\alpha)=a$ and $g(\beta)=b$). Consider the $k^\mathrm{th}$ rectangle, from $x=a+(k-1)w_n$ to $x=a+kw_n$. Since $g$ is invertible, there are unique times $t_{k-1}$ and $t_k$ between $\alpha$ and $\beta$ such that $g(t_{k-1})=a+(k-1)w_n$ and $g(t_k)=a+kw_n$. Then, by the Mean Value Theorem, there is a time $\tau_k$ between $t_{k-1}$ and $t_k$ such that
+\[g'(\tau_k)=\frac{g(t_k)-g(t_{k-1})}{t_k-t_{k-1}}=\frac{(a+(k-1)w_n)-(a+kw_n)}{t_k-t_{k-1}}=\frac{w_n}{t_k-t_{k-1}}.\]
+
+Therefore the area of the rectangle over the $k^\mathrm{th}$ subinterval is equal to
+\[f(g(t_k))g'(\tau_k)(t_k-t_{k-1}),\]
+and so
+\[\int_a^b f(x)\diff x = \lim_{n\to \infty}\sum_{k=1}^n f(g(t_k))g'(\tau_k)(t_k-t_{k-1}).\]
+
+As $n$ tends to infinity, $t_k$ and $t_{k-1}$ get arbitrarily close together, and since $\tau_k$ is in between them, we end up with $t_{k-1}\approx \tau_k\approx t_k$, as we approach the limit. Therefore we have the time interval from $t=\alpha$ to $t=\beta$ divided into $n$ subintervals from $t_{k-1}$ to $t_k$, and we are multiplying $f(g(t_k))g'(\tau_k)\approx f(g(t_k))g'(t_k)$ (the value of the function over the $k^\mathrm{th}$ subinterval) by the width $(t_k-t_{k-1})$ of that subinterval; but this gives the area of the rectangle over the subinterval and underneath the function $f(g(t))g'(t)$. We then add up the areas of all these rectangles and let $n$ tend to infinity, so we get the integral of $f(g(t))g'(t)$:
+\[\int_a^b f(x)\diff x = \int_\alpha^\beta f(g(t))g'(t)\diff t=\int_\alpha^\beta f(x)\deriv{x}{t}\diff t.\]\bigskip
+
+
+
+This was a difficult argument, and you will probably need to go back over it a few times to understand it. The idea is that we move along the $x$-axis and the width of each subinterval on the $x$-axis can be found by taking our average speed over that subinterval ($g'(\tau_k)$) times the time it took us to cover that subinterval ($t_k-t_{k-1}$); so we can rewrite the width of our rectangles as $g'(t) (t_k-t_{k-1})$; then $(t_k-t_{k-1})$ is a small change in time and we are multiplying it by the value of the function $f(g(t))g'(t)$ to get the area of a rectangle ``over the $t$-axis'' which is equal to the area of the rectangle over the $x$-axis. So we describe each of our rectangles over the $x$-axis in terms of speed and time taken to cross their width, and then add up their areas with that description. Taking the limit, we then find that we are taking an integral with respect to $t$, of the function $f(g(t))g'(t)$, which describes where we are on the original function at time $t$, times our velocity $g'(t)$ at time $t$.\bigskip
+
+
+\textbf{Examples:}\medskip
+
+
+\[\int_0^{1/2} \frac{1}{\sqrt{1-x^2}}\diff x\]
+
+
+\vfill
+
+
+\[\int_1^5 v\sqrt{2v+1} \diff v\]
+
+\vfill
+
+
+
+
+
+
+\clearpage
+
+
+
+
+\textbf{Practice:}\bigskip
+
+Recall the substitution formula for integration:
+\[\int f(x)\diff x = \int f(x(t))\deriv{x}{t}\diff t.\]
+
+
+\begin{enumerate}
+	\item Make the substitution $t=1+\ln(x)$ to evaluate
+		\[\int_1^2 \frac{\ln(x)}{x(1+\ln(x))^2}\diff x.\]
+	\item Make a suitable substitution to evaluate
+		\[\int_1^4 \frac{y}{1+\sqrt{y}}\diff y.\]
+	\item By substituting $t=\tan(\theta)$, show that
+		\[\int \frac{1}{1+t^2}\diff t = \int \!\!\!\diff \theta\]
+		and hence find all antiderivatives of $\frac{1}{1+t^2}$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item If $x(t)$ is an invertible, differentiable function of $t$ between $t=\alpha$ and $t=\beta$, and we have $x(\alpha)=a$, $x(\beta)=b$, then
+		\[\int_a^b f(x)\diff x = \int_\alpha^\beta f(x(t))\deriv{x}{t}\diff t.\]
+	\item Integration by substitution is an extremely powerful technique that can make difficult integrals trivially easy, but it can be very difficult to find an appropriate substitution, so it is often better to try other techniques first and leave substitution as a last resort (unless you can see an obvious substitution to try).
+	\item When substituting in a definite integral, never forget to switch the limits to the new variable! This is a very common mistake.
+	\item Typically, it is best to choose a substitution that simplifies the most complicated part of the integrand.
+	\item When an expression such as $1+x^2$ or $1-x^2$ (or similar) appears in the integrand, trigonometric or hyperbolic substitutions will often simplify the integral.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

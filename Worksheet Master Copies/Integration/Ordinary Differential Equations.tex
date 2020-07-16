@@ -1,0 +1,248 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+%%%\usepackage{array}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+
+\begin{document}
+
+\title{Ordinary Differential Equations}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand what a differential equation is and how}}
+
+\textbf{\underline{they arise.}}
+
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+\textbf{Recap: Integration by Substitution:}
+
+
+\bigskip
+
+
+Recall the substitution formula for integration:
+\[\int f(x)\diff x = \int f(x(t))\deriv{x}{t}\diff t.\]
+
+\bigskip
+
+\begin{enumerate}
+	\item Evaluate
+		\[\int_3^8 \frac{x-1}{\sqrt{x+1}}\diff x.\]
+	\item Find
+		\[\int \frac{1}{x}\deriv{x}{t}\diff t\]
+		in terms of $x$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Warm-up: Simple Harmonic Motion:}\bigskip
+
+
+
+Newton's Second Law of Motion states that
+\[F=\deriv{p}{t},\]
+where $F$ is the total force applied to an object, and $p$ is the linear momentum of that object, defined by $p=mv$, where $m$ is mass and $v$ is velocity.
+
+
+Consider a mass $m$ attached to a spring. Set up coordinate axes such that the position of the mass is $x$, with $x=0$ being the rest position (where the spring is neither stretched nor squashed). For the purposes of this question, we will assume that the only force acting on the mass is the tension in the spring (no friction, no weight, no air resistance, etc.). Hooke's Law for Springs says that the force exerted by the spring is given by $F=-kx$, where $k$ is a constant measuring the stiffness of the spring. This means that the larger $x$ is (the more the spring is stretched or squashed) the greater the force it exerts, and the force always acts in the \textit{opposite} direction to the stretching or squashing (hence the minus sign), so if you stretch the spring, it tries to pull back, whereas if you squash it, it tries to push back out.
+
+\begin{enumerate}
+	\item By substituting $p=mv$ into the equation of Newton's Second Law above, show that
+		\[F=m\deriv{v}{t}+v\deriv{m}{t}.\]
+	\item Assuming the mass is constant, show that therefore
+		\[F=ma,\]
+		where $a$ is the acceleration of the mass.
+	\item Use Hooke's Law to conclude that
+		\[ma=-kx.\]
+	\item Hence conclude that
+		\[\deriv[2]{x}{t}+\omega^2 x=0,\]
+		where $\omega=\sqrt{k/m}$ (note that both $k$ and $m$ must be positive, so $k/m$ has a real square root).
+	\item Show that if $x(t)=A\cos(\omega t) + B\sin(\omega t)$ for any constants $A$ and $B$, then
+		\[\deriv[2]{x(t)}{t}+\omega^2 x(t)=0,\]
+		so this function satisifes the equation.
+\end{enumerate}
+
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: Types of Equation:}
+
+\bigskip
+
+
+
+Though you probably haven't realised it, we have in fact seen two fundamentally different types of equation thus far. In an equation such as $x^2-3=0$, we have an \textit{unknown number}, which we denote $x$, and the equation asserts that if you apply a certain function to this number (in this case, squaring it and subtracting 3), the result is 0. We can then try to deduce the value of $x$, either exactly or by an approximate method like Newton-Raphson. In this case, we can deduce that $x$ must be either $\sqrt{3}$ or $-\sqrt{3}$, but without further information we cannot tell which.
+
+On the other hand, in an equation like $f(x)=\sin(x)$, we are not asserting anything about the symbol $x$, but rather about $f$. We are saying that $f$ is a \textit{function} which takes an input (which we are referring to as $x$) and outputs the sine of that input. So $x$ is not standing for any particular number, but is just a placeholder for whatever we might choose to input into $f$. It would not mean anything to ``solve'' the equation $f(x)=\sin(x)$, because $x$ is \textit{not} standing for a particular number, it's just a convenient bit of notation to help us make a statement about $f$, which is the real subject of the equation. Occasionally, people use the notation $\equiv$ as an alternative to equals, meaning ``equal for all values of the variable''---so they would write $f(x)\equiv \sin(x)$, to emphasise that $x$ is not a particular value. However, usually people rely on context to distinguish equations about numbers and equations about functions.
+
+Most of the equations about functions we have seen have been either simply defining a function (like $f(x)=\sin(x)$) or deducing something about a function. For instance, given $f(x)=\sin(x)$, we can deduce that $f'(x)=\cos(x)$. Again, $x$ is not standing for any particular number here, this is an equation of functions, but it is asserting that the derivative of $f$ is the cosine function, which is a consequence of the defining equation $f(x)=\sin(x)$.
+
+With integration, we can go the other way; we could start with the equation $g'(x)=\cos(x)$ for some \textit{unknown function} $g$, and then deduce by integrating that $g(x)=\sin(x)+c$, for some unknown constant $c$. This is now more like equations with numbers we have seen---we are solving for an unknown---but the difference is that we solve for an unknown \textit{function} instead of an unknown \textit{number}. Still, the appearance of the variable $x$ in this equation is just a placeholder, and the equation tells us nothing about $x$, but tells us about $g$.
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+
+\textbf{Theory: Ordinary Differential Equations:}\bigskip
+
+
+An \textbf{ordinary differential equation} (ODE) is a particular type of equation which gives us information about the \textit{derivatives} of an \textit{unknown function} $f(x)$. The aim is then to deduce what the unknown function actually is; just as we cannot always deduce the precise answer to an equation about numbers (\textit{e.g.}, $x^2-3=0$ has two roots) we do not generally expect to be able to deduce exactly the function. In particular, because antiderivatives are only unique up to a constant of integration, we expect to have unknown constants appearing in our solution. Extra information (called \textit{initial conditions} or \textit{boundary conditions}) can then let us find the values of these constants.
+
+There are several different types of equation about an unknown function that can be formed with derivatives, leading to different types of differential equation. You will likely see partial differential equations at some point (where the unknown function has \textit{more than one input}) and may also see stochastic differential equations (where there is a \textit{random, probabilistic element} to the equation) and delay differential equations (where the value of the derivative \textit{at an earlier time} influences the value of the function \textit{at the present time}). However, for now, we will limit ourselves to ODEs, which are already quite complicated enough to be getting on with!
+
+
+The \textbf{order} of a differential equation is the order of the highest derivative appearing. So if the equation only involves the unknown function and its first derivative, then it is \textbf{first-order}, if it involves the function and its first and second derivatives, it is \textbf{second-order}, and so on. We shall study some techniques for solving first-order ODEs; later, when we cover integral transforms in Fourier analysis, we shall see some techniques for solving higher-order ODEs.\medskip
+
+Differential equations arise in all sorts of applications, because very often there are theoretical considerations that allow us to understand the rate of change (derivative) of a quantity. For example, Newton's Second Law and the resulting equation $F=ma$ tells us about the acceleration of an object, which is the second derivative of its position: $a=x''$. In the warm-up, we looked at a setup where the force on an object depended on its position $x$, so we formed the second-order ODE
+\[\deriv[2]{x}{t}+\omega^2 x=0.\]
+In a similar way, second-order ODEs arise throughout the study of motion, because of Newton's Second Law.
+
+
+
+
+\clearpage
+
+
+\textbf{Practice: An Electronics Example:}\bigskip
+
+
+Consider a series RC circuit. A capacitor of capacitance $C$ charges from a voltage source $V_\mathrm{in}$ through a resistor of resistance $R$. Let $V_\mathrm{C}$ be the voltage across the capacitor.\medskip
+
+
+\begin{enumerate}
+	\item Use Ohm's Law to write an expression for the current through the resistor. % I=(V_in-V_C)/R
+	\item The capacitor voltage is related to the amount of charge on it by the equation $Q=CV_\mathrm{C}$. By differentiating this, find an equation linking the current to the first derivative of $V_\mathrm{C}$. % I=C dV_C/dt
+	\item Combine your two equations and rearrange to show that
+		\[\deriv{V_\mathrm{C}}{t}+\frac{1}{RC}V_\mathrm{C} = \frac{1}{RC} V_\mathrm{in}.\]
+	\item Suppose that $V_\mathrm{in}=10\mathrm{V}$ is a constant (DC) voltage. By subsituting into the ODE, show in this case that
+		\[V_\mathrm{C}(t) = ke^{-t/RC}+10\]
+		is a solution, where $k$ is any constant. Show moreover that if at time 0, $V_\mathrm{C}=0$ (the capacitor starts with no charge), then $k=-10$.
+	\item Suppose instead that $V_\mathrm{in}$ is a sinusoid, $V_\mathrm{in}=A\sin(\omega t)$. Show that in this case
+		\[V_\mathrm{C}(t) = \frac{A}{1+\omega^2 R^2 C^2}\left[\sin(\omega t)-RC\omega\cos(\omega t)\right] + ke^{-t/RC}\]
+		is a solution, where again $k$ is any constant.
+	\item Now suppose the voltage supply is interrupted, so $V_\mathrm{in}=0$, and the capacitor now discharges through the same resistor to provide power during the supply interruption. Show that
+		\[V_\mathrm{C}(t)=ke^{-t/RC}\]
+		is a solution for any constant $k$, and find the value of $k$ if the capacitor is charged to $100\mathrm{V}$ when the interruption occurs (at $t=0$).
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item An equation can say what value an \textit{unknown number} $x$ gives when input into a function; this can then be solved for the value of $x$.
+	\item An equation can instead describe the behaviour of a \textit{function}; a variable such as $x$ appearing in an equation like this is simply a placeholder for the input to the function.
+	\item An \textbf{ordinary differential equation} tells us about an unknown function and its derivatives; this can then be solved to find the unknown function.
+	\item Since antiderivatives are non-unique, differential equations do not have unique solutions; there will be one or more unknown constants in the solution.
+	\item \textbf{Initial conditions} can allow us to determine the value of unknown constants; an initial condition tells us the value of the function (and perhaps its derivatives) at a certain point (usually $t=0$, hence ``initial''). These are sometimes called \textbf{boundary conditions} instead (there is a difference, but it's not important).
+	\item The \textbf{order} of a differential equation is the order of the highest derivative occurring; so a first-order ODE, for instance, tells us about the function and its first derivative, but does not mention the second derivative or any higher derivative.
+	\item Differential equations occur in practice because theoretical reasoning allows us to determine things about the rate-of-change of a quantity, and this information is expressed by a differential equation.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

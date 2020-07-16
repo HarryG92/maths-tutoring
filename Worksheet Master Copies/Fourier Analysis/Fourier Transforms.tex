@@ -1,0 +1,230 @@
+
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+
+\usepackage{amsmath}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{subfigure}
+
+
+
+\pagestyle{empty}
+
+\setlength{\tabcolsep}{15pt}
+
+
+\newcommand{\deriv}[3][]{\frac{\mathrm{d}^{#1}#2}{\mathrm{d}#3^{#1}}}
+\newcommand{\diff}{\;\mathrm{d}}
+
+\newcommand{\norm}[1]{\left|\kern-1pt\left|#1\right|\kern-1pt\right|}
+\newcommand{\bra}[1]{\left\langle #1 \,\right|}
+\newcommand{\ket}[1]{\left|\, #1\right\rangle}
+\newcommand{\braket}[2]{\left\langle #1 \mid #2 \right\rangle}
+
+
+
+
+\begin{document}
+
+\title{Fourier Transforms}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\vskip -10mm
+
+\textbf{\underline{Objective: To understand the Fourier coefficient function as a}}
+
+\textbf{\underline{representation of a function in the discrete frequency domain,}}
+
+\textbf{\underline{and the Fourier transform as a generalisation to the continuous}}
+
+\textbf{\underline{frequency domain.}}
+
+
+
+
+
+
+\vspace{5mm}
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: The Fourier Coefficient Function:}
+
+\bigskip
+
+
+We know that an $L_2$ function $f$ can be represented by its Fourier series: we have almost everywhere
+\[f(t)=\sum_{n=-\infty}^\infty c_n e^{2\pi int/L},\quad\mbox{where}\quad c_n=\frac{1}{L}\int_a^{a+L}\!\! f(t)e^{-2\pi int/L}\diff t.\]
+
+
+We can regard $c$ as a function taking integers to complex numbers; this is the Fourier coefficient function. Given $f$, we can find $c$ by the above formula, and given $c$ we can find $f$ by taking the Fourier series. So $f$ and $c$ encode the same information, but in different ways.
+
+The inputs to $c$ are integers, each of which corresponds to a frequency of the complex sinusoid $e^{2\pi int/L}$. The angular frequency of $e^{2\pi int/L}$ is $\frac{2\pi n}{L}$; so for any $n$, we can take the frequency $\frac{2\pi n}{L}$ and assign to it the complex number $c_n$. This gives us a function $\hat{f}$ which takes integer multiples of the \textbf{fundamental frequency}$\frac{2\pi}{L}$ and returns complex numbers; those complex numbers are then the coefficients of the Fourier series at the given frequency.
+
+This function $\hat{f}$ therefore, which is essentially the coefficient function, is a function which takes frequencies and gives complex numbers, such that if you take a sinusoid at each frequency $\omega$ with the amplitude given by $\hat{f}(\omega)$ and then sum over all frequencies, you get the Fourier series, which evaluates at almost all $t$ to the same value as the original function.
+
+So $f$ takes a time $t$ and gives a number, $f(t)$, and $\hat{f}$ takes a frequency $\omega$ and gives the amplitude $\hat{f}(\omega)$ of the sinusoid at frequency $\omega$ in the Fourier decomposition of $f$. We say that $f$ is a function on the \textbf{time domain} and $\hat{f}$ is the representation of the same function on the \textbf{frequency domain}. Note however that here the time domain is continuous (any $t\in \mathbb{R}$ is allowed), but the frequency domain is discrete (only integer multiples of the fundamental frequency are allowed). The Fourier transform is the generalisation to a continuous frequency domain.
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+
+
+\textbf{Theory: From Fourier Series to Fourier Transforms:}\bigskip
+
+
+
+Fourier series are useful for studying periodic functions. We can also use them to study non-periodic functions, as long as we only care what happens within a certain interval $[a,a+L]$---we simply cut away the parts of the function outside that interval and replace by periodic copies of what the function does inside that interval, and take the Fourier series. So if we have a function $f:\mathbb{R}\to \mathbb{C}$ (or just to $\mathbb{R}$, it doesn't really matter) and we want to study with Fourier series, we can't study the whole thing, but we can take some large value of $L$ and look at $f$ between $-\frac{L}{2}$ and $\frac{L}{2}$; as long as $f$ is square-integrable over this interval, we can take the Fourier series. So we can study $f$ via Fourier series over as large an interval as we like, so what if we let $L$ tend to infinity?
+
+In order to be able to take a Fourier series from $-\frac{L}{2}$ to $\frac{L}{2}$ for arbitrarily large $L$ (as $L\to\infty$), we need $f$ to be square-integrable over all of $\mathbb{R}$, so $f\in L_2(\mathbb{R})$. In particular, $f(t)\to 0$ as $t\to \pm\infty$.
+
+We have, for $-\frac{L}{2}\leq t\leq \frac{L}{2}$:
+\begin{align*}
+	f(t)&=\sum_{n=-\infty}^\infty c_{L,n} e^{2\pi i nt/L}\\
+	&=\sum_{n=-\infty}^\infty \left(\frac{1}{L}\int_{-\frac{L}{2}}^{\frac{L}{2}}f(t)e^{-2\pi i nt/L}\diff t\right) e^{2\pi int/L}\\
+	&= \sum_{n=-\infty}^\infty \left(\int_{-\frac{L}{2}}^{\frac{L}{2}} f(t) e^{-it\omega_n}\diff t \right) e^{it\omega_n}\frac{\omega_0}{2\pi},
+\end{align*}
+where $\omega_0=\frac{2\pi}{L}$ is the fundamental frequency and $\omega_n=n\omega_0$.
+
+Now we can view the integral in the above expression as a function on the discrete frequency domain; given $\omega_n$ a frequency, we can take
+\[\hat{f}(\omega_n)=\frac{1}{2\pi}\int_{-\frac{L}{2}}^{\frac{L}{2}} f(t)e^{-it\omega_n}\diff t.\]
+Then the difference in frequency between two adjacent frequencies is $\omega_{n+1}-\omega_n = \omega_0$, so let us write the fundamental frequency $\omega_0$ as $\delta\omega$, the small change in frequency. Then the sum above samples the frequency function $\hat{f}$ at points $\omega_n$ a small distance $\delta\omega$ apart, multiplies the width $\delta\omega$ of that interval by the height of the frequency function $\hat{f}(\omega_n)$, and adds them all up. This sounds suspiciously like the definition of an integral! Indeed, as we let $L$ tend to infinity, $\delta\omega=\omega_0=\frac{2\pi}{L}$ tends to 0, so we are multiplying an infinitesimal width by the height of the function and summing:
+\begin{align*}
+	f(t)&=\lim_{L\to \infty}\sum_{n=-\infty}^\infty \left(\frac{1}{2\pi}\int_{-\frac{L}{2}}^{\frac{L}{2}} f(t) e^{-it\omega_n}\diff t \right) e^{it\omega_n}\delta\omega\\
+	&=\int_{-\infty}^\infty \left(\frac{1}{2\pi}\int_{-\infty}^\infty f(t)e^{-it\omega}\diff t\right) e^{it\omega}\diff \omega.
+\end{align*}
+
+
+Therefore we define the \textbf{Fourier transform} of $f$ to be the function on the continuous frequency domain
+\[\hat{f}(\omega)=\frac{1}{2\pi}\int_{-\infty}^\infty f(t)e^{-i\omega t}\diff t,\]
+and can recover the original function $f$ by the \textbf{inverse Fourier transform}
+\[f(t)=\int_{-\infty}^\infty \hat{f}(\omega)e^{i\omega t}\diff \omega.\]
+
+Note that we take a function of $t$, introduce a new variable $\omega$, and integrate with respect to $t$, removing the old variable and leaving a function $\hat{f}$ purely of the new variable $\omega$; for the inverse transform, we use the same trick, introducing a new variable $t$ and integrating out $\omega$ to leave a function purely of $t$. The forward transform should be thought of as analagous to the coefficient function $c_n$ for Fourier series; indeed, it is almost exactly the same expression. The inverse transform should be thought of as analagous to the Fourier series itself, summing up each sinusoid with the amplitude given by the coefficient function; however, since we now allow any frequency $\omega\in \mathbb{R}$, instead of just integer multiples of the fundamental frequency, we have an integral instead of a sum.\medskip
+
+
+There are different conventions in Fourier transforms. Some people prefer to put the factor of $\frac{1}{2\pi}$ on the forward transform instead of the inverse, others prefer to split it and have $\frac{1}{\sqrt{2\pi}}$ on both transforms, for more symmetrical formulae. Still others prefer to use ordinary frequency $\xi$ instead of angular frequency $\omega=2\pi\xi$, which makes the transform formulae into
+\begin{align*}
+	\hat{f}(\xi)&=\int_{-\infty}^\infty f(t)e^{-2\pi i\xi t}\diff t\\
+	f(t)&=\int_{-\infty}^\infty \hat{f}(\xi)e^{2\pi i\xi t}\diff \xi.
+\end{align*}
+
+Any of these conventions is acceptable, and different ones tend to be more common among different groups (physicists versus electrical engineers, etc.), so whichever you use, it's best to first state clearly which, and then stick with that choice, to avoid confusion.
+
+
+\clearpage
+
+
+
+
+
+
+
+
+
+
+\textbf{Practice:}\bigskip
+
+For the following questions, we will use the angular frequency Fourier transform:
+\begin{align*}
+	\hat{f}(\omega)&=\int_{-\infty}^\infty f(t)e^{-i\omega t}\diff t\\
+	f(t)&=\frac{1}{2\pi}\int_{-\infty}^\infty \hat{f}(\omega)e^{i\omega t}\diff t.
+\end{align*}
+
+\begin{enumerate}
+	\item Let $f(t)=H(t)e^{-\alpha t}$, where $\alpha>0$ and $H$ is the Heaviside function ($H(t)=0$ for $t<0$ and $H(t)=1$ for $t>0$). Find the Fourier transform $\hat{f}$. Note: multiplying by $H(t)$ is necessary to make $f$ square-integrable---since $e^{-\alpha t}$ does not decay to 0 as $t\to -\infty$, the Fourier transform of just $e^{-\alpha t}$ does not exist.
+		% \int_0^\infty e^{(-\alpha -i\omega)t}\diff t =  \left[\frac{e^{(-\alpha-i\omega)t}}{-\alpha-i\omega}\right]_0^\infty = \frac{1}{\alpha+i\omega}
+	\item
+		\begin{enumerate}
+			\item Prove the following property of Fourier transforms: if $g(t)=f'(t)$, then
+				\[\hat{g}(\omega) = i\omega\hat{f}(\omega).\]
+				Hint: use integration by parts to compute $\hat{g}$.
+				% \hat{g}(\omega) = \int_{-\infty}^\infty f'(t)e^{-i\omega t}\diff t = \left[f(t)e^{-i\omega t}\right]_{-\infty}^\infty + i\omega\int_{-\infty}^\infty f(t)e^{-i\omega t}\diff t
+			\item Generalising this, prove by induction that if $h_n(t)=f^{(n)}(t)$, then
+				\[\hat{h}(\omega) = \left(i\omega\right)^n\hat{f}(\omega).\]
+			\item Consider the ordinary differential equation for undamped simple harmonic motion:
+				\[\deriv[2]{x}{t}+\beta^2 x=0,\]
+				where $\beta^2=\frac{k}{m}$, where $k$ is the spring constant and $m$ the mass.
+				
+				Show that the Fourier transform of $x$ obeys the purely algebraic equation $-\omega^2\hat{x}(\omega) +\beta\hat{x}(\omega)=0$.
+			\item Hence show that $\hat{x}(\omega)=0$ for any $\omega\neq \pm\beta$. So the only frequencies occuring in the solution are $\beta$ and $-\beta$. Note that the solution to the ODE is $x(t)=A\cos(\beta t)+B\sin(\beta t)$, where $A$ and $B$ are unknown constants; so indeed the only frequency occuring is $\beta$ ($-\beta$ amounts to the same frequency, since cosine is even and sine is odd).
+		\end{enumerate}
+	\item Prove that if $g(t)=f(t-\alpha)$ for some constant $\alpha$ (\textit{i.e.}, $g$ is a time-translation of $f$), then
+		\[\hat{g}(\omega) = e^{-i\alpha\omega}\hat{f}(\omega).\]
+		% \int_{-\infty}^\infty f(t-\alpha)e^{--i\omega t}\diff t = \int_{-\infty}^\infty f(s)e^{-i\omega (s+\alpha)}\diff s = e^{-\alpha\omega}\int_{-\infty}^\infty f(s)e^{-i\omega s}\diff s = e^{-i\alpha\omega}\hat{f}(\omega)
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\clearpage
+
+
+
+
+{\bf Key Points to Remember:}
+
+\vspace{5mm}
+
+\begin{enumerate}
+	\item The \textbf{Fourier transform} of a square-integrable function $f(t)$ is the function of the new variable $\omega$ (frequency):
+		\[\hat{f}(\omega)=\int_{-\infty}^\infty f(t)e^{-i\omega t}\diff t.\]
+	\item The \textbf{inverse Fourier transform} allows us to recover the original function:
+		\[f(t)=\frac{1}{2\pi}\int_{-\infty}^\infty\hat{f}(\omega) e^{i\omega t}\diff \omega.\]
+	\item The Fourier transform is a continuous version of the Fourier series; rather than considering discrete frequencies at integer multiples of some fundamental frequency, it considers any real frequency. As such, taking the Fourier transform is analagous to the process of finding Fourier coefficients, and the inverse transform is analagous to summing up the coefficients times the different sinusoids $e^{i\omega t}$, but the sum becomes an integral because the frequencies are continuous.
+	\item We refer to $t$ as being int eh \textbf{time domain}, and $\omega$ as being in the \textbf{frequency domain}. We think of $f$ and $\hat{f}$ as representing the same function, but $f$ represents it in the time domain, $\hat{f}$ represents it in the frequency domain. If $f$ tells you the size of the function at any given time $t$, $\hat{f}$ tells you the amplitude of the sinusoid of frequency $\omega$ you need to make $f$ by combining sinusoids of all frequencies.
+	\item Differentiation in the time domain corresponds to multiplication by $i\omega$ in the frequency domain:
+		\[\widehat{\deriv[n]{f}{t}}=(i\omega)^n\hat{f}.\]
+		This can be useful for studying differential equations, though typically the closely related Laplace transform is more suited to that.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+\end{document}

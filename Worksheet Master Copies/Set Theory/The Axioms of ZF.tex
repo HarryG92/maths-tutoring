@@ -1,0 +1,159 @@
+\documentclass{article}
+
+\usepackage[left=2cm,right=2cm, top=2cm, bottom = 2cm]{geometry}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%%%\usepackage{array}
+
+\usepackage{tikz}
+
+\pagestyle{empty}
+
+%%%\setlength{\tabcolsep}{1.8cm}
+%%%\renewcommand{\arraystretch}{2.5}
+
+%%%\makeatletter
+%%%\newcommand{\thickhline}{%
+%%%    \noalign {\ifnum 0=`}\fi \hrule height 2pt
+%%%    \futurelet \reserved@a \@xhline
+%%%}
+%%%\newcolumntype{!}{@{\hskip\tabcolsep\vrule width 2pt\hskip\tabcolsep}}
+%%%\makeatother
+
+\newcommand{\cis}{\,\mathrm{cis}}
+
+\begin{document}
+
+\title{The Zermelo-Fraenkel Axioms}
+\date{}
+
+\maketitle
+\thispagestyle{empty}
+
+\Large
+
+\textbf{\underline{Objective: To understand the axioms of ZF set theory.}}
+
+
+\vspace{5mm}
+
+
+For each axiom, we shall give an intuitive description of what it means.
+
+\vspace{5mm}
+
+
+\textbf{The Empty Set Axiom:}\bigskip
+\[\exists x\forall z(z\notin x)\]
+
+\vfill
+
+
+\textbf{The Axiom of Extensionality:}\bigskip
+\[\forall x \forall y (x=y\leftrightarrow \forall z(z\in x\leftrightarrow z\in y))\]
+
+\vfill
+
+
+
+
+
+
+\clearpage
+
+
+\textbf{The Axiom of Foundation:}\bigskip
+\[\forall x(x\neq \varnothing\rightarrow\exists y\in x(\forall z \in y(z\notin x)))\]
+
+
+\vfill
+
+
+\textbf{The Axiom Scheme of Separation:}\bigskip
+
+For each formula $\phi$ with free variables among $x$, $z$, $w_1,\hdots,w_n$, we have
+\[\forall z\forall w_1\hdots\forall w_n\exists y\forall x (x\in y\leftrightarrow x\in z\wedge \phi(x,z,w_1,\hdots,w_n))\]
+
+\vfill
+
+\textbf{The Pairing Axiom:}\bigskip
+\[\forall x\forall y\exists z\forall w(w\in z\leftrightarrow(w=x\vee w=y))\]
+
+\vfill
+
+
+
+\clearpage
+
+
+
+
+
+
+\textbf{The Union Axiom:}\bigskip
+\[\forall F\exists A\forall x(x\in A\leftrightarrow\exists Y\in F(x\in Y))\]
+
+\vfill
+
+
+
+\textbf{The Axiom Scheme of Replacement:}\bigskip
+
+For each formula $\phi$ with free variables among $x$, $y$, $A$, $w_1,\hdots, w_n$:
+\begin{align*}
+	\forall A\forall w_1\hdots\forall w_n (&(\forall x\in A\exists!y\,\phi(x,y,A,w_1,\hdots,w_n))\\
+	&\rightarrow \exists Y\forall x\in A\exists y\in Y\,\phi(x,y,A,w_1,\hdots,w_n))
+\end{align*}
+
+
+\vfill
+
+
+
+
+
+\clearpage
+
+
+\textbf{The Axiom of Infinity:}\bigskip
+\[\exists x(\varnothing\in x\wedge \forall y\in x(y\cup\{y\}\in x))\]
+
+\vfill
+
+
+
+\textbf{The Power Set Axiom:}\bigskip
+\[\forall x\exists y\forall z(z\in y\leftrightarrow z\subseteq x)\]
+
+\vfill
+
+
+
+
+
+
+
+\clearpage
+
+
+
+\textbf{Exercises:}
+
+\vspace{5mm}
+
+
+\begin{enumerate}
+	\item Prove that there is no set of all sets.
+	\item Prove that no set contains itself as an element.
+	\item Prove that for any set $x$, $x\cup\{x\}$ is a set.
+	\item Prove that for any set $x$, there is a set containing $\{y\}$ for every $y\in x$ and nothing else (\textit{i.e.}, the set of all singleton subsets of $x$).
+\end{enumerate}
+
+
+
+
+
+
+
+\end{document}
